@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { flexBetween } from '../../../constants';
 
 export const HeaderWrapper = styled.nav`
   position: fixed;
@@ -6,8 +7,7 @@ export const HeaderWrapper = styled.nav`
   background-color: inherit;
   width: 100%;
   height: 72px;
-  display: flex;
-  justify-content: space-between;
+  ${flexBetween};
   align-items: center;
   z-index:9999;
   padding:0 70px;

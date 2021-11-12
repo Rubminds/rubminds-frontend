@@ -1,3 +1,4 @@
-export { default as Header} from './Header';
-export { default as ChatButton} from './ChatButton';
-export { default as Footer} from './Footer';
+export { default as Header} from './common/Header';
+export { default as ChatButton} from './common/ChatButton';
+export { default as Footer} from './common/Footer';
+export {default as Banner} from './Landing/Banner'

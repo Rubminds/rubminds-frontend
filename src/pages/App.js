@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../common/theme';
 import GlobalStyles from '../common/GlobalStyle';
 import LandingPage from './LandingPage';
-import {Header} from '../components'
+import {Header, ChatButton, Footer} from '../components'
 
 const App = () => {
   return (
@@ -13,10 +13,13 @@ const App = () => {
       <GlobalStyles />
       <Router>
         <Header/>
+        <ChatButton/>
         <Switch>
           <Route exact path="/" component={LandingPage} />
         </Switch>
+        
       </Router>
+      <Footer/>
     </ThemeProvider>
   );
 };

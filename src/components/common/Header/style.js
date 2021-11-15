@@ -10,7 +10,7 @@ export const HeaderWrapper = styled.nav`
   ${flexBetween};
   align-items: center;
   z-index:9999;
-  padding:0 70px;
+  padding:0 140px;
 `;
 
 export const HeaderContent = styled.label`

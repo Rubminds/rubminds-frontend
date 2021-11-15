@@ -15,3 +15,5 @@ export const flexBetween = css`
   display: flex;
   justify-content: space-between;
 `;
+
+export const LandingDropdownOptions = ['파이썬', '리액트' ,'자바', '자바스크립트', 'NODEJS'];

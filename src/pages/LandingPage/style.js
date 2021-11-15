@@ -8,7 +8,7 @@ export const LandingWrapper = styled.div`
 
 export const LandingDetailWrapper = styled.div`
   width: 100%;
-  padding: 80px 70px;
+  padding: 50px 70px;
   ${flexColumn};
 `;
 
@@ -44,7 +44,7 @@ export const CheckboxText = styled.label`
 
 export const CategoryWrapper = styled.div`
     ${flexCenter};
-    margin-top:70px;
+    margin-top:50px;
 `
 
 export const CategoryCard =styled.div`
@@ -58,4 +58,13 @@ export const CategoryCard =styled.div`
     &+&{
         margin-left:150px;
     }
+`
+
+export const FilterWrapper = styled.div`
+`
+
+export const PostsWrapper = styled.div`
+    display:flex;
+    flex-wrap:wrap;
+    margin-top:50px;
 `

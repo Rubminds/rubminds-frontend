@@ -8,7 +8,7 @@ const ChatButton = () => {
 
   return (
     <S.StyledChatButton onClick={onClick}>
-      <HiOutlineChatAlt2 fontSize="100px" color="#ffffff" />
+      <HiOutlineChatAlt2 fontSize="80px" color="#ffffff" />
     </S.StyledChatButton>
   );
 };

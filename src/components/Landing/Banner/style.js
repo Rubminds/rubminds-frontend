@@ -3,7 +3,7 @@ import { flexCenter,flexColumn } from '../../../constants'
 import theme from '../../../common/theme'
 
 export const LandingBanner = styled.div`
-    height:560px;
+    height:480px;
     width:100%;
     background:linear-gradient(to right, ${theme.colors.gradientLeft}, ${theme.colors.gradientRight});
     padding-top: 90px;
@@ -23,7 +23,7 @@ export const BannerText = styled.label`
 `
 
 export const RecruitBtn = styled.button`
-    margin-top:100px;
+    margin-top:30px;
     border-radius:50px;
     background-color:#CDF6E8;
     border:none;

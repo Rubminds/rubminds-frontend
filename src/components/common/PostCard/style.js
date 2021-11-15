@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { flexColumn, flexBetween } from '../../../constants';
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.li`
   ${flexColumn};
-  width: 250px;
+  width: 300px;
   height: 200px;
-  border-radius: 10px;
-  border: 1px solid black;
+  border-radius: 30px;
   padding: 2% 2%;
+  margin:2%;
+  box-shadow:3px 3px 4px rgba(0, 0, 0, 0.1);
+  background-color:#fff;
 `;
 
 export const CardCategory = styled.div``;

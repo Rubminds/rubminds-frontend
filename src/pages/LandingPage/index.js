@@ -1,14 +1,19 @@
 import React, { useState, useCallback } from 'react';
 import * as S from './style';
 import { BsCheckLg } from 'react-icons/bs';
-import { FaBook } from 'react-icons/fa';
+import { FaBook,FaMedal } from 'react-icons/fa';
 import { MdPersonAdd } from 'react-icons/md';
 import { HiUserGroup } from 'react-icons/hi';
+import {BiBorderAll} from 'react-icons/bi'
 
-import { Banner, PostCard,DropDown } from '../../components';
+import { Banner, PostCard, DropDown } from '../../components';
 import { LandingDropdownOptions } from '../../constants';
+
+import {useDispatch} from 'react-redux'
+import { signupUser } from '../../modules/user';
 const LandingPage = () => {
   const [isCheck, setIsCheck] = useState(true);
+  const dispatch = useDispatch();
   const Posts = [
     { category: 'study', title: '알고리즘 공부 하실분', skills: ['python', 'javascript'] },
     { category: 'scout', title: '저좀 데려가실분', skills: ['react', 'javascript', 'redux'] },
@@ -25,6 +30,10 @@ const LandingPage = () => {
   const onCheck = useCallback(() => {
     setIsCheck((prev) => !prev);
   }, []);
+
+  const test = useCallback(()=>{
+    dispatch(signupUser());
+  })
   return (
     <>
       <S.LandingWrapper>
@@ -55,7 +64,11 @@ const LandingPage = () => {
           </S.CategoryWrapper>
           <S.FilterWrapper>
             <S.DetailTitle>어떤 기술을 찾으시나요?</S.DetailTitle>
-            <DropDown options={LandingDropdownOptions} marginTop="50px"/>
+            <DropDown options={LandingDropdownOptions} marginTop="50px" />
+            <S.SortWrapper>
+              <S.SortOption><BiBorderAll fontSize="20px"/>All</S.SortOption>
+              <S.SortOption><FaMedal fontSize="20px"/>진행종료</S.SortOption>
+            </S.SortWrapper>
           </S.FilterWrapper>
           <S.PostsWrapper>
             {Posts.map((v, i) => {
@@ -64,6 +77,7 @@ const LandingPage = () => {
           </S.PostsWrapper>
         </S.LandingDetailWrapper>
       </S.LandingWrapper>
+      <button onClick ={test}>sd</button>
     </>
   );
 };

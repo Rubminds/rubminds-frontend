@@ -3,9 +3,9 @@ import * as S from './style';
 import {BiStar} from 'react-icons/bi'
 
 import { Python } from '../../../assets/imgs';
-const PostCard = ({ post }) => {
+const PostCard = ({ post, ...props }) => {
   return (
-    <S.CardWrapper>
+    <S.CardWrapper {...props}>
       <S.CardCategory>{post.category}</S.CardCategory>
       <br />
       <S.CardTitle>{post.title}</S.CardTitle>

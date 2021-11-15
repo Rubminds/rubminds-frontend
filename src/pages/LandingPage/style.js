@@ -10,6 +10,7 @@ export const LandingDetailWrapper = styled.div`
   width: 100%;
   padding: 0 140px;
   ${flexColumn};
+  background-color:#F9FBFC;
 `;
 
 export const TitleWrapper = styled.div`
@@ -60,6 +61,7 @@ export const CategoryCard = styled.div`
   justify-content: center;
   width: 200px;
   height: 120px;
+  background-color:#fff;
   border: 1px solid black;
   border-radius: 10px;
   & + & {
@@ -69,12 +71,27 @@ export const CategoryCard = styled.div`
 
 export const FilterWrapper = styled.div`
   ${flexColumn};
-  align-items:center;
+  align-items: center;
 `;
 
-export const PostsWrapper = styled.div`
+export const SortWrapper = styled.ul`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 50px;
+`;
+
+export const SortOption = styled.li`
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  & + & {
+    margin-left: 2%;
+  }
+`;
+
+export const PostsWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  justify-content:space-around;
-  margin-top: 50px;
 `;

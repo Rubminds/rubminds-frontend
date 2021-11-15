@@ -1,36 +1,54 @@
 import React, { useState, useCallback } from 'react';
 import * as S from './style';
 
-import { FiChevronDown } from 'react-icons/fi';
-
-const DropDown = ({ options }) => {
+const DropDown = ({ options, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   //헤더나 옵션 클릭시 열려진 옵션리스트 닫기용
   const toggle = useCallback(() => {
     setIsOpen((prev) => !prev);
-  }, [isOpen]);
+  },[]);
 
   //옵션 선택시 헤더 value 변경 + 토글용
   const onOptionClick = useCallback(
     (option) => () => {
-      setSelectedOption(option);
+      setSelectedOptions(selectedOptions.concat(option));
       setIsOpen(false);
     },
-    [selectedOption]
+    [selectedOptions]
+  );
+
+  const onDeleteClick = useCallback(
+    (option) => () => {
+      setSelectedOptions(
+        selectedOptions.filter(
+          (
+            i //이름이 인자로 받은 option이 아니면 새로 구성
+          ) => i !== option
+        )
+      );
+    },
+    [selectedOptions]
   );
 
   return (
-    <S.DropDownContainer>
+    <S.DropDownContainer {...props}>
       <S.DropDownHeader onClick={toggle}>
-        {selectedOption} &nbsp;
-        <FiChevronDown fontSize="24px" />
+        {selectedOptions.map((v) => {
+          return (
+            <S.HeaderTag onClick={onDeleteClick(v)}>
+              {v}
+            </S.HeaderTag>
+          );
+        })}{' '}
+        &nbsp;
+        <S.HeaderArrow />
       </S.DropDownHeader>
       {isOpen && (
         <S.DropDownList>
           {options.map((option, i) => (
-            <S.ListItem onClick={onOptionClick}>{option}</S.ListItem>
+            <S.ListItem onClick={onOptionClick(option)}>{option}</S.ListItem>
           ))}
         </S.DropDownList>
       )}

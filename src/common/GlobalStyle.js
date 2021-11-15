@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 body {
@@ -6,6 +6,7 @@ body {
     font-size:16px; //1rem
     margin:0px;
     padding:0px;
+    font-family:"Malgun Gothic";
 }
 div{
     -webkit-box-sizing:border-box;

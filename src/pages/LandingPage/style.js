@@ -68,12 +68,13 @@ export const CategoryCard = styled.div`
 `;
 
 export const FilterWrapper = styled.div`
-  margin-top: 70px;
-  ${flexCenter};
+  ${flexColumn};
+  align-items:center;
 `;
 
 export const PostsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content:space-around;
   margin-top: 50px;
 `;

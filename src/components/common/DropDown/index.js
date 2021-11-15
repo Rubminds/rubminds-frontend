@@ -32,6 +32,7 @@ const DropDown = ({ options, ...props }) => {
     [selectedOptions]
   );
 
+  //중복된 값 안받게 예외처리 해주어야 함.
   return (
     <S.DropDownContainer {...props}>
       <S.DropDownHeader onClick={toggle}>

@@ -8,7 +8,7 @@ export const DropDownContainer = styled.div`
   height: ${(props) => (props.height ? props.height : '60px')};
   position: relative;
   background: #ffffff;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
   z-index: 10;
   padding: 4px 10px;

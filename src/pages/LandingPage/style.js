@@ -64,6 +64,7 @@ export const CategoryCard = styled.div`
   background-color:#fff;
   border: 1px solid black;
   border-radius: 10px;
+  box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
   & + & {
     margin-left: 150px;
   }

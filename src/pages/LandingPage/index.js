@@ -9,31 +9,25 @@ import {BiBorderAll} from 'react-icons/bi'
 import { Banner, PostCard, DropDown } from '../../components';
 import { LandingDropdownOptions } from '../../constants';
 
-import {useDispatch} from 'react-redux'
-import { signupUser } from '../../modules/user';
 const LandingPage = () => {
   const [isCheck, setIsCheck] = useState(true);
-  const dispatch = useDispatch();
   const Posts = [
-    { category: 'study', title: '알고리즘 공부 하실분', skills: ['python', 'javascript'] },
-    { category: 'scout', title: '저좀 데려가실분', skills: ['react', 'javascript', 'redux'] },
-    { category: 'project', title: '웹 프로젝트 인원 구해요', skills: ['react', 'javascript'] },
+    { category: 'study', status:'모집중', title: '알고리즘 공부 하실분', skills: ['python', 'javascript'] },
+    { category: 'scout', status:'진행완료', title: '저좀 데려가실분', skills: ['react', 'javascript', 'redux'] },
+    { category: 'project', status:'진행중', title: '웹 프로젝트 인원 구해요', skills: ['react', 'javascript'] },
     {
       category: 'project',
-      title: '웹 프론트엔드 프로젝트 인원 구해요. 2줄이상 테스트 하는중입니다.',
+      status:'모집중', title: '웹 프론트엔드 프로젝트 인원 구해요. 2줄이상 테스트 하는중입니다. 2줄이상 테스트 하는중입니다. 2줄이상 테스트 하는중입니다',
       skills: ['react', 'javascript'],
     },
-    { category: 'study', title: '알고리즘 공부 하실분', skills: ['python', 'javascript'] },
-    { category: 'scout', title: '저좀 데려가실분', skills: ['react', 'javascript', 'redux'] },
-    { category: 'project', title: '웹 프로젝트 인원 구해요', skills: ['react', 'javascript'] },
+    { category: 'study', status:'진행완료', title: '알고리즘 공부 하실분', skills: ['python', 'javascript'] },
+    { category: 'scout', status:'진행중', title: '저좀 데려가실분', skills: ['react', 'javascript', 'redux'] },
+    { category: 'project', status:'모집중', title: '웹 프로젝트 인원 구해요', skills: ['react', 'javascript'] },
   ];
   const onCheck = useCallback(() => {
     setIsCheck((prev) => !prev);
   }, []);
 
-  const test = useCallback(()=>{
-    dispatch(signupUser());
-  })
   return (
     <>
       <S.LandingWrapper>
@@ -77,7 +71,6 @@ const LandingPage = () => {
           </S.PostsWrapper>
         </S.LandingDetailWrapper>
       </S.LandingWrapper>
-      <button onClick ={test}>sd</button>
     </>
   );
 };

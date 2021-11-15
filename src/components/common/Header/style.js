@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { flexBetween } from '../../../constants';
+import theme from '../../../common/theme'
 
 export const HeaderWrapper = styled.nav`
-  position: fixed;
-  top: 0;
-  background-color: inherit;
+  background:linear-gradient(to right, ${theme.colors.gradientLeft}, ${theme.colors.gradientRight});
+  //background-color: inherit;
   width: 100%;
   height: 72px;
   ${flexBetween};

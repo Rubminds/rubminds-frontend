@@ -6,7 +6,7 @@ export const LandingBanner = styled.div`
     height:480px;
     width:100%;
     background:linear-gradient(to right, ${theme.colors.gradientLeft}, ${theme.colors.gradientRight});
-    padding-top: 90px;
+    //padding-top: 90px;
     ${flexCenter};
 `
 

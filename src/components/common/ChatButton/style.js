@@ -9,4 +9,5 @@ export const StyledChatButton = styled.button`
     border:none;
     bottom:10%;
     right:4%;
+    cursor:pointer;
 `

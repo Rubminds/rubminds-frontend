@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import { flexCenter,flexColumn } from '../../../constants'
+import theme from '../../../common/theme'
+
 export const LandingBanner = styled.div`
     height:560px;
     width:100%;
-    background:linear-gradient(to right, #998CF8, #F383DF);
+    background:linear-gradient(to right, ${theme.colors.gradientLeft}, ${theme.colors.gradientRight});
     padding-top: 90px;
     ${flexCenter};
 `

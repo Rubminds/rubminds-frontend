@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import * as S from './style'
 import { RiKakaoTalkFill } from 'react-icons/ri'
 import { FcGoogle } from 'react-icons/fc'
 
 const LogInPage = () => {
+  const onGoogleLogInClick = useCallback(() => {
+   window.location.href = 'https://dev.rubminds.site/oauth2/authorization/google'; 
+  }, [])
+
+  const onKakaoLogInClick = useCallback(()=>{
+    window.location.href = 'https://dev.rubminds.site/oauth2/authorization/kakao'
+  }, []);
+
   return (
     <>
       <S.WhiteSpace></S.WhiteSpace>
@@ -34,13 +42,17 @@ const LogInPage = () => {
             Rubminds 회원으로 다양한 혜택을 누려보세요!
           </S.MainTitle>
           <S.LogInPageInnerRight>
-            <S.LogInBox>
+            <S.LogInBox onClick={onGoogleLogInClick}>
               <FcGoogle size="75" />
             </S.LogInBox>
-            <S.LogInBox style={{ backgroundColor: 'yellow' }}>
+            <S.LogInBox style={{ backgroundColor: 'yellow' }} onClick={onKakaoLogInClick}>
               <RiKakaoTalkFill size="75" />
             </S.LogInBox>
           </S.LogInPageInnerRight>
+          <S.labelWrap>
+            <S.loginLabel>Google 로그인</S.loginLabel>
+            <S.loginLabel>KakaoTalk 로그인</S.loginLabel>
+          </S.labelWrap>
         </S.LogInPageRight>
       </S.LogInPageWrapper>
     </>

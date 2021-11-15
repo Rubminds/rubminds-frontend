@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../common/theme'
-import { flexCenter, flexColumn, flexBetween } from '../../constants'
+import { flexCenter } from '../../constants'
 
 export const WhiteSpace = styled.div`
   width: 50%;
@@ -50,4 +50,15 @@ export const LogInBox = styled.div`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.16);
   text-align: center;
   padding-top: 7.5%;
+  cursor : pointer; 
 `
+
+export const labelWrap = styled.div`
+  margin-top : 30px; 
+  display: flex;
+  justify-content: space-around;
+`; 
+
+export const loginLabel = styled.div`
+  font-size: 30px;
+`; 

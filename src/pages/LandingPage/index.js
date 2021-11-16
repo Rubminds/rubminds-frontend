@@ -6,7 +6,7 @@ import { MdPersonAdd } from 'react-icons/md';
 import { HiUserGroup } from 'react-icons/hi';
 import {BiBorderAll} from 'react-icons/bi'
 
-import { Banner, PostCard, DropDown } from '../../components';
+import { Banner, PostCard, DropDown,Footer } from '../../components';
 import { LandingDropdownOptions } from '../../constants';
 
 const LandingPage = () => {
@@ -80,6 +80,7 @@ const LandingPage = () => {
             })}
           </S.PostsWrapper>
         </S.LandingDetailWrapper>
+        <Footer/>
       </S.LandingWrapper>
     </>
   );

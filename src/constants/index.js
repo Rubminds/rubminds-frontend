@@ -15,6 +15,7 @@ export const flexColumn = css`
 export const flexBetween = css`
   display: flex;
   justify-content: space-between;
+  align-items:center;
 `;
 
 //dropdown options

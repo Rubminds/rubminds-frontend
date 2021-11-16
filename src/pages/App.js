@@ -5,7 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../common/theme';
 import GlobalStyles from '../common/GlobalStyle';
 import LandingPage from './LandingPage';
-import {Header, ChatButton, Footer} from '../components'
+import PostDetailPage from './PostDetailPage'
+import {Header, ChatButton} from '../components'
 
 const App = () => {
   return (
@@ -16,10 +17,10 @@ const App = () => {
         <ChatButton/>
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          <Route exact path="/detail" component={PostDetailPage} />
         </Switch>
         
       </Router>
-      <Footer/>
     </ThemeProvider>
   );
 };

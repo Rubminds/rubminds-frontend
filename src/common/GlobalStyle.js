@@ -1,14 +1,18 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
-* {
-    margin: 0 0;    
-    padding:0 0;
-}
 body {
     height: 100%;
-    width:100%;
     font-size:16px; //1rem
+    margin:0px;
+    padding:0px;
+    font-family:"Malgun Gothic";
+}
+div{
+    -webkit-box-sizing:border-box;
+}
+nav{
+    -webkit-box-sizing:border-box;
 }
 button {
     text-decoration: none;
@@ -23,10 +27,13 @@ a{
 li{
     list-style:none;
     cursor:pointer;
+    margin:0;
 }
 ul{
     display:flex;
     list-style: none;
+    padding:0px;
+    margin:0px;
 }
 input:focus{
     outline:none;

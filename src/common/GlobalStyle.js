@@ -27,6 +27,7 @@ a{
 li{
     list-style:none;
     cursor:pointer;
+    margin:0;
 }
 ul{
     display:flex;

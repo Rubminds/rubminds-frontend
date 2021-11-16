@@ -8,7 +8,7 @@ export const DropDownContainer = styled.div`
   height: ${(props) => (props.height ? props.height : '60px')};
   position: relative;
   background: #ffffff;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
   z-index: 10;
   padding: 4px 10px;
@@ -46,6 +46,7 @@ export const HeaderTag = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  z-index:10;
 `;
 export const TagDelete = styled(IoMdCloseCircle)`
   position: absolute;
@@ -59,10 +60,10 @@ export const DropDownList = styled.ul`
   position: absolute;
   width: 100%;
   left: 0;
+  top:100%;
   padding: 8px 1px;
-  //border: none;
-  border: 1px solid lightgray;
-  max-height: 600px;
+  border: none;
+  max-height: 200px;
   overflow-y: auto;
   /* 드롭박스 스크롤바 없애기 */
   -ms-overflow-style: none; /* IE and Edge */
@@ -70,7 +71,9 @@ export const DropDownList = styled.ul`
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
-
+  display:flex;
+  flex-direction:column;
+  align-items:center;
   margin: 0;
   background: #ffffff;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);

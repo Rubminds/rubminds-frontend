@@ -15,9 +15,12 @@ export const LogInPageWrapper = styled.div`
 `
 
 export const LogInPageLeft = styled.div`
+  position : fixed;
+  top : 0;
+  z-index: 1000; 
   width: 50%;
   height: 100vh;
-  padding: 270px 150px 270px 150px;
+  padding: 350px 150px 270px 150px;
   text-align: center;
   background: linear-gradient(
     to right,
@@ -32,9 +35,14 @@ export const MainTitle = styled.div`
 `
 
 export const LogInPageRight = styled.div`
+  position : fixed; 
+  top : 0;
+  right : 0; 
+  z-index : 1000;
   padding: 150px 150px 150px 150px;
   width: 50%;
   height: 100vh;
+  background-color: white;
 `
 
 export const LogInPageInnerRight = styled.div`

@@ -8,9 +8,11 @@ import LandingPage from './LandingPage'
 import WrittingPage from './WrittingPage'
 import { Header, ChatButton, Footer } from '../components'
 import LogInPage from './LogInPage'
+import SignUpPage from './SignUpPage'
+
+
 
 const App = () => {
- 
 
   return (
     <ThemeProvider theme={theme}>
@@ -19,9 +21,13 @@ const App = () => {
         <Header />
         <ChatButton />
         <Switch>
+          <Route
+            path="/callback/:accessToken/:signupCheck"
+            component={SignUpPage}
+          />
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/login" component={LogInPage} />
-          <Route exact path="/write" component={WrittingPage} />
+          <Route path="/login" component={LogInPage} />
+          <Route path="/write" component={WrittingPage} />
         </Switch>
       </Router>
       <Footer />

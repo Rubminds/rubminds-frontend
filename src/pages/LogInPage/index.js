@@ -3,18 +3,21 @@ import * as S from './style'
 import { RiKakaoTalkFill } from 'react-icons/ri'
 import { FcGoogle } from 'react-icons/fc'
 
+import { useDispatch } from 'react-redux'
+
 const LogInPage = () => {
   const onGoogleLogInClick = useCallback(() => {
-   window.location.href = 'https://dev.rubminds.site/oauth2/authorization/google'; 
-  }, [])
-
-  const onKakaoLogInClick = useCallback(()=>{
-    window.location.href = 'https://dev.rubminds.site/oauth2/authorization/kakao'
+    window.location.href =
+      'https://dev.rubminds.site/oauth2/authorization/google';
   }, []);
 
-  return (
+  const onKakaoLogInClick = useCallback(() => {
+    window.location.href =
+      'https://dev.rubminds.site/oauth2/authorization/kakao'
+  }, []);
+
+  return ( 
     <>
-      <S.WhiteSpace></S.WhiteSpace>
       <S.LogInPageWrapper>
         <S.LogInPageLeft>
           <S.MainTitle color="white" fontSize="50px">
@@ -45,7 +48,10 @@ const LogInPage = () => {
             <S.LogInBox onClick={onGoogleLogInClick}>
               <FcGoogle size="75" />
             </S.LogInBox>
-            <S.LogInBox style={{ backgroundColor: 'yellow' }} onClick={onKakaoLogInClick}>
+            <S.LogInBox
+              style={{ backgroundColor: 'yellow' }}
+              onClick={onKakaoLogInClick}
+            >
               <RiKakaoTalkFill size="75" />
             </S.LogInBox>
           </S.LogInPageInnerRight>

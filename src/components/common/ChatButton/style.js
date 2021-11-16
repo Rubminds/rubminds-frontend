@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const StyledChatButton = styled.button`
     position:fixed;
-    width:120px;
-    height:120px;
+    width:80px;
+    height:80px;
     background-color:#AA8AE8;
     border-radius:100px;
     border:none;

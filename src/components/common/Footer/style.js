@@ -6,6 +6,7 @@ export const FooterWrapper= styled.div`
     align-items:center;
     font-size: 1rem;
     padding:30px 0 0 10px;
+    background-color:#F9FBFC;
 `
 
 export const TextBox = styled.div`

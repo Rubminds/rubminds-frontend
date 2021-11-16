@@ -22,11 +22,11 @@ const PostCard = ({ post, ...props }) => {
       <S.CardFooter>
         <S.FooterTags>
           {post.skills.map((v) => {
-            return <S.FooterTag>#{v}</S.FooterTag>;
+            return <S.FooterTag>#{v}&nbsp;</S.FooterTag>;
           })}
         </S.FooterTags>
         <S.DibBtn>
-          <BiStar /> 찜하기
+          <BiStar color="#E4DC00"/> <label>찜하기</label>
         </S.DibBtn>
       </S.CardFooter>
     </S.CardWrapper>

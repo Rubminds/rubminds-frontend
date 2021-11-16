@@ -11,6 +11,7 @@ export const LandingDetailWrapper = styled.div`
   padding: 0 140px;
   ${flexColumn};
   background-color:#F9FBFC;
+  min-height:1000px;
 `;
 
 export const TitleWrapper = styled.div`

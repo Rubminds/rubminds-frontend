@@ -24,6 +24,7 @@ export const CardStatusWrapper = styled.div`
     width:100%;
     height:100%;
     color:#fff;
+    z-index:10;
     display:${(props) => props.status === "모집중" ? "none":""};
 `
 
@@ -35,6 +36,7 @@ export const CardTitle = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  font-weight:bold;
 `;
 
 export const CardSkills = styled.div`
@@ -43,11 +45,14 @@ export const CardSkills = styled.div`
 
 export const CardFooter = styled.div`
   ${flexBetween};
+  color:#707070;
 `;
 
 export const FooterTags = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  align-items:end;
+  width:70%;
 `;
 
 export const FooterTag = styled.li`
@@ -59,6 +64,7 @@ export const FooterTag = styled.li`
 
 export const DibBtn = styled.button`
   border: none;
-  color: yellow;
   background-color: inherit;
+  display:flex;
+  align-items:center;
 `;

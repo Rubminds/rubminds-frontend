@@ -34,13 +34,14 @@ export const SignUpPageRight = styled.div`
   right : 0;
   width: 50%;
   height: 100vh;
-  padding : 7.5% 7.5% 0px 7.5%;
+  padding : 7.5% 7.5% 7.5% 7.5%;
   background: white;
 `
 
 export const SignUpPageInnerForm = styled.form`
   position : relative;
   margin-top: 50px;
+  padding-bottom : 50px;
 `
 
 export const ProfileWrapper = styled.div`
@@ -98,7 +99,7 @@ export const Introduce = styled.textarea`
 
 export const SubmitBtn = styled(CheckBox)`
   position : absolute; 
-  bottom : 0; 
+  bottom : 50px; 
   right : 0; 
   padding : 0px 50px 0px 50px; 
 `

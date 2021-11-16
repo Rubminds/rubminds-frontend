@@ -19,16 +19,37 @@ const SignUp = () => {
   const imgInput = useRef()
   const { accessToken, signupCheck } = useParams()
 
+
+  const [nickName, setNickName] = useState(null);
+  const [job, setJob] = useState(null);
+  const [skillSet, setSkillSet] = useState(null); 
+  const [introduce, setIntroduce] = useState(null);
+ 
+
   // attachment : img URL (for Server)
   const [attachMent, setAttachment] = useState(null)
   const [fileInfo, setFileInfo] = useState(null)
-  const [body, setBody] = useState({
-    profileSrc: null,
-    nickName: null,
-    job: null,
-    skillSet: null,
-    introduce: null,
-  })
+
+  const onChangeNickName = useCallback((e)=>{
+    setNickName(e.target.value);  
+  },[]); 
+
+  const onChangeJob = useCallback((e)=>{
+    e.preventDefault(); 
+    if(e.target.name==='student'){
+      setJob('student');
+    }else{
+      setJob('officer');
+    }
+  },[]);
+
+  // const onChangeSkillSet = useCallback((e)=>{
+    
+  // },[]);
+  
+  const onChangeIntroducer = useCallback((e)=>{
+    setIntroduce(e.target.value); 
+  }, []);
 
   const onProfileUpload = useCallback(() => {
     imgInput.current.click()
@@ -47,12 +68,7 @@ const SignUp = () => {
     setAttachment(''); 
   }); 
 
-  const onBodyChange = (e)=>{
-    setBody({
-      ...body,
-      [e.target.name] : e.target.value
-    }) 
-  };
+
 
   const onSubmitHandler = (e) =>{
     e.preventDefault(); 
@@ -102,7 +118,7 @@ const SignUp = () => {
             <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="20px">
               닉네임
             </S.MainTitle>
-            <S.NickNameBox name='nickName' onChange={setBody} />
+            <S.NickNameBox name='nickName' onChange={onChangeNickName} />
             <S.CheckBox onClick={()=>{alert('중복체크 중!')}}>중복 체크</S.CheckBox>
             
             {/* 신분 */}
@@ -110,8 +126,8 @@ const SignUp = () => {
               신분
             </S.MainTitle>
             <S.JobWrapper>
-              <S.JobCheckBtn>학생</S.JobCheckBtn>
-              <S.JobCheckBtn>직장인</S.JobCheckBtn>
+              <S.JobCheckBtn name='student' onClick={onChangeJob}>학생</S.JobCheckBtn>
+              <S.JobCheckBtn name='officer' onClick={onChangeJob}>직장인</S.JobCheckBtn>
             </S.JobWrapper>
 
             {/* 기술 스택 */}
@@ -123,7 +139,7 @@ const SignUp = () => {
 
           {/* 자기소개 */}
           <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="20px"> 자기소개</S.MainTitle>
-            <S.Introduce />
+            <S.Introduce onChange={onChangeIntroducer}/>
 
           <S.SubmitBtn onClick={onSubmitHandler}>회원 가입</S.SubmitBtn>
             

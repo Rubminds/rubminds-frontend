@@ -1,5 +1,6 @@
 import styled,{css} from 'styled-components';
-import { flexColumn, flexBetween, flexCenter,mediaQuery } from '../../../constants';
+import { flexColumn, flexBetween, flexCenter } from '../../../constants';
+import mediaQuery from '../../../hooks/mediaQuery'
 
 export const CardWrapper = styled.li`
   ${flexColumn};
@@ -13,10 +14,8 @@ export const CardWrapper = styled.li`
   background-color:${(props) => props.status === '진행중' ? "#AA8AE8" : props.status === '진행완료' ? "#7944E3":'#fff'};
   opacity: ${(props) => props.status === '진행중' ? "0.6" : props.status === '진행완료' ? "0.7":'1'};
   position:relative;
+  ${mediaQuery({"max-width":"300px", width:"100%", "min-height":"220px",padding:"2rem 2rem"})};
   @media all and (max-width:768px){
-    min-width:290px;
-    min-height:200px;
-    padding:2rem 2rem;
   }
 `;
 
@@ -53,7 +52,7 @@ export const CardSkills = styled.div`
 
 export const CardFooter = styled.div`
   ${flexBetween};
-  color:#707070;
+  color:${(props) => props.status === "진행완료" ? "#000" : "#707070"};
 `;
 
 export const FooterTags = styled.ul`

@@ -4,7 +4,7 @@ import { FiChevronDown } from 'react-icons/fi';
 import { IoMdCloseCircle } from 'react-icons/io';
 
 export const DropDownContainer = styled.div`
-  width: ${(props) => (props.width ? props.width : '80%')};
+  width: ${(props) => (props.width ? props.width : '90%')};
   height: ${(props) => (props.height ? props.height : '6rem')};
   position: relative;
   background: #ffffff;
@@ -32,7 +32,7 @@ export const HeaderArrow = styled(FiChevronDown)`
 `;
 export const HeaderTag = styled.div`
   position: relative;
-  width: 10rem;
+  width: 9rem;
   font-size: 1.6rem;
   line-height: 3rem;
   background-color: lightgray;

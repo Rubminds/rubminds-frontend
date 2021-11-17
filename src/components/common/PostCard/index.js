@@ -19,7 +19,7 @@ const PostCard = ({ post, ...props }) => {
           return <Python width="45px" height="45px" key={i}/>;
         })}
       </S.CardSkills>
-      <S.CardFooter>
+      <S.CardFooter status={post.status}>
         <S.FooterTags>
           {post.skills.map((v,i) => {
             return <S.FooterTag key={i}>#{v}&nbsp;</S.FooterTag>;

@@ -9,7 +9,7 @@ import { Test } from '../../assets/imgs';
 import { DetailInfo, UserListModal } from '../../components';
 
 const PostDetailPage = () => {
-  const me = '김경원';
+  const me = '김경원'; //추후에 리덕스 상태를 가져올 것
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const post = {
@@ -42,7 +42,7 @@ const PostDetailPage = () => {
   }, [modalOpen]);
   return (
     <S.PostDetailWrapper>
-      <MdOutlineArrowBackIos fontSize="60px" cursor="pointer" onClick={onBackClick} />
+      <MdOutlineArrowBackIos fontSize="6rem" cursor="pointer" onClick={onBackClick} />
       <S.PostDetailTitle>{post.title}</S.PostDetailTitle>
       <S.PostDetailInfo>
         <S.DetailInfoWrapper>
@@ -58,7 +58,7 @@ const PostDetailPage = () => {
           <DetailInfo title="지역" info={post.location} />
         </S.DetailInfoWrapper>
 
-        <S.DetailInfoWrapper width="20%">
+        <S.DetailInfoWrapper width="20%" Group>
           {modalOpen ? (
             <UserListModal
               userList={post.userList}
@@ -67,23 +67,23 @@ const PostDetailPage = () => {
             />
           ) : (
             <>
-              {me === post.author ? (
-                <>
-                  <S.DetailInfoContent toBtn>
-                    모집 종료하기
-                  </S.DetailInfoContent>
+              <S.GroupBox>
+                {me === post.author ? (
+                  <>
+                    <S.DetailInfoContent toBtn>모집 종료하기</S.DetailInfoContent>
+                    <S.DetailInfoContent>
+                      <AiOutlineEdit /> &nbsp;수정
+                    </S.DetailInfoContent>
+                  </>
+                ) : (
                   <S.DetailInfoContent>
-                    <AiOutlineEdit /> &nbsp;수정
+                    <MdPersonAdd /> &nbsp;모집자와 채팅하기
                   </S.DetailInfoContent>
-                </>
-              ) : (
+                )}
                 <S.DetailInfoContent>
-                  <MdPersonAdd /> &nbsp;모집자와 채팅하기
+                  <BiStar color="#E4DC00" /> &nbsp;{post.star}
                 </S.DetailInfoContent>
-              )}
-              <S.DetailInfoContent>
-                <BiStar color="#E4DC00" /> &nbsp;{post.star}
-              </S.DetailInfoContent>
+              </S.GroupBox>
               <S.DetailInfoContent>
                 <S.PostStatusCircle onClick={openModal}>
                   <label>모집중</label>

@@ -18,14 +18,6 @@ export const flexBetween = css`
   align-items: center;
 `;
 
-export const mediaQuery = (options) => {
-  return css`
-    @media all and (max-width: 768px) {
-      ${options};
-    }
-  `;
-};
-
 //dropdown options
 export const LandingDropdownOptions = [
   '파이썬',

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { flexCenter, flexColumn } from '../../../constants';
+import mediaQuery from '../../../hooks/mediaQuery'
 
 export const UserListWrapper = styled.div`
   position: relative;
   padding: 2% 2%;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
+  ${mediaQuery({width:"100%"})}
 `;
 
 export const CloseBtn = styled.button`

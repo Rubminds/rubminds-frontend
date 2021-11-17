@@ -81,7 +81,7 @@ export const JobCheckBtn = styled.button`
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 30px;
   border : none; 
-  background-color: white;
+  background-color: ${props => props.backgroundColor || 'white'};
   padding : 20px;
   font-size: 20px;
 `; 

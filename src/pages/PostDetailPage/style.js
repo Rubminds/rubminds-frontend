@@ -27,7 +27,7 @@ export const PostDetailInfo = styled.div`
 
 export const DetailInfoWrapper = styled.div`
   ${flexColumn};
-  width: ${(props) => (props.width ? props.width : '40%')};
+  width: ${(props) => (props.width ? props.width : '35%')};
 `;
 export const DetailInfoBetween = styled.div`
   ${flexBetween};
@@ -35,15 +35,15 @@ export const DetailInfoBetween = styled.div`
   margin-bottom: 5%;
 `;
 export const DetailInfoLeft = styled.div`
-  ${flexCenter};
+  display: flex;
+  align-items: center;
   flex: 1;
   position: relative;
 `;
 export const DetailInfoRight = styled.div`
-  ${flexCenter};
-  flex: 1;
+  ${flexCenter}
+  flex: 2.5;
   flex-wrap: wrap;
-  border-left: 1px solid rgba(128, 128, 128, 0.199);
   padding: 0 1%;
 `;
 
@@ -73,7 +73,7 @@ export const PostStatusCircle = styled.button`
   font-size: 26px;
   font-weight: bold;
   background-color: #aa8ae8;
-  box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   & label {
     cursor: pointer;
   }

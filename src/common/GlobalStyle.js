@@ -23,6 +23,7 @@ button {
     text-decoration: none;
     cursor: pointer;
     color: inherit;
+    padding:0;
 }
 a{ 
     /* 링크의 색상 및 밑줄 없애기 */

@@ -7,3 +7,4 @@ export { default as DropDown } from './common/DropDown';
 export { default as Banner } from './Landing/Banner';
 
 export { default as DetailInfo } from './PostDetail/DetailInfo';
+export { default as UserListModal } from './PostDetail/UserListModal';

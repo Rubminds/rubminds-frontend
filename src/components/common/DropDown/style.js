@@ -10,6 +10,8 @@ export const DropDownContainer = styled.div`
   background: #ffffff;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
+  border-bottom-left-radius: ${(props) => props.isOpen && "0"};
+  border-bottom-right-radius: ${(props) => props.isOpen && "0"};
   z-index: 10;
   padding: 0.4rem 1rem;
   margin-top: ${(props) => (props.marginTop ? props.marginTop : '0')};
@@ -51,7 +53,7 @@ export const HeaderTag = styled.div`
 
 export const DropDownList = styled.ul`
   position: absolute;
-  width: 100%;
+  width: 99.8%;
   left: 0;
   top:100%;
   padding: 0.8rem 0.1rem;
@@ -70,7 +72,6 @@ export const DropDownList = styled.ul`
   margin: 0;
   background: #ffffff;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
 `;
 
 export const ListItem = styled.li`

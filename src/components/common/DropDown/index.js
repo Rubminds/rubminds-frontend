@@ -15,7 +15,7 @@ const DropDown = ({ options, ...props }) => {
     (option) => () => {
       let already = false;
       if(selectedOptions.length <5){
-        selectedOptions.map(element => {
+        selectedOptions.forEach((element) => {
           element === option? already=true:already=false;
         });
         if(!already){
@@ -45,11 +45,11 @@ const DropDown = ({ options, ...props }) => {
   })
 
   return (
-    <S.DropDownContainer {...props}>
+    <S.DropDownContainer isOpen={isOpen} {...props}>
       <S.DropDownHeader>
-        {selectedOptions.map((v) => {
+        {selectedOptions.map((v, i) => {
           return (
-            <S.HeaderTag onClick={onDeleteClick(v)} key={v.id}>
+            <S.HeaderTag onClick={onDeleteClick(v)} key={i}>
               {v}
             </S.HeaderTag>
           );
@@ -60,7 +60,7 @@ const DropDown = ({ options, ...props }) => {
       {isOpen && (
         <S.DropDownList>
           {options.map((option, i) => (
-            <S.ListItem onClick={onOptionClick(option)}>{option}</S.ListItem>
+            <S.ListItem onClick={onOptionClick(option)} key={i}>{option}</S.ListItem>
           ))}
           <S.ListItem onClick={onUserInputClick}>직접입력</S.ListItem>
         </S.DropDownList>

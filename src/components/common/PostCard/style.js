@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import { flexColumn, flexBetween, flexCenter } from '../../../constants';
+import styled,{css} from 'styled-components';
+import { flexColumn, flexBetween, flexCenter,mediaQuery } from '../../../constants';
 
 export const CardWrapper = styled.li`
   ${flexColumn};
   justify-content:space-between;
-  width: 300px;
-  height: 200px;
+  width: 30rem;
+  height: 20rem;
   border-radius: 30px;
   padding: 2% 2%;
   margin:2%;
@@ -13,6 +13,11 @@ export const CardWrapper = styled.li`
   background-color:${(props) => props.status === '진행중' ? "#AA8AE8" : props.status === '진행완료' ? "#7944E3":'#fff'};
   opacity: ${(props) => props.status === '진행중' ? "0.6" : props.status === '진행완료' ? "0.7":'1'};
   position:relative;
+  @media all and (max-width:768px){
+    min-width:290px;
+    min-height:200px;
+    padding:2rem 2rem;
+  }
 `;
 
 export const CardStatusWrapper = styled.div`
@@ -26,6 +31,7 @@ export const CardStatusWrapper = styled.div`
     color:#fff;
     z-index:10;
     display:${(props) => props.status === "모집중" ? "none":""};
+    font-size:2rem;
 `
 
 export const CardCategory = styled.div``;
@@ -37,6 +43,8 @@ export const CardTitle = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   font-weight:bold;
+  font-size:1.4rem;
+  ${mediaQuery({"font-size":"2.2rem"})}
 `;
 
 export const CardSkills = styled.div`
@@ -56,7 +64,7 @@ export const FooterTags = styled.ul`
 `;
 
 export const FooterTag = styled.li`
-  font-size: 12px;
+  font-size: 1.2rem;
   &+&{
       margin-left:1%;
   }

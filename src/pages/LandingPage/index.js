@@ -46,37 +46,37 @@ const LandingPage = () => {
           <S.TitleWrapper>
             <S.DetailTitle>
               어떤 동료를 찾으시나요? &nbsp;
-              <S.CheckboxText>
+            </S.DetailTitle>
+            <S.CheckboxWrapper>
                 <S.StyledCheckbox onClick={onCheck}>{isCheck && <BsCheckLg />}</S.StyledCheckbox>
                 &nbsp;전체보기
-              </S.CheckboxText>
-            </S.DetailTitle>
+              </S.CheckboxWrapper>
           </S.TitleWrapper>
           <S.CategoryWrapper>
             <S.CategoryCard>
-              <FaBook fontSize="30px" />
+              <FaBook fontSize="3rem" />
               스터디
             </S.CategoryCard>
             <S.CategoryCard>
-              <MdPersonAdd fontSize="30px" />
+              <MdPersonAdd fontSize="3rem" />
               스카웃
             </S.CategoryCard>
             <S.CategoryCard>
-              <HiUserGroup fontSize="30px" />
+              <HiUserGroup fontSize="3rem" />
               프로젝트
             </S.CategoryCard>
           </S.CategoryWrapper>
           <S.FilterWrapper>
             <S.DetailTitle>어떤 기술을 찾으시나요?</S.DetailTitle>
-            <DropDown options={LandingDropdownOptions} marginTop="50px" />
+            <DropDown options={LandingDropdownOptions} marginTop="5rem" />
             <S.SortWrapper>
-              <S.SortOption onClick={onRecruitOptionClick}><BiBorderAll fontSize="20px"/>모집중</S.SortOption>
-              <S.SortOption onClick={onFinishOptionClick}><FaMedal fontSize="20px"/>진행완료</S.SortOption>
+              <S.SortOption onClick={onRecruitOptionClick}><BiBorderAll fontSize="2rem"/>모집중</S.SortOption>
+              <S.SortOption onClick={onFinishOptionClick}><FaMedal fontSize="2rem"/>진행완료</S.SortOption>
             </S.SortWrapper>
           </S.FilterWrapper>
           <S.PostsWrapper>
-            {Posts.map((v, i) => {
-              return v.status === sortOption && <PostCard post={v} key={i} />;
+            {Posts.map((v) => {
+              return v.status === sortOption && <PostCard post={v} key={v.id} />;
             })}
           </S.PostsWrapper>
         </S.LandingDetailWrapper>

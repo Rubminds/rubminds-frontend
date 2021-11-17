@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import * as S from './style';
 import { MdOutlineArrowBackIos, MdPersonAdd } from 'react-icons/md';
 import { BiStar } from 'react-icons/bi';
-import {AiOutlineEdit} from 'react-icons/ai'
+import { AiOutlineEdit } from 'react-icons/ai';
 
 import { Test } from '../../assets/imgs';
 import { DetailInfo, UserListModal } from '../../components';
@@ -68,17 +68,21 @@ const PostDetailPage = () => {
           ) : (
             <>
               {me === post.author ? (
-                <S.DetailInfoContent>
-                  <AiOutlineEdit/> &nbsp;수정
-                </S.DetailInfoContent>
+                <>
+                  <S.DetailInfoContent toBtn>
+                    모집 종료하기
+                  </S.DetailInfoContent>
+                  <S.DetailInfoContent>
+                    <AiOutlineEdit /> &nbsp;수정
+                  </S.DetailInfoContent>
+                </>
               ) : (
-                <></>
+                <S.DetailInfoContent>
+                  <MdPersonAdd /> &nbsp;모집자와 채팅하기
+                </S.DetailInfoContent>
               )}
               <S.DetailInfoContent>
                 <BiStar color="#E4DC00" /> &nbsp;{post.star}
-              </S.DetailInfoContent>
-              <S.DetailInfoContent>
-                <MdPersonAdd /> &nbsp;모집자와 채팅하기
               </S.DetailInfoContent>
               <S.DetailInfoContent>
                 <S.PostStatusCircle onClick={openModal}>

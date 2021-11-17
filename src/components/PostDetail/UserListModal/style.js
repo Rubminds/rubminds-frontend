@@ -27,6 +27,7 @@ export const User = styled.li`
   & + & {
     border-top: 1px solid rgba(128, 128, 128, 0.199);
   }
+  font-size:14px;
 `;
 
 export const UserAvatar = styled.img`

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { flexColumn, flexCenter, flexBetween } from '../../constants';
 
 export const PostDetailWrapper = styled.div`
@@ -39,12 +39,14 @@ export const DetailInfoLeft = styled.div`
   align-items: center;
   flex: 1;
   position: relative;
+  font-weight: bold;
 `;
 export const DetailInfoRight = styled.div`
   ${flexCenter}
   flex: 2.5;
   flex-wrap: wrap;
   padding: 0 1%;
+  color: #707070;
 `;
 
 export const AuthorAvatar = styled.img`
@@ -56,9 +58,20 @@ export const AuthorAvatar = styled.img`
 export const DetailInfoContent = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
   & + & {
     margin-top: 5%;
   }
+  ${(props) =>
+    props.toBtn &&
+    css`
+      background-color:#ffa586;
+      padding:2% 4%;
+      border-radius:20px;
+      color: #fff;
+      font-weight:bold;
+      width:fit-content;
+    `}
 `;
 export const PostStatusCircle = styled.button`
   width: 140px;

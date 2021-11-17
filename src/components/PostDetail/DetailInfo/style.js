@@ -13,6 +13,7 @@ export const DetailInfoLeft = styled.div`
   align-items:center;
   flex: 1;
   position: relative;
+  color:#707070;
 `;
 export const DetailInfoRight = styled.div`
   ${flexCenter};
@@ -20,4 +21,5 @@ export const DetailInfoRight = styled.div`
   flex-wrap: wrap;
   border-left: 1px solid rgba(128, 128, 128, 0.199);
   padding:0 1%;
+
 `;

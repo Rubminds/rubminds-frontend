@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 body {
@@ -8,6 +8,11 @@ body {
     padding:0px;
     font-family:"Malgun Gothic";
 }
+
+textarea{
+    -webkit-box-sizing:border-box;
+}
+
 div{
     -webkit-box-sizing:border-box;
 }
@@ -39,5 +44,5 @@ input:focus{
     outline:none;
 }
 
-`;
-export default GlobalStyles;
+`
+export default GlobalStyles

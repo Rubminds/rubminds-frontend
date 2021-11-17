@@ -18,10 +18,12 @@ const LogInPage = () => {
 
   return ( 
     <>
-      <S.LogInPageWrapper>
         <S.LogInPageLeft>
           <S.MainTitle color="white" fontSize="50px">
-            당신의 개발 동료를 찾아 줄 최고의 온라인 커뮤니티
+            당신의 개발 동료를 찾아 줄
+          </S.MainTitle>
+          <S.MainTitle color="white" fontSize="50px">
+            최고의 온라인 커뮤니티
           </S.MainTitle>
           <S.MainTitle
             style={{ marginTop: '50px' }}
@@ -60,7 +62,6 @@ const LogInPage = () => {
             <S.loginLabel>KakaoTalk 로그인</S.loginLabel>
           </S.labelWrap>
         </S.LogInPageRight>
-      </S.LogInPageWrapper>
     </>
   )
 }

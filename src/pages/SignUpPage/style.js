@@ -3,14 +3,10 @@ import theme from '../../common/theme'
 import { flexCenter,flexBetween } from '../../constants'
 
 
-export const SignUpPageWrapper = styled.div`
-  display: flex;
-`
-
 export const SignUpPageLeft = styled.div`
   position : fixed; 
   top : 0; 
-  width: 50%;
+  width : 50%; 
   height : 100vh;
   text-align : center;
   padding: 350px 150px 270px 150px;
@@ -32,7 +28,7 @@ export const SignUpPageRight = styled.div`
   position : absolute; 
   top : 0;
   right : 0;
-  width: 50%;
+  width : 50%;
   height: 100vh;
   padding : 7.5% 7.5% 7.5% 7.5%;
   background: white;

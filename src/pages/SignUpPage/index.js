@@ -95,10 +95,12 @@ const SignUp = () => {
 
   return (
     <>
-      <S.SignUpPageWrapper>
         <S.SignUpPageLeft>
           <S.MainTitle color="white" fontSize="50px">
-            당신의 개발 동료를 찾아 줄 최고의 온라인 커뮤니티
+            당신의 개발 동료를 찾아 줄           
+          </S.MainTitle>
+          <S.MainTitle color="white" fontSize="50px">
+            최고의 온라인 커뮤니티
           </S.MainTitle>
           <S.MainTitle
             style={{ marginTop: '50px' }}
@@ -202,7 +204,6 @@ const SignUp = () => {
             <S.SubmitBtn onClick={onSubmitHandler}>회원 가입</S.SubmitBtn>
           </S.SignUpPageInnerForm>
         </S.SignUpPageRight>
-      </S.SignUpPageWrapper>
     </>
   )
 }

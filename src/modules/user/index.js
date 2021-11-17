@@ -3,7 +3,7 @@ import produce from 'immer';
 
 //초기 상태 초기화
 export const initialState = {
-  me: null,
+  accessToken : null,
 };
 
 //액션 생성함수

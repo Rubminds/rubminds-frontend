@@ -3,6 +3,7 @@ import { flexColumn, flexBetween, flexCenter } from '../../../constants';
 
 export const CardWrapper = styled.li`
   ${flexColumn};
+  justify-content:space-between;
   width: 300px;
   height: 200px;
   border-radius: 30px;
@@ -12,7 +13,6 @@ export const CardWrapper = styled.li`
   background-color:${(props) => props.status === '진행중' ? "#AA8AE8" : props.status === '진행완료' ? "#7944E3":'#fff'};
   opacity: ${(props) => props.status === '진행중' ? "0.6" : props.status === '진행완료' ? "0.7":'1'};
   position:relative;
-  ${flexBetween};
 `;
 
 export const CardStatusWrapper = styled.div`

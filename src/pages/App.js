@@ -5,21 +5,27 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../common/theme';
 import GlobalStyles from '../common/GlobalStyle';
 import LandingPage from './LandingPage';
-import PostDetailPage from './PostDetailPage'
-import {Header, ChatButton} from '../components'
+import WrittingPage from './WrittingPage';
+import PostDetailPage from './PostDetailPage';
+import LogInPage from './LogInPage';
+import SignUpPage from './SignUpPage';
+
+import { Header, ChatButton } from '../components';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
-        <Header/>
-        <ChatButton/>
+        <Header />
+        <ChatButton />
         <Switch>
+          <Route path="/callback/:accessToken/:signupCheck" component={SignUpPage} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/detail" component={PostDetailPage} />
+          <Route path="/login" component={LogInPage} />
+          <Route path="/write" component={WrittingPage} />
         </Switch>
-        
       </Router>
     </ThemeProvider>
   );

@@ -8,9 +8,9 @@ export const PostDetailWrapper = styled.div`
 `;
 
 export const PostDetailTitle = styled.div`
-  width: 90%;
+  width: 100%;
   margin-top: 2%;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -21,18 +21,18 @@ export const PostDetailTitle = styled.div`
 
 export const PostDetailInfo = styled.div`
   ${flexBetween};
-  align-items:flex-start;
-  margin-top: 2%;
+  align-items: flex-start;
+  margin-top: 5%;
 `;
 
 export const DetailInfoWrapper = styled.div`
   ${flexColumn};
-  width: 30%;
+  width: ${(props) => (props.width ? props.width : '40%')};
 `;
 export const DetailInfoBetween = styled.div`
   ${flexBetween};
   font-size: 16px;
-  margin-bottom: 3%;
+  margin-bottom: 5%;
 `;
 export const DetailInfoLeft = styled.div`
   ${flexCenter};
@@ -44,6 +44,7 @@ export const DetailInfoRight = styled.div`
   flex: 1;
   flex-wrap: wrap;
   border-left: 1px solid rgba(128, 128, 128, 0.199);
+  padding: 0 1%;
 `;
 
 export const AuthorAvatar = styled.img`
@@ -56,16 +57,30 @@ export const DetailInfoContent = styled.div`
   display: flex;
   align-items: center;
   & + & {
-    margin-top: 3%;
+    margin-top: 5%;
   }
 `;
-export const PostStatusCircle = styled.div`
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    ${flexCenter};
-    color:#fff;
-    font-size:26px;
-    font-weight:bold;
-    background-color:#AA8AE8;
-`
+export const PostStatusCircle = styled.button`
+  width: 140px;
+  height: 140px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  ${flexColumn};
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 26px;
+  font-weight: bold;
+  background-color: #aa8ae8;
+  box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
+  & label {
+    cursor: pointer;
+  }
+`;
+
+export const PostDetailContent = styled.div`
+  width: 100%;
+  margin-top: 5%;
+  font-size: 18px;
+`;

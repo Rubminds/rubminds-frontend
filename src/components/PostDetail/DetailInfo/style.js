@@ -5,7 +5,7 @@ export const DetailInfoBetween = styled.div`
   ${flexBetween};
   font-size: 16px;
   & + & {
-    margin-top: 3%;
+    margin-top: 5%;
   }
 `;
 export const DetailInfoLeft = styled.div`
@@ -18,4 +18,5 @@ export const DetailInfoRight = styled.div`
   flex: 1;
   flex-wrap: wrap;
   border-left: 1px solid rgba(128, 128, 128, 0.199);
+  padding:0 1%;
 `;

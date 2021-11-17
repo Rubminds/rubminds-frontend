@@ -18,7 +18,7 @@ const PostDetailPage = () => {
     location: '서울',
     council: '혼합',
     detail:
-      '해당 언어 6개월 공부했습니다. 파이썬을 기반으로 같이 백준 골드 찍어봅시다. 같이 하실 수준 비슷 하신 분 찾아요.',
+      '해당 언어 6개월 공부했습니다. 파이썬을 기반으로 같이 백준 골드 찍어봅시다. 같이 하실 수준 비슷 하신 분 찾아요.해당 언어 6개월 공부했습니다. 파이썬을 기반으로 같이 백준 골드 찍어봅시다. 같이 하실 수준 비슷 하신 분 찾아요.',
     participants: ['나'],
     maxParticipants: 4,
     Date: '2021-11-16',
@@ -40,7 +40,7 @@ const PostDetailPage = () => {
           <DetailInfo title="회의형태" info={post.council} />
           <DetailInfo title="지역" info={post.location} />
         </S.DetailInfoWrapper>
-        <S.DetailInfoWrapper>
+        <S.DetailInfoWrapper width="20%">
           <S.DetailInfoContent>
             <BiStar color="#E4DC00" /> &nbsp;{post.star}
           </S.DetailInfoContent>
@@ -48,10 +48,18 @@ const PostDetailPage = () => {
             <MdPersonAdd /> &nbsp;모집자와 채팅하기
           </S.DetailInfoContent>
           <S.DetailInfoContent>
-            <S.PostStatusCircle>모집인원</S.PostStatusCircle>{' '}
+            <S.PostStatusCircle>
+              <label>모집중</label>
+              <label>
+                {post.participants.length}/{post.maxParticipants}
+              </label>
+            </S.PostStatusCircle>
           </S.DetailInfoContent>
         </S.DetailInfoWrapper>
       </S.PostDetailInfo>
+      <S.PostDetailContent>
+        {post.detail}
+      </S.PostDetailContent>
     </S.PostDetailWrapper>
   );
 };

@@ -17,4 +17,5 @@ export const HeaderContent = styled.label`
   font-size: 26px;
   color: #ffffff;
   font-weight: bold;
+  cursor : pointer; 
 `;

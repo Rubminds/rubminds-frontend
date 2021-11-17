@@ -5,22 +5,22 @@ const Footer = () =>{
     return(
         <S.FooterWrapper>
             <S.TextBox>
-                <li>sd</li>
-                <li>sd</li>
-                <li>sd</li>
-                <li>sd</li>
+                <li>footer</li>
+                <li>footer</li>
+                <li>footer</li>
+                <li>footer</li>
             </S.TextBox>
             <S.TextBox>
-                <li>sd</li>
-                <li>sd</li>
-                <li>sd</li>
-                <li>sd</li>
+                <li>footer</li>
+                <li>footer</li>
+                <li>footer</li>
+                <li>footer</li>
             </S.TextBox>
             <S.TextBox>
-                <li>sd</li>
-                <li>sd</li>
-                <li>sd</li>
-                <li>sd</li>
+                <li>footer</li>
+                <li>footer</li>
+                <li>footer</li>
+                <li>footer</li>
             </S.TextBox>
         </S.FooterWrapper>
     )

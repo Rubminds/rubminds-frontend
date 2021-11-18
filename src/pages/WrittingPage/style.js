@@ -71,6 +71,3 @@ export const EnviromentCheck = styled.input`
   border : 1px; 
 `;
 
-export const EnviromentLabel = styled.label`
-
-`;

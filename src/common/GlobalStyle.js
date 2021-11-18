@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+*{
+    box-sizing:border-box;
+}
 body {
     height: 100%;
     width:100%;
@@ -17,7 +20,12 @@ html{
 textarea{
     -webkit-box-sizing:border-box;
 }
-
+textarea:focus{
+    outline:none;
+}
+input{
+    box-sizing:border-box;
+}
 div{
     -webkit-box-sizing:border-box;
 }
@@ -39,12 +47,14 @@ li{
     list-style:none;
     cursor:pointer;
     margin:0;
+    box-sizing:border-box;
 }
 ul{
     display:flex;
     list-style: none;
     padding:0px;
     margin:0px;
+    box-sizing:border-box;
 }
 input:focus{
     outline:none;

@@ -4,10 +4,10 @@ import mediaQuery from '../../hooks/mediaQuery';
 
 export const PostDetailWrapper = styled.div`
   width: 100%;
-  padding: 4rem 16rem;
+  padding: 4rem 16rem 12rem 16rem;
   background-color:#F9FBFC;
   ${flexColumn};
-  ${mediaQuery({ padding: '2rem 4rem' })}
+  ${mediaQuery({ padding: '2rem 4rem 12rem 4rem' })}
 `;
 
 export const PostDetailTitle = styled.div`
@@ -24,7 +24,7 @@ export const PostDetailTitle = styled.div`
 
 export const PostDetailContent = styled.div`
   width: 100%;
-  margin-top: 5rem;
+  margin: 5rem 0;
   font-size: 1.8rem;
   line-height:4rem;
 `;

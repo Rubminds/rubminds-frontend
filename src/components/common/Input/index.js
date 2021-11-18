@@ -3,7 +3,7 @@ import * as S from './style'
 
 const Input = ({placeholder , ...props}) =>{
     return(
-        <S.StyledInput type="text" placeholder={placeholder} {...props}/>
+        <S.StyledInput type="text" placeholder={placeholder} spellCheck={false} {...props}/>
     )
 }
 

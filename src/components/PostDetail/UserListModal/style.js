@@ -7,7 +7,8 @@ export const UserListWrapper = styled.div`
   padding: 2% 2%;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
-  ${mediaQuery({width:"100%"})}
+  border-radius:5px;
+  ${mediaQuery({width:"100%"})};
 `;
 
 export const CloseBtn = styled.button`

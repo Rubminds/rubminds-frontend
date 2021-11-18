@@ -11,6 +11,7 @@ export const LandingBanner = styled.div`
     ${theme.colors.gradientLeft},
     ${theme.colors.gradientRight}
   );
+  padding-top:3rem;
   //padding-top: 90px;
   ${flexCenter};
   @media all and (max-width: 767px) {

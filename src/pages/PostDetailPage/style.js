@@ -5,6 +5,7 @@ import mediaQuery from '../../hooks/mediaQuery';
 export const PostDetailWrapper = styled.div`
   width: 100%;
   padding: 4rem 16rem;
+  background-color:#F9FBFC;
   ${flexColumn};
   ${mediaQuery({ padding: '2rem 4rem' })}
 `;

@@ -6,7 +6,7 @@ import { BiStar } from 'react-icons/bi';
 import { AiOutlineEdit } from 'react-icons/ai';
 
 import { Test } from '../../assets/imgs';
-import { DetailInfo, UserListModal } from '../../components';
+import { DetailInfo, UserListModal,ProcessEndModal } from '../../components';
 
 const PostDetailPage = () => {
   const me = '김경원'; //추후에 리덕스 상태를 가져올 것

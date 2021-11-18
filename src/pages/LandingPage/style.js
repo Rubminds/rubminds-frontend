@@ -65,7 +65,7 @@ export const CategoryWrapper = styled.div`
   margin-top: 5rem;
 `;
 
-export const CategoryCard = styled.div`
+export const CategoryCard = styled.button`
   ${flexColumn};
   align-items: center;
   justify-content: center;

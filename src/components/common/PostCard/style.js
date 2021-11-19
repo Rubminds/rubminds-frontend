@@ -8,13 +8,13 @@ export const CardWrapper = styled.li`
   width: 32rem;
   height: 24rem;
   border-radius: 30px;
-  padding: 2% 2%;
+  padding: 2rem 2rem;
   margin:2rem;
   box-shadow:3px 3px 4px rgba(0, 0, 0, 0.2);
   background-color:${(props) => props.status === '진행중' ? "#AA8AE8" : props.status === '진행완료' ? "#7944E3":'#fff'};
   opacity: ${(props) => props.status === '진행중' ? "0.6" : props.status === '진행완료' ? "0.7":'1'};
   position:relative;
-  ${mediaQuery({"max-width":"300px", width:"100%", "min-height":"220px",padding:"2rem 2rem"})};
+  ${mediaQuery({width:"280px", "min-height":"220px",padding:"2rem 2rem", "margin":"2rem 0"})};
   @media all and (max-width:768px){
   }
 `;

@@ -24,13 +24,14 @@ export const CategoryCard = styled.div`
   justify-content: center;
   width: 200px;
   height: 120px;
-  background-color: #fff;
+  background-color: ${ props => props.backgroundColor};
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   & + & {
     margin-left: 150px;
   }
+  cursor : pointer; 
 `
 
 export const MainTitle = styled.div`

@@ -30,3 +30,9 @@ export const Submit = styled.button`
   border-radius: 50px;
   margin-top:5rem;
 `;
+
+export const ContentsWrapper = styled.div`
+  display:flex;
+  width:100%;
+  justify-content:space-between;
+`

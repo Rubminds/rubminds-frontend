@@ -106,6 +106,7 @@ export const PostsWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin-top:3rem;
+  width:100%;
   @media all and (max-width:768px){
     ${flexColumn};
     align-items:center;

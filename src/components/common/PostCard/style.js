@@ -5,11 +5,11 @@ import mediaQuery from '../../../hooks/mediaQuery'
 export const CardWrapper = styled.li`
   ${flexColumn};
   justify-content:space-between;
-  width: 30rem;
-  height: 20rem;
+  width: 32rem;
+  height: 24rem;
   border-radius: 30px;
   padding: 2% 2%;
-  margin:2%;
+  margin:2rem;
   box-shadow:3px 3px 4px rgba(0, 0, 0, 0.2);
   background-color:${(props) => props.status === '진행중' ? "#AA8AE8" : props.status === '진행완료' ? "#7944E3":'#fff'};
   opacity: ${(props) => props.status === '진행중' ? "0.6" : props.status === '진행완료' ? "0.7":'1'};

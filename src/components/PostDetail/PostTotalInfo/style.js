@@ -94,4 +94,5 @@ export const PostStatusCircle = styled.button`
 export const GroupBox = styled.div`
   ${flexColumn};
   width:auto;
+  justify-content:center;
 `;

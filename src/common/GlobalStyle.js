@@ -9,6 +9,10 @@ body {
     font-family:"Malgun Gothic";
 }
 
+input { 
+    -webkit-box-sizing:border-box;
+}
+
 textarea{
     -webkit-box-sizing:border-box;
 }

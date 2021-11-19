@@ -13,7 +13,7 @@ export const LandingDetailWrapper = styled.div`
   background-color:#F9FBFC;
   min-height:1vh;
   @media all and (max-width: 768px) {
-    padding: 2rem 2rem;
+    padding: 2rem 5%;
   }
 `;
 

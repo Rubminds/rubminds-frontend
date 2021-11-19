@@ -62,8 +62,6 @@ const onMainTextHandler = useCallback((e)=> {
 const onSubmitHandler = (e) => {
   e.preventDefault();
 
-  console.log(recruitType, title, meetEnviroment, recruitPeople, area, mainText);
-
   const formData = new FormData();
   if (recruitPeople){
     formData.append('recruitPeople', recruitPeople);
@@ -75,16 +73,6 @@ const onSubmitHandler = (e) => {
   formData.append('recruitPeople', recruitPeople);
   formData.append('area', area);
   formData.append('mainText', mainText);
-
-  // for (var key of formData.keys()) {
-  //   console.log(key);
-  // }
-  //
-  // for (var value of formData.values()) {
-  //   console.log(value);
-  // }
-
-
 };
 
   return (

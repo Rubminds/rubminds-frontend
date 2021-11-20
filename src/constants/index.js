@@ -18,7 +18,8 @@ export const flexBetween = css`
   align-items: center;
 `;
 
-//dropdown options
+//options
+//dropdown
 export const LandingDropdownOptions = [
   '파이썬',
   '리액트',
@@ -27,6 +28,28 @@ export const LandingDropdownOptions = [
   'NODEJS',
   '엄청긴거테스트용ㅇㅇㅇㅇ',
 ];
+// 지역 options
+export const AreaOptions = [
+  '서울특별시',
+  '경기도',
+  '인천광역시',
+  '대전광역시',
+  '광주광역시',
+  '전라북도',
+  '전라남도',
+  '제주도',
+  '경상남도',
+  '경상북도',
+  '부산광역시',
+  '울산광역시',
+  '대구광역시',
+  '충청남도',
+  '충청북도',
+  '세종특별자치시',
+  '강원도',
+];
+// 모집 유형
+export const RecruitmentType = ['study', 'scout', 'project'];
 
 //actions
 export const SIGNUP_USER = 'SIGNUP_USER';

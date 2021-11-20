@@ -17,8 +17,13 @@ html{
         font-size:6px !important;
     }
 }
+
+input { 
+    box-sizing:border-box;
+}
+
 textarea{
-    box-sizing:inherit;
+    box-sizing:border-box;
 }
 textarea:focus{
     outline:none;
@@ -27,17 +32,17 @@ input{
     box-sizing:border-box;
 }
 div{
-    box-sizing:inherit;
+    box-sizing:border-box;
 }
 nav{
-    box-sizing:inherit;
+    box-sizing:border-box;
 }
 button {
     text-decoration: none;
     cursor: pointer;
     color: inherit;
     padding:0;
-    box-sizing:inherit;
+    box-sizing:border-box;
 }
 a{ 
     /* 링크의 색상 및 밑줄 없애기 */
@@ -61,10 +66,10 @@ input:focus{
     outline:none;
 }
 img{
-    box-sizing:inherit;
+    box-sizing:border-box;
 }
 svg{
-    box-sizing:inherit;
+    box-sizing:border-box;
 }
 
 `;

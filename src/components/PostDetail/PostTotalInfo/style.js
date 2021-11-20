@@ -84,7 +84,7 @@ export const PostStatusCircle = styled.button`
   color: #fff;
   font-size: 2.6rem;
   font-weight: bold;
-  background-color: #aa8ae8;
+  background-color: ${(props)=>props.status === "모집중" ? "#aa8ae8" : props.status === "진행중" ? "#966BEB":"#7944e3"};
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   & label {
     cursor: pointer;

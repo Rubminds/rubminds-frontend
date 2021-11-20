@@ -1,10 +1,13 @@
 import React from 'react';
-import * as S from './style'
+import * as S from './style';
+import { useHistory } from 'react-router';
 
 import { BannerCarousel } from '../..';
+import { Iphone } from '../../../assets/imgs';
 
 const Banner = () => {
-  const me = "someone"; //로그인 여부
+  const me = 'someone'; //로그인 여부
+  const history = useHistory();
   return (
     <S.LandingBanner>
       <S.BannerTextBox>
@@ -13,11 +16,15 @@ const Banner = () => {
         <br />
         <br />
         <S.BannerText fontSize="md">Rubminds에서 당신의 팀원을 찾으세요!</S.BannerText>
-        <S.RecruitBtn>모집하기</S.RecruitBtn>
+        <S.RecruitBtn
+          onClick={() => {
+            history.push('/write');
+          }}
+        >
+          모집하기
+        </S.RecruitBtn>
       </S.BannerTextBox>
-      {
-        me ? <BannerCarousel/>:<S.IphoneImg/>
-      }
+      {me ? <BannerCarousel /> : <S.IphoneImg />}
     </S.LandingBanner>
   );
 };

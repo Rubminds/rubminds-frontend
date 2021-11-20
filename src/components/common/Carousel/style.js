@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
+import { flexCenter, flexColumn } from '../../../constants';
 
 export const CarouselContainer = styled.div`
   width: ${(props) => props.size};
@@ -12,9 +13,23 @@ export const CarouselWrapper = styled.div`
   display: flex;
 `;
 
-export const CarouselImg = styled.img`
+export const CarouselContent = styled.div`
   width: ${(props) => props.size};
   height: ${(props) => props.size};
+`;
+export const CarouselImg = styled.img`
+  width:${(props) => props.size};
+  height:${(props) => props.size};
+`;
+export const AddImgCard = styled.label`
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
+  font-size: 3rem;
+  ${flexColumn};
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid rgba(128, 128, 128, 0.199);
 `;
 
 export const CarouselPrev = styled(GrFormPrevious)`

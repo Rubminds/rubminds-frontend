@@ -15,14 +15,14 @@ const PostCard = ({ post, ...props }) => {
         </S.CardCategory>
       <S.CardTitle>{post.title}</S.CardTitle>
       <S.CardSkills>
-        {post.skills.map((v) => {
-          return <Python width="45px" height="45px" />;
+        {post.skills.map((v, i) => {
+          return <Python width="45px" height="45px" key={i}/>;
         })}
       </S.CardSkills>
-      <S.CardFooter>
+      <S.CardFooter status={post.status}>
         <S.FooterTags>
-          {post.skills.map((v) => {
-            return <S.FooterTag>#{v}&nbsp;</S.FooterTag>;
+          {post.skills.map((v,i) => {
+            return <S.FooterTag key={i}>#{v}&nbsp;</S.FooterTag>;
           })}
         </S.FooterTags>
         <S.DibBtn>

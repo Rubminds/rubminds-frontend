@@ -4,14 +4,16 @@ import { FiChevronDown } from 'react-icons/fi';
 import { IoMdCloseCircle } from 'react-icons/io';
 
 export const DropDownContainer = styled.div`
-  width: ${(props) => (props.width ? props.width : '80%')};
-  height: ${(props) => (props.height ? props.height : '60px')};
+  width: ${(props) => (props.width ? props.width : '90%')};
+  height: ${(props) => (props.height ? props.height : '6rem')};
   position: relative;
   background: #ffffff;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
+  border-bottom-left-radius: ${(props) => props.isOpen && "0"};
+  border-bottom-right-radius: ${(props) => props.isOpen && "0"};
   z-index: 10;
-  padding: 4px 10px;
+  padding: 0.4rem 1rem;
   margin-top: ${(props) => (props.marginTop ? props.marginTop : '0')};
   display: flex;
   align-items: center;
@@ -25,16 +27,16 @@ export const DropDownHeader = styled.div`
 `;
 
 export const HeaderArrow = styled(FiChevronDown)`
-  font-size: 24px;
+  font-size: 2.4rem;
   position: absolute;
   right: 3%;
   cursor: pointer;
 `;
 export const HeaderTag = styled.div`
   position: relative;
-  width: 120px;
-  font-size: 16px;
-  line-height: 32px;
+  width: 9rem;
+  font-size: 1.6rem;
+  line-height: 3rem;
   background-color: lightgray;
   //color: #ffffff;
   cursor: pointer;
@@ -48,20 +50,13 @@ export const HeaderTag = styled.div`
   white-space: nowrap;
   z-index:10;
 `;
-export const TagDelete = styled(IoMdCloseCircle)`
-  position: absolute;
-  top: 0;
-  right: 5%;
-  font-size: 14px;
-  color: red;
-`;
 
 export const DropDownList = styled.ul`
   position: absolute;
-  width: 100%;
+  width: 99.8%;
   left: 0;
   top:100%;
-  padding: 8px 1px;
+  padding: 0.8rem 0.1rem;
   border: none;
   max-height: 200px;
   overflow-y: auto;
@@ -77,16 +72,15 @@ export const DropDownList = styled.ul`
   margin: 0;
   background: #ffffff;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
 `;
 
 export const ListItem = styled.li`
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  margin-bottom: 12px;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  margin-bottom: 1.2rem;
   &:last-child {
     margin-bottom: 0;
   }

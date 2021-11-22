@@ -25,6 +25,7 @@ const App = () => {
           <Route exact path="/detail" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
           <Route path="/write" component={WrittingPage} />
+          <Route path="/mypage" component={WrittingPage} />
         </Switch>
       </Router>
     </ThemeProvider>

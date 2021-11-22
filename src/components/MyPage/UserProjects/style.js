@@ -6,7 +6,7 @@ import theme from '../../../common/theme';
 
 export const CardWrapper = styled(Paper)`
   width: 45%;
-  height:24rem;
+  height: 24rem;
   padding: 3rem 4rem;
 `;
 export const Title = styled.label`
@@ -26,6 +26,7 @@ export const StatusCircle = styled.div`
   ${flexColumn};
   align-items: center;
   justify-content: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 
   ${(props) =>
     props.status === '모집중'

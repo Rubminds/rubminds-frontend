@@ -17,10 +17,7 @@ export const SignUpPageLeft = styled.div`
   );
 
   ${mediaQuery({
-    position: 'static',
-    width: '0rem',
-    height: '0rem',
-    padding: '0rem 0rem 0rem 0rem',
+    display: 'none',
   })}
 `
 export const MainTitle = styled.div`
@@ -58,14 +55,23 @@ export const ProfileWrapper = styled.div`
   color: grey;
 `
 
+export const NickNameWrapper = styled.div`
+  width: 100%;
+  @media all and (max-width: 443px) {
+    display: flex;
+  }
+`
+
 export const NickNameBox = styled.input`
   border: none;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-  width: 70%;
+  width: 60%;
   height: 7rem;
   border-radius: 3rem;
   padding: 0rem 3rem 0rem 3rem;
   font-size: 3rem;
+  margin-right: 5%;
+
 `
 
 export const CheckBox = styled.button`
@@ -75,10 +81,15 @@ export const CheckBox = styled.button`
   font-size: 3rem;
   background-color: #cdf6e8;
   border: none;
-  padding: 0rem 2rem 0rem 2rem;
-  margin-left: 5rem;
+  padding: 0rem 3rem 0rem 3rem;
+  width: 30%;
   font-size: 2rem;
-`
+  margin-left: 5%;
+  @media all and (max-width: 768px) {
+    font-size: 1.8vw;
+    padding: 0rem 2rem;
+  }
+`;
 
 export const JobWrapper = styled.div`
   ${flexBetween}
@@ -87,11 +98,11 @@ export const JobWrapper = styled.div`
 export const JobCheckBtn = styled.button`
   width: 30%;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 30px;
+  border-radius: 3rem;
   border: none;
   background-color: ${props => props.backgroundColor || 'white'};
-  padding: 20px;
-  font-size: 20px;
+  padding: 2rem;
+  font-size: 2rem;
 `
 
 export const Introduce = styled.textarea`

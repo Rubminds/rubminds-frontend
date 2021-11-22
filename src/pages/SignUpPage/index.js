@@ -134,22 +134,25 @@ const SignUp = () => {
           </S.ProfileWrapper>
 
           {/* 닉네임 */}
-          <S.MainTitle
-            marginTop="7.5%"
-            marginBottom="7.5%"
-            fontSize="20px"
-            aquired
-          >
-            닉네임
-          </S.MainTitle>
-          <S.NickNameBox name="nickName" onChange={onChangeNickName} required />
-          <S.CheckBox
-            onClick={() => {
-              alert('중복체크 중!')
-            }}
-          >
-            중복 체크
-          </S.CheckBox>
+
+            <S.MainTitle
+              marginTop="7.5%"
+              marginBottom="7.5%"
+              fontSize="20px"
+              aquired
+            >
+              닉네임
+            </S.MainTitle>
+            <S.NickNameWrapper>
+              <S.NickNameBox name="nickName" onChange={onChangeNickName} required />
+              <S.CheckBox
+                onClick={() => {
+                  alert('중복체크 중!')
+                }}
+              >
+                중복 체크
+              </S.CheckBox>
+          </S.NickNameWrapper>
 
           {/* 직업 */}
           <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="20px">

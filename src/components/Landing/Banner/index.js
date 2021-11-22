@@ -1,11 +1,10 @@
 import React from 'react';
 import * as S from './style';
 import { Iphone } from '../../../assets/imgs';
-import { useHistory } from 'react-router';
+import {Link} from "react-router-dom";
 
 
 const Banner = () => {
-  const history = useHistory(); 
   return (
     <S.LandingBanner>
       <S.BannerTextBox>
@@ -14,7 +13,7 @@ const Banner = () => {
         <br />
         <br />
         <S.BannerText fontSize="30px">Rubminds에서 당신의 팀원을 찾으세요!</S.BannerText>
-        <S.RecruitBtn onClick={()=>{history.push('/write')}}>모집하기</S.RecruitBtn>
+        <S.RecruitBtn> <Link to='/write'> 모집하기 </Link> </S.RecruitBtn>
       </S.BannerTextBox>
       <Iphone width="600px" height="100%" />
     </S.LandingBanner>

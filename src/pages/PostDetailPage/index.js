@@ -1,12 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import * as S from './style';
 
 import { PostTotalInfo, ResultForm,BackButton } from '../../components';
 
 const PostDetailPage = () => {
   const me = '김경원'; //추후에 리덕스 상태를 가져올 것
-  const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const post = {
     title:

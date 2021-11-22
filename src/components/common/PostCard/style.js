@@ -1,4 +1,4 @@
-import styled,{css} from 'styled-components';
+import styled from 'styled-components';
 import { flexColumn, flexBetween, flexCenter } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery'
 
@@ -15,8 +15,6 @@ export const CardWrapper = styled.li`
   opacity: ${(props) => props.status === '진행중' ? "0.6" : props.status === '진행완료' ? "0.7":'1'};
   position:relative;
   ${mediaQuery({width:"280px", "min-height":"220px",padding:"2rem 2rem", "margin":"2rem 0"})};
-  @media all and (max-width:768px){
-  }
 `;
 
 export const CardStatusWrapper = styled.div`

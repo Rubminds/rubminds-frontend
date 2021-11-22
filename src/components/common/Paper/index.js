@@ -1,9 +1,9 @@
 import React from 'react';
 import * as S from './style'
 
-const Paper = ({width, height}) =>{
+const Paper = ({children, ...props}) =>{
     return(
-        <S.Paper width={width} height={height}></S.Paper>
+        <S.Paper {...props}>{children}</S.Paper>
     )
 }
 

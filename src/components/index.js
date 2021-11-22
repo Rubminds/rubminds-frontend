@@ -21,3 +21,4 @@ export { default as ResultForm } from './PostDetail/ResultForm';
 export {default as UserProfile} from './MyPage/UserProfile'
 export {default as UserProjects} from './MyPage/UserProjects'
 export {default as UserRating} from './MyPage/UserRating'
+export {default as UserDibs} from './MyPage/UserDibs'

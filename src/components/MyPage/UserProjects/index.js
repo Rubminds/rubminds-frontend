@@ -8,15 +8,15 @@ const UserProjects = ({ me }) => {
       <S.Content>
         <S.StatusCircle status="모집중">
           <S.CircleLabel>모집중</S.CircleLabel>
-          {me.projects.모집중.length}
+          <S.CircleLabel>{me.projects.모집중.length}</S.CircleLabel>
         </S.StatusCircle>
         <S.StatusCircle status="진행중">
           <S.CircleLabel>진행중</S.CircleLabel>
-          {me.projects.진행중.length}
+          <S.CircleLabel>{me.projects.진행중.length}</S.CircleLabel>
         </S.StatusCircle>
         <S.StatusCircle status="진행종료">
-          <S.CircleLabel>모집종</S.CircleLabel>료
-          {me.projects.진행종료.length}
+          <S.CircleLabel>진행종료</S.CircleLabel>
+          <S.CircleLabel>{me.projects.진행종료.length}</S.CircleLabel>
         </S.StatusCircle>
       </S.Content>
     </S.CardWrapper>

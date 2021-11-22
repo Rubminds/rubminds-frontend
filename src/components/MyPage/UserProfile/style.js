@@ -20,7 +20,7 @@ export const Content = styled.div`
   justify-content: center;
   &:last-child {
     padding-right: 0;
-    border-left: 1px solid black;
+    border-left: 1px solid rgba(128, 128, 128, 0.199);
   }
 `;
 export const Avatar = styled.img`

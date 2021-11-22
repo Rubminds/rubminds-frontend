@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+
 import { flexColumn, flexBetween, flexCenter } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery'
+import theme from '../../../common/theme';
 
 export const CardWrapper = styled.li`
   ${flexColumn};
@@ -11,7 +13,7 @@ export const CardWrapper = styled.li`
   padding: 2rem 2rem;
   margin:2rem;
   box-shadow:3px 3px 4px rgba(0, 0, 0, 0.2);
-  background-color:${(props) => props.status === '진행중' ? "#AA8AE8" : props.status === '진행완료' ? "#7944E3":'#fff'};
+  background-color:${(props) => props.status === '진행중' ? `${theme.colors.status2Color}` : props.status === '진행완료' ? `${theme.colors.status3Color}`:'#fff'};
   opacity: ${(props) => props.status === '진행중' ? "0.6" : props.status === '진행완료' ? "0.7":'1'};
   position:relative;
   ${mediaQuery({width:"280px", "min-height":"220px",padding:"2rem 2rem", "margin":"2rem 0"})};

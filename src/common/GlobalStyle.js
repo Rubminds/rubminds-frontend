@@ -71,6 +71,9 @@ img{
 svg{
     box-sizing:border-box;
 }
+label{
+    box-sizing:border-box;
+}
 
 `;
 export default GlobalStyles;

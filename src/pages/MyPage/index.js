@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
 
-import { BackButton, UserProfile, UserProjects, UserRating } from '../../components';
+import { BackButton, UserProfile, UserProjects, UserRating,UserDibs } from '../../components';
 
 const MyPage = () => {
   const me = {
@@ -33,7 +33,7 @@ const MyPage = () => {
         <UserProjects me={me}/>
         <UserRating me={me}/>
       </S.Division>
-      <S.Division></S.Division>
+      <UserDibs me={me}/>
     </S.MyPageWrapper>
   );
 };

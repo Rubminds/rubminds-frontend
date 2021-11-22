@@ -1,4 +1,4 @@
-import styled,{css} from 'styled-components'
+import styled, { css } from 'styled-components';
 import { flexBetween, flexColumn, flexCenter } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
 
@@ -6,20 +6,24 @@ export const PostDetailInfo = styled.div`
   ${flexBetween};
   align-items: flex-start;
   margin-top: 5rem;
-  ${mediaQuery({ 'flex-direction': 'column-reverse', 'justify-content': 'reverse', "align-items":"center" })};
+  ${mediaQuery({
+    'flex-direction': 'column-reverse',
+    'justify-content': 'reverse',
+    'align-items': 'center',
+  })};
 `;
 
 export const DetailInfoWrapper = styled.div`
   ${flexColumn};
   width: ${(props) => (props.width ? props.width : '40%')};
-  ${mediaQuery({width:"60%", "margin-top":"3rem"})};
+  ${mediaQuery({ width: '60%', 'margin-top': '3rem' })};
   ${(props) =>
     props.Group &&
     css`
-      @media all and (max-width:768px){
-        flex-direction:row-reverse;
-        justify-content:space-around;
-        width:100%;
+      @media all and (max-width: 768px) {
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        width: 100%;
       }
     `}
 `;
@@ -33,8 +37,8 @@ export const DetailInfoLeft = styled.div`
   align-items: center;
   flex: 1;
   position: relative;
-  font-weight: bold;
-  ${mediaQuery({ "justify-content":"center" })};
+  font-weight: ${(props) => props.bold && 'bold'};
+  ${mediaQuery({ 'justify-content': 'center' })};
 `;
 export const DetailInfoRight = styled.div`
   ${flexCenter}
@@ -42,7 +46,7 @@ export const DetailInfoRight = styled.div`
   flex-wrap: wrap;
   padding: 0 1%;
   color: #707070;
-  ${mediaQuery({ flex:"1" })};
+  ${mediaQuery({ flex: '1' })};
 `;
 
 export const AuthorAvatar = styled.img`
@@ -68,8 +72,8 @@ export const DetailInfoContent = styled.div`
       font-weight: bold;
       width: fit-content;
       height: fit-content;
-      ${mediaQuery({width:"max-content"})};
-      margin-bottom:
+      ${mediaQuery({ width: 'max-content' })};
+      margin-bottom: ;
     `}
 `;
 export const PostStatusCircle = styled.button`
@@ -84,7 +88,8 @@ export const PostStatusCircle = styled.button`
   color: #fff;
   font-size: 2.6rem;
   font-weight: bold;
-  background-color: ${(props)=>props.status === "모집중" ? "#aa8ae8" : props.status === "진행중" ? "#966BEB":"#7944e3"};
+  background-color: ${(props) =>
+    props.status === '모집중' ? '#aa8ae8' : props.status === '진행중' ? '#966BEB' : '#7944e3'};
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   & label {
     cursor: pointer;
@@ -93,6 +98,7 @@ export const PostStatusCircle = styled.button`
 
 export const GroupBox = styled.div`
   ${flexColumn};
-  width:auto;
-  justify-content:center;
+  width: auto;
+  justify-content: center;
 `;
+

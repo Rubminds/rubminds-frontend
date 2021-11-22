@@ -3,7 +3,6 @@ import * as S from './style';
 import { useHistory } from 'react-router';
 
 import { BannerCarousel } from '../..';
-import { Iphone } from '../../../assets/imgs';
 
 const Banner = () => {
   const me = 'someone'; //로그인 여부

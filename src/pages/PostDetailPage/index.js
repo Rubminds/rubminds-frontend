@@ -27,6 +27,7 @@ const PostDetailPage = () => {
     ],
     maxUserNum: 4,
     Date: '2021-11-16',
+    file:"c:\\fakepath\\filename.pdfc:\\fakepath\\filename.pdf"
   };
   const onBackClick = useCallback(() => {
     history.go(-1);
@@ -41,6 +42,7 @@ const PostDetailPage = () => {
     <S.PostDetailWrapper>
       <MdOutlineArrowBackIos fontSize="6rem" cursor="pointer" onClick={onBackClick} />
       <S.PostDetailTitle>{post.title}</S.PostDetailTitle>
+      <S.UploadedFile download href={post.file}>첨부파일</S.UploadedFile>
       <PostTotalInfo
         post={post}
         modalOpen={modalOpen}

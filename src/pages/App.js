@@ -9,6 +9,7 @@ import WrittingPage from './WrittingPage';
 import PostDetailPage from './PostDetailPage';
 import LogInPage from './LogInPage';
 import SignUpPage from './SignUpPage';
+import MyPage from './MyPage'
 
 import { Header, ChatButton } from '../components';
 
@@ -25,7 +26,7 @@ const App = () => {
           <Route exact path="/detail" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
           <Route path="/write" component={WrittingPage} />
-          <Route path="/mypage" component={WrittingPage} />
+          <Route path="/mypage" component={MyPage} />
         </Switch>
       </Router>
     </ThemeProvider>

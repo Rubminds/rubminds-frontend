@@ -1,9 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as S from './style';
-import { MdOutlineArrowBackIos } from 'react-icons/md';
 
-import { PostTotalInfo, ResultForm } from '../../components';
+import { PostTotalInfo, ResultForm,BackButton } from '../../components';
 
 const PostDetailPage = () => {
   const me = '김경원'; //추후에 리덕스 상태를 가져올 것
@@ -29,9 +28,6 @@ const PostDetailPage = () => {
     Date: '2021-11-16',
     file:"c:\\fakepath\\filename.pdfc:\\fakepath\\filename.pdf"
   };
-  const onBackClick = useCallback(() => {
-    history.go(-1);
-  }, []);
   const openModal = useCallback(() => {
     setModalOpen(true);
   }, [modalOpen]);
@@ -40,7 +36,7 @@ const PostDetailPage = () => {
   }, [modalOpen]);
   return (
     <S.PostDetailWrapper>
-      <MdOutlineArrowBackIos fontSize="6rem" cursor="pointer" onClick={onBackClick} />
+      <BackButton/>
       <S.PostDetailTitle>{post.title}</S.PostDetailTitle>
       <S.UploadedFile download href={post.file}>첨부파일</S.UploadedFile>
       <PostTotalInfo

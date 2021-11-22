@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import mediaQuery from '../../../hooks/mediaQuery'
 
 export const StyledChatButton = styled.button`
     position:fixed;
@@ -11,4 +12,5 @@ export const StyledChatButton = styled.button`
     right:4%;
     cursor:pointer;
     z-index:9999;
+    ${mediaQuery({width:"60px", height:"60px"})}
 `

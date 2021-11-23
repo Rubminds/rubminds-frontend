@@ -3,11 +3,13 @@ import styled, { css } from 'styled-components';
 import { Paper } from '../../';
 import { flexBetween, flexCenter, flexColumn } from '../../../constants';
 import theme from '../../../common/theme';
+import mediaQuery from '../../../hooks/mediaQuery';
 
 export const CardWrapper = styled(Paper)`
   width: 45%;
   height: 24rem;
   padding: 3rem 4rem;
+  ${mediaQuery({"width":"100%"})}
 `;
 export const Title = styled.label`
   font-size: 2rem;

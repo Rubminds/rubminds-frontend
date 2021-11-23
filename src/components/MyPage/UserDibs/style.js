@@ -2,12 +2,14 @@ import styled from 'styled-components';
 
 import { Paper } from '../..';
 import { flexBetween, flexColumn } from '../../../constants';
+import mediaQuery from '../../../hooks/mediaQuery';
 
 export const CardWrapper = styled(Paper)`
   margin-top: 5rem;
   width: 45%;
   height: auto;
   padding: 3rem 4rem;
+  ${mediaQuery({"width":"100%"})}
 `;
 export const Title = styled.label`
   font-size: 2rem;

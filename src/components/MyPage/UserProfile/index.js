@@ -6,7 +6,7 @@ import { Test } from '../../../assets/imgs';
 const UserProfile = ({ me }) => {
   return (
     <S.RowContentWrapper>
-      <S.Avatar src={Test} flex="1" />
+      <S.Avatar src={Test}  />
       <S.Content flex="5">
         <S.NameIntroduce>
           <S.Name>{me.name}</S.Name>

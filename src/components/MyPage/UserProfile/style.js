@@ -19,6 +19,7 @@ export const Content = styled.div`
   height: 100%;
   ${flexColumn};
   justify-content: center;
+  flex: ${(props) => props.flex};
   &:last-child {
     padding-right: 0;
     border-left: 1px solid rgba(128, 128, 128, 0.199);
@@ -30,7 +31,6 @@ export const Avatar = styled.img`
   width: 8rem;
   height: 8rem;
   border-radius: 50%;
-  flex: ${(props) => props.flex};
   ${mediaQuery({margin:"1rem 0"})}
 `;
 export const NameIntroduce = styled.div`

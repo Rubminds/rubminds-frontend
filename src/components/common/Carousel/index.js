@@ -24,7 +24,7 @@ const Carousel = ({ size }) => {
 
   // Prev 버튼 클릭 시
   const prevClick = useCallback(() => {
-    if (currentImg === 0) { //첫번째 사진일 때
+    if (currentImg === 0) { // 첫번째 사진일 때
       setCurrentImg(totalImgsNum); // 마지막 사진으로
     } else {
       setCurrentImg(currentImg - 1);

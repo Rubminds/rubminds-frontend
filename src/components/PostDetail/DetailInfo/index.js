@@ -6,7 +6,11 @@ const DetailInfo = ({ title, info }) => {
     <S.DetailInfoBetween>
       <S.DetailInfoLeft>{title}</S.DetailInfoLeft>
       <S.DetailInfoRight>
-        {Array.isArray(info) ? info.map((v, i) => <label key={i}>#{v}</label>) : <label>{info}</label>}
+        {Array.isArray(info) ? (
+          info.map((v, i) => <label key={i}>#{v}</label>)
+        ) :  (
+          <label>{info}</label>
+        )}
       </S.DetailInfoRight>
     </S.DetailInfoBetween>
   );

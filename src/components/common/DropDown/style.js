@@ -53,7 +53,7 @@ export const HeaderTag = styled.div`
 
 export const DropDownList = styled.ul`
   position: absolute;
-  width: 99.8%;
+  width: 100%;
   left: 0;
   top:100%;
   padding: 0.8rem 0.1rem;

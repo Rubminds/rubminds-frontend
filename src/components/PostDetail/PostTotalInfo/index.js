@@ -15,7 +15,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
         <S.DetailInfoBetween>
-          <S.DetailInfoLeft>
+          <S.DetailInfoLeft bold>
             <S.AuthorAvatar src={Test} /> &nbsp;{post.author}
           </S.DetailInfoLeft>
           <S.DetailInfoRight>{post.Date}</S.DetailInfoRight>

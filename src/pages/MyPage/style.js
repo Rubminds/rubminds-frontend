@@ -7,7 +7,7 @@ export const MyPageWrapper = styled.div`
   padding: 4rem 16rem 20rem 16rem;
   background-color: #f9fbfc;
   ${flexColumn};
-  ${mediaQuery({ padding: '2rem 4rem 12rem 4rem' })}
+  ${mediaQuery({ padding: '2rem 4rem 24rem 4rem' })}
 `;
 
 export const Division = styled.div`

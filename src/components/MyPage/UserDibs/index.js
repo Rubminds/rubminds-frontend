@@ -4,7 +4,10 @@ import * as S from './style';
 const UserDibs = ({ me }) => {
   return (
     <S.CardWrapper>
-      <S.Title>찜목록</S.Title>
+      <S.TitleWrapper>
+        <S.Title>찜목록</S.Title>
+        <S.TitleDetail>자세히 보기</S.TitleDetail>
+      </S.TitleWrapper>
       <S.Content>
         <S.Type>
           <S.TypeName>스터디</S.TypeName>

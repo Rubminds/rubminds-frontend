@@ -31,7 +31,7 @@ export const Avatar = styled.img`
   width: 8rem;
   height: 8rem;
   border-radius: 50%;
-  ${mediaQuery({margin:"1rem 0"})}
+  ${mediaQuery({margin:"1rem 0", width:"16rem", height:"16rem"})}
 `;
 export const NameIntroduce = styled.div`
   ${flexColumn};
@@ -42,6 +42,7 @@ export const NameIntroduce = styled.div`
 export const Name = styled.label`
   font-size: 2rem;
   font-weight: bold;
+  ${mediaQuery({"font-size":"2.6rem"})}
 `;
 export const Introduce = styled.label`
   font-size: 1.2rem;
@@ -50,10 +51,11 @@ export const Introduce = styled.label`
   display: -webkit-box;
   -webkit-line-clamp: 3; //라인수 정함
   -webkit-box-orient: vertical;
-  ${mediaQuery({"margin-top":"1rem"})}
+  ${mediaQuery({"margin-top":"1rem", "font-size":"2rem"})}
 `;
 export const SkillsWrapper = styled.ul`
   display: flex;
+  ${mediaQuery({"justify-content":"center"})}
 `;
 export const SkillImg = styled.img`
   width: 6rem;

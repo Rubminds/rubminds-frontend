@@ -9,11 +9,20 @@ export const CardWrapper = styled(Paper)`
   width: 45%;
   height: auto;
   padding: 3rem 4rem;
-  ${mediaQuery({"width":"100%"})}
+  ${mediaQuery({ width: '100%' })}
+`;
+export const TitleWrapper = styled.div`
+  ${flexBetween};
 `;
 export const Title = styled.label`
   font-size: 2rem;
   font-weight: bold;
+`;
+export const TitleDetail = styled.a`
+  font-size: 1.2rem;
+  color: rgba(128, 128, 128);
+  text-decoration: underline;
+  text-underline-position: under;
 `;
 export const Content = styled.div`
   ${flexBetween};
@@ -30,6 +39,6 @@ export const TypeName = styled.label`
 `;
 
 export const ValueLabel = styled.label`
-    font-size:2.4rem;
-    font-weight:bold;
+  font-size: 2.4rem;
+  font-weight: bold;
 `;

@@ -15,3 +15,12 @@ export const Division = styled.div`
   margin-top:5rem;
   ${mediaQuery({"flex-direction":"column"})}
 `;
+
+export const EditProfile = styled.label`
+  display:flex;
+  justify-content:flex-end;
+  font-size: 1.2rem;
+  color: rgba(128, 128, 128);
+  text-decoration: underline;
+  text-underline-position: under;
+`

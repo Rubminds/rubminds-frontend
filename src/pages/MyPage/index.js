@@ -28,6 +28,7 @@ const MyPage = () => {
   return (
     <S.MyPageWrapper>
       <BackButton />
+      <S.EditProfile>프로필 수정</S.EditProfile>
       <UserProfile me={me} />
       <S.Division>
         <UserProjects me={me}/>

@@ -4,6 +4,7 @@ import * as S from './style';
 import { MAX_STAR } from '../../../constants';
 
 const UserRating = ({ me }) => {
+  let idx=0;
   const render = (ratio, type) => {
     const empty = [];
     let decimal = Number((ratio % 1).toFixed(2)); // 소수점자리
@@ -11,25 +12,25 @@ const UserRating = ({ me }) => {
 
     // 꽉찬 별 추가
     for (let i = 0; i < integer; i++) {
-      empty.push(<S.Star filled />);
+      empty.push(<S.Star filled="true" key={idx++}/>);
     }
     // 반쯤 채워진 별 추가
     for (let i = 0; i < decimal; i++) {
       empty.push(
-        <>
+        <b key={idx++}>
           <S.HiddenSvg>
             <linearGradient id={type} x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop stopColor="#FFD975" offset={decimal} />
-              <stop stopColor="#f0f0f0" offset={decimal} />
+              <stop stopColor="#FFD975" offset={decimal}/>
+              <stop stopColor="#f0f0f0" offset={decimal}/>
             </linearGradient>
           </S.HiddenSvg>
-          <S.Star style={{ fill: `url(#${type})` }} />
-        </>
+          <S.Star style={{ fill: `url(#${type})` }} key={idx++}/>
+        </b>
       );
     }
     // 빈 별 추가
     for (let i = 0; i < (decimal > 0 ? MAX_STAR - integer - 1 : MAX_STAR - integer); i++) {
-      empty.push(<S.Star />);
+      empty.push(<S.Star key={idx++}/>);
     }
     return empty;
   };

@@ -35,7 +35,7 @@ export const RatingWrapper = styled.div`
   }
 `;
 
-export const StarWrapper = styled.div`
+export const StarWrapper = styled.ul`
   ${flexBetween};
   flex: 1.5;
 `;

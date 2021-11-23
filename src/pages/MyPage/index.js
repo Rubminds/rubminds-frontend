@@ -8,7 +8,7 @@ const MyPage = () => {
     name: '김경원',
     avatar: '회원이미지',
     introduce:
-      '저는 대학생이고 프론트엔드 개발자가 되기를 희망합니다. ',
+      '저는 대학생이고 프론트엔드 개발자가 되기를 희망합니다. 저는 앞으로 계속 나아가는 개발자입니다. 웹에 관심이 많습니다. 많은 관심 부탁드립니다',
     skills: ['노드', '리액트', '자바스크립트'],
     projects: {
       모집중: [1],
@@ -21,8 +21,8 @@ const MyPage = () => {
       project: [1],
     },
     rating: {
-      participateRatio: 4,
-      skillfulRatio: 3,
+      attendanceRatio: 4.5,
+      skillfulRatio: 3.3,
     },
   };
   return (

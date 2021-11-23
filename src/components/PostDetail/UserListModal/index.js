@@ -13,7 +13,7 @@ const UserListModal = ({ userList, maxUserNum, closeModal }) => {
     for (let i = 0; i < maxUserNum - userList.length; i++) {
       empty.push(
         <S.User key={i} onClick={AddUser}>
-          <BsPlusCircleDotted fontSize="30px" />
+          <BsPlusCircleDotted fontSize="3rem" />
           &nbsp;&nbsp;팀원 추가
         </S.User>
       );
@@ -23,7 +23,7 @@ const UserListModal = ({ userList, maxUserNum, closeModal }) => {
   return (
     <S.UserListWrapper>
       <S.CloseBtn onClick={closeModal}>
-        <ExitBtn width="12px" height="12px" />
+        <ExitBtn width="1.2rem" height="1.2rem" />
       </S.CloseBtn>
       <S.UserList>
         {userList.map((v) => {

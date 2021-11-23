@@ -18,6 +18,9 @@ export const flexBetween = css`
   align-items: center;
 `;
 
+//최대 별점
+export const MAX_STAR=5;
+
 //options
 //dropdown
 export const LandingDropdownOptions = [

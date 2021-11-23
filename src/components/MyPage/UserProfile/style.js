@@ -58,4 +58,7 @@ export const SkillsWrapper = styled.ul`
 export const SkillImg = styled.img`
   width: 6rem;
   height: 6rem;
+  &+&{
+    margin-left:0.5rem;
+  }
 `;

@@ -6,5 +6,5 @@ export const Paper = styled.div`
     height:${props => props.height ? props.height: "auto"};
     border-radius:30px;
     border:none;
-    box-shadow:5px 5px 6px rgba(0, 0, 0, 0.2);
+    box-shadow:3px 3px 20px rgba(0, 0, 0, 0.2);
 `

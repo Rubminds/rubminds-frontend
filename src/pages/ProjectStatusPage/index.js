@@ -16,7 +16,7 @@ const ProjectStatusPage = ({ match }) => {
     {
       id: 2,
       category: 'scout',
-      status: '진행완료',
+      status: '진행종료',
       title: '저좀 데려가실분',
       skills: ['react', 'javascript', 'redux'],
     },
@@ -38,7 +38,7 @@ const ProjectStatusPage = ({ match }) => {
     {
       id: 5,
       category: 'study',
-      status: '진행완료',
+      status: '진행종료',
       title: '알고리즘 공부 하실분',
       skills: ['python', 'javascript'],
     },
@@ -59,7 +59,7 @@ const ProjectStatusPage = ({ match }) => {
     {
       id: 8,
       category: 'project',
-      status: '진행완료',
+      status: '진행종료',
       title: '웹 프로젝트 인원 구해요',
       skills: ['react', 'javascript'],
     },
@@ -93,7 +93,7 @@ const ProjectStatusPage = ({ match }) => {
         </S.Title>
         <S.PostsWrapper>
           {Posts.map((v) => {
-            return match.params.type === v.status ? <PostCard post={v} key={v.id} /> : <></>;
+            return match.params.type === v.status && <PostCard post={v} key={v.id} />;
           })}
         </S.PostsWrapper>
       </S.ContentsWrapper>

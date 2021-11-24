@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
 
 import { Paper } from '../..';
 import { flexBetween, flexColumn } from '../../../constants';
@@ -18,7 +19,7 @@ export const Title = styled.label`
   font-size: 2rem;
   font-weight: bold;
 `;
-export const TitleDetail = styled.a`
+export const TitleDetail = styled(Link)`
   font-size: 1.2rem;
   color: rgba(128, 128, 128);
   text-decoration: underline;

@@ -6,7 +6,7 @@ const UserDibs = ({ me }) => {
     <S.CardWrapper>
       <S.TitleWrapper>
         <S.Title>찜목록</S.Title>
-        <S.TitleDetail>자세히 보기</S.TitleDetail>
+        <S.TitleDetail to="/dibs">자세히 보기</S.TitleDetail>
       </S.TitleWrapper>
       <S.Content>
         <S.Type>

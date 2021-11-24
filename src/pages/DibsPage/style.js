@@ -8,7 +8,7 @@ export const DibsPageWrapper = styled.div`
   padding: 4rem 16rem 20rem 16rem;
   background-color: #f9fbfc;
   ${flexColumn};
-  ${mediaQuery({ padding: '2rem 4rem 24rem 4rem' })}
+  ${mediaQuery({ padding: '2rem 3rem 24rem 3rem' })}
 `;
 
 export const ContentsWrapper = styled(Paper)`
@@ -17,4 +17,5 @@ export const ContentsWrapper = styled(Paper)`
     ${flexColumn};
     margin-top:5rem;
     padding:4rem 6rem;
+    ${mediaQuery({"box-shadow":"none", "background-color":"inherit", "padding":"0", "align-items":"center"})}
 `

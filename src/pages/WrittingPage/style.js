@@ -13,7 +13,8 @@ export const WrittingInnerForm = styled.form`
   background-color: white;
   border-radius: 30px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.16);
-  padding: 5% 10% 5% 10%;
+  padding: 5% 10% 15% 10%;
+  position : relative; 
 `
 
 export const CategoryWrapper = styled.div`
@@ -106,9 +107,9 @@ export const MeetEnviromentWrapper = styled.div`
 `
 
 export const RadioWrapper = styled.div`
+
   ${flexBetween}
-  font-size : 2rem;
-  
+  padding: 1rem 15rem 0 0; 
   & input{ 
     width:3rem;
     height:3rem;
@@ -117,9 +118,27 @@ export const RadioWrapper = styled.div`
   & input[type='radio']:checked{
     width : 3rem;
     height : 3rem;
-    background-color : #998CF8;
+    background : #998CF8;
+  }
+
+  @media all and (max-width : 768px){
+    display : block; 
   }
 `;
+
+export const CheckBoxWrapper = styled.div`
+    font-size : 1.5rem; 
+    display : flex; 
+    align-items : center;
+    & label{
+      padding-left : 1rem; 
+    }
+
+    @media all and (max-width : 768px){
+      margin : 1rem 0; 
+    }
+`; 
+
 
 export const MeetSelect = styled.select`
   width: 80%;
@@ -143,42 +162,46 @@ export const AreaSelect = styled.select`
   padding: 20px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 `
+
+export const FileInput = styled.label`
+  padding: 2rem 5rem;
+  font-size : 2rem;
+  background-color:#F383DF;
+  border-radius: 5rem;
+  color: white;
+  cursor: pointer;
+`; 
+
 export const MainTextArea = styled.textarea`
   width: 100%;
   height: 54rem;
   border-radius: 30px;
-  padding: 30px;
+  padding: 3rem;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border: none;
   font-size: 2rem;
 `
 
-export const BtnArea = styled.div`
-  display: flex;
-  margin-top: 5%;
-  margin-bottom: 5%;
-`
 
-export const BtnLeftArea = styled.div`
-  flex: 0.5;
-`
-
-export const BtnRightArea = styled.div`
-  flex: 1;
-  position: relative;
-`
 export const Btn = styled.button`
-  padding: 20px;
+  position : absolute; 
+  right : ${props => props.right || '10%'}; 
+  bottom : 4rem;
+  padding: 3rem;
   background-color: ${props => props.backgroundColor || '#CDF6E8'};
   border: none;
   border-radius: 30px;
   font-size: 3rem;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  right: ${props => props.right || '0px'};
+
+  @media all and (max-width: 1550px) {
+    padding: 2rem;
+    font-size : 2.5rem; 
+  }
 
   @media all and (max-width: 768px) {
-    padding: 10px;
+    bottom : 2rem;
+    padding: 2.5rem;
     font-size: 2rem;
   }
 `

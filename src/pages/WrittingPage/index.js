@@ -17,8 +17,8 @@ const WrittingPage = () => {
   const [meetEnviroment, setMeetEnviroment] = useState(null);
   const [recruitPeople, setRecuitPeople] = useState(null);
   const [area, setArea] = useState(null);
+  const [file, setFile] = useState(null); 
   const [mainText, setMainText] = useState(null);
-
   const [isScout , setIsScout] = useState(false);
 
   const onRecruitTypeHandler = useCallback((e)=>{
@@ -55,6 +55,11 @@ const onAreaHandler = useCallback((e)=>{
   setArea(e.target.value);
 },[area]);
 
+const onFileHandler = useCallback((e)=>{
+  console.log(e.target.files[0]); 
+  setFile(e.target.files[0]); 
+},[]); 
+
 const onMainTextHandler = useCallback((e)=> {
   setMainText(e.target.value);
 }, [mainText]);
@@ -84,15 +89,15 @@ const onSubmitHandler = (e) => {
         </S.MainTitle>
         <S.CategoryWrapper>
           <S.CategoryCard id='study' backgroundColor = {btnColor[0]} onClick={onRecruitTypeHandler} >
-            <S.Book fontSize="4rem" />
+            <S.Book fontSize="3rem" />
             <S.MainTitle fontSize='1.3rem'>스터디</S.MainTitle>
           </S.CategoryCard>
           <S.CategoryCard id='scout' backgroundColor = {btnColor[1]} onClick={onRecruitTypeHandler} >
-            <S.PersonAdd fontSize="4rem" />
+            <S.PersonAdd fontSize="3rem" />
             <S.MainTitle fontSize='1.3rem'>스카웃</S.MainTitle>
           </S.CategoryCard>
           <S.CategoryCard id='project' backgroundColor = {btnColor[2]} onClick={onRecruitTypeHandler} >
-            <S.UserGroup fontSize="4rem" />
+            <S.UserGroup fontSize="3rem" />
             <S.MainTitle fontSize='1.3rem'>프로젝트</S.MainTitle>
           </S.CategoryCard>
         </S.CategoryWrapper>
@@ -119,16 +124,22 @@ const onSubmitHandler = (e) => {
               회의 환경
             </S.MainTitle>
             <S.RadioWrapper>
-              <input id='online' type ='radio' name='env'/><label htmlFor='online'>온라인</label>
-              <input id='offline' type ='radio' name='env'/><label htmlFor='offline'>오프라인</label>
-              <input id='mix' type ='radio' name='env'/><label htmlFor='mix'>혼합</label>
+              <S.CheckBoxWrapper>
+                <input id='online' type ='radio' name='env'/><label htmlFor='online'>온라인</label>
+              </S.CheckBoxWrapper>
+              <S.CheckBoxWrapper>
+                <input id='offline' type ='radio' name='env'/><label htmlFor='offline'>오프라인</label>
+              </S.CheckBoxWrapper>
+              <S.CheckBoxWrapper>
+                <input id='mix' type ='radio' name='env'/><label htmlFor='mix'>혼합</label>
+              </S.CheckBoxWrapper>
             </S.RadioWrapper>
           </S.MeetEnviromentWrapper>
 
           {
             !isScout &&
             (<S.RecruitPeopleWrapper>
-            <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+            <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="7%">
             모집인원
             </S.MainTitle>
             <S.InputBox type='number' min='0' width="30%" onChange={onRecruitPeopleHandler}/>
@@ -149,6 +160,12 @@ const onSubmitHandler = (e) => {
           })}
         </S.AreaSelect>
 
+        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+          참고 자료
+        </S.MainTitle>
+        <S.FileInput className="input-file-button" for="input-file" onChange={onFileHandler}> 업로드 </S.FileInput>
+        <input type="file" id="input-file" style={{display:"none"}}/> 
+
         {/* 모집 내용 */}
         <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
           모집 내용
@@ -157,13 +174,11 @@ const onSubmitHandler = (e) => {
         </S.MainTextArea>
 
         {/* 버튼 */}
-        <S.BtnArea>
-          <S.BtnLeftArea></S.BtnLeftArea>
-          <S.BtnRightArea>
-            <S.Btn backgroundColor = 'white' right='10'>취소</S.Btn>
+        {/* <S.BtnArea> */}
+            <S.Btn backgroundColor = 'white' right='40rem'>취소</S.Btn>
             <S.Btn onClick={onSubmitHandler}>등록하기</S.Btn>
-          </S.BtnRightArea>
-        </S.BtnArea>
+        {/* </S.BtnArea> */}
+        {/* <div style={{clear:'both'}}></div> */}
 
       </S.WrittingInnerForm>
     </S.WrittingBackGround>

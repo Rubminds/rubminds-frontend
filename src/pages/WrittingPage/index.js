@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react'
 import * as S from './style'
-import { FaBook } from 'react-icons/fa'
 import { MdPersonAdd } from 'react-icons/md'
 import { HiUserGroup } from 'react-icons/hi'
 import DropDown from '../../components/common/DropDown'
 import { LandingDropdownOptions } from '../../constants'
 import { AreaOptions } from '../../constants'
+
 
 
 const WrittingPage = () => {
@@ -79,32 +79,32 @@ const onSubmitHandler = (e) => {
     <S.WrittingBackGround>
       <S.WrittingInnerForm onSubmit={onSubmitHandler}>
         {/* 모집 유형 */}
-        <S.MainTitle fontSize="30px" marginBottom="3%">
+        <S.MainTitle fontSize="3rem" marginBottom="3%">
           모집 유형
         </S.MainTitle>
         <S.CategoryWrapper>
           <S.CategoryCard id='study' backgroundColor = {btnColor[0]} onClick={onRecruitTypeHandler} >
-            <FaBook fontSize="30px" />
-            스터디
+            <S.Book fontSize="4rem" />
+            <S.MainTitle fontSize='1.3rem'>스터디</S.MainTitle>
           </S.CategoryCard>
           <S.CategoryCard id='scout' backgroundColor = {btnColor[1]} onClick={onRecruitTypeHandler} >
-            <MdPersonAdd fontSize="30px" />
-            스카웃
+            <S.PersonAdd fontSize="4rem" />
+            <S.MainTitle fontSize='1.3rem'>스카웃</S.MainTitle>
           </S.CategoryCard>
           <S.CategoryCard id='project' backgroundColor = {btnColor[2]} onClick={onRecruitTypeHandler} >
-            <HiUserGroup fontSize="30px" />
-            프로젝트
+            <S.UserGroup fontSize="4rem" />
+            <S.MainTitle fontSize='1.3rem'>프로젝트</S.MainTitle>
           </S.CategoryCard>
         </S.CategoryWrapper>
 
         {/* 제목 */}
-        <S.MainTitle fontSize="30px" marginTop="5%" marginBottom="3%">
+        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
           제목
         </S.MainTitle>
         <S.InputBox placeholder="제목을 입력하세요." onChange={onTitleHandler}/>
 
         {/* 기술 스택 */}
-        <S.MainTitle fontSize="30px" marginTop="5%" marginBottom="3%">
+        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
           기술 스택
         </S.MainTitle>
         <DropDown
@@ -115,33 +115,31 @@ const onSubmitHandler = (e) => {
         <S.MiddleWrapper>
           {/* 회의 환경 */}
           <S.MeetEnviromentWrapper>
-            <S.MainTitle fontSize="30px" marginTop="5%" marginBottom="3%">
+            <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
               회의 환경
             </S.MainTitle>
-            <S.MeetSelect onChange={onMeetSelectHandler}>
-              <option selected disabled hidden>== 선택 ==</option>
-              <option>온라인</option>
-              <option>오프라인</option>
-              <option>혼합</option>
-              <option>상관없음</option>
-            </S.MeetSelect>
+            <S.RadioWrapper>
+              <input id='online' type ='radio' name='env'/><label htmlFor='online'>온라인</label>
+              <input id='offline' type ='radio' name='env'/><label htmlFor='offline'>오프라인</label>
+              <input id='mix' type ='radio' name='env'/><label htmlFor='mix'>혼합</label>
+            </S.RadioWrapper>
           </S.MeetEnviromentWrapper>
 
           {
             !isScout &&
             (<S.RecruitPeopleWrapper>
-            <S.MainTitle fontSize="30px" marginTop="5%" marginBottom="3%">
+            <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
             모집인원
             </S.MainTitle>
             <S.InputBox type='number' min='0' width="30%" onChange={onRecruitPeopleHandler}/>
-            <span>명</span>
+            <S.InputBoxPeople>명</S.InputBoxPeople>
             </S.RecruitPeopleWrapper>)
           }
 
         </S.MiddleWrapper>
 
         {/* 지역 */}
-        <S.MainTitle fontSize="30px" marginTop="5%" marginBottom="3%">
+        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
           지역
         </S.MainTitle>
         <S.AreaSelect onChange={onAreaHandler}>
@@ -152,7 +150,7 @@ const onSubmitHandler = (e) => {
         </S.AreaSelect>
 
         {/* 모집 내용 */}
-        <S.MainTitle fontSize="30px" marginTop="5%" marginBottom="3%">
+        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
           모집 내용
         </S.MainTitle>
         <S.MainTextArea placeholder='프로젝트에 대한 자세한 설명을 부탁드립니다.' onChange={onMainTextHandler}>

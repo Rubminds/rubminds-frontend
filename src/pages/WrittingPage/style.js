@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 import { flexColumn, flexBetween, flexCenter } from '../../constants'
+import { FaBook } from 'react-icons/fa'
+import { MdPersonAdd } from 'react-icons/md'
+import { HiUserGroup } from 'react-icons/hi'
 
 export const WrittingBackGround = styled.div`
   background-color: #f9fbfc;
@@ -15,23 +18,48 @@ export const WrittingInnerForm = styled.form`
 
 export const CategoryWrapper = styled.div`
   ${flexBetween};
-  margin-top: 50px;
+  margin-top: 5rem;
+  @media all and (max-width: 768px) {
+    ${flexColumn};
+    align-items: center;
+  }
 `
+
+export const Book = styled(FaBook)`
+  margin : 1rem; 
+`;
+
+export const PersonAdd = styled(MdPersonAdd)`
+  margin : 1rem; 
+`;
+
+export const UserGroup = styled(HiUserGroup)`
+  margin : 1rem; 
+`;
+
+
 
 export const CategoryCard = styled.div`
   ${flexColumn};
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 120px;
-  background-color: ${ props => props.backgroundColor};
+  width: 20rem;
+  height: 12rem;
+  background-color: ${props => props.backgroundColor};
   border: 1px solid black;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   & + & {
     margin-left: 150px;
   }
-  cursor : pointer; 
+  cursor: pointer;
+
+  @media all and (max-width: 768px) {
+    width: 100%;
+    & + & {
+      margin-left: 0px;
+    }
+    margin: 2rem 0rem;
+  }
 `
 
 export const MainTitle = styled.div`
@@ -43,13 +71,25 @@ export const MainTitle = styled.div`
 `
 export const InputBox = styled.input`
   width: ${props => props.width || '100%'};
-  height: 70px;
+  height: 7rem;
   border: none;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 30px;
   padding: 0px 30px 0px 30px;
-  font-size: 30px;
+  font-size: 3rem;
+
+  ::placeholder {
+    ${flexCenter}
+    font-size : 2rem;  
+  }
+
 `
+
+
+export const InputBoxPeople = styled.span`
+  font-size : 2rem; 
+  margin-left : 1rem; 
+`; 
 
 export const MiddleWrapper = styled.div`
   display: flex;
@@ -60,63 +100,85 @@ export const RecruitPeopleWrapper = styled.div`
   flex: 1;
 `
 
+
 export const MeetEnviromentWrapper = styled.div`
   flex: 1.2;
 `
+
+export const RadioWrapper = styled.div`
+  ${flexBetween}
+  font-size : 2rem;
+  
+  & input{ 
+    width:3rem;
+    height:3rem;
+  }
+
+  & input[type='radio']:checked{
+    width : 3rem;
+    height : 3rem;
+    background-color : #998CF8;
+  }
+`;
 
 export const MeetSelect = styled.select`
   width: 80%;
   padding: 20px;
   border-radius: 30px;
-  font-size: 20px;
+  font-size: 2rem;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border: none;
 `
 
 export const EnviromentCheck = styled.input`
-  width: 30px;
-  height: 30px;
+  width: 3rem;
+  height: 3rem;
   border: 1px;
 `
 export const AreaSelect = styled.select`
   width: 50%;
   border: none;
-  font-size: 20px;
+  font-size: 2rem;
   border-radius: 30px;
   padding: 20px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 `
 export const MainTextArea = styled.textarea`
   width: 100%;
-  height: 540px;
+  height: 54rem;
   border-radius: 30px;
   padding: 30px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border: none;
-  font-size: 20px;
+  font-size: 2rem;
 `
 
 export const BtnArea = styled.div`
   display: flex;
-  margin-top : 5%;
-  margin-bottom : 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 `
 
 export const BtnLeftArea = styled.div`
-  flex: 3;
+  flex: 0.5;
 `
 
 export const BtnRightArea = styled.div`
   flex: 1;
-  position : relative; 
+  position: relative;
 `
 export const Btn = styled.button`
-  padding : 20px; 
-  background-color: ${props=> props.backgroundColor || '#CDF6E8'};
-  border : none; 
+  padding: 20px;
+  background-color: ${props => props.backgroundColor || '#CDF6E8'};
+  border: none;
   border-radius: 30px;
-  font-size : 30px;
+  font-size: 3rem;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-  position : absolute;
-  right : ${props=> props.right || '0px'};
-`;
+  position: absolute;
+  right: ${props => props.right || '0px'};
+
+  @media all and (max-width: 768px) {
+    padding: 10px;
+    font-size: 2rem;
+  }
+`

@@ -13,7 +13,7 @@ export const WrittingInnerForm = styled.form`
   background-color: white;
   border-radius: 30px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.16);
-  padding: 5% 10% 15% 10%;
+  padding: 5% 10% 5% 10%;
   position : relative; 
 `
 
@@ -166,10 +166,13 @@ export const AreaSelect = styled.select`
 export const FileInput = styled.label`
   padding: 2rem 5rem;
   font-size : 2rem;
-  background-color:#F383DF;
+  background-color: #F383DF;
   border-radius: 5rem;
-  color: white;
-  cursor: pointer;
+  display : block; 
+  width : 10rem;
+  text-align: center; 
+  color : white;
+  cursor : pointer;
 `; 
 
 export const MainTextArea = styled.textarea`
@@ -182,26 +185,27 @@ export const MainTextArea = styled.textarea`
   font-size: 2rem;
 `
 
+export const BtnWrapper = styled.div`
+  margin-top : 8rem;  
+  padding : 10px;
+  display : flex; 
+`;
 
-export const Btn = styled.button`
-  position : absolute; 
-  right : ${props => props.right || '10%'}; 
-  bottom : 4rem;
-  padding: 3rem;
-  background-color: ${props => props.backgroundColor || '#CDF6E8'};
-  border: none;
-  border-radius: 30px;
-  font-size: 3rem;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+export const BtnLeft = styled.button`
+  width : 14rem; 
+  height : 7rem; 
+  font-size : 3rem;  
+  border-radius: 2rem; 
+  border : none;  
+  margin : auto 0 0 auto;
+`; 
 
-  @media all and (max-width: 1550px) {
-    padding: 2rem;
-    font-size : 2.5rem; 
-  }
-
-  @media all and (max-width: 768px) {
-    bottom : 2rem;
-    padding: 2.5rem;
-    font-size: 2rem;
-  }
-`
+export const BtnRight = styled.button`
+  width : 26rem; 
+  height : 7rem; 
+  border : none;
+  font-size : 3rem;  
+  border-radius: 2rem; 
+  background : #CDF6E8;
+  margin-left : 3rem; 
+`; 

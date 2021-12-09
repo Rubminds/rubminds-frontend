@@ -14,7 +14,7 @@ export const WrittingInnerForm = styled.form`
   border-radius: 30px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.16);
   padding: 5% 10% 5% 10%;
-  position : relative; 
+  position: relative;
 `
 
 export const CategoryWrapper = styled.div`
@@ -27,18 +27,16 @@ export const CategoryWrapper = styled.div`
 `
 
 export const Book = styled(FaBook)`
-  margin : 1rem; 
-`;
+  margin: 1rem;
+`
 
 export const PersonAdd = styled(MdPersonAdd)`
-  margin : 1rem; 
-`;
+  margin: 1rem;
+`
 
 export const UserGroup = styled(HiUserGroup)`
-  margin : 1rem; 
-`;
-
-
+  margin: 1rem;
+`
 
 export const CategoryCard = styled.div`
   ${flexColumn};
@@ -81,16 +79,14 @@ export const InputBox = styled.input`
 
   ::placeholder {
     ${flexCenter}
-    font-size : 2rem;  
+    font-size : 2rem;
   }
-
 `
 
-
 export const InputBoxPeople = styled.span`
-  font-size : 2rem; 
-  margin-left : 1rem; 
-`; 
+  font-size: 2rem;
+  margin-left: 1rem;
+`
 
 export const MiddleWrapper = styled.div`
   display: flex;
@@ -101,44 +97,41 @@ export const RecruitPeopleWrapper = styled.div`
   flex: 1;
 `
 
-
 export const MeetEnviromentWrapper = styled.div`
   flex: 1.2;
 `
 
 export const RadioWrapper = styled.div`
-
   ${flexBetween}
-  padding: 1rem 15rem 0 0; 
-  & input{ 
-    width:3rem;
-    height:3rem;
+  padding: 1rem 15rem 0 0;
+  & input {
+    width: 3rem;
+    height: 3rem;
   }
 
-  & input[type='radio']:checked{
-    width : 3rem;
-    height : 3rem;
-    background : #998CF8;
+  & input[type='radio']:checked {
+    width: 3rem;
+    height: 3rem;
+    background: #998cf8;
   }
 
-  @media all and (max-width : 768px){
-    display : block; 
+  @media all and (max-width: 768px) {
+    display: block;
   }
-`;
+`
 
 export const CheckBoxWrapper = styled.div`
-    font-size : 1.5rem; 
-    display : flex; 
-    align-items : center;
-    & label{
-      padding-left : 1rem; 
-    }
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  & label {
+    padding-left: 1rem;
+  }
 
-    @media all and (max-width : 768px){
-      margin : 1rem 0; 
-    }
-`; 
-
+  @media all and (max-width: 768px) {
+    margin: 1rem 0;
+  }
+`
 
 export const MeetSelect = styled.select`
   width: 80%;
@@ -165,15 +158,15 @@ export const AreaSelect = styled.select`
 
 export const FileInput = styled.label`
   padding: 2rem 5rem;
-  font-size : 2rem;
-  background-color: #F383DF;
+  font-size: 2rem;
+  background-color: #f383df;
   border-radius: 5rem;
-  display : block; 
-  width : 10rem;
-  text-align: center; 
-  color : white;
-  cursor : pointer;
-`; 
+  display: block;
+  width: 10rem;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+`
 
 export const MainTextArea = styled.textarea`
   width: 100%;
@@ -186,26 +179,41 @@ export const MainTextArea = styled.textarea`
 `
 
 export const BtnWrapper = styled.div`
-  margin-top : 8rem;  
-  padding : 10px;
-  display : flex; 
-`;
+  margin-top: 8rem;
+  padding: 10px;
+  display: flex;
+`
 
 export const BtnLeft = styled.button`
-  width : 14rem; 
-  height : 7rem; 
-  font-size : 3rem;  
-  border-radius: 2rem; 
-  border : none;  
-  margin : auto 0 0 auto;
-`; 
+  width: 14rem;
+  height: 7rem;
+  font-size: 3rem;
+  border-radius: 2rem;
+  border: none;
+  margin: auto 0 0 auto;
+`
 
 export const BtnRight = styled.button`
-  width : 26rem; 
-  height : 7rem; 
-  border : none;
-  font-size : 3rem;  
-  border-radius: 2rem; 
-  background : #CDF6E8;
-  margin-left : 3rem; 
-`; 
+  width: 26rem;
+  height: 7rem;
+  border: none;
+  font-size: 3rem;
+  border-radius: 2rem;
+  background: #cdf6e8;
+  margin-left: 3rem;
+`
+
+export const FileWrapper = styled.div`
+  display: flex;
+  margin-top: 5%;
+  margin-bottom: 3%;
+`
+
+export const FileLeft = styled.div`
+  flex: 1;
+`
+
+export const FileRight = styled.div`
+  flex: 1;
+  padding: 5rem;
+`

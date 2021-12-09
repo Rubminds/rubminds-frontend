@@ -5,16 +5,14 @@ import { LandingDropdownOptions } from '../../constants'
 import { AreaOptions } from '../../constants'
 
 const WrittingPage = () => {
-  // const [recruitType, setRecruitType] = useState(null);
   const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
-  // const [title, setTitle] = useState(null);
-  // const [skillSet, setSkillSet] = useState(null);
-  // const [meetEnviroment, setMeetEnviroment] = useState(null);
-  // const [recruitPeople, setRecuitPeople] = useState(null);
-  // const [area, setArea] = useState(null);
-  // const [file, setFile] = useState(null);
-  // const [mainText, setMainText] = useState(null);
   const [isScout, setIsScout] = useState(false)
+
+  // 이미지 서버 전송용 데이터
+  const [fileInfo, setFileInfo] = useState(null)
+
+  // 이미지 미리보기 데이터
+  const [attachment, setAttachment] = useState(null)
 
   const [body, setBody] = useState({
     recruitType: 'study',
@@ -29,7 +27,6 @@ const WrittingPage = () => {
 
   const onBodyChange = useCallback(
     e => {
-      console.log(e.target.getAttribute('name'), e.target.getAttribute('value')); 
       if (e.target.getAttribute('name') === 'recruitType') {
         setBody({
           ...body,
@@ -39,18 +36,28 @@ const WrittingPage = () => {
           case 'study':
             setIsScout(false)
             setBtnColor(['#FBEAFF', 'white', 'white'])
-            break;
+            break
           case 'scout':
             setIsScout(true)
             setBtnColor(['white', '#FBEAFF', 'white'])
-            break;
+            break
           case 'project':
             setIsScout(false)
             setBtnColor(['white', 'white', '#FBEAFF'])
-            break;
+            break
         }
-      } else if (e.target.name === 'file') {
-        
+      }
+      if (e.target.name === 'file') {
+        const reader = new FileReader()
+        setFileInfo(e.target.files[0])
+        reader.readAsDataURL(e.target.files[0])
+        reader.onloadend = finished => {
+          setAttachment(finished.target.result)
+        }
+        setBody({
+          ...body,
+          [e.target.name]: fileInfo,
+        })
       }
       setBody({
         ...body,
@@ -69,49 +76,6 @@ const WrittingPage = () => {
     ]
   )
 
-  // const onRecruitTypeHandler = useCallback((e)=>{
-  //   setRecruitType(e.target.id);
-  //   switch (e.target.id){
-  //      case 'study' :
-  //        setIsScout(false);
-  //        setBtnColor(['#FBEAFF', 'white', 'white']);
-  //         break;
-  //      case 'scout' :
-  //        setIsScout(true);
-  //        setBtnColor(['white', '#FBEAFF', 'white']);
-  //        break;
-  //      case 'project' :
-  //        setIsScout(false);
-  //        setBtnColor(['white', 'white', '#FBEAFF']);
-  //        break;
-  //   }
-  // },[btnColor]);
-
-  // const onTitleHandler = useCallback((e)=>{
-  //   setTitle(e.target.value);
-  // }, [title]);
-
-  // const onMeetSelectHandler = useCallback((e)=>{
-  //   setMeetEnviroment(e.target.value);
-  // }, [meetEnviroment]);
-
-  // const onRecruitPeopleHandler = useCallback((e)=> {
-  //     setRecuitPeople(e.target.value);
-  // }, [recruitPeople]);
-
-  // const onAreaHandler = useCallback((e)=>{
-  //   setArea(e.target.value);
-  // },[area]);
-
-  // const onFileHandler = useCallback((e)=>{
-  //   console.log(e.target.files[0]);
-  //   setFile(e.target.files[0]);
-  // },[]);
-
-  // const onMainTextHandler = useCallback((e)=> {
-  //   setMainText(e.target.value);
-  // }, [mainText]);
-
   const onSubmitHandler = e => {
     e.preventDefault()
 
@@ -119,7 +83,6 @@ const WrittingPage = () => {
     if (body.recruitPeople) {
       formData.append('recruitPeople', body.recruitPeople)
     }
-
     formData.append('recruitType', body.recruitType)
     formData.append('title', body.title)
     formData.append('meetEnviroment', body.meetEnviroment)
@@ -139,7 +102,7 @@ const WrittingPage = () => {
           <S.CategoryCard
             name="recruitType"
             value="study"
-            backgroundColor ={btnColor[0]}
+            backgroundColor={btnColor[0]}
             onClick={onBodyChange}
           >
             <S.Book fontSize="3rem" />
@@ -253,20 +216,25 @@ const WrittingPage = () => {
           })}
         </S.AreaSelect>
 
-        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
-          참고 자료
-        </S.MainTitle>
-        <S.FileInput
-          name="file"
-          className="input-file-button"
-          for="input-file"
-          onChange={onBodyChange}
-        >
-          {' '}
-          업로드{' '}
-        </S.FileInput>
-        <input type="file" id="input-file" style={{ display: 'none' }} />
+        <S.FileWrapper>
+          <S.FileLeft>
+            <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+              참고 자료
+            </S.MainTitle>
 
+            <S.FileInput htmlFor="input-file">업로드</S.FileInput>
+            <input
+              name="file"
+              type="file"
+              id="input-file"
+              style={{ display: 'none' }}
+              onChange={onBodyChange}
+            />
+          </S.FileLeft>
+          <S.FileRight>
+            {attachment && <img src={attachment} width="100%" />}
+          </S.FileRight>
+        </S.FileWrapper>
         {/* 모집 내용 */}
         <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
           모집 내용

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexColumn, flexCenter, flexBetween } from '../../constants';
+import { flexColumn } from '../../constants';
 import mediaQuery from '../../hooks/mediaQuery';
 
 export const PostDetailWrapper = styled.div`

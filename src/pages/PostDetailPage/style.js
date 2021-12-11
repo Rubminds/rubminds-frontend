@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { flexColumn, flexCenter, flexBetween } from '../../constants';
 import mediaQuery from '../../hooks/mediaQuery';
 

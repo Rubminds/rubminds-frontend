@@ -3,6 +3,7 @@ import * as S from './style'
 import DropDown from '../../components/common/DropDown'
 import { LandingDropdownOptions } from '../../constants'
 import { AreaOptions } from '../../constants'
+import { Link } from 'react-router-dom'
 
 const WrittingPage = () => {
   const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
@@ -246,7 +247,7 @@ const WrittingPage = () => {
         ></S.MainTextArea>
 
         <S.BtnWrapper>
-          <S.BtnLeft>취소</S.BtnLeft>
+          <S.BtnLeft><Link to='/'>취소</Link></S.BtnLeft>
           <S.BtnRight onClick={onSubmitHandler}>등록하기</S.BtnRight>
         </S.BtnWrapper>
       </S.WrittingInnerForm>

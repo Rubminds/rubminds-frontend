@@ -28,3 +28,16 @@ export const PostDetailContent = styled.div`
   font-size: 1.8rem;
   line-height:4rem;
 `;
+export const UploadedFile = styled.a`
+  ${flexCenter};
+  cursor: pointer;
+  font-size: 1.6rem;
+  background-color: #ffa586;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: bold;
+  width: fit-content;
+  height: fit-content;
+  margin:1rem 0;
+`;

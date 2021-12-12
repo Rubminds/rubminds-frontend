@@ -48,6 +48,7 @@ a{
     /* 링크의 색상 및 밑줄 없애기 */
     color: inherit;
     text-decoration: none;
+    cursor:pointer;
 }
 li{
     list-style:none;
@@ -69,6 +70,9 @@ img{
     box-sizing:border-box;
 }
 svg{
+    box-sizing:border-box;
+}
+label{
     box-sizing:border-box;
 }
 

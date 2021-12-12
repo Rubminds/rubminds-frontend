@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexColumn, flexCenter, flexBetween } from '../../../constants';
+import { flexCenter, flexBetween } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
 
 export const MainTitle = styled.div`

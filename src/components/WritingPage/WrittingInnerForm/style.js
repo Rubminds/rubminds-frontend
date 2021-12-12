@@ -4,17 +4,12 @@ import { FaBook } from 'react-icons/fa'
 import { MdPersonAdd } from 'react-icons/md'
 import { HiUserGroup } from 'react-icons/hi'
 
-export const WrittingBackGround = styled.div`
-  background-color: #f9fbfc;
-  padding: 5% 10% 5% 10%;
-`
-
 export const WrittingInnerForm = styled.form`
   background-color: white;
   border-radius: 30px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.16);
+  width : 76.8rem;
   padding: 5% 10% 5% 10%;
-  position: relative;
 `
 
 export const CategoryWrapper = styled.div`
@@ -69,13 +64,13 @@ export const MainTitle = styled.div`
   font-weight: ${props => props.fontWeight && props.fontWeight};
 `
 export const InputBox = styled.input`
-  width: ${props => props.width || '100%'};
+  width : ${props => props.width || '100%'};
   height: 7rem;
   border: none;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 30px;
-  padding: 0px 30px 0px 30px;
-  font-size: 3rem;
+  padding: 0rem 3rem ;
+  font-size: 2rem;
 
   ::placeholder {
     ${flexCenter}
@@ -92,42 +87,42 @@ export const MiddleWrapper = styled.div`
   display: flex;
   margin-top: 5%;
 `
+export const MeetEnviromentWrapper = styled.div`
+  flex: 2;
+  margin-right : 5rem; 
+`
 
 export const RecruitPeopleWrapper = styled.div`
   flex: 1;
 `
 
-export const MeetEnviromentWrapper = styled.div`
-  flex: 1.2;
-`
-
 export const RadioWrapper = styled.div`
-  ${flexBetween}
-  padding: 1rem 15rem 0 0;
-  & input {
-    width: 3rem;
+  width : 100%;
+  ${flexBetween} 
+  margin-top : 1rem; 
+  & input[type='radio'] {
+    margin-left : -30px; 
+    width: 10rem;
     height: 3rem;
   }
 
   & input[type='radio']:checked {
-    width: 3rem;
+    width: 10rem;
     height: 3rem;
-    background: #998cf8;
   }
 
   @media all and (max-width: 768px) {
     display: block;
+    & input[type='radio'] {
+    margin-left : -3rem; 
+  }
   }
 `
 
 export const CheckBoxWrapper = styled.div`
-  font-size: 1.5rem;
+  font-size: 2rem;
   display: flex;
   align-items: center;
-  & label {
-    padding-left: 1rem;
-  }
-
   @media all and (max-width: 768px) {
     margin: 1rem 0;
   }
@@ -142,27 +137,22 @@ export const MeetSelect = styled.select`
   border: none;
 `
 
-export const EnviromentCheck = styled.input`
-  width: 3rem;
-  height: 3rem;
-  border: 1px;
-`
 export const AreaSelect = styled.select`
-  width: 50%;
+  width: 100%;
   border: none;
   font-size: 2rem;
   border-radius: 30px;
-  padding: 20px;
+  padding: 2rem;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 `
 
 export const FileInput = styled.label`
-  padding: 2rem 5rem;
+  display : block; 
+  width : 15rem;
+  padding : 2rem 0rem; 
   font-size: 2rem;
   background-color: #f383df;
   border-radius: 5rem;
-  display: block;
-  width: 10rem;
   text-align: center;
   color: white;
   cursor: pointer;
@@ -210,7 +200,7 @@ export const FileWrapper = styled.div`
 `
 
 export const FileLeft = styled.div`
-  flex: 1;
+  flex: 1.5;
 `
 
 export const FileRight = styled.div`

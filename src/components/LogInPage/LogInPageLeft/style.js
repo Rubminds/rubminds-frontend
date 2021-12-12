@@ -1,17 +1,14 @@
 import styled from 'styled-components'
 import theme from '../../../common/theme'
-import { flexCenter } from '../../../constants'
 import mediaQuery from '../../../hooks/mediaQuery'
-import { RiKakaoTalkFill } from 'react-icons/ri'
-import { FcGoogle } from 'react-icons/fc'
+import { flexCenter, flexBetween, flexColumn } from '../../../constants'
+
 
 export const LogInPageLeft = styled.div`
-  min-width : 400px; 
   position: fixed;
   top: 0;
   z-index: 5;
-  width : 50%;
-  min-width : 400px;
+  width : 50vw;
   height: 100vh;
   text-align: center; 
   padding: 25rem 0 0 0;

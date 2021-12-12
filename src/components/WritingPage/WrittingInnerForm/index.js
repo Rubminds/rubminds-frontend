@@ -15,6 +15,11 @@ const WrittingInnerForm = () => {
   // 이미지 미리보기 데이터
   const [attachment, setAttachment] = useState(null)
 
+  const deleteImg = useCallback(() => {
+    setFileInfo('')
+    setAttachment('')
+  }, [])
+
   const [body, setBody] = useState({
     recruitType: 'study',
     title: null,
@@ -150,7 +155,7 @@ const WrittingInnerForm = () => {
       <S.MiddleWrapper>
         {/* 회의 환경 */}
         <S.MeetEnviromentWrapper>
-          <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+          <S.MainTitle fontSize="3rem" marginBottom="11%">
             회의 환경
           </S.MainTitle>
           <S.RadioWrapper>
@@ -158,6 +163,7 @@ const WrittingInnerForm = () => {
               <input
                 name="meetEnviroment"
                 value="online"
+                id="online"
                 type="radio"
                 onChange={onBodyChange}
               />
@@ -167,6 +173,7 @@ const WrittingInnerForm = () => {
               <input
                 name="meetEnviroment"
                 value="offline"
+                id="offline"
                 type="radio"
                 onChange={onBodyChange}
               />
@@ -176,6 +183,7 @@ const WrittingInnerForm = () => {
               <input
                 name="meetEnviroment"
                 value="mix"
+                id="mix"
                 type="radio"
                 onChange={onBodyChange}
               />
@@ -187,14 +195,15 @@ const WrittingInnerForm = () => {
         <S.RecruitPeopleWrapper>
           {!isScout && (
             <>
-              <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="7%">
-                모집인원
+              <S.MainTitle fontSize="3rem" marginBottom="13%">
+                모집 인원
               </S.MainTitle>
               <S.InputBox
+                width="15rem"
                 name="recruitPeople"
                 type="number"
                 min="0"
-                width="30%"
+                max="9"
                 onChange={onBodyChange}
               />
               <S.InputBoxPeople>명</S.InputBoxPeople>
@@ -218,7 +227,7 @@ const WrittingInnerForm = () => {
 
       <S.FileWrapper>
         <S.FileLeft>
-          <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+          <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="6%">
             참고 자료
           </S.MainTitle>
 
@@ -232,7 +241,9 @@ const WrittingInnerForm = () => {
           />
         </S.FileLeft>
         <S.FileRight>
-          {attachment && <img src={attachment} width="100%" />}
+          {attachment && (
+            <img src={attachment} width="100%" onClick={deleteImg} />
+          )}
         </S.FileRight>
       </S.FileWrapper>
       {/* 모집 내용 */}

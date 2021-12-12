@@ -5,27 +5,6 @@ import mediaQuery from '../../../hooks/mediaQuery'
 import { RiKakaoTalkFill } from 'react-icons/ri'
 import { FcGoogle } from 'react-icons/fc'
 
-export const LogInPageLeft = styled.div`
-  min-width : 400px; 
-  position: fixed;
-  top: 0;
-  z-index: 5;
-  width : 50%;
-  min-width : 400px;
-  height: 100vh;
-  text-align: center; 
-  padding: 25rem 0 0 0;
-  background: linear-gradient(
-    to right,
-    ${theme.colors.gradientLeft},
-    ${theme.colors.gradientRight}
-  );
-  ${mediaQuery({width : '100%', height : '50vh', padding : '15rem 0 0 0'})}  
-`
-export const LeftMainTextWrapper = styled.div`
-  width : 100%; 
-  margin : auto; 
-`;
 
 export const MainTitle = styled.div`
   font-size: ${props => props.fontSize === 'big'? '5rem' : '3rem'};
@@ -56,11 +35,12 @@ export const LogInPageInnerRight = styled.div`
 `
 
 export const LogInBox = styled.div`
-  border-radius: 30px;
+  border-radius: 3rem;
   width: 17rem;
   height: 17rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.16);
   text-align: center;
+  background-color : ${props => props.bgColor || 'white'};  
   cursor: pointer;
   position : relative;
 `

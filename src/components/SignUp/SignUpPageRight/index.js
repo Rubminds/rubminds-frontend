@@ -7,6 +7,7 @@ import { DropDown } from '../../../components'
 import { LandingDropdownOptions } from '../../../constants'
 
 const SignUpPageRight = () => {
+  
     useEffect(() => {
         localStorage.setItem('accessToken', accessToken)
         return () => {
@@ -90,7 +91,7 @@ const SignUpPageRight = () => {
       )
     return (
         <S.SignUpPageRightWrapper>
-        <S.MainTitle fontSize="50px" fontWeight="bold">
+        <S.MainTitle fontSize="5rem" fontWeight="bold">
           Sign Up
         </S.MainTitle>
 
@@ -100,7 +101,7 @@ const SignUpPageRight = () => {
               <>
                 <img
                   src={attachMent}
-                  width="100px"
+                  width="10rem"
                   style={{ display: 'block', borderRadius: '5000px' }}
                 />
                 <S.CheckBox onClick={onDeleteURL}>X</S.CheckBox>
@@ -122,7 +123,7 @@ const SignUpPageRight = () => {
             <S.MainTitle
               marginTop="7.5%"
               marginBottom="7.5%"
-              fontSize="20px"
+              fontSize="2rem"
               aquired
             >
               닉네임
@@ -139,7 +140,7 @@ const SignUpPageRight = () => {
           </S.NickNameWrapper>
 
           {/* 직업 */}
-          <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="20px">
+          <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
             직업
           </S.MainTitle>
           <S.JobWrapper>
@@ -160,7 +161,7 @@ const SignUpPageRight = () => {
           </S.JobWrapper>
 
           {/* 기술 스택 */}
-          <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="20px">
+          <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
             기술 스택
           </S.MainTitle>
           <DropDown
@@ -172,7 +173,7 @@ const SignUpPageRight = () => {
           <S.MainTitle
             marginTop="7.5%"
             marginBottom="7.5%"
-            fontSize="20px"
+            fontSize="2rem"
             aquired
           >
             자기소개

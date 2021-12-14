@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 
-import { flexBetween } from '../../../constants';
+import { flexBetween, flexColumn } from '../../../constants';
 import { Paper } from '../../';
 import mediaQuery from '../../../hooks/mediaQuery';
 
@@ -14,7 +14,7 @@ export const ChatModalWrapper = styled(Paper)`
   width: 45rem;
   height: 60rem;
   padding: 2rem 2rem;
-  ${mediaQuery({width:'100%', height:'80%', bottom:'5%', right:0,})}
+  ${mediaQuery({ width: '100%', height: '80%', bottom: '5%', right: 0 })}
 `;
 
 export const ModalHeader = styled.div`
@@ -30,7 +30,7 @@ export const HeaderTitle = styled.label`
 
 export const CloseButton = styled(GrClose)`
   font-size: 2rem;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 export const Contents = styled(Paper)`
@@ -38,3 +38,39 @@ export const Contents = styled(Paper)`
   height: 95%;
   margin-top: 1rem;
 `;
+
+export const UserListWrapper = styled.div`
+  ${flexColumn};
+`;
+
+export const UserRow = styled.div`
+  position: relative;
+  display:flex;
+  align-items:center;
+  width: 100%;
+  height: 10rem;
+  padding: 1rem;
+  &:after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 4rem);
+    height: 1px;
+    margin: 0 1rem;
+    -webkit-box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
+    box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
+  }
+`;
+
+export const UserAvatar = styled.img`
+  width: 8rem;
+  height: 8rem;
+  border-radius:50%;
+  flex:1;
+`;
+
+export const UserInfo = styled.div`
+    flex:8;
+    font-size:2rem;
+`

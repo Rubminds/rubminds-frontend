@@ -45,8 +45,8 @@ export const UserListWrapper = styled.div`
 
 export const UserRow = styled.div`
   position: relative;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 10rem;
   padding: 1rem;
@@ -66,11 +66,29 @@ export const UserRow = styled.div`
 export const UserAvatar = styled.img`
   width: 8rem;
   height: 8rem;
-  border-radius:50%;
-  flex:1;
+  border-radius: 50%;
+  flex: 1;
 `;
 
 export const UserInfo = styled.div`
-    flex:8;
-    font-size:2rem;
-`
+  flex: 8;
+  font-size: 2rem;
+`;
+
+// 여기부터 다시 구현
+export const ChatroomWrapper = styled.div`
+  ${flexColumn};
+  padding:1rem 1rem;
+`;
+
+export const ChatroomHeader = styled.div`
+  flex: 1;
+`;
+
+export const ChatroomBody = styled.div`
+  flex: 6;
+`;
+
+export const ChatroomSend = styled.div`
+  flex: 1;
+`;

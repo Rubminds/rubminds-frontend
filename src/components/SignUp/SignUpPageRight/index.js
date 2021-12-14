@@ -9,6 +9,7 @@ import { LandingDropdownOptions } from '../../../constants'
 const SignUpPageRight = () => {
   
     useEffect(() => {
+      console.log(accessToken); 
         localStorage.setItem('accessToken', accessToken)
         return () => {
           localStorage.setItem('signupCheck', signupCheck)

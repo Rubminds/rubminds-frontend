@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../../common/theme'
-import { flexCenter } from '../../../constants'
+import { flexCenter, flexBetween, flexColumn } from '../../../constants'
 import mediaQuery from '../../../hooks/mediaQuery'
 import { RiKakaoTalkFill } from 'react-icons/ri'
 import { FcGoogle } from 'react-icons/fc'

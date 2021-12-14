@@ -58,3 +58,7 @@ export const RecruitmentType = ['study', 'scout', 'project'];
 export const SIGNUP_USER = 'SIGNUP_USER';
 export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';
 export const SIGNUP_USER_ERROR = 'SIGNUP_USER_ERROR';
+
+export const TOGGLE_CHAT_MODAL = 'TOGGLE_CHAT_MODAL';
+export const TOGGLE_CHAT_MODAL_SUCCESS = 'TOGGLE_CHAT_MODAL_SUCCESS';
+export const TOGGLE_CHAT_MODAL_ERROR = 'TOGGLE_CHAT_MODAL_ERROR';

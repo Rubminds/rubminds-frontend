@@ -28,5 +28,5 @@ export const MainTitle = styled.div`
   font-size: ${props => props.fontSize === 'big'? '4rem' : '2.5rem'};
   color: ${props => props.color && props.color};
   font-weight: ${props => props.fontWeight && props.fontWeight};
-  margin : ${props => props.margin === 'topBottom' ? '5rem 0 0 0' :  '5rem 0 0 0'};
+  margin : 5rem 0 0 0;
 `

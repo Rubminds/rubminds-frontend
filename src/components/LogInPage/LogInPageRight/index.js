@@ -13,12 +13,11 @@ const LogInPageRight = () => {
   }, [])
   return (
     <S.LogInPageRight>
-      <S.MainTitle color="black" fontSize="big" fontWeight="bold">
+      <S.MainTitle fontSize="big" fontWeight="bold">
         Sign In
       </S.MainTitle>
       <S.MainTitle
         margin="topBottom"
-        color="black"
         fontSize="middle"
         fontWeight="regular"
       >
@@ -34,7 +33,7 @@ const LogInPageRight = () => {
       </S.LogInPageInnerRight>
       <S.labelWrap>
         <S.MainTitle fontSize="regular">Google 로그인</S.MainTitle>
-        <S.MainTitle fontSize="regular">KakaoTalk 로그인</S.MainTitle>
+        <S.MainTitle fontSize="regular">Kakao 로그인</S.MainTitle>
       </S.labelWrap>
     </S.LogInPageRight>
   )

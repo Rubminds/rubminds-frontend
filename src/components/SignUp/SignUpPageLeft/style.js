@@ -24,8 +24,7 @@ export const LeftMainTextWrapper = styled.div`
 `;
 
 export const MainTitle = styled.div`
-  margin-top: ${props => props.marginTop || '0px'};
-  margin-bottom: ${props => props.marginBottom || '0px'};
+  margin : 5rem 0 0 0;
   font-size: ${props => props.fontSize === 'big'? '4rem' : '2.5rem'};
   color: ${props => props.color && props.color};
   font-weight: ${props => props.fontWeight && props.fontWeight};

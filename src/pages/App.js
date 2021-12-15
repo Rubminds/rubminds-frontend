@@ -10,6 +10,8 @@ import PostDetailPage from './PostDetailPage';
 import LogInPage from './LogInPage';
 import SignUpPage from './SignUpPage';
 import MyPage from './MyPage'
+import DibsPage from './DibsPage'
+import ProjectStatusPage from './ProjectStatusPage';
 
 import { Header, ChatButton } from '../components';
 
@@ -27,6 +29,8 @@ const App = () => {
           <Route path="/login" component={LogInPage} />
           <Route path="/write" component={WrittingPage} />
           <Route path="/mypage" component={MyPage} />
+          <Route path="/dibs" component={DibsPage} />
+          <Route path="/projects/:type" component={ProjectStatusPage} />
         </Switch>
       </Router>
     </ThemeProvider>

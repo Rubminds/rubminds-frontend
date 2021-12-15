@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import mediaQuery from '../../../hooks/mediaQuery';
 export const CarouselContainer = styled.div`
-  width: 36rem;
+  width: 38rem;
   height: 100%;
   overflow: hidden;
   position: relative;

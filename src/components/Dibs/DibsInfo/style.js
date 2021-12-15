@@ -1,34 +1,26 @@
 import styled from 'styled-components';
-import {Link} from 'react-router-dom'
-
-import { Paper } from '../..';
 import { flexBetween, flexColumn } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
 
-export const CardWrapper = styled(Paper)`
-  margin-top: 5rem;
-  width: 45%;
-  height: auto;
-  padding: 3rem 4rem;
-  ${mediaQuery({ width: '100%' })}
-`;
-export const TitleWrapper = styled.div`
-  ${flexBetween};
+export const DibsInfoWrapper = styled.div`
+  width: 40%;
+  ${mediaQuery({
+    width: '80%',
+    'background-color': '#fff',
+    'border-radius': '20px',
+    'box-shadow':'3px 3px 20px rgba(0, 0, 0, 0.2)',
+    padding: '2rem 2rem',
+  })}
 `;
 export const Title = styled.label`
   font-size: 2rem;
   font-weight: bold;
 `;
-export const TitleDetail = styled(Link)`
-  font-size: 1.2rem;
-  color: rgba(128, 128, 128);
-  text-decoration: underline;
-  text-underline-position: under;
-`;
 export const Content = styled.div`
   ${flexBetween};
   margin-top: 5rem;
   width: 100%;
+  ${mediaQuery({ 'justify-content': 'space-around' })}
 `;
 export const Type = styled.div`
   ${flexColumn}

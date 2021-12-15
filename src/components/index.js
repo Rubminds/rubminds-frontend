@@ -19,7 +19,10 @@ export { default as ProcessEndModal } from './PostDetail/ProcessEndModal';
 export { default as PostTotalInfo } from './PostDetail/PostTotalInfo';
 export { default as ResultForm } from './PostDetail/ResultForm';
 
-export {default as UserProfile} from './MyPage/UserProfile'
-export {default as UserProjects} from './MyPage/UserProjects'
-export {default as UserRating} from './MyPage/UserRating'
-export {default as UserDibs} from './MyPage/UserDibs'
+export { default as UserProfile } from './MyPage/UserProfile';
+export { default as UserProjects } from './MyPage/UserProjects';
+export { default as UserRating } from './MyPage/UserRating';
+export { default as UserDibs } from './MyPage/UserDibs';
+
+export { default as DibsInfo } from './Dibs/DibsInfo';
+export { default as DibsPosts } from './Dibs/DibsPosts';

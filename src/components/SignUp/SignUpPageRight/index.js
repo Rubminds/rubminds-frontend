@@ -65,8 +65,9 @@ const SignUpPageRight = () => {
   }, [])
 
   const onDeleteURL = useCallback(() => {
+    setFileInfo('')
     setAttachment('')
-  })
+  }, [fileInfo, attachMent])
 
   const onSubmitHandler = useCallback(
     e => {
@@ -101,10 +102,10 @@ const SignUpPageRight = () => {
             <>
               <img
                 src={attachMent}
-                width="10rem"
+                width="150px"
                 style={{ display: 'block', borderRadius: '5000px' }}
+                onClick={onDeleteURL}
               />
-              <S.CheckBox onClick={onDeleteURL}>X</S.CheckBox>
             </>
           ) : (
             <CgProfile size="100" onClick={onProfileUpload} />
@@ -179,8 +180,8 @@ const SignUpPageRight = () => {
           자기소개
         </S.MainTitle>
         <S.Introduce onChange={onChangeIntroducer} />
-
         <S.SubmitBtn onClick={onSubmitHandler}>회원 가입</S.SubmitBtn>
+        <S.Clear></S.Clear>
       </S.SignUpPageInnerForm>
     </S.SignUpPageRightWrapper>
   )

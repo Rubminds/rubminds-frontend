@@ -8,6 +8,7 @@ export { default as TextArea } from './common/TextArea';
 export { default as Carousel } from './common/Carousel';
 export { default as Paper } from './common/Paper';
 export { default as BackButton } from './common/BackButton';
+export { default as Avatar } from './common/Avatar';
 export { default as ChatModal } from './common/ChatModal';
 
 export { default as Banner } from './Landing/Banner';

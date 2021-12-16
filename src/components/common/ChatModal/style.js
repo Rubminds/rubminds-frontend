@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 
-import { flexBetween, flexColumn } from '../../../constants';
+import { flexBetween, flexCenter, flexColumn } from '../../../constants';
 import { Paper } from '../../';
 import mediaQuery from '../../../hooks/mediaQuery';
 
@@ -14,7 +14,7 @@ export const ChatModalWrapper = styled(Paper)`
   width: 45rem;
   height: 60rem;
   padding: 2rem 2rem;
-  ${mediaQuery({ width: '100%', height: '80%', bottom: '5%', right: 0 })}
+  ${mediaQuery({ width: '100%', height: '80%', bottom: 0, right: 0 })}
 `;
 
 export const ModalHeader = styled.div`
@@ -55,7 +55,7 @@ export const UserRow = styled.div`
     content: '';
     bottom: 0;
     left: 0;
-    width: calc(100% - 4rem);
+    width: calc(100% - 2rem);
     height: 1px;
     margin: 0 1rem;
     -webkit-box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
@@ -67,18 +67,43 @@ export const UserAvatar = styled.img`
   width: 8rem;
   height: 8rem;
   border-radius: 50%;
-  flex: 1;
 `;
 
 export const UserInfo = styled.div`
-  flex: 8;
-  font-size: 2rem;
+  flex: 6;
+  padding: 0 1rem;
+  ${flexColumn}
+  width:60%;
+`;
+
+export const UserName = styled.label`
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: 2;
+`;
+
+export const LastMessage = styled.label`
+  font-size: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const NoticeNumber = styled.label`
+  ${flexCenter}
+  width:3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size:1.2rem;
+  background-color: red;
+  color: white;
+  font-weight: bold;
 `;
 
 // 여기부터 다시 구현
 export const ChatroomWrapper = styled.div`
   ${flexColumn};
-  padding:1rem 1rem;
+  padding: 1rem 1rem;
 `;
 
 export const ChatroomHeader = styled.div`

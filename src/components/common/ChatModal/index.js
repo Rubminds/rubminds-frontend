@@ -7,7 +7,7 @@ import { Test } from '../../../assets/imgs';
 
 const ChatModal = () => {
   const dispatch = useDispatch();
-  const step = 1;
+  const step = 2;
   const onCloseClick = useCallback(() => {
     dispatch(toggleChatModal());
   }, []);
@@ -22,7 +22,11 @@ const ChatModal = () => {
           <S.UserListWrapper>
             <S.UserRow>
               <S.UserAvatar src={Test} />
-              <S.UserInfo>닉네임</S.UserInfo>
+              <S.UserInfo>
+                <S.UserName>닉네임</S.UserName>
+                <S.LastMessage>이 공간에 마지막으로 쓴 말이 나올건데 너무 길면 한 줄에서 ...으로 풀어나갈 것</S.LastMessage>
+              </S.UserInfo>
+              <S.NoticeNumber>99</S.NoticeNumber>
             </S.UserRow>
             <S.UserRow>asd</S.UserRow>
             <S.UserRow>asd</S.UserRow>

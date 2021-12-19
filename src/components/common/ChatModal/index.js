@@ -50,6 +50,34 @@ const ChatModal = () => {
                 <S.MessageAvatar src={Test} />
                 <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
               </S.MessageWrapper>
+              <S.MessageWrapper>
+                <S.MessageAvatar src={Test} />
+                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
+              </S.MessageWrapper>
+              <S.MessageWrapper>
+                <S.MessageAvatar src={Test} />
+                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
+              </S.MessageWrapper>
+              <S.MessageWrapper>
+                <S.MessageAvatar src={Test} />
+                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
+              </S.MessageWrapper>
+              <S.MessageWrapper>
+                <S.MessageAvatar src={Test} />
+                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
+              </S.MessageWrapper>
+              <S.MessageWrapper>
+                <S.MessageAvatar src={Test} />
+                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
+              </S.MessageWrapper>
+              <S.MessageWrapper>
+                <S.MessageAvatar src={Test} />
+                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
+              </S.MessageWrapper>
+              <S.MessageWrapper>
+                <S.MessageAvatar src={Test} />
+                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
+              </S.MessageWrapper>
             </S.ChatroomBody>
             <S.ChatInputWrapper>
               <S.ChatroomInput placeholder={'메시지를 입력해주세요.'} />

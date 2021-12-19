@@ -52,7 +52,7 @@ export const UserRow = styled.div`
   align-items: center;
   width: 100%;
   height: 10rem;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   &:after {
     position: absolute;
     content: '';
@@ -67,8 +67,8 @@ export const UserRow = styled.div`
 `;
 
 export const UserAvatar = styled(Avatar)`
-  width: 8rem;
-  height: 8rem;
+  width: 6rem;
+  height: 6rem;
   cursor: pointer;
 `;
 
@@ -80,7 +80,7 @@ export const UserInfo = styled.div`
 `;
 
 export const UserName = styled.label`
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: bold;
   line-height: 2;
   cursor: pointer;
@@ -149,8 +149,13 @@ export const ChatroomBody = styled.div`
   height: 100%;
   width: 100%;
   flex: 8;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 1rem 0;
+  /* -ms-overflow-style: none;
+  scrollbar-width: none;
+  &:-webkit-scrollbar {
+    display: none;
+  } */
 `;
 
 export const ChatInputWrapper = styled(Paper)`
@@ -179,10 +184,12 @@ export const sendBtn = styled(RiSendPlaneFill)`
 export const MessageWrapper = styled.div`
   display: flex;
   align-items: flex-end;
+  margin-bottom: 1.5rem;
 `;
 
 export const MessageAvatar = styled(HeaderAvatar)`
   margin-right: 1rem;
+  ${mediaQuery({ 'margin-right': '2rem' })}
 `;
 
 export const MessageText = styled.div`
@@ -194,16 +201,17 @@ export const MessageText = styled.div`
   border-radius: 10px;
   white-space: normal;
   word-break: break-all;
+  line-height: 1.5;
+  font-size: 1.2rem;
   &:after {
     border-color: transparent #f9f871 transparent transparent;
     border-style: solid;
     border-width: 5px;
     content: '';
     display: block;
-    left: -10px;
+    left: -9px;
     position: absolute;
-    bottom: 30%;
+    bottom: 10px;
     width: 0;
-    z-index: 0;
   }
 `;

@@ -60,47 +60,9 @@ export const CheckboxWrapper = styled.label`
   font-size: 2rem;
 `;
 
-export const CategoryWrapper = styled.div`
-  ${flexCenter};
-  margin-top: 5rem;
-`;
 
-export const CategoryCard = styled.button`
-  ${flexColumn};
-  align-items: center;
-  justify-content: center;
-  width: 20rem;
-  height: 12rem;
-  background-color:#fff;
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
-  & + & {
-    margin-left: 5rem;
-  }
-`;
 
-export const FilterWrapper = styled.div`
-  ${flexColumn};
-  align-items: center;
-`;
 
-export const SortWrapper = styled.ul`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 5rem;
-`;
-
-export const SortOption = styled.li`
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  & + & {
-    margin-left: 2%;
-  }
-`;
 
 export const PostsWrapper = styled.ul`
   display: flex;

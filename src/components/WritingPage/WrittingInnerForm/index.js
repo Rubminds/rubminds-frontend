@@ -20,6 +20,10 @@ const WrittingInnerForm = () => {
     setAttachment('')
   }, [])
 
+  const blockText = useCallback((e)=>{
+    e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+  }, []); 
+
   const [body, setBody] = useState({
     recruitType: 'study',
     title: null,
@@ -209,13 +213,16 @@ const WrittingInnerForm = () => {
               <S.MainTitle fontSize="3rem" marginBottom="13%">
                 모집 인원
               </S.MainTitle>
+              <S.InputWrapper>
               <S.InputBox
                 width="15rem"
                 name="recruitPeople"
                 type="number"
+                onInput={blockText}
                 onChange={onBodyChange}
               />
               <S.InputBoxPeople>명</S.InputBoxPeople>
+              </S.InputWrapper>
             </>
           )}
         </S.RecruitPeopleWrapper>

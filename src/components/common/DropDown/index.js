@@ -1,53 +1,50 @@
 import React, { useState, useCallback } from 'react';
 import * as S from './style';
 
-const DropDown = ({ options, ...props }) => {
+const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  
+
   //헤더나 옵션 클릭시 열려진 옵션리스트 닫기용
   const toggle = useCallback(() => {
-    setIsOpen((prev) => !prev);
-  },[]);
+    setIsOpen(prev => !prev);
+  }, []);
 
   //옵션 선택시 헤더 value 변경 + 토글용
   const onOptionClick = useCallback(
-    (option) => () => {
+    option => () => {
       let already = false;
-      if(selectedOptions.length <5){
-        selectedOptions.forEach((element) => {
-          element === option? already=true:already=false;
+      if (dropDownOptions.length < 5) {
+        dropDownOptions.forEach(element => {
+          element === option ? (already = true) : (already = false);
         });
-        if(!already){
-          setSelectedOptions(selectedOptions.concat(option));
+        if (!already) {
+          setDropDownOptions(dropDownOptions.concat(option));
         }
       }
       setIsOpen(false);
     },
-    [selectedOptions]
+    [dropDownOptions],
   );
 
   const onDeleteClick = useCallback(
-    (option) => () => {
-      setSelectedOptions(
-        selectedOptions.filter(
+    option => () => {
+      setDropDownOptions(
+        dropDownOptions.filter(
           (
-            i //이름이 인자로 받은 option이 아니면 새로 구성
-          ) => i !== option
-        )
+            i, //이름이 인자로 받은 option이 아니면 새로 구성
+          ) => i !== option,
+        ),
       );
     },
-    [selectedOptions]
+    [dropDownOptions],
   );
 
-  const onUserInputClick = useCallback(()=>{
-
-  })
+  const onUserInputClick = useCallback(() => {});
 
   return (
     <S.DropDownContainer isOpen={isOpen} {...props}>
       <S.DropDownHeader>
-        {selectedOptions.map((v, i) => {
+        {dropDownOptions.map((v, i) => {
           return (
             <S.HeaderTag onClick={onDeleteClick(v)} key={i}>
               {v}
@@ -55,12 +52,14 @@ const DropDown = ({ options, ...props }) => {
           );
         })}{' '}
         &nbsp;
-        <S.HeaderArrow  onClick={toggle}/>
+        <S.HeaderArrow onClick={toggle} />
       </S.DropDownHeader>
       {isOpen && (
         <S.DropDownList>
           {options.map((option, i) => (
-            <S.ListItem onClick={onOptionClick(option)} key={i}>{option}</S.ListItem>
+            <S.ListItem onClick={onOptionClick(option)} key={i}>
+              {option}
+            </S.ListItem>
           ))}
           <S.ListItem onClick={onUserInputClick}>직접입력</S.ListItem>
         </S.DropDownList>

@@ -20,10 +20,10 @@ const ChatModal = () => {
       <S.Contents>
         {step === 1 ? (
           <S.UserListWrapper>
-            <S.UserRow onClick={() => setStep(2)}>
-              <S.UserAvatar src={Test} />
+            <S.UserRow>
+              <S.UserAvatar src={Test} onClick={() => setStep(2)} />
               <S.UserInfo>
-                <S.UserName>닉네임</S.UserName>
+                <S.UserName onClick={() => setStep(2)}>닉네임</S.UserName>
                 <S.LastMessage>
                   이 공간에 마지막으로 쓴 말이 나올건데 너무 길면 한 줄에서 ...으로 풀어나갈 것
                 </S.LastMessage>
@@ -38,9 +38,19 @@ const ChatModal = () => {
             <S.ChatroomHeader>
               <S.HeaderBackBtn onClick={() => setStep(1)} />
               <S.HeaderAvatar src={Test} />
-              <S.HeaderUser>김경원<br/><S.UserStatus/>현재접속중</S.HeaderUser>
+              <S.HeaderUser>
+                김경원
+                <br />
+                <S.UserStatus />
+                현재접속중
+              </S.HeaderUser>
             </S.ChatroomHeader>
-            <S.ChatroomBody>body</S.ChatroomBody>
+            <S.ChatroomBody>
+              <S.MessageWrapper>
+                <S.MessageAvatar src={Test} />
+                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
+              </S.MessageWrapper>
+            </S.ChatroomBody>
             <S.ChatInputWrapper>
               <S.ChatroomInput placeholder={'메시지를 입력해주세요.'} />
               <S.sendBtn />

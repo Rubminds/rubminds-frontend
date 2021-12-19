@@ -9,7 +9,6 @@ export const RowContentWrapper = styled(Paper)`
   align-items: center;
   width: 100%;
   height: 100%;
-  max-height: 20rem;
   margin-top: 4rem;
   padding: 3rem 6rem;
   ${mediaQuery({ padding: '2rem 1rem', "flex-direction":"column", height:"auto", "max-height":"initial"})};
@@ -56,11 +55,10 @@ export const Introduce = styled.label`
 export const SkillsWrapper = styled.ul`
   display: flex;
   ${mediaQuery({"justify-content":"center"})}
+  flex-wrap:wrap;
 `;
 export const SkillImg = styled.img`
-  width: 6rem;
-  height: 6rem;
-  &+&{
-    margin-left:0.5rem;
-  }
+  width: 5rem;
+  height: 5rem;
+  ${mediaQuery({'margin-left':'0.5rem'})}
 `;

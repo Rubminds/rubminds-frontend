@@ -31,12 +31,6 @@ const WrittingInnerForm = () => {
     mainText: null,
   })
 
-  // const inNumber = useCallback((e)=>{
-  //   if(e.keyCode < 48 || e.keyCode >57){
-  //     e.returnValue = false; 
-  //   }
-  // },[body.recruitPeople]);
-
   const onBodyChange = useCallback(
     e => {
       if (e.target.getAttribute('name') === 'recruitType') {
@@ -72,6 +66,16 @@ const WrittingInnerForm = () => {
           [e.target.name]: fileInfo,
         })
       }
+
+      if (e.target.name === 'recruitPeople') {
+        const { value } = e.currentTarget;
+        const onlyNumber = value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1')
+        setBody({
+          ...body,
+          [e.target.name]: onlyNumber,
+        })
+      }
+
       setBody({
         ...body,
         [e.target.name]: e.target.value,
@@ -209,7 +213,6 @@ const WrittingInnerForm = () => {
                 width="15rem"
                 name="recruitPeople"
                 type="number"
-                onInput={this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')}
                 onChange={onBodyChange}
               />
               <S.InputBoxPeople>명</S.InputBoxPeople>

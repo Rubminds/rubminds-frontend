@@ -56,17 +56,18 @@ const SignUpPageRight = () => {
   }, [])
 
   const onProfileURL = useCallback(e => {
-    const reader = new FileReader()
+    let reader = new FileReader()
     setFileInfo(e.target.files[0])
     reader.readAsDataURL(e.target.files[0])
     reader.onloadend = finished => {
       setAttachment(finished.target.result)
+      e.target.value ='';
     }
-  }, [])
+  }, [attachMent, fileInfo])
 
   const onDeleteURL = useCallback(() => {
-    setFileInfo('')
-    setAttachment('')
+    setFileInfo(null)
+    setAttachment(null)
   }, [fileInfo, attachMent])
 
   const onSubmitHandler = useCallback(

@@ -6,7 +6,7 @@ import * as S from './style';
 
 import { DropDown } from '../../../components';
 import { LandingDropdownOptions } from '../../../constants';
-import useInput from '../../../hooks/useInput'
+import useInput from '../../../hooks/useInput';
 
 const SignUpPageRight = () => {
   useEffect(() => {
@@ -22,48 +22,34 @@ const SignUpPageRight = () => {
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [nickname, onChangeNickname] = useInput('');
 
-  const [job, setJob] = useState(null);
-  const [skillSet, setSkillSet] = useState([]);
+  const [job, onChangeJob, setJob] = useInput('');
   const [introduce, onChangeIntroduce] = useInput(null);
-
-  const [studentBtnColor, setStudentBtnColor] = useState(null);
-  const [officerBtnColor, setOfficerBtnColor] = useState(null);
 
   // attachment : img URL (for Server)
   const [attachMent, setAttachment] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
 
-  const onChangeJob = useCallback(e => {
-    e.preventDefault();
-    setJob(e.target.name);
-    console.log(e.target.name);
-    if (e.target.name === 'student') {
-      setStudentBtnColor('#CDF6E8');
-      setOfficerBtnColor(null);
-    } else {
-      setStudentBtnColor(null);
-      setOfficerBtnColor('#CDF6E8');
-    }
-  }, []);
-
   const onProfileUpload = useCallback(() => {
     imgInput.current.click();
   }, []);
 
-  const onProfileURL = useCallback(e => {
-    let reader = new FileReader()
-    setFileInfo(e.target.files[0])
-    reader.readAsDataURL(e.target.files[0])
-    reader.onloadend = finished => {
-      setAttachment(finished.target.result)
-      e.target.value ='';
-    }
-  }, [attachMent, fileInfo])
+  const onProfileURL = useCallback(
+    e => {
+      let reader = new FileReader();
+      setFileInfo(e.target.files[0]);
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onloadend = finished => {
+        setAttachment(finished.target.result);
+        e.target.value = '';
+      };
+    },
+    [attachMent, fileInfo],
+  );
 
   const onDeleteURL = useCallback(() => {
-    setFileInfo(null)
-    setAttachment(null)
-  }, [fileInfo, attachMent])
+    setFileInfo(null);
+    setAttachment(null);
+  }, [fileInfo, attachMent]);
 
   const onSubmitHandler = useCallback(
     e => {
@@ -71,7 +57,7 @@ const SignUpPageRight = () => {
       alert(`attachMent : ${attachMent}
           nickName : ${nickname} 
           job : ${job} 
-          skillSet : ${skillSet}
+          skillSet : ${dropDownOptions}
           introduce : ${introduce} `);
 
       const formData = new FormData();
@@ -81,11 +67,10 @@ const SignUpPageRight = () => {
 
       formData.append('nickName', nickname);
       formData.append('job', job);
-      formData.append('skillSet', skillSet);
+      formData.append('skillSet', dropDownOptions);
       formData.append('introduce', introduce);
-      console.log(formData)
     },
-    [attachMent, nickname, job, skillSet, introduce],
+    [attachMent, nickname, job, dropDownOptions, introduce],
   );
   return (
     <S.SignUpPageRightWrapper>
@@ -131,10 +116,20 @@ const SignUpPageRight = () => {
           직업
         </S.MainTitle>
         <S.JobWrapper>
-          <S.JobCheckBtn name="student" backgroundColor={studentBtnColor} onClick={onChangeJob}>
+          <S.JobCheckBtn
+            name="student"
+            onClick={e => setJob(e.target.name)}
+            name={'student'}
+            selected={job}
+          >
             학생
           </S.JobCheckBtn>
-          <S.JobCheckBtn name="officer" backgroundColor={officerBtnColor} onClick={onChangeJob}>
+          <S.JobCheckBtn
+            name="officer"
+            onClick={e => setJob(e.target.name)}
+            name={'officer'}
+            selected={job}
+          >
             직장인
           </S.JobCheckBtn>
         </S.JobWrapper>

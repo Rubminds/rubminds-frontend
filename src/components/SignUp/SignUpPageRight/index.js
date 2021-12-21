@@ -3,8 +3,10 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import * as S from './style';
+
 import { DropDown } from '../../../components';
 import { LandingDropdownOptions } from '../../../constants';
+import useInput from '../../../hooks/useInput'
 
 const SignUpPageRight = () => {
   useEffect(() => {
@@ -18,11 +20,11 @@ const SignUpPageRight = () => {
   const { accessToken, signupCheck } = useParams();
   const imgInput = useRef();
   const [dropDownOptions, setDropDownOptions] = useState([]);
+  const [nickname, onChangeNickname] = useInput('');
 
-  const [nickName, setNickName] = useState(null);
   const [job, setJob] = useState(null);
   const [skillSet, setSkillSet] = useState([]);
-  const [introduce, setIntroduce] = useState(null);
+  const [introduce, onChangeIntroduce] = useInput(null);
 
   const [studentBtnColor, setStudentBtnColor] = useState(null);
   const [officerBtnColor, setOfficerBtnColor] = useState(null);
@@ -30,10 +32,6 @@ const SignUpPageRight = () => {
   // attachment : img URL (for Server)
   const [attachMent, setAttachment] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
-
-  const onChangeNickName = useCallback(e => {
-    setNickName(e.target.value);
-  }, []);
 
   const onChangeJob = useCallback(e => {
     e.preventDefault();
@@ -46,10 +44,6 @@ const SignUpPageRight = () => {
       setStudentBtnColor(null);
       setOfficerBtnColor('#CDF6E8');
     }
-  }, []);
-
-  const onChangeIntroducer = useCallback(e => {
-    setIntroduce(e.target.value);
   }, []);
 
   const onProfileUpload = useCallback(() => {
@@ -75,7 +69,7 @@ const SignUpPageRight = () => {
     e => {
       e.preventDefault();
       alert(`attachMent : ${attachMent}
-          nickName : ${nickName} 
+          nickName : ${nickname} 
           job : ${job} 
           skillSet : ${skillSet}
           introduce : ${introduce} `);
@@ -85,12 +79,13 @@ const SignUpPageRight = () => {
         formData.append('profileImg', fileInfo);
       }
 
-      formData.append('nickName', nickName);
+      formData.append('nickName', nickname);
       formData.append('job', job);
       formData.append('skillSet', skillSet);
       formData.append('introduce', introduce);
+      console.log(formData)
     },
-    [attachMent, nickName, job, skillSet, introduce],
+    [attachMent, nickname, job, skillSet, introduce],
   );
   return (
     <S.SignUpPageRightWrapper>
@@ -121,7 +116,7 @@ const SignUpPageRight = () => {
           닉네임
         </S.MainTitle>
         <S.NickNameWrapper>
-          <S.NickNameBox name="nickName" onChange={onChangeNickName} required />
+          <S.NickNameBox name="nickName" onChange={onChangeNickname} required />
           <S.CheckBox
             onClick={() => {
               alert('중복체크 중!');
@@ -159,7 +154,7 @@ const SignUpPageRight = () => {
         <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem" aquired>
           자기소개
         </S.MainTitle>
-        <S.Introduce onChange={onChangeIntroducer} />
+        <S.Introduce onChange={onChangeIntroduce} />
         <S.SubmitBtn onClick={onSubmitHandler}>회원 가입</S.SubmitBtn>
         <S.Clear></S.Clear>
       </S.SignUpPageInnerForm>

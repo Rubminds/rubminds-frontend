@@ -81,6 +81,7 @@ const LandingPage = () => {
       skills: ['react', 'javascript'],
     },
   ];
+  
   const onCheck = useCallback(() => {
     setIsCheck(prev => !prev);
   }, []);

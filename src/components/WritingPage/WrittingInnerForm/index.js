@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 const WrittingInnerForm = () => {
   const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
   const [isScout, setIsScout] = useState(false)
+  const [dropDownOptions, setDropDownOptions] = useState([]);
 
   // 이미지 서버 전송용 데이터
   const [fileInfo, setFileInfo] = useState(null)
@@ -163,6 +164,8 @@ const WrittingInnerForm = () => {
         기술 스택
       </S.MainTitle>
       <DropDown
+        dropDownOptions={dropDownOptions}
+        setDropDownOptions={setDropDownOptions}
         style={{ width: '100%' }}
         options={LandingDropdownOptions}
       ></DropDown>

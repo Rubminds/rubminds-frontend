@@ -9,4 +9,5 @@ export const StyledTextArea = styled.textarea`
     border-radius:10px;
     height:auto;
     min-height:15rem;
+    resize:none;
 `

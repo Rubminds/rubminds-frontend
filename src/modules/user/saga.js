@@ -4,6 +4,9 @@ import {
   SIGNUP_USER,
   SIGNUP_USER_ERROR,
   SIGNUP_USER_SUCCESS,
+  TOGGLE_CHAT_MODAL,
+  TOGGLE_CHAT_MODAL_ERROR,
+  TOGGLE_CHAT_MODAL_SUCCESS,
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 // 액션에서 axios 요청 필요할 때
@@ -28,12 +31,31 @@ function* signupUser() {
   }
 }
 
+function* toggleChatModal() {
+  const result = '';//yield call(signupUserAPI, action.data);
+  try {
+    yield put({
+      type: TOGGLE_CHAT_MODAL_SUCCESS,
+      data: result,
+    });
+  } catch (err) { //에러 발생시 이벤트
+    yield put({
+      type: TOGGLE_CHAT_MODAL_ERROR,
+      error: err,
+    });
+  }
+}
+
 //액션 감지 함수
 //takeLatest안의 액션을 감지.
 function* watchSignupUser() {
   yield takeLatest(SIGNUP_USER, signupUser);
 }
 
+function* watchToggleChatModal() {
+  yield takeLatest(TOGGLE_CHAT_MODAL, toggleChatModal);
+}
+
 export default function* userSaga() {
-  yield all([fork(watchSignupUser)]);
+  yield all([fork(watchSignupUser), fork(watchToggleChatModal)]);
 }

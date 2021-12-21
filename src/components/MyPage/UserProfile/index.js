@@ -7,7 +7,7 @@ const UserProfile = ({ me }) => {
   return (
     <S.RowContentWrapper>
       <S.Avatar src={Test}  />
-      <S.Content flex="5">
+      <S.Content flex="6">
         <S.NameIntroduce>
           <S.Name>{me.name}</S.Name>
           <S.Introduce>{me.introduce}</S.Introduce>

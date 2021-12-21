@@ -78,7 +78,11 @@ export const InputBox = styled.input`
   }
 `
 
-export const InputBoxPeople = styled.span`
+export const InputWrapper = styled.div`
+  display : flex; 
+`;  
+
+export const InputBoxPeople = styled.p`
   font-size: 2rem;
   margin-left: 1rem;
 `

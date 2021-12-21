@@ -21,6 +21,10 @@ const WrittingInnerForm = () => {
     setAttachment('')
   }, [])
 
+  const blockText = useCallback((e)=>{
+    e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+  }, []); 
+
   const [body, setBody] = useState({
     recruitType: 'study',
     title: null,
@@ -55,17 +59,28 @@ const WrittingInnerForm = () => {
         }
       }
       if (e.target.name === 'file') {
-        const reader = new FileReader()
+        let reader = new FileReader()
         setFileInfo(e.target.files[0])
         reader.readAsDataURL(e.target.files[0])
         reader.onloadend = finished => {
           setAttachment(finished.target.result)
+          e.target.value = ''
         }
         setBody({
           ...body,
           [e.target.name]: fileInfo,
         })
       }
+
+      if (e.target.name === 'recruitPeople') {
+        const { value } = e.currentTarget;
+        const onlyNumber = value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1')
+        setBody({
+          ...body,
+          [e.target.name]: onlyNumber,
+        })
+      }
+
       setBody({
         ...body,
         [e.target.name]: e.target.value,
@@ -201,15 +216,16 @@ const WrittingInnerForm = () => {
               <S.MainTitle fontSize="3rem" marginBottom="13%">
                 모집 인원
               </S.MainTitle>
+              <S.InputWrapper>
               <S.InputBox
                 width="15rem"
                 name="recruitPeople"
                 type="number"
-                min="0"
-                max="9"
+                onInput={blockText}
                 onChange={onBodyChange}
               />
               <S.InputBoxPeople>명</S.InputBoxPeople>
+              </S.InputWrapper>
             </>
           )}
         </S.RecruitPeopleWrapper>
@@ -220,7 +236,7 @@ const WrittingInnerForm = () => {
         지역
       </S.MainTitle>
       <S.AreaSelect name="area" onChange={onBodyChange}>
-        <option selected disabled hidden>
+        <option value="" selected disabled hidden>
           == 선택 ==
         </option>
         {AreaOptions.map((value, index) => {

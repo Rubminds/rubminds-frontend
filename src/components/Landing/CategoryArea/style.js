@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { flexColumn, flexCenter } from '../../../constants';
 
-export const CategoryWrapper = styled.div`
+export const CategoryWrapper = styled.section`
   ${flexCenter};
   margin-top: 5rem;
 `;

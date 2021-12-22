@@ -1,13 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import * as S from './style';
 import { BsCheckLg } from 'react-icons/bs';
-import { FaBook, FaMedal } from 'react-icons/fa';
-import { MdPersonAdd } from 'react-icons/md';
-import { HiUserGroup } from 'react-icons/hi';
-import { BiBorderAll } from 'react-icons/bi';
 
-import { Banner, PostCard, DropDown, Footer } from '../../components';
-import { LandingDropdownOptions } from '../../constants';
+import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../components';
 
 const LandingPage = () => {
   const [isCheck, setIsCheck] = useState(true);
@@ -86,6 +81,7 @@ const LandingPage = () => {
       skills: ['react', 'javascript'],
     },
   ];
+  
   const onCheck = useCallback(() => {
     setIsCheck(prev => !prev);
   }, []);
@@ -108,39 +104,13 @@ const LandingPage = () => {
               &nbsp;전체보기
             </S.CheckboxWrapper>
           </S.TitleWrapper>
-          <S.CategoryWrapper>
-            <S.CategoryCard>
-              <FaBook fontSize="3rem" />
-              스터디
-            </S.CategoryCard>
-            <S.CategoryCard>
-              <MdPersonAdd fontSize="3rem" />
-              스카웃
-            </S.CategoryCard>
-            <S.CategoryCard>
-              <HiUserGroup fontSize="3rem" />
-              프로젝트
-            </S.CategoryCard>
-          </S.CategoryWrapper>
-          <S.FilterWrapper>
-            <S.DetailTitle>어떤 기술을 찾으시나요?</S.DetailTitle>
-            <DropDown
-              options={LandingDropdownOptions}
-              marginTop="5rem"
-              dropDownOptions={dropDownOptions}
-              setDropDownOptions={setDropDownOptions}
-            />
-            <S.SortWrapper>
-              <S.SortOption onClick={onRecruitOptionClick}>
-                <BiBorderAll fontSize="2rem" />
-                모집중
-              </S.SortOption>
-              <S.SortOption onClick={onFinishOptionClick}>
-                <FaMedal fontSize="2rem" />
-                진행완료
-              </S.SortOption>
-            </S.SortWrapper>
-          </S.FilterWrapper>
+          <CategoryArea />
+          <FilterArea
+            dropDownOptions={dropDownOptions}
+            setDropDownOptions={setDropDownOptions}
+            onRecruitOptionClick={onRecruitOptionClick}
+            onFinishOptionClick={onFinishOptionClick}
+          />
           <S.PostsWrapper>
             {Posts.map(v => {
               return v.status === sortOption && <PostCard post={v} key={v.id} />;

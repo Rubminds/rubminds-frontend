@@ -13,6 +13,8 @@ export { default as ChatModal } from './common/ChatModal';
 
 export { default as Banner } from './Landing/Banner';
 export { default as BannerCarousel } from './Landing/BannerCarousel';
+export { default as CategoryArea } from './Landing/CategoryArea';
+export { default as FilterArea } from './Landing/FilterArea';
 
 export { default as DetailInfo } from './PostDetail/DetailInfo';
 export { default as UserListModal } from './PostDetail/UserListModal';

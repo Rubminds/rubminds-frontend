@@ -7,10 +7,15 @@ import * as S from './style';
 import { DropDown } from '../../../components';
 import { LandingDropdownOptions } from '../../../constants';
 import useInput from '../../../hooks/useInput';
+import { useDispatch } from 'react-redux';
+import { SIGNUP_USER } from '../../../constants';
+import { signupUserAPI } from '../../../modules/user/saga';
 
 const SignUpPageRight = () => {
+
+  const dispatch = useDispatch(); 
+
   useEffect(() => {
-    console.log(accessToken);
     localStorage.setItem('accessToken', accessToken);
     return () => {
       localStorage.setItem('signupCheck', signupCheck);
@@ -54,7 +59,8 @@ const SignUpPageRight = () => {
   const onSubmitHandler = useCallback(
     e => {
       e.preventDefault();
-      alert(`attachMent : ${attachMent}
+      
+      console.log(`attachMent : ${attachMent}
           nickName : ${nickname} 
           job : ${job} 
           skillSet : ${dropDownOptions}
@@ -69,9 +75,15 @@ const SignUpPageRight = () => {
       formData.append('job', job);
       formData.append('skillSet', dropDownOptions);
       formData.append('introduce', introduce);
+
+      dispatch(signupUserAPI(formData))
+      .then((res)=>{
+        console.log('성공')
+      }).catch((e)=> console.log(e)); 
+
     },
     [attachMent, nickname, job, dropDownOptions, introduce],
-  );
+  )
   return (
     <S.SignUpPageRightWrapper>
       <S.MainTitle fontSize="5rem" fontWeight="bold">

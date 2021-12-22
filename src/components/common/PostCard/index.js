@@ -11,17 +11,17 @@ const PostCard = ({ post, ...props }) => {
     <S.CardWrapper status={post.status}{...props}>
       <S.CardStatusWrapper status={post.status}>{post.status}</S.CardStatusWrapper>
       <S.CardCategory>
-        {post.category === "study" ? <FaBook fontSize="30px" /> : post.category === "scout" ? <MdPersonAdd fontSize="30px" /> : <HiUserGroup fontSize="30px" />}
+        {post.kinds === "STUDY" ? <FaBook fontSize="30px" /> : post.kinds === "SCOUT" ? <MdPersonAdd fontSize="30px" /> : <HiUserGroup fontSize="30px" />}
         </S.CardCategory>
       <S.CardTitle>{post.title}</S.CardTitle>
       <S.CardSkills>
-        {post.skills.map((v, i) => {
+        {post.skill?.map((v, i) => {
           return <Python width="45px" height="45px" key={i}/>;
         })}
       </S.CardSkills>
       <S.CardFooter status={post.status}>
         <S.FooterTags>
-          {post.skills.map((v,i) => {
+          {post.skill?.map((v,i) => {
             return <S.FooterTag key={i}>#{v}&nbsp;</S.FooterTag>;
           })}
         </S.FooterTags>

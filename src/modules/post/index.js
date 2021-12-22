@@ -25,10 +25,10 @@ const post = (state = initialState, action) => {
         draft.loadPostsError = null;
         break;
       case LOAD_POSTS_SUCCESS: //액션 처리
-        console.log(action.data);
+        console.log(action.data.data);
         draft.loadPostsLoading = false;
         draft.loadPostsDone = true;
-        draft.posts = draft.posts.concat(action.data);
+        draft.posts = draft.posts.concat(action.data.data.content);
         break;
       case LOAD_POSTS_ERROR:
         draft.loadPostsLoading = false;

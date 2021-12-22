@@ -3,7 +3,7 @@ import { flexCenter, flexColumn } from '../../../constants';
 import theme from '../../../common/theme';
 import { Iphone } from '../../../assets/imgs';
 
-export const LandingBanner = styled.div`
+export const LandingBanner = styled.section`
   height: 48rem;
   width: 100%;
   background: linear-gradient(

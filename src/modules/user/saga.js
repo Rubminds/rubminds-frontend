@@ -10,7 +10,7 @@ import {
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 // 액션에서 axios 요청 필요할 때
-export function signupUserAPI(data){
+function signupUserAPI(data){
     return axios.post('https://dev.rubminds.site/api/user/signup', data, {
       headers : {
         Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
@@ -21,7 +21,9 @@ export function signupUserAPI(data){
 //axios요청시 주석처럼 작성.
 //axios에서 받은 결과를 success 로 보내줌.
 function* signupUser(action) {
+  console.log(action)
   const result = yield call(signupUserAPI, action.data);
+  console.log(result); 
   try {
     yield put({
       type: SIGNUP_USER_SUCCESS,

@@ -15,8 +15,9 @@ export const initialState = {
 };
 
 //액션 생성함수
-export const signupUser = () => ({
+export const signupUser = (data) => ({
   type: SIGNUP_USER,
+  data: data, 
 });
 
 export const toggleChatModal = () => ({

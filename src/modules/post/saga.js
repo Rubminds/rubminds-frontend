@@ -4,13 +4,15 @@ import { LOAD_POSTS, LOAD_POSTS_ERROR, LOAD_POSTS_SUCCESS } from '../../constant
 
 // 액션에서 axios 요청 필요할 때
 function loadPostsAPI() {
-  return axios.get('https://dev.rubminds.site/api/posts');
+  return axios.get('/posts?page=1&size=10&kinds=PROJECT&status=RECRUIT');
 }
 
 //axios요청시 주석처럼 작성.
 //axios에서 받은 결과를 success 로 보내줌.
 function* loadPosts() {
+  console.log('access loadPosts saga');
   const result = yield call(loadPostsAPI);
+  console.log(result);
   try {
     yield put({
       type: LOAD_POSTS_SUCCESS,

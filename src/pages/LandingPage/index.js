@@ -1,16 +1,20 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import * as S from './style';
 import { BsCheckLg } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
 
 import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../components';
+import { loadPosts } from '../../modules/post';
 
 const LandingPage = () => {
   const [isCheck, setIsCheck] = useState(true);
   const [sortOption, setSortOption] = useState('모집중');
   const [dropDownOptions, setDropDownOptions] = useState([]);
-  useEffect(()=>{
-    
-  },[])
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log('page');
+    dispatch(loadPosts());
+  }, []);
   const Posts = [
     {
       id: 1,
@@ -84,7 +88,7 @@ const LandingPage = () => {
       skills: ['react', 'javascript'],
     },
   ];
-  
+
   const onCheck = useCallback(() => {
     setIsCheck(prev => !prev);
   }, []);

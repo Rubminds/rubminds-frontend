@@ -19,7 +19,7 @@ export const flexBetween = css`
 `;
 
 //최대 별점
-export const MAX_STAR=5;
+export const MAX_STAR = 5;
 
 //options
 //dropdown
@@ -62,3 +62,7 @@ export const SIGNUP_USER_ERROR = 'SIGNUP_USER_ERROR';
 export const TOGGLE_CHAT_MODAL = 'TOGGLE_CHAT_MODAL';
 export const TOGGLE_CHAT_MODAL_SUCCESS = 'TOGGLE_CHAT_MODAL_SUCCESS';
 export const TOGGLE_CHAT_MODAL_ERROR = 'TOGGLE_CHAT_MODAL_ERROR';
+
+export const LOAD_POSTS = 'LOAD_POSTS';
+export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
+export const LOAD_POSTS_ERROR = 'LOAD_POSTS_ERROR';

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import * as S from './style';
 import { BsCheckLg } from 'react-icons/bs';
 
@@ -8,6 +8,9 @@ const LandingPage = () => {
   const [isCheck, setIsCheck] = useState(true);
   const [sortOption, setSortOption] = useState('모집중');
   const [dropDownOptions, setDropDownOptions] = useState([]);
+  useEffect(()=>{
+    
+  },[])
   const Posts = [
     {
       id: 1,

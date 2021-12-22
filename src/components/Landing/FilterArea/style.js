@@ -1,25 +1,26 @@
 import styled from 'styled-components';
-import { flexColumn, flexCenter } from '../../../constants';
+import { flexColumn, flexCenter, flexBetween } from '../../../constants';
 
-export const FilterWrapper = styled.div`
+export const FilterWrapper = styled.section`
   ${flexColumn};
   align-items: center;
 `;
 
-export const SortWrapper = styled.ul`
+export const SortWrapper = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  ${flexBetween}
   margin-top: 5rem;
 `;
+
+export const SortOptionWrapper = styled.ul``;
 
 export const SortOption = styled.li`
   font-size: 2rem;
   display: flex;
+  white-space: nowrap;
   align-items: center;
   & + & {
-    margin-left: 2%;
+    margin-left: 1rem;
   }
 `;
 
@@ -30,4 +31,13 @@ export const DetailTitle = styled.label`
   width: 100%;
   ${flexCenter};
   margin-top: 5rem;
+`;
+
+export const AreaSelect = styled.select`
+  width: 20rem;
+  border: none;
+  font-size: 2rem;
+  border-radius: 30px;
+  padding: 1rem 1.5rem;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 `;

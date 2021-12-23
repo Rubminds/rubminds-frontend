@@ -4,15 +4,19 @@ import { useParams } from 'react-router-dom';
 import * as S from './style';
 
 import { PostTotalInfo, ResultForm, BackButton } from '../../components';
+import { loadPost } from '../../modules/post';
 
 const PostDetailPage = () => {
   const me = '김경원'; //추후에 리덕스 상태를 가져올 것
   const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
   const params = useParams();
+  const { singlePost } = useSelector(state => state.post);
 
   useEffect(() => {
-    
+    console.log('page start');
+    dispatch(loadPost(params.id));
+    console.log(singlePost);
   }, []);
   const post = {
     title:
@@ -43,17 +47,21 @@ const PostDetailPage = () => {
   return (
     <S.PostDetailWrapper>
       <BackButton />
-      <S.PostDetailTitle>{post.title}</S.PostDetailTitle>
-      {/* <S.UploadedFile download href={post.files[0].url}>첨부파일</S.UploadedFile> */}
-      <PostTotalInfo
-        post={post}
-        modalOpen={modalOpen}
-        closeModal={closeModal}
-        openModal={openModal}
-        me={me}
-      />
-      <S.PostDetailContent>{post.content}</S.PostDetailContent>
-      <ResultForm />
+      {singlePost && (
+        <>
+          <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>
+          {/* <S.UploadedFile download href={post.files[0].url}>첨부파일</S.UploadedFile> */}
+          <PostTotalInfo
+            post={singlePost}
+            modalOpen={modalOpen}
+            closeModal={closeModal}
+            openModal={openModal}
+            me={me}
+          />
+          <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
+          <ResultForm />
+        </>
+      )}
     </S.PostDetailWrapper>
   );
 };

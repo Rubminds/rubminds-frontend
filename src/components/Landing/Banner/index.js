@@ -4,8 +4,7 @@ import {Link} from "react-router-dom";
 
 import { BannerCarousel } from '../..';
 
-const Banner = () => {
-
+const Banner = ({posts}) => {
   const me = 'someone'; //로그인 여부
   return (
     <S.LandingBanner>
@@ -17,7 +16,7 @@ const Banner = () => {
         <S.BannerText fontSize="md">Rubminds에서 당신의 팀원을 찾으세요!</S.BannerText>
         <S.RecruitBtn> <Link to='/write'> 모집하기 </Link> </S.RecruitBtn>
       </S.BannerTextBox>
-      {me ? <BannerCarousel /> : <S.IphoneImg />}
+      {me ? <BannerCarousel posts={posts}/> : <S.IphoneImg />}
     </S.LandingBanner>
   );
 };

@@ -7,7 +7,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 
-import rootReducer,{rootSaga} from './modules';
+import rootReducer, { rootSaga } from './modules';
+require('dotenv').config();
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
@@ -18,7 +19,7 @@ ReactDOM.render(
     <App />
   </Provider>,
 
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 reportWebVitals();

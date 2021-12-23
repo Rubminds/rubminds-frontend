@@ -7,16 +7,14 @@ import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../compon
 import { loadPosts } from '../../modules/post';
 
 const LandingPage = () => {
-  useEffect(() => {
-    console.log('page');
-    dispatch(loadPosts());
-    console.log(posts);
-  }, []);
-
   const [isCheck, setIsCheck] = useState(true);
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const posts = useSelector(state => state.post.posts);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadPosts());
+  }, []);
 
   const onCheck = useCallback(() => {
     setIsCheck(prev => !prev);
@@ -27,7 +25,7 @@ const LandingPage = () => {
   return (
     <>
       <S.LandingWrapper>
-        <Banner posts={posts}/>
+        <Banner posts={posts} />
         <S.LandingDetailWrapper>
           <S.TitleWrapper>
             <S.DetailTitle>어떤 동료를 찾으시나요? &nbsp;</S.DetailTitle>
@@ -44,7 +42,7 @@ const LandingPage = () => {
             onFinishOptionClick={onFinishOptionClick}
           />
           <S.PostsWrapper>
-            {posts&& posts.map(v => {
+            {posts.map(v => {
               return <PostCard post={v} key={v.id} />;
             })}
           </S.PostsWrapper>

@@ -24,6 +24,7 @@ function* loadPosts() {
       error: err,
     });
   }
+  console.log('finished loadPosts saga')
 }
 
 //액션 감지 함수

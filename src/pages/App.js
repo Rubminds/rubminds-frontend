@@ -25,7 +25,7 @@ const App = () => {
         <Switch>
           <Route path="/callback/:accessToken/:signupCheck" component={SignUpPage} />
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/detail" component={PostDetailPage} />
+          <Route exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
           <Route path="/write" component={WrittingPage} />
           <Route path="/mypage" component={MyPage} />

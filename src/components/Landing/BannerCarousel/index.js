@@ -11,7 +11,7 @@ const BannerCarousel = ({ posts }) => {
 
   useEffect(() => {
     CarouselWrapper.current.style.transition = 'all 0.3s ease-in-out';
-    CarouselWrapper.current.style.transform = `translateX(-${currentPost * 2}0%)`;
+    CarouselWrapper.current.style.transform = `translateX(-${currentPost}0%)`;
   }, [currentPost]);
 
   const nextClick = useCallback(() => {
@@ -39,7 +39,7 @@ const BannerCarousel = ({ posts }) => {
       <S.CarouselNext onClick={nextClick} />
       <S.CarouselWrapper ref={CarouselWrapper}>
         {posts.map(v => {
-          return <PostCard post={v} key={v.id} />;
+          return <PostCard post={v} key={`carousel${v.id}`} />;
         })}
       </S.CarouselWrapper>
     </S.CarouselContainer>

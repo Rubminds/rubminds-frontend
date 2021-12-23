@@ -1,11 +1,23 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import * as S from './style';
 
-import { PostTotalInfo, ResultForm,BackButton } from '../../components';
+import { PostTotalInfo, ResultForm, BackButton } from '../../components';
+import { loadPost } from '../../modules/post';
 
 const PostDetailPage = () => {
   const me = '김경원'; //추후에 리덕스 상태를 가져올 것
   const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { singlePost } = useSelector(state => state.post);
+
+  useEffect(() => {
+    console.log('page start');
+    dispatch(loadPost(params.id));
+    console.log(singlePost);
+  }, []);
   const post = {
     title:
       '2학기 동안 알고리즘을 공부할 분을 모집합니다. 많은 지원 바랍니다. 2줄 이상 테스트 위해 엄청 길게 제목을 쓰고 있는 중입니다. 2줄 이상부터는 ...으로 ellipsis 되어야 합니다. 이제쯤 2줄이 되었으려나',
@@ -24,7 +36,7 @@ const PostDetailPage = () => {
     ],
     maxUserNum: 4,
     Date: '2021-11-16',
-    file:"c:\\fakepath\\filename.pdfc:\\fakepath\\filename.pdf"
+    file: 'c:\\fakepath\\filename.pdfc:\\fakepath\\filename.pdf',
   };
   const openModal = useCallback(() => {
     setModalOpen(true);
@@ -34,18 +46,22 @@ const PostDetailPage = () => {
   }, [modalOpen]);
   return (
     <S.PostDetailWrapper>
-      <BackButton/>
-      <S.PostDetailTitle>{post.title}</S.PostDetailTitle>
-      <S.UploadedFile download href={post.file}>첨부파일</S.UploadedFile>
-      <PostTotalInfo
-        post={post}
-        modalOpen={modalOpen}
-        closeModal={closeModal}
-        openModal={openModal}
-        me={me}
-      />
-      <S.PostDetailContent>{post.detail}</S.PostDetailContent>
-      <ResultForm/>
+      <BackButton />
+      {singlePost && (
+        <>
+          <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>
+          {/* <S.UploadedFile download href={post.files[0].url}>첨부파일</S.UploadedFile> */}
+          <PostTotalInfo
+            post={singlePost}
+            modalOpen={modalOpen}
+            closeModal={closeModal}
+            openModal={openModal}
+            me={me}
+          />
+          <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
+          <ResultForm />
+        </>
+      )}
     </S.PostDetailWrapper>
   );
 };

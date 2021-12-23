@@ -11,7 +11,7 @@ const BannerCarousel = ({ posts }) => {
 
   useEffect(() => {
     CarouselWrapper.current.style.transition = 'all 0.3s ease-in-out';
-    CarouselWrapper.current.style.transform = `translateX(-${currentPost * 2}0%)`;
+    CarouselWrapper.current.style.transform = `translateX(-${currentPost}0%)`;
   }, [currentPost]);
 
   const nextClick = useCallback(() => {

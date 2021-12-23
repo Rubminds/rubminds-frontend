@@ -7,6 +7,9 @@ import {
   LOAD_POST,
   LOAD_POST_ERROR,
   LOAD_POST_SUCCESS,
+  LIKE_POST,
+  LIKE_POST_ERROR,
+  LIKE_POST_SUCCESS,
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 // 액션에서 axios 요청 필요할 때
@@ -55,6 +58,28 @@ function* loadPost(action) {console.log(action.data);
   console.log('finished loadPost saga');
 }
 
+function likePostAPI(data) {
+  return axios.get(`/post/${data}/like`);
+}
+function* likePost(action) {console.log(action.data);
+  console.log('access likePost saga');
+  const result = yield call(likePostAPI, action.data);
+  console.log(result);
+  try {
+    yield put({
+      type: LIKE_POST_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    //에러 발생시 이벤트
+    yield put({
+      type: LIKE_POST_ERROR,
+      error: err,
+    });
+  }
+  console.log('finished likePost saga');
+}
+
 //액션 감지 함수
 //takeLatest안의 액션을 감지.
 function* watchLoadPosts() {
@@ -63,7 +88,10 @@ function* watchLoadPosts() {
 function* watchLoadPost() {
   yield takeLatest(LOAD_POST, loadPost);
 }
+function* watchLikePost() {
+  yield takeLatest(LIKE_POST, likePost);
+}
 
 export default function* postSaga() {
-  yield all([fork(watchLoadPosts), fork(watchLoadPost)]);
+  yield all([fork(watchLoadPosts), fork(watchLoadPost), fork(watchLikePost)]);
 }

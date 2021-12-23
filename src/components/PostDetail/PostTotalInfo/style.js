@@ -16,7 +16,7 @@ export const PostDetailInfo = styled.div`
 export const DetailInfoWrapper = styled.div`
   ${flexColumn};
   width: ${(props) => (props.width ? props.width : '40%')};
-  ${mediaQuery({ width: '60%', 'margin-top': '3rem' })};
+  ${mediaQuery({ width: '60%', 'margin-top': '1rem' })};
   ${(props) =>
     props.Group &&
     css`
@@ -102,3 +102,6 @@ export const GroupBox = styled.div`
   justify-content: center;
 `;
 
+export  const LikeWrapper = styled.div`
+
+`

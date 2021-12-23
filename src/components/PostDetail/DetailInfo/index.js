@@ -7,7 +7,7 @@ const DetailInfo = ({ title, info }) => {
       <S.DetailInfoLeft>{title}</S.DetailInfoLeft>
       <S.DetailInfoRight>
         {Array.isArray(info) ? (
-          info.map((v, i) => <label key={i}>#{v}</label>)
+          info.map((v, i) => <label key={i}>#{v}&nbsp;</label>)
         ) :  (
           <label>{info}</label>
         )}

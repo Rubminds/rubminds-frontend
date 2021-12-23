@@ -70,3 +70,7 @@ export const LOAD_POSTS_ERROR = 'LOAD_POSTS_ERROR';
 export const LOAD_POST = 'LOAD_POST';
 export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS';
 export const LOAD_POST_ERROR = 'LOAD_POST_ERROR';
+
+export const LIKE_POST = 'LIKE_POST';
+export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS';
+export const LIKE_POST_ERROR = 'LIKE_POST_ERROR';

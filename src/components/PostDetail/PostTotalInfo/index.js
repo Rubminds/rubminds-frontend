@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import * as S from './style.js';
 import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdPersonAdd } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 
 import { DetailInfo, UserListModal } from '../..';
 import { Test } from '../../../assets/imgs';
+import { likePost } from '../../../modules/post';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
 const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   const combinedSkills = post.postSkills.concat(post.customSkills);
+  const dispatch = useDispatch();
+  const onLikeClick = useCallback(() => {
+    dispatch(likePost(post.id));
+  }, []);
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
@@ -58,14 +64,14 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
               )}
               <S.DetailInfoContent>
                 {post.isLike ? (
-                  <>
-                    <AiFillStar color="#E4DC00" /> <label>&nbsp;찜 취소</label>
-                  </>
+                  <S.LikeWrapper onClick={onLikeClick}>
+                    <AiFillStar color="#E4DC00" /> &nbsp;찜 취소
+                  </S.LikeWrapper>
                 ) : (
-                  <>
+                  <S.LikeWrapper onClick={onLikeClick}>
                     <AiOutlineStar color="#E4DC00" />
-                    <label>&nbsp;찜 하기</label>
-                  </>
+                    &nbsp;찜 하기
+                  </S.LikeWrapper>
                 )}
               </S.DetailInfoContent>
             </S.GroupBox>

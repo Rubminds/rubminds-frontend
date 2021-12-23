@@ -23,33 +23,35 @@ const LandingPage = () => {
   const onFinishOptionClick = useCallback(() => {});
 
   return (
-    <>
-      <S.LandingWrapper>
-        <Banner posts={posts} />
-        <S.LandingDetailWrapper>
-          <S.TitleWrapper>
-            <S.DetailTitle>어떤 동료를 찾으시나요? &nbsp;</S.DetailTitle>
-            <S.CheckboxWrapper>
-              <S.StyledCheckbox onClick={onCheck}>{isCheck && <BsCheckLg />}</S.StyledCheckbox>
-              &nbsp;전체보기
-            </S.CheckboxWrapper>
-          </S.TitleWrapper>
-          <CategoryArea />
-          <FilterArea
-            dropDownOptions={dropDownOptions}
-            setDropDownOptions={setDropDownOptions}
-            onRecruitOptionClick={onRecruitOptionClick}
-            onFinishOptionClick={onFinishOptionClick}
-          />
-          <S.PostsWrapper>
-            {posts.map(v => {
-              return <PostCard post={v} key={`post${v.id}`} />;
-            })}
-          </S.PostsWrapper>
-        </S.LandingDetailWrapper>
-        <Footer />
-      </S.LandingWrapper>
-    </>
+    <S.LandingWrapper>
+      {posts && (
+        <>
+          <Banner posts={posts} />
+          <S.LandingDetailWrapper>
+            <S.TitleWrapper>
+              <S.DetailTitle>어떤 동료를 찾으시나요? &nbsp;</S.DetailTitle>
+              <S.CheckboxWrapper>
+                <S.StyledCheckbox onClick={onCheck}>{isCheck && <BsCheckLg />}</S.StyledCheckbox>
+                &nbsp;전체보기
+              </S.CheckboxWrapper>
+            </S.TitleWrapper>
+            <CategoryArea />
+            <FilterArea
+              dropDownOptions={dropDownOptions}
+              setDropDownOptions={setDropDownOptions}
+              onRecruitOptionClick={onRecruitOptionClick}
+              onFinishOptionClick={onFinishOptionClick}
+            />
+            <S.PostsWrapper>
+              {posts.map(v => {
+                return <PostCard post={v} key={`post${v.id}`} />;
+              })}
+            </S.PostsWrapper>
+          </S.LandingDetailWrapper>
+          <Footer />
+        </>
+      )}
+    </S.LandingWrapper>
   );
 };
 

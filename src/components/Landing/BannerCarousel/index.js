@@ -39,7 +39,7 @@ const BannerCarousel = ({ posts }) => {
       <S.CarouselNext onClick={nextClick} />
       <S.CarouselWrapper ref={CarouselWrapper}>
         {posts.map(v => {
-          return <PostCard post={v} key={v.id} />;
+          return <PostCard post={v} key={`carousel${v.id}`} />;
         })}
       </S.CarouselWrapper>
     </S.CarouselContainer>

@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { flexColumn, flexBetween, flexCenter } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery'
 import theme from '../../../common/theme';
 
-export const CardWrapper = styled.li`
+export const CardLinkWrapper = styled(Link)``
+export const CardWrapper = styled.div`
   ${flexColumn};
   justify-content:space-between;
   width: 34rem;

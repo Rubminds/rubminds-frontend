@@ -43,7 +43,7 @@ const LandingPage = () => {
           />
           <S.PostsWrapper>
             {posts.map(v => {
-              return <PostCard post={v} key={v.id} />;
+              return <PostCard post={v} key={`post${v.id}`} />;
             })}
           </S.PostsWrapper>
         </S.LandingDetailWrapper>

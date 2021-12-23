@@ -16,36 +16,36 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
       <S.DetailInfoWrapper>
         <S.DetailInfoBetween>
           <S.DetailInfoLeft bold>
-            <S.AuthorAvatar src={Test} /> &nbsp;{post.author}
+            <S.AuthorAvatar src={Test} /> &nbsp;{post.writer}
           </S.DetailInfoLeft>
           <S.DetailInfoRight>{post.Date}</S.DetailInfoRight>
         </S.DetailInfoBetween>
-        <DetailInfo title="모집유형" info={post.category} />
-        <DetailInfo title="기술스택" info={post.skills} />
-        <DetailInfo title="회의형태" info={post.council} />
-        <DetailInfo title="지역" info={post.location} />
+        <DetailInfo title="모집유형" info={post.postsStatus} />
+        <DetailInfo title="기술스택" info={post.postSkills} />
+        <DetailInfo title="회의형태" info={post.meeting} />
+        <DetailInfo title="지역" info={post.region} />
       </S.DetailInfoWrapper>
 
       <S.DetailInfoWrapper width="20%" Group>
         {modalOpen ? (
           <UserListModal
-            userList={post.userList}
-            maxUserNum={post.maxUserNum}
+            userList={[]}
+            maxUserNum={post.headcount}
             closeModal={closeModal}
           />
         ) : (
           <>
             <S.GroupBox>
-              {me === post.author ? (
+              {me === post.writer ? (
                 <>
-                  {post.status === '모집중' ? (
+                  {post.postsStatus === 'RECRUIT' ? (
                     <>
                       <S.DetailInfoContent toBtn >모집 종료하기</S.DetailInfoContent>
                       <S.DetailInfoContent>
                         <AiOutlineEdit /> &nbsp;수정
                       </S.DetailInfoContent>
                     </>
-                  ) : post.status === '진행중' ? (
+                  ) : post.postsStatus === 'WORKING' ? (
                     <S.DetailInfoContent toBtn>모집중으로 변경</S.DetailInfoContent>
                   ) : (
                     <></>
@@ -57,14 +57,14 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                 </S.DetailInfoContent>
               )}
               <S.DetailInfoContent>
-                <BiStar color="#E4DC00" /> &nbsp;{post.star}
+                <BiStar color="#E4DC00" /> &nbsp;{post.isLike}
               </S.DetailInfoContent>
             </S.GroupBox>
             <S.DetailInfoContent>
-              <S.PostStatusCircle status={post.status} onClick={openModal}>
-                <label>{post.status}</label>
+              <S.PostStatusCircle status={post.postsStatus} onClick={openModal}>
+                <label>{post.postsStatus}</label>
                 <label>
-                  {post.userList.length}/{post.maxUserNum}
+                  1/{post.headcount}
                 </label>
               </S.PostStatusCircle>
             </S.DetailInfoContent>

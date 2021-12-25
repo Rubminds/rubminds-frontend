@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'; 
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
@@ -10,31 +11,9 @@ import useInput from '../../../hooks/useInput'
 import { useDispatch } from 'react-redux'
 import { signupUser } from '../../../modules/user'
 
-import axios from 'axios'; 
-
 const SignUpPageRight = () => {
 
   const dispatch = useDispatch();
-
-
-  useEffect(()=>{
-    axios.get('https://dev.rubminds.site/api/skills',{
-      headers : {
-        Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
-      }
-    })
-    .then((res)=>{
-      console.log(res.data); 
-    })
-  },[]); 
-
-  useEffect(() => {
-    localStorage.setItem('accessToken', accessToken)
-    return () => {
-      localStorage.setItem('signupCheck', signupCheck)
-    }
-  }, [])
-
   const { accessToken, signupCheck } = useParams()
   const imgInput = useRef()
   const [dropDownOptions, setDropDownOptions] = useState([])
@@ -46,6 +25,31 @@ const SignUpPageRight = () => {
   // attachment : img URL (for Server)
   const [attachMent, setAttachment] = useState(null)
   const [fileInfo, setFileInfo] = useState(null)
+
+
+  const [skillId, setSkillId] = useState([]);
+  const [skillName, setSkillName] = useState([]);  
+
+  useEffect(() => {
+    axios.get('https://dev.rubminds.site/api/skills', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
+      })
+      .then(res => {
+        let temp = res.data.skills; 
+        setSkillName([temp[0].name]);  
+      })
+  }, [])
+
+
+  useEffect(() => {
+    localStorage.setItem('accessToken', accessToken)
+    return () => {
+      localStorage.setItem('signupCheck', signupCheck)
+    }
+  }, [])
+
 
   const onProfileUpload = useCallback(() => {
     imgInput.current.click()
@@ -184,7 +188,7 @@ const SignUpPageRight = () => {
           dropDownOptions={dropDownOptions}
           setDropDownOptions={setDropDownOptions}
           style={{ width: '100%' }}
-          options={LandingDropdownOptions}
+          options={skillName}
         ></DropDown>
 
         {/* 자기소개 */}

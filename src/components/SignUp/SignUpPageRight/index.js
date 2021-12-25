@@ -1,19 +1,17 @@
 import React from 'react'
-import axios from 'axios'; 
+import axios from 'axios'
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
 import * as S from './style'
 
 import { DropDown } from '../../../components'
-import { LandingDropdownOptions } from '../../../constants'
 import useInput from '../../../hooks/useInput'
 import { useDispatch } from 'react-redux'
 import { signupUser } from '../../../modules/user'
 
 const SignUpPageRight = () => {
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { accessToken, signupCheck } = useParams()
   const imgInput = useRef()
   const [dropDownOptions, setDropDownOptions] = useState([])
@@ -27,20 +25,33 @@ const SignUpPageRight = () => {
   const [fileInfo, setFileInfo] = useState(null)
 
 
-  const [skillId, setSkillId] = useState([]);
-  const [skillName, setSkillName] = useState([]);  
+  const [skill, setSkill] = useState(); 
+  const [skillId, setSkillId] = useState([])
+  const [skillName, setSkillName] = useState([])
 
   useEffect(() => {
-    axios.get('https://dev.rubminds.site/api/skills', {
+    axios
+      .get('https://dev.rubminds.site/api/skills', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },
       })
       .then(res => {
-        let temp = res.data.skills; 
-        setSkillName([temp[0].name]);  
+        let temp = res.data.skills;
+        setSkill(temp); 
+        temp.map((value, index) => {
+          skillName.push(value.name) //  윤석님, state를 setState를 사용하지 않고 배열형태로 넣어야할 때 이렇게 넣어도 되는건지 모르겠습니다. 우선 구현은 됩니다.
+        })
       })
   }, [])
+
+  useEffect(()=>{
+    if (skill != 'undefined' && skill != null){
+      let index = skill.findIndex(v=>v.name===dropDownOptions[-1]);
+      skillId.push(skill[index].id);
+      console.log(skillId);
+    }
+  },[dropDownOptions]);
 
 
   useEffect(() => {
@@ -49,7 +60,6 @@ const SignUpPageRight = () => {
       localStorage.setItem('signupCheck', signupCheck)
     }
   }, [])
-
 
   const onProfileUpload = useCallback(() => {
     imgInput.current.click()
@@ -75,13 +85,13 @@ const SignUpPageRight = () => {
 
   const onSubmitHandler = useCallback(
     e => {
-      e.preventDefault(); 
+      e.preventDefault()
 
       let data = `attachMent : ${attachMent}
           nickName : ${nickname} 
           job : ${job} 
           skillSet : ${dropDownOptions}
-          introduce : ${introduce} `;
+          introduce : ${introduce} `
 
       const formData = new FormData()
       if (fileInfo) {
@@ -92,12 +102,9 @@ const SignUpPageRight = () => {
       formData.append('job', job)
       formData.append('introduce', introduce)
       formData.append('skillIds', dropDownOptions)
-      
 
       // console.log(formData);
       // dispatch(signupUser(formData))
-
-
     },
     [attachMent, nickname, job, dropDownOptions, introduce]
   )

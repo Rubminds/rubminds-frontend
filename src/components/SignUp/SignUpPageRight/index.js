@@ -31,35 +31,31 @@ const SignUpPageRight = () => {
 
   useEffect(() => {
     axios
-      .get('https://dev.rubminds.site/api/skills', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-        },
+    .get('https://dev.rubminds.site/api/skills', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      },
+    })
+    .then(res => {
+      let temp = res.data.skills;
+      setSkill(temp); 
+      temp.map((value) => {
+        skillName.push(value.name) 
       })
-      .then(res => {
-        let temp = res.data.skills;
-        setSkill(temp); 
-        temp.map((value, index) => {
-          skillName.push(value.name) //  윤석님, state를 setState를 사용하지 않고 배열형태로 넣어야할 때 이렇게 넣어도 되는건지 모르겠습니다. 우선 구현은 됩니다.
-        })
-      })
-  }, [])
-
-  useEffect(()=>{
-    if (skill != 'undefined' && skill != null){
-      let index = skill.findIndex(v=>v.name===dropDownOptions[-1]);
-      skillId.push(skill[index].id);
-      console.log(skillId);
-    }
-  },[dropDownOptions]);
-
-
-  useEffect(() => {
+    })
     localStorage.setItem('accessToken', accessToken)
     return () => {
       localStorage.setItem('signupCheck', signupCheck)
     }
   }, [])
+
+  useEffect(()=>{
+    if (skill != 'undefined' && skill != null){
+      let index = skill.findIndex(v=>v.name == dropDownOptions[dropDownOptions.length-1]);
+      skillId.push(skill[index].id);
+      console.log(skillId);
+    }
+  },[dropDownOptions]);
 
   const onProfileUpload = useCallback(() => {
     imgInput.current.click()
@@ -87,24 +83,43 @@ const SignUpPageRight = () => {
     e => {
       e.preventDefault()
 
-      let data = `attachMent : ${attachMent}
-          nickName : ${nickname} 
-          job : ${job} 
-          skillSet : ${dropDownOptions}
-          introduce : ${introduce} `
+      console.log('제출');
+      let data = [{
+        nickName : `${nickname}`, 
+        job : `${job}`, 
+        skillSet : `${skillId}`,
+        introduce : `${introduce}` 
+      }]
+      
 
       const formData = new FormData()
       if (fileInfo) {
         formData.append('profileImg', fileInfo)
       }
 
-      formData.append('nickName', nickname)
-      formData.append('job', job)
-      formData.append('introduce', introduce)
-      formData.append('skillIds', dropDownOptions)
+      formData.append('userInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
 
-      // console.log(formData);
-      // dispatch(signupUser(formData))
+      // for (var key of formData.keys()) {
+
+      //   console.log(key);
+      
+      // }
+      
+      // for (var value of formData.values()) {
+      
+      //   console.log(value);
+      
+      // }
+      
+
+      axios.post('https://dev.rubminds.site/api/user/signup', formData, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        }
+      })
+      .then((res)=> {
+        console.log(res.data); 
+      })
     },
     [attachMent, nickname, job, dropDownOptions, introduce]
   )
@@ -164,23 +179,23 @@ const SignUpPageRight = () => {
         </S.MainTitle>
         <S.JobWrapper>
           <S.JobCheckBtn
-            name="student"
+            name="학생"
             onClick={e => {
               setJob(e.target.name)
               e.preventDefault()
             }}
-            name={'student'}
+            name={'학생'}
             selected={job}
           >
             학생
           </S.JobCheckBtn>
           <S.JobCheckBtn
-            name="officer"
+            name="직장인"
             onClick={e => {
               setJob(e.target.name)
               e.preventDefault()
             }}
-            name={'officer'}
+            name={'직장인'}
             selected={job}
           >
             직장인

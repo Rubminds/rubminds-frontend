@@ -53,7 +53,6 @@ const SignUpPageRight = () => {
     if (skill != 'undefined' && skill != null){
       let index = skill.findIndex(v=>v.name == dropDownOptions[dropDownOptions.length-1]);
       skillId.push(skill[index].id);
-      console.log(skillId);
     }
   },[dropDownOptions]);
 
@@ -83,43 +82,32 @@ const SignUpPageRight = () => {
     e => {
       e.preventDefault()
 
-      console.log('제출');
-      let data = [{
-        nickName : `${nickname}`, 
-        job : `${job}`, 
-        skillSet : `${skillId}`,
-        introduce : `${introduce}` 
-      }]
+      const data = {
+        'nickname' : `${nickname}`, 
+        'job' : `${job}`, 
+        'introduce' : `${introduce}`,
+        'skillIds' : [1,2,3]
+      };
       
-
+      console.log(data);
+      
       const formData = new FormData()
+
       if (fileInfo) {
-        formData.append('profileImg', fileInfo)
+        formData.append('avatar', fileInfo)
       }
 
       formData.append('userInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
-
-      // for (var key of formData.keys()) {
-
-      //   console.log(key);
-      
-      // }
-      
-      // for (var value of formData.values()) {
-      
-      //   console.log(value);
-      
-      // }
-      
 
       axios.post('https://dev.rubminds.site/api/user/signup', formData, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         }
       })
-      .then((res)=> {
+      .then((res) => {
         console.log(res.data); 
       })
+
     },
     [attachMent, nickname, job, dropDownOptions, introduce]
   )

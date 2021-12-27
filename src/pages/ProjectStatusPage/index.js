@@ -1,10 +1,12 @@
 import React from 'react';
 import * as S from './style';
+import { useParams } from 'react-router-dom';
 
 import { BackButton,PostCard } from '../../components';
 
-const ProjectStatusPage = ({ match }) => {
+const ProjectStatusPage = () => {
   const me = '김경원';
+  const params = useParams();
   const Posts = [
     {
       id: 1,
@@ -84,16 +86,16 @@ const ProjectStatusPage = ({ match }) => {
       <S.ContentsWrapper>
         <S.Title>
           {me}님의&nbsp;
-          {match.params.type === '모집중'
+          {params.type === '모집중'
             ? '모집중인'
-            : match.params.type === '진행중'
+            : params.type === '진행중'
             ? '진행중인'
             : '진행종료된'}
           &nbsp;프로젝트 현황
         </S.Title>
         <S.PostsWrapper>
           {Posts.map((v) => {
-            return match.params.type === v.status && <PostCard post={v} key={v.id} />;
+            return params.type === v.status && <PostCard post={v} key={v.id} />;
           })}
         </S.PostsWrapper>
       </S.ContentsWrapper>

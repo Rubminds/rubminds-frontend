@@ -13,20 +13,21 @@ import {
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 // 액션에서 axios 요청 필요할 때
-function signupUserAPI(data){
-    return axios.post('/user/signup', data);
+function signupUserAPI(data) {
+  return axios.post('/user/signup', data);
 }
 
 //axios요청시 주석처럼 작성.
 //axios에서 받은 결과를 success 로 보내줌.
 function* signupUser() {
-  const result = '';//yield call(signupUserAPI, action.data);
+  const result = ''; //yield call(signupUserAPI, action.data);
   try {
     yield put({
       type: SIGNUP_USER_SUCCESS,
       data: result,
     });
-  } catch (err) { //에러 발생시 이벤트
+  } catch (err) {
+    //에러 발생시 이벤트
     yield put({
       type: SIGNUP_USER_ERROR,
       error: err,
@@ -35,13 +36,14 @@ function* signupUser() {
 }
 
 function* toggleChatModal() {
-  const result = '';//yield call(signupUserAPI, action.data);
+  const result = ''; //yield call(signupUserAPI, action.data);
   try {
     yield put({
       type: TOGGLE_CHAT_MODAL_SUCCESS,
       data: result,
     });
-  } catch (err) { //에러 발생시 이벤트
+  } catch (err) {
+    //에러 발생시 이벤트
     yield put({
       type: TOGGLE_CHAT_MODAL_ERROR,
       error: err,
@@ -49,23 +51,24 @@ function* toggleChatModal() {
   }
 }
 
-function loadUserInfoAPI(data){
+function loadUserInfoAPI(data) {
   return axios.post(`/user/${data}`);
 }
 
 function* loadUserInfo(action) {
-const result = yield call(loadUserInfoAPI, action.data);
-try {
-  yield put({
-    type: LOAD_USER_INFO_SUCCESS,
-    data: result,
-  });
-} catch (err) { //에러 발생시 이벤트
-  yield put({
-    type: LOAD_USER_INFO_ERROR,
-    error: err,
-  });
-}
+  const result = yield call(loadUserInfoAPI, action.data);
+  try {
+    yield put({
+      type: LOAD_USER_INFO_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    //에러 발생시 이벤트
+    yield put({
+      type: LOAD_USER_INFO_ERROR,
+      error: err,
+    });
+  }
 }
 
 //액션 감지 함수

@@ -3,20 +3,20 @@ import * as S from './style';
 
 import { Test } from '../../../assets/imgs';
 
-const UserProfile = ({ me }) => {
+const UserProfile = ({ user }) => {
   return (
     <S.RowContentWrapper>
       <S.Avatar src={Test}  />
       <S.Content flex="6">
         <S.NameIntroduce>
-          <S.Name>{me.name}</S.Name>
-          <S.Introduce>{me.introduce}</S.Introduce>
+          <S.Name>{user.nickname}</S.Name>
+          <S.Introduce>{user.introduce}</S.Introduce>
         </S.NameIntroduce>
       </S.Content>
       <S.Content flex="2">
         <S.SkillsWrapper>
-          {me.skills.map((v, i) => {
-            return <S.SkillImg src={v} key={i}/>;
+          {user.userSkills.map((v) => {
+            return <S.SkillImg src={v.name} key={v.id}/>;
           })}
         </S.SkillsWrapper>
       </S.Content>

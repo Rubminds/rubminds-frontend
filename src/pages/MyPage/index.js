@@ -14,8 +14,8 @@ const MyPage = () => {
     };
     fetchData();
   }, []);
-  const me = {
-    name: '김경원',
+  const user = {
+    nauser: '김경원',
     avatar: '회원이미지',
     introduce:
       '저는 대학생이고 프론트엔드 개발자가 되기를 희망합니다. 저는 앞으로 계속 나아가는 개발자입니다. 웹에 관심이 많습니다. 많은 관심 부탁드립니다',
@@ -49,12 +49,12 @@ const MyPage = () => {
     <S.MyPageWrapper>
       <BackButton />
       <S.EditProfile>프로필 수정</S.EditProfile>
-      <UserProfile me={me} />
+      <UserProfile user={user} />
       <S.Division>
-        <UserProjects me={me} />
-        <UserRating me={me} />
+        <UserProjects user={user} />
+        <UserRating user={user} />
       </S.Division>
-      <UserDibs me={me} />
+      <UserDibs user={user} />
     </S.MyPageWrapper>
   );
 };

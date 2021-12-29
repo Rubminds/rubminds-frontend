@@ -7,10 +7,21 @@ import * as S from './style'
 
 import { DropDown } from '../../../components'
 import useInput from '../../../hooks/useInput'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signupUser } from '../../../modules/user'
+import { useHistory } from 'react-router-dom'
 
-const SignUpPageRight = () => {
+const SignUpPageRight = () => { 
+
+  const isSigninDone = useSelector((state) => state.user.isSigninDone); 
+
+  useEffect(()=> {
+    if(isSigninDone){
+      history.push('/'); 
+    }
+  }, [isSigninDone]); 
+
+  const history = useHistory(); 
   const dispatch = useDispatch()
   const { accessToken, signupCheck } = useParams()
   const imgInput = useRef()
@@ -80,38 +91,20 @@ const SignUpPageRight = () => {
 
   const onSubmitHandler = useCallback(
     e => {
-      e.preventDefault()
-      console.log(skillId); 
-
+      e.preventDefault(); 
+      console.log(skillId);
       let data = {
         nickname : nickname, 
         job : job, 
         introduce : introduce,
         skillIds : skillId,
       };
-      
-      console.log(data);
-      
       const formData = new FormData()
-
       if (fileInfo) {
         formData.append('avatar', fileInfo)
       }
-
       formData.append('userInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
-
-
       dispatch(signupUser(formData)); 
-
-      // axios.post('https://dev.rubminds.site/api/user/signup', formData, {
-      //   headers: {
-      //     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      //   }
-      // })
-      // .then((res) => {
-      //   console.log(res.data); 
-      // })
-
     },
     [attachMent, nickname, job, dropDownOptions, introduce]
   )

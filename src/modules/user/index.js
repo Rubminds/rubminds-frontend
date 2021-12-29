@@ -13,11 +13,7 @@ import produce from 'immer';
 
 //초기 상태 초기화
 export const initialState = {
-  me : {
-    id : null, 
-    nickname: null, 
-    avatar : null,
-  }, 
+  me : null,
   isSigninLoading : false, 
   isSigninDone : false, 
   isSigninError : null, 

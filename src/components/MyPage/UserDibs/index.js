@@ -3,9 +3,9 @@ import * as S from './style';
 
 const UserDibs = ({ user }) => {
   const getProjectNumByKinds = useCallback((kinds) => {
-    const kindsProjectArray = user.projectInfo.filter(e => e.kinds === kinds);
-    console.log(kindsProjectArray);
-    return kindsProjectArray.length;
+    const kindsProject = user.likeInfo.find(e => e.kinds === kinds);
+    console.log(kindsProject);
+    return kindsProject ? kindsProject.count : 0;
   },[])
   return (
     <S.CardWrapper>

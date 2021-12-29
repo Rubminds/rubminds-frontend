@@ -58,7 +58,11 @@ function* toggleChatModal() {
 }
 
 function loadUserInfoAPI(data) {
-  return axios.post(`/user/${data}`);
+  return axios.get('/user',data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  });
 }
 
 function* loadUserInfo(action) {

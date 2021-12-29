@@ -55,9 +55,6 @@ const SignUpPageRight = () => {
       })
     })
     localStorage.setItem('accessToken', accessToken)
-    return () => {
-      localStorage.setItem('signupCheck', signupCheck)
-    }
   }, [])
 
   useEffect(()=>{

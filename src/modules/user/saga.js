@@ -11,7 +11,6 @@ import {
 
 // 액션에서 axios 요청 필요할 때
 function signupUserAPI(data){
-  console.log('axios',data); 
     return axios.post('https://dev.rubminds.site/api/user/signup', data, {
       headers : {
         Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
@@ -22,9 +21,7 @@ function signupUserAPI(data){
 //axios요청시 주석처럼 작성.
 //axios에서 받은 결과를 success 로 보내줌.
 function* signupUser(action) {
-  // console.log(`들어가기 이전`,action.data); 
   const result = yield call(signupUserAPI, action.data);
-  console.log(`들어간 이후`,result); 
   try {
     yield put({
       type: SIGNUP_USER_SUCCESS,

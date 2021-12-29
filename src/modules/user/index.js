@@ -44,6 +44,7 @@ const user = (state = initialState, action) => {
         draft.isSigninLoading = false;
         draft.isSigninDone = true; 
         draft.isSigninError = null;
+        
         draft.me = action.data.data; 
         break;
       case SIGNUP_USER_ERROR:

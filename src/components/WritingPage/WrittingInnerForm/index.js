@@ -159,9 +159,9 @@ const WrittingInnerForm = () => {
         Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
       }
     }).then((res)=> console.log(res.data)).catch((e)=> console.log(e)); 
-
-  }
 // 
+  }
+
   return (
     <S.WrittingInnerForm onSubmit={onSubmitHandler}>
       {/* 모집 유형 */}

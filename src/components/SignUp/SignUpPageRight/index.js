@@ -21,7 +21,7 @@ const SignUpPageRight = () => {
     }
   }, [isSigninDone]); 
 
-  const history = useHistory(); 
+  const history = useHistory()
   const dispatch = useDispatch()
   const { accessToken, signupCheck } = useParams()
   const imgInput = useRef()
@@ -35,26 +35,24 @@ const SignUpPageRight = () => {
   const [attachMent, setAttachment] = useState(null)
   const [fileInfo, setFileInfo] = useState(null)
 
-
   const [skill, setSkill] = useState(); 
   const [skillId, setSkillId] = useState([])
   const [skillName, setSkillName] = useState([])
 
-  useEffect(() => {
-    axios
-    .get('https://dev.rubminds.site/api/skills', {
+  useEffect(async() => {
+    localStorage.setItem('accessToken', accessToken)
+    
+    const result = await axios.get('https://dev.rubminds.site/api/skills', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
       },
     })
-    .then(res => {
-      let temp = res.data.skills;
-      setSkill(temp); 
+
+    let temp = result.data.skills;
+    setSkill(temp); 
       temp.map((value) => {
         skillName.push(value.name) 
       })
-    })
-    localStorage.setItem('accessToken', accessToken)
   }, [])
 
   useEffect(()=>{
@@ -108,7 +106,7 @@ const SignUpPageRight = () => {
   return (
     <S.SignUpPageRightWrapper>
       <S.MainTitle fontSize="5rem" fontWeight="bold">
-        Sign Up
+        회원 가입
       </S.MainTitle>
 
       <S.SignUpPageInnerForm onSubmit={onSubmitHandler}>
@@ -146,11 +144,7 @@ const SignUpPageRight = () => {
         </S.MainTitle>
         <S.NickNameWrapper>
           <S.NickNameBox name="nickName" onChange={onChangeNickname} required />
-          <S.CheckBox
-            onClick={() => {
-              alert('중복체크 중!')
-            }}
-          >
+          <S.CheckBox>
             중복 체크
           </S.CheckBox>
         </S.NickNameWrapper>

@@ -10,13 +10,21 @@ import produce from 'immer';
 
 //초기 상태 초기화
 export const initialState = {
-  accessToken: null,
+  me : {
+    id : null, 
+    nickname: null, 
+    avatar : null,
+  }, 
+  isSigninLoading : false, 
+  isSigninDone : false, 
+  isSigninError : null, 
   isChatOpen: false,
 };
 
 //액션 생성함수
-export const signupUser = () => ({
+export const signupUser = (data) => ({
   type: SIGNUP_USER,
+  data: data, 
 });
 
 export const toggleChatModal = () => ({
@@ -28,12 +36,20 @@ const user = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case SIGNUP_USER:
+        draft.isSigninLoading = true;
+        draft.isSigninDone = false; 
+        draft.isSigninError = null; 
         break;
       case SIGNUP_USER_SUCCESS: //액션 처리
-        //draft.id = action.data;
-        console.log('success');
+        draft.isSigninLoading = false;
+        draft.isSigninDone = true; 
+        draft.isSigninError = null;
+        
+        draft.me = action.data.data; 
         break;
       case SIGNUP_USER_ERROR:
+        draft.isSigninLoading = false; 
+        draft.isSigninError = action.error; 
         break;
       case TOGGLE_CHAT_MODAL:
         break;

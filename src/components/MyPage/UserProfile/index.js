@@ -1,12 +1,10 @@
 import React from 'react';
 import * as S from './style';
 
-import { Test } from '../../../assets/imgs';
-
 const UserProfile = ({ user }) => {
   return (
     <S.RowContentWrapper>
-      <S.Avatar src={Test}  />
+      <S.Avatar src={user.avatar}  />
       <S.Content flex="6">
         <S.NameIntroduce>
           <S.Name>{user.nickname}</S.Name>

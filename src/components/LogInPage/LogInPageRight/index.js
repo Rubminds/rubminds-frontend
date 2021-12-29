@@ -14,7 +14,7 @@ const LogInPageRight = () => {
   return (
     <S.LogInPageRight>
       <S.MainTitle fontSize="big" fontWeight="bold">
-        Sign In
+        Log In
       </S.MainTitle>
       <S.MainTitle
         margin="topBottom"

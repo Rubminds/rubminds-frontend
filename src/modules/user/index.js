@@ -14,6 +14,7 @@ export const initialState = {
   nickname: null, 
   avatar : null, 
   accessToken: null,
+  isLoggingIn : false, 
   // isChatOpen: false,
 };
 
@@ -33,13 +34,14 @@ const user = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case SIGNUP_USER:
-        return{
-
-        }
+        draft.isLoggingIn = true;
         break;
       case SIGNUP_USER_SUCCESS: //액션 처리
-        //draft.id = action.data;
-        console.log('success');
+        console.log('action.data',action.data.data.id); 
+        draft.id = action.data.data.id;  
+        draft.isLoggingIn = false;
+        draft.avatar = '123'; 
+        console.log('redux-initial-state', initialState); 
         break;
       case SIGNUP_USER_ERROR:
         break;

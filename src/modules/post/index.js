@@ -84,7 +84,7 @@ const post = (state = initialState, action) => {
         draft.likePostError = null;
         break;
       case LIKE_POST_SUCCESS: //액션 처리
-        console.log(action.data.data);
+        console.log('like success');
         draft.likePostLoading = false;
         draft.likePostDone = true;
         draft.singlePost = action.data.data;

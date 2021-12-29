@@ -60,7 +60,7 @@ function* loadPost(action) {
 }
 
 function likePostAPI(data) {
-  return axios.put(`/post/${data}/like`, {
+  return axios.post(`/post/${data}/like`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

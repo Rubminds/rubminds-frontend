@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import * as S from './style';
 
-const UserDibs = ({ me }) => {
+const UserDibs = ({ user }) => {
+  const getProjectNumByKinds = useCallback((kinds) => {
+    const kindsProject = user.likeInfo.find(e => e.kinds === kinds);
+    console.log(kindsProject);
+    return kindsProject ? kindsProject.count : 0;
+  },[])
   return (
     <S.CardWrapper>
       <S.TitleWrapper>
@@ -11,15 +16,15 @@ const UserDibs = ({ me }) => {
       <S.Content>
         <S.Type>
           <S.TypeName>스터디</S.TypeName>
-          <S.ValueLabel>{me.dibs.study.length}</S.ValueLabel>
+          <S.ValueLabel>{getProjectNumByKinds('STUDY')}</S.ValueLabel>
         </S.Type>
         <S.Type>
           <S.TypeName>스카웃</S.TypeName>
-          <S.ValueLabel>{me.dibs.scout.length}</S.ValueLabel>
+          <S.ValueLabel>{getProjectNumByKinds('SCOUT')}</S.ValueLabel>
         </S.Type>
         <S.Type>
           <S.TypeName>프로젝트</S.TypeName>
-          <S.ValueLabel>{me.dibs.project.length}</S.ValueLabel>
+          <S.ValueLabel>{getProjectNumByKinds('PROJECT')}</S.ValueLabel>
         </S.Type>
       </S.Content>
     </S.CardWrapper>

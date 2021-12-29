@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
+import axios from 'axios'
+
 import * as S from './style'
 import DropDown from '../../../components/common/DropDown'
 import { LandingDropdownOptions } from '../../../constants'
@@ -6,9 +8,37 @@ import { AreaOptions } from '../../../constants'
 import { Link } from 'react-router-dom'
 
 const WrittingInnerForm = () => {
+  const [skill, setSkill] = useState()
+  const [skillId, setSkillId] = useState([])
+  const [skillName, setSkillName] = useState([])
+  const [dropDownOptions, setDropDownOptions] = useState([])
+
+  useEffect(async () => {
+    const result = await axios.get('https://dev.rubminds.site/api/skills', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      },
+    })
+
+    let temp = result.data.skills
+    setSkill(temp)
+    temp.map(value => {
+      skillName.push(value.name)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (skill != 'undefined' && skill != null) {
+      let index = skill.findIndex(
+        v => v.name == dropDownOptions[dropDownOptions.length - 1]
+      )
+      skillId.push(skill[index].id)
+    }
+  }, [dropDownOptions])
+
   const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
   const [isScout, setIsScout] = useState(false)
-  const [dropDownOptions, setDropDownOptions] = useState([]);
+
 
   // 이미지 서버 전송용 데이터
   const [fileInfo, setFileInfo] = useState(null)
@@ -21,9 +51,11 @@ const WrittingInnerForm = () => {
     setAttachment('')
   }, [])
 
-  const blockText = useCallback((e)=>{
-    e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
-  }, []); 
+  const blockText = useCallback(e => {
+    e.target.value = e.target.value
+      .replace(/[^0-9.]/g, '')
+      .replace(/(\..*)\./g, '$1')
+  }, [])
 
   const [body, setBody] = useState({
     recruitType: 'study',
@@ -73,8 +105,10 @@ const WrittingInnerForm = () => {
       }
 
       if (e.target.name === 'recruitPeople') {
-        const { value } = e.currentTarget;
-        const onlyNumber = value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1')
+        const { value } = e.currentTarget
+        const onlyNumber = value
+          .replace(/[^0-9.]/g, '')
+          .replace(/(\.*)\./g, '$1')
         setBody({
           ...body,
           [e.target.name]: onlyNumber,
@@ -101,6 +135,7 @@ const WrittingInnerForm = () => {
   const onSubmitHandler = e => {
     e.preventDefault()
 
+    console.log(body); 
     const formData = new FormData()
     if (body.recruitPeople) {
       formData.append('recruitPeople', body.recruitPeople)
@@ -167,7 +202,7 @@ const WrittingInnerForm = () => {
         dropDownOptions={dropDownOptions}
         setDropDownOptions={setDropDownOptions}
         style={{ width: '100%' }}
-        options={LandingDropdownOptions}
+        options={skillName}
       ></DropDown>
 
       <S.MiddleWrapper>
@@ -217,14 +252,14 @@ const WrittingInnerForm = () => {
                 모집 인원
               </S.MainTitle>
               <S.InputWrapper>
-              <S.InputBox
-                width="15rem"
-                name="recruitPeople"
-                type="number"
-                onInput={blockText}
-                onChange={onBodyChange}
-              />
-              <S.InputBoxPeople>명</S.InputBoxPeople>
+                <S.InputBox
+                  width="15rem"
+                  name="recruitPeople"
+                  type="number"
+                  onInput={blockText}
+                  onChange={onBodyChange}
+                />
+                <S.InputBoxPeople>명</S.InputBoxPeople>
               </S.InputWrapper>
             </>
           )}

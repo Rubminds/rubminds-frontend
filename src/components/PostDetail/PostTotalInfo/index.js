@@ -13,6 +13,7 @@ import { likePost } from '../../../modules/post';
 const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
+  
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
   }, []);

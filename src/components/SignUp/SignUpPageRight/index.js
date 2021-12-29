@@ -81,12 +81,13 @@ const SignUpPageRight = () => {
   const onSubmitHandler = useCallback(
     e => {
       e.preventDefault()
+      console.log(skillId); 
 
-      const data = {
-        'nickname' : `${nickname}`, 
-        'job' : `${job}`, 
-        'introduce' : `${introduce}`,
-        'skillIds' : [1,2,3]
+      let data = {
+        nickname : nickname, 
+        job : job, 
+        introduce : introduce,
+        skillIds : skillId,
       };
       
       console.log(data);
@@ -99,14 +100,17 @@ const SignUpPageRight = () => {
 
       formData.append('userInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
 
-      axios.post('https://dev.rubminds.site/api/user/signup', formData, {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-        }
-      })
-      .then((res) => {
-        console.log(res.data); 
-      })
+
+      dispatch(signupUser(formData)); 
+
+      // axios.post('https://dev.rubminds.site/api/user/signup', formData, {
+      //   headers: {
+      //     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      //   }
+      // })
+      // .then((res) => {
+      //   console.log(res.data); 
+      // })
 
     },
     [attachMent, nickname, job, dropDownOptions, introduce]

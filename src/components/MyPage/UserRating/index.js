@@ -3,7 +3,7 @@ import * as S from './style';
 
 import { MAX_STAR } from '../../../constants';
 
-const UserRating = ({ me }) => {
+const UserRating = ({ user }) => {
   let idx=0;
   const render = (ratio, type) => {
     const empty = [];
@@ -36,15 +36,15 @@ const UserRating = ({ me }) => {
   };
   return (
     <S.CardWrapper>
-      <S.Title>{me.name}님의 평가도</S.Title>
+      <S.Title>{user.nickname}님의 평가도</S.Title>
       <S.Content>
         <S.RatingWrapper>
-          <label>참여도 &nbsp; {me.rating.attendanceRatio}</label>
-          <S.StarWrapper>{render(me.rating.attendanceRatio, 'attendance')}</S.StarWrapper>
+          <label>참여도 &nbsp; {user.attendLevel}</label>
+          <S.StarWrapper>{render(user.attendLevel, 'attendance')}</S.StarWrapper>
         </S.RatingWrapper>
         <S.RatingWrapper>
-          <label>숙련도 &nbsp; {me.rating.skillfulRatio}</label>
-          <S.StarWrapper>{render(me.rating.skillfulRatio, 'skillful')}</S.StarWrapper>
+          <label>숙련도 &nbsp; {user.workLevel}</label>
+          <S.StarWrapper>{render(user.workLevel, 'skillful')}</S.StarWrapper>
         </S.RatingWrapper>
       </S.Content>
     </S.CardWrapper>

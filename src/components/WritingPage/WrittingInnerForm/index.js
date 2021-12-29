@@ -12,6 +12,12 @@ const WrittingInnerForm = () => {
   const [skillId, setSkillId] = useState([])
   const [skillName, setSkillName] = useState([])
   const [dropDownOptions, setDropDownOptions] = useState([])
+  const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
+  const [isScout, setIsScout] = useState(false)
+  // 이미지 서버 전송용 데이터
+  const [fileInfo, setFileInfo] = useState(null)
+  // 이미지 미리보기 데이터
+  const [attachment, setAttachment] = useState(null)
 
   useEffect(async () => {
     const result = await axios.get('https://dev.rubminds.site/api/skills', {
@@ -36,15 +42,6 @@ const WrittingInnerForm = () => {
     }
   }, [dropDownOptions])
 
-  const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
-  const [isScout, setIsScout] = useState(false)
-
-
-  // 이미지 서버 전송용 데이터
-  const [fileInfo, setFileInfo] = useState(null)
-
-  // 이미지 미리보기 데이터
-  const [attachment, setAttachment] = useState(null)
 
   const deleteImg = useCallback(() => {
     setFileInfo('')
@@ -58,33 +55,32 @@ const WrittingInnerForm = () => {
   }, [])
 
   const [body, setBody] = useState({
-    recruitType: 'study',
     title: null,
-    skillSet: null,
-    meetEnviroment: null,
-    recruitPeople: null,
-    area: null,
+    content: null,
+    headcount: null,
+    kinds: 'STUDY',
+    meeting: null,
+    region: null,
     file: null,
-    mainText: null,
   })
 
   const onBodyChange = useCallback(
     e => {
-      if (e.target.getAttribute('name') === 'recruitType') {
+      if (e.target.getAttribute('name') === 'kinds') {
         setBody({
           ...body,
           [e.target.getAttribute('name')]: e.target.getAttribute('value'),
         })
         switch (e.target.getAttribute('value')) {
-          case 'study':
+          case 'STUDY':
             setIsScout(false)
             setBtnColor(['#FBEAFF', 'white', 'white'])
             break
-          case 'scout':
+          case 'SCOUT':
             setIsScout(true)
             setBtnColor(['white', '#FBEAFF', 'white'])
             break
-          case 'project':
+          case 'PROJECT':
             setIsScout(false)
             setBtnColor(['white', 'white', '#FBEAFF'])
             break
@@ -104,7 +100,7 @@ const WrittingInnerForm = () => {
         })
       }
 
-      if (e.target.name === 'recruitPeople') {
+      if (e.target.name === 'headcount') {
         const { value } = e.currentTarget
         const onlyNumber = value
           .replace(/[^0-9.]/g, '')
@@ -121,31 +117,49 @@ const WrittingInnerForm = () => {
       })
     },
     [
-      body.recruitType,
+      body.meeting,
       body.title,
       body.skillSet,
       body.meetEnviroment,
-      body.recruitPeople,
-      body.area,
+      body.headcount,
+      body.region,
       body.file,
-      body.mainText,
+      body.content,
     ]
   )
 
   const onSubmitHandler = e => {
     e.preventDefault()
 
-    console.log(body); 
+    console.log(body);
+    console.log(skillId); 
+
     const formData = new FormData()
-    if (body.recruitPeople) {
-      formData.append('recruitPeople', body.recruitPeople)
+    if (body.headcount) {
+      formData.append('headcount', parseInt(body.headcount))
     }
-    formData.append('recruitType', body.recruitType)
-    formData.append('title', body.title)
-    formData.append('meetEnviroment', body.meetEnviroment)
-    formData.append('recruitPeople', body.recruitPeople)
-    formData.append('area', body.area)
-    formData.append('mainText', body.mainText)
+    if (body.file) {
+      formData.append('files',body.file)
+    }
+    let data = {
+      title : body.title, 
+      content : body.content,
+      headcount : body.headcount, 
+      kinds : body.kinds,
+      meeting : body.meeting, 
+      region : body.region, 
+      skillIds : skillId,
+      customSkillName : ['python'],
+    }
+
+    formData.append('postInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
+
+    axios.post('https://dev.rubminds.site/api/post', formData , {
+      headers : {
+        Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
+      }
+    }).then((res)=> console.log(res.data)).catch((e)=> console.log(e)); 
+
   }
 
   return (
@@ -156,8 +170,8 @@ const WrittingInnerForm = () => {
       </S.MainTitle>
       <S.CategoryWrapper>
         <S.CategoryCard
-          name="recruitType"
-          value="study"
+          name="kinds"
+          value="STUDY"
           backgroundColor={btnColor[0]}
           onClick={onBodyChange}
         >
@@ -165,8 +179,8 @@ const WrittingInnerForm = () => {
           <S.MainTitle fontSize="1.3rem">스터디</S.MainTitle>
         </S.CategoryCard>
         <S.CategoryCard
-          name="recruitType"
-          value="scout"
+          name="kinds"
+          value="SCOUT"
           backgroundColor={btnColor[1]}
           onClick={onBodyChange}
         >
@@ -174,8 +188,8 @@ const WrittingInnerForm = () => {
           <S.MainTitle fontSize="1.3rem">스카웃</S.MainTitle>
         </S.CategoryCard>
         <S.CategoryCard
-          name="recruitType"
-          value="project"
+          name="kinds"
+          value="PROJECT"
           backgroundColor={btnColor[2]}
           onClick={onBodyChange}
         >
@@ -214,33 +228,33 @@ const WrittingInnerForm = () => {
           <S.RadioWrapper>
             <S.CheckBoxWrapper>
               <input
-                name="meetEnviroment"
-                value="online"
-                id="online"
+                name="meeting"
+                value="ONLINE"
+                id="ONLINE"
                 type="radio"
                 onChange={onBodyChange}
               />
-              <label htmlFor="online">온라인</label>
+              <label htmlFor="ONLINE">온라인</label>
             </S.CheckBoxWrapper>
             <S.CheckBoxWrapper>
               <input
-                name="meetEnviroment"
-                value="offline"
-                id="offline"
+                name="meeting"
+                value="OFFLINE"
+                id="OFFLINE"
                 type="radio"
                 onChange={onBodyChange}
               />
-              <label htmlFor="offline">오프라인</label>
+              <label htmlFor="OFFLINE">오프라인</label>
             </S.CheckBoxWrapper>
             <S.CheckBoxWrapper>
               <input
-                name="meetEnviroment"
-                value="mix"
-                id="mix"
+                name="meeting"
+                value="BOTH"
+                id="BOTH"
                 type="radio"
                 onChange={onBodyChange}
               />
-              <label htmlFor="mix">혼합</label>
+              <label htmlFor="BOTH">혼합</label>
             </S.CheckBoxWrapper>
           </S.RadioWrapper>
         </S.MeetEnviromentWrapper>
@@ -254,7 +268,7 @@ const WrittingInnerForm = () => {
               <S.InputWrapper>
                 <S.InputBox
                   width="15rem"
-                  name="recruitPeople"
+                  name="headcount"
                   type="number"
                   onInput={blockText}
                   onChange={onBodyChange}
@@ -270,7 +284,7 @@ const WrittingInnerForm = () => {
       <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
         지역
       </S.MainTitle>
-      <S.AreaSelect name="area" onChange={onBodyChange}>
+      <S.AreaSelect name="region" onChange={onBodyChange}>
         <option value="" selected disabled hidden>
           == 선택 ==
         </option>
@@ -305,7 +319,7 @@ const WrittingInnerForm = () => {
         모집 내용
       </S.MainTitle>
       <S.MainTextArea
-        name="mainText"
+        name="content"
         placeholder="프로젝트에 대한 자세한 설명을 부탁드립니다."
         onChange={onBodyChange}
       ></S.MainTextArea>

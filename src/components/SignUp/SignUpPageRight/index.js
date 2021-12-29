@@ -1,77 +1,110 @@
-import React from 'react';
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
-import { CgProfile } from 'react-icons/cg';
-import * as S from './style';
+import React from 'react'
+import axios from 'axios'
+import { useEffect, useState, useRef, useCallback } from 'react'
+import { useParams } from 'react-router-dom'
+import { CgProfile } from 'react-icons/cg'
+import * as S from './style'
 
-import { DropDown } from '../../../components';
-import { LandingDropdownOptions } from '../../../constants';
-import useInput from '../../../hooks/useInput';
+import { DropDown } from '../../../components'
+import useInput from '../../../hooks/useInput'
+import { useDispatch, useSelector } from 'react-redux'
+import { signupUser } from '../../../modules/user'
+import { useHistory } from 'react-router-dom'
 
-const SignUpPageRight = () => {
-  useEffect(() => {
-    console.log(accessToken);
-    localStorage.setItem('accessToken', accessToken);
-    return () => {
-      localStorage.setItem('signupCheck', signupCheck);
-    };
-  }, []);
+const SignUpPageRight = () => { 
 
-  const { accessToken, signupCheck } = useParams();
-  const imgInput = useRef();
-  const [dropDownOptions, setDropDownOptions] = useState([]);
-  const [nickname, onChangeNickname] = useInput('');
+  const isSigninDone = useSelector((state) => state.user.isSigninDone); 
 
-  const [job, onChangeJob, setJob] = useInput('');
-  const [introduce, onChangeIntroduce] = useInput(null);
+  useEffect(()=> {
+    if(isSigninDone){
+      history.push('/'); 
+    }
+  }, [isSigninDone]); 
+
+  const history = useHistory(); 
+  const dispatch = useDispatch()
+  const { accessToken, signupCheck } = useParams()
+  const imgInput = useRef()
+  const [dropDownOptions, setDropDownOptions] = useState([])
+  const [nickname, onChangeNickname] = useInput('')
+
+  const [job, onChangeJob, setJob] = useInput('')
+  const [introduce, onChangeIntroduce] = useInput(null)
 
   // attachment : img URL (for Server)
-  const [attachMent, setAttachment] = useState(null);
-  const [fileInfo, setFileInfo] = useState(null);
+  const [attachMent, setAttachment] = useState(null)
+  const [fileInfo, setFileInfo] = useState(null)
+
+
+  const [skill, setSkill] = useState(); 
+  const [skillId, setSkillId] = useState([])
+  const [skillName, setSkillName] = useState([])
+
+  useEffect(() => {
+    axios
+    .get('https://dev.rubminds.site/api/skills', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      },
+    })
+    .then(res => {
+      let temp = res.data.skills;
+      setSkill(temp); 
+      temp.map((value) => {
+        skillName.push(value.name) 
+      })
+    })
+    localStorage.setItem('accessToken', accessToken)
+  }, [])
+
+  useEffect(()=>{
+    if (skill != 'undefined' && skill != null){
+      let index = skill.findIndex(v=>v.name == dropDownOptions[dropDownOptions.length-1]);
+      skillId.push(skill[index].id);
+    }
+  },[dropDownOptions]);
 
   const onProfileUpload = useCallback(() => {
-    imgInput.current.click();
-  }, []);
+    imgInput.current.click()
+  }, [])
 
   const onProfileURL = useCallback(
     e => {
-      let reader = new FileReader();
-      setFileInfo(e.target.files[0]);
-      reader.readAsDataURL(e.target.files[0]);
+      let reader = new FileReader()
+      setFileInfo(e.target.files[0])
+      reader.readAsDataURL(e.target.files[0])
       reader.onloadend = finished => {
-        setAttachment(finished.target.result);
-        e.target.value = '';
-      };
+        setAttachment(finished.target.result)
+        e.target.value = ''
+      }
     },
-    [attachMent, fileInfo],
-  );
+    [attachMent, fileInfo]
+  )
 
   const onDeleteURL = useCallback(() => {
-    setFileInfo(null);
-    setAttachment(null);
-  }, [fileInfo, attachMent]);
+    setFileInfo(null)
+    setAttachment(null)
+  }, [fileInfo, attachMent])
 
   const onSubmitHandler = useCallback(
     e => {
-      e.preventDefault();
-      alert(`attachMent : ${attachMent}
-          nickName : ${nickname} 
-          job : ${job} 
-          skillSet : ${dropDownOptions}
-          introduce : ${introduce} `);
-
-      const formData = new FormData();
+      e.preventDefault(); 
+      console.log(skillId);
+      let data = {
+        nickname : nickname, 
+        job : job, 
+        introduce : introduce,
+        skillIds : skillId,
+      };
+      const formData = new FormData()
       if (fileInfo) {
-        formData.append('profileImg', fileInfo);
+        formData.append('avatar', fileInfo)
       }
-
-      formData.append('nickName', nickname);
-      formData.append('job', job);
-      formData.append('skillSet', dropDownOptions);
-      formData.append('introduce', introduce);
+      formData.append('userInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
+      dispatch(signupUser(formData)); 
     },
-    [attachMent, nickname, job, dropDownOptions, introduce],
-  );
+    [attachMent, nickname, job, dropDownOptions, introduce]
+  )
   return (
     <S.SignUpPageRightWrapper>
       <S.MainTitle fontSize="5rem" fontWeight="bold">
@@ -92,19 +125,30 @@ const SignUpPageRight = () => {
           ) : (
             <CgProfile size="100" onClick={onProfileUpload} />
           )}
-          <input type="file" accept="image/*" onChange={onProfileURL} hidden ref={imgInput} />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={onProfileURL}
+            hidden
+            ref={imgInput}
+          />
         </S.ProfileWrapper>
 
         {/* 닉네임 */}
 
-        <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem" aquired>
+        <S.MainTitle
+          marginTop="7.5%"
+          marginBottom="7.5%"
+          fontSize="2rem"
+          aquired
+        >
           닉네임
         </S.MainTitle>
         <S.NickNameWrapper>
           <S.NickNameBox name="nickName" onChange={onChangeNickname} required />
           <S.CheckBox
             onClick={() => {
-              alert('중복체크 중!');
+              alert('중복체크 중!')
             }}
           >
             중복 체크
@@ -117,17 +161,23 @@ const SignUpPageRight = () => {
         </S.MainTitle>
         <S.JobWrapper>
           <S.JobCheckBtn
-            name="student"
-            onClick={e => setJob(e.target.name)}
-            name={'student'}
+            name="학생"
+            onClick={e => {
+              setJob(e.target.name)
+              e.preventDefault()
+            }}
+            name={'학생'}
             selected={job}
           >
             학생
           </S.JobCheckBtn>
           <S.JobCheckBtn
-            name="officer"
-            onClick={e => setJob(e.target.name)}
-            name={'officer'}
+            name="직장인"
+            onClick={e => {
+              setJob(e.target.name)
+              e.preventDefault()
+            }}
+            name={'직장인'}
             selected={job}
           >
             직장인
@@ -142,11 +192,16 @@ const SignUpPageRight = () => {
           dropDownOptions={dropDownOptions}
           setDropDownOptions={setDropDownOptions}
           style={{ width: '100%' }}
-          options={LandingDropdownOptions}
+          options={skillName}
         ></DropDown>
 
         {/* 자기소개 */}
-        <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem" aquired>
+        <S.MainTitle
+          marginTop="7.5%"
+          marginBottom="7.5%"
+          fontSize="2rem"
+          aquired
+        >
           자기소개
         </S.MainTitle>
         <S.Introduce onChange={onChangeIntroduce} />
@@ -154,7 +209,7 @@ const SignUpPageRight = () => {
         <S.Clear></S.Clear>
       </S.SignUpPageInnerForm>
     </S.SignUpPageRightWrapper>
-  );
-};
+  )
+}
 
-export default SignUpPageRight;
+export default SignUpPageRight

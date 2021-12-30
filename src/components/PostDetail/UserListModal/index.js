@@ -3,14 +3,14 @@ import * as S from './style';
 import { ExitBtn, Test } from '../../../assets/imgs';
 import { BsPlusCircleDotted } from 'react-icons/bs';
 
-const UserListModal = ({ userList, maxUserNum, closeModal }) => {
+const UserListModal = ({ userList, headcount, closeModal }) => {
   const AddUser = useCallback(() => {
     //팀원 추가 액션
   }, []);
   //모집되지 않은 인원자리에 팀원추가 버튼 생성
   const rendering = () => {
     const empty = [];
-    for (let i = 0; i < maxUserNum - userList.length; i++) {
+    for (let i = 0; i < headcount - userList.length; i++) {
       empty.push(
         <S.User key={i} onClick={AddUser}>
           <BsPlusCircleDotted fontSize="3rem" />

@@ -12,28 +12,38 @@ import { likePost } from '../../../modules/post';
 const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
-  
+
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
   }, []);
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
-        <S.DetailInfoBetween>
+        <S.DetailUserInfo >
+          <S.AuthorAvatar src={post.writer.avatar} /> &nbsp;{post.writer.nickname}
+        </S.DetailUserInfo>
+        {/* <S.DetailInfoBetween>
           <S.DetailInfoLeft bold>
             <S.AuthorAvatar src={post.writer.avatar} /> &nbsp;{post.writer.nickname}
           </S.DetailInfoLeft>
           <S.DetailInfoRight>{post.Date}</S.DetailInfoRight>
-        </S.DetailInfoBetween>
+        </S.DetailInfoBetween> */}
         <DetailInfo title="모집유형" info={post.postsStatus} />
         <DetailInfo title="기술스택" info={combinedSkills} />
         <DetailInfo title="회의형태" info={post.meeting} />
         <DetailInfo title="지역" info={post.region} />
+        <S.FileContainer>
+          {post.files.map(v => (
+            <S.UploadedFile download href={v.url}>
+              첨부파일
+            </S.UploadedFile>
+          ))}
+        </S.FileContainer>
       </S.DetailInfoWrapper>
 
       <S.DetailInfoWrapper width="20%" Group>
         {modalOpen ? (
-          <UserListModal userList={[]} maxUserNum={post.headcount} closeModal={closeModal} />
+          <UserListModal userList={[]} headcount={post.headcount} closeModal={closeModal} />
         ) : (
           <>
             <S.GroupBox>

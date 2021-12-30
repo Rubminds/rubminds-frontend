@@ -50,7 +50,7 @@ const PostDetailPage = () => {
       {singlePost && (
         <>
           <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>
-          {/* <S.UploadedFile download href={post.files[0].url}>첨부파일</S.UploadedFile> */}
+          <S.PostDetailDate>2021-12-25</S.PostDetailDate>
           <PostTotalInfo
             post={singlePost}
             modalOpen={modalOpen}

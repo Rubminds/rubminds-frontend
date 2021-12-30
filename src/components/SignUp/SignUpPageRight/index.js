@@ -15,12 +15,6 @@ const SignUpPageRight = () => {
 
   const isSigninDone = useSelector((state) => state.user.isSigninDone); 
 
-  useEffect(()=> {
-    if(isSigninDone){
-      history.push('/'); 
-    }
-  }, [isSigninDone]); 
-
   const history = useHistory()
   const dispatch = useDispatch()
   const { accessToken, signupCheck } = useParams()
@@ -31,17 +25,27 @@ const SignUpPageRight = () => {
   const [job, onChangeJob, setJob] = useInput('')
   const [introduce, onChangeIntroduce] = useInput(null)
 
-  // attachment : img URL (for Server)
   const [attachMent, setAttachment] = useState(null)
-  const [fileInfo, setFileInfo] = useState(null)
+  const [fileInfo, setFileInfo] = useState(null) // img URL (for Server)
 
   const [skill, setSkill] = useState(); 
   const [skillId, setSkillId] = useState([])
   const [skillName, setSkillName] = useState([])
 
+  useEffect(()=>{
+    localStorage.setItem('accessToken', accessToken); 
+    localStorage.setItem('signupCheck', signupCheck);
+  },[]); 
+
+  useEffect(()=> {
+    if(isSigninDone){
+      history.push('/'); 
+    }
+
+  }, [isSigninDone, signupCheck]); 
+
+  
   useEffect(async() => {
-    localStorage.setItem('accessToken', accessToken)
-    
     const result = await axios.get('https://dev.rubminds.site/api/skills', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('accessToken'),

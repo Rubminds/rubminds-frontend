@@ -1,13 +1,20 @@
 import React, { useState, useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 import * as S from './style'
 import DropDown from '../../../components/common/DropDown'
-import { LandingDropdownOptions } from '../../../constants'
 import { AreaOptions } from '../../../constants'
 import { Link } from 'react-router-dom'
+import { createPosts } from '../../../modules/post'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const WrittingInnerForm = () => {
+
+  const done  = useSelector((state)=>state.post.createpostDone);
+  const dispatch = useDispatch(); 
+  const history = useHistory(); 
+
   const [skill, setSkill] = useState()
   const [skillId, setSkillId] = useState([])
   const [skillName, setSkillName] = useState([])
@@ -18,6 +25,13 @@ const WrittingInnerForm = () => {
   const [fileInfo, setFileInfo] = useState(null)
   // 이미지 미리보기 데이터
   const [attachment, setAttachment] = useState(null)
+
+
+  useEffect(()=>{
+    if(done){
+      history.push('/'); 
+    }
+  },[done]);
 
   useEffect(async () => {
     const result = await axios.get('https://dev.rubminds.site/api/skills', {
@@ -130,36 +144,27 @@ const WrittingInnerForm = () => {
 
   const onSubmitHandler = e => {
     e.preventDefault()
-
-    console.log(body);
-    console.log(skillId); 
-
-    const formData = new FormData()
-    if (body.headcount) {
-      formData.append('headcount', parseInt(body.headcount))
-    }
-    if (body.file) {
-      formData.append('files',body.file)
-    }
-    let data = {
-      title : body.title, 
-      content : body.content,
-      headcount : body.headcount, 
-      kinds : body.kinds,
-      meeting : body.meeting, 
-      region : body.region, 
-      skillIds : skillId,
-      customSkillName : ['python'],
-    }
-
-    formData.append('postInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
-
-    axios.post('https://dev.rubminds.site/api/post', formData , {
-      headers : {
-        Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
+    if(window.confirm('글을 등록하시겠습니까?')){
+      let data = {
+        title : body.title, 
+        content : body.content,
+        headcount : body.headcount, 
+        kinds : body.kinds,
+        meeting : body.meeting, 
+        region : body.region, 
+        skillIds : skillId,
+        customSkillName : ['python'],
       }
-    }).then((res)=> console.log(res.data)).catch((e)=> console.log(e)); 
-// 
+      const formData = new FormData()
+      if (body.headcount) {
+        formData.append('headcount', parseInt(body.headcount))
+      }
+      if (body.file) {
+        formData.append('files',body.file)
+      }
+      formData.append('postInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
+      dispatch(createPosts(formData)); 
+    }
   }
 
   return (

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Header = () => {
-  const {me} = useSelector(state => state.user)
+  const me = useSelector(state => state.user.me);
   return (
     <S.HeaderWrapper>
       <S.HeaderContent>

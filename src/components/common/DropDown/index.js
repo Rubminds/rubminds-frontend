@@ -27,7 +27,8 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
   );
 
   const onDeleteClick = useCallback(
-    option => () => {
+    (e,option) => {
+      e.stopPropagation();
       setDropDownOptions(
         dropDownOptions.filter(
           (
@@ -43,16 +44,16 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
 
   return (
     <S.DropDownContainer isOpen={isOpen} {...props}>
-      <S.DropDownHeader>
+      <S.DropDownHeader onClick={toggle}>
         {dropDownOptions.map((v, i) => {
           return (
-            <S.HeaderTag onClick={onDeleteClick(v)} key={i}>
+            <S.HeaderTag onClick={e => onDeleteClick(e,v)} key={i}>
               {v}
             </S.HeaderTag>
           );
         })}{' '}
         &nbsp;
-        <S.HeaderArrow onClick={toggle} />
+        <S.HeaderArrow/>
       </S.DropDownHeader>
       {isOpen && (
         <S.DropDownList>

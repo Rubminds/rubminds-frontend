@@ -5,7 +5,6 @@ import { MdPersonAdd } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 
 import { DetailInfo, UserListModal } from '../..';
-import { Test } from '../../../assets/imgs';
 import { likePost } from '../../../modules/post';
 
 //게시글 상세정보.
@@ -22,7 +21,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
       <S.DetailInfoWrapper>
         <S.DetailInfoBetween>
           <S.DetailInfoLeft bold>
-            <S.AuthorAvatar src={Test} /> &nbsp;{post.writer}
+            <S.AuthorAvatar src={post.writer.avatar} /> &nbsp;{post.writer.nickname}
           </S.DetailInfoLeft>
           <S.DetailInfoRight>{post.Date}</S.DetailInfoRight>
         </S.DetailInfoBetween>

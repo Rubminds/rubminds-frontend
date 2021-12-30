@@ -20,10 +20,10 @@ export const DropDownContainer = styled.div`
 `;
 export const DropDownHeader = styled.div`
   width: 100%;
-  //font-weight: bold;
+  height:100%;
   display: flex;
   align-items: center;
-  margin: auto;
+  //margin: auto;
 `;
 
 export const HeaderArrow = styled(FiChevronDown)`
@@ -38,6 +38,7 @@ export const HeaderTag = styled.div`
   font-size: 1.6rem;
   line-height: 3rem;
   background-color: lightgray;
+  z-index:10;
   //color: #ffffff;
   cursor: pointer;
   ${flexCenter};
@@ -48,7 +49,6 @@ export const HeaderTag = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  z-index:10;
 `;
 
 export const DropDownList = styled.ul`

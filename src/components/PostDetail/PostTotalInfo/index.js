@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { DetailInfo, UserListModal } from '../..';
 import { likePost } from '../../../modules/post';
+import { loadTeamMembers } from '../../../modules/team';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
@@ -16,6 +17,11 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
   }, []);
+
+  const onStatusCircleClick = useCallback(()=>{
+    dispatch(loadTeamMembers(post.teamId))
+    openModal();
+  },[])
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
@@ -33,8 +39,8 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
         <DetailInfo title="회의형태" info={post.meeting} />
         <DetailInfo title="지역" info={post.region} />
         <S.FileContainer>
-          {post.files.map(v => (
-            <S.UploadedFile download href={v.url}>
+          {post.files.map((v,i) => (
+            <S.UploadedFile download href={v.url} key={i}>
               첨부파일
             </S.UploadedFile>
           ))}
@@ -86,7 +92,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
               </S.DetailInfoContent>
             </S.GroupBox>
             <S.DetailInfoContent>
-              <S.PostStatusCircle status={post.postsStatus} onClick={openModal}>
+              <S.PostStatusCircle status={post.postsStatus} onClick={onStatusCircleClick}>
                 <label>{post.postsStatus}</label>
                 <label>1/{post.headcount}</label>
               </S.PostStatusCircle>

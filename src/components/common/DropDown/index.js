@@ -45,7 +45,7 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
     e => {
       const option = e.target.value;
       if (dropDownOptions.length < 5) {
-        if (!dropDownOptions.find(e => e === option)) {
+        if (!dropDownOptions.includes(option)) {
           setDropDownOptions(dropDownOptions.concat(option));
         }
       }

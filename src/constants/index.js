@@ -18,6 +18,25 @@ export const flexBetween = css`
   align-items: center;
 `;
 
+//skills name-id
+export const SKILL_ID = {
+  Java: 1,
+  Python: 2,
+  C: 3,
+  'C++': 4,
+  Javascript: 5,
+  Springboot: 6,
+  React: 7,
+  Vue: 8,
+  NodeJS: 9,
+  Aws: 10,
+  Docker: 11,
+  Html: 12,
+  Css: 13,
+  Django: 14,
+  Flask: 15,
+};
+
 //최대 별점
 export const MAX_STAR = 5;
 

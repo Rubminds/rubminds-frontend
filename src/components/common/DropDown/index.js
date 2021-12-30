@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import * as S from './style';
 
+import { SKILL_ID } from '../../../constants';
+
 const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -11,14 +13,14 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
 
   //옵션 선택시 헤더 value 변경 + 토글용
   const onOptionClick = useCallback(
-    option => () => {
+    skillname => () => {
       let already = false;
       if (dropDownOptions.length < 5) {
-        dropDownOptions.forEach(element => {
-          element === option ? (already = true) : (already = false);
+        dropDownOptions.forEach(option => {
+          option === skillname ? (already = true) : (already = false);
         });
         if (!already) {
-          setDropDownOptions(dropDownOptions.concat(option));
+          setDropDownOptions(dropDownOptions.concat(skillname));
         }
       }
       setIsOpen(false);

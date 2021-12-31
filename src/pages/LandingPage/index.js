@@ -28,7 +28,7 @@ const LandingPage = () => {
       console.log(option);
       if (apiQuery.includes('kinds')) {
         const currentQuery = apiQuery;
-        const changedQuery = currentQuery.replace(kinds,option);
+        const changedQuery = currentQuery.replace(kinds, option);
         setApiQuery(changedQuery);
       } else {
         setApiQuery(prev => prev + `&kinds=${option}`);
@@ -37,8 +37,20 @@ const LandingPage = () => {
     },
     [kinds, apiQuery],
   );
-  const onRecruitOptionClick = useCallback(() => {});
-  const onFinishOptionClick = useCallback(() => {});
+  const onPostStatusClick = useCallback(
+    option => () => {
+      console.log(option);
+      if (apiQuery.includes('status')) {
+        const currentQuery = apiQuery;
+        const changedQuery = currentQuery.replace(postStatus, option);
+        setApiQuery(changedQuery);
+      } else {
+        setApiQuery(prev => prev + `&status=${option}`);
+      }
+      setPostStatus(option);
+    },
+    [apiQuery, postStatus],
+  );
 
   return (
     <S.LandingWrapper>
@@ -57,8 +69,8 @@ const LandingPage = () => {
             <FilterArea
               dropDownOptions={dropDownOptions}
               setDropDownOptions={setDropDownOptions}
-              onRecruitOptionClick={onRecruitOptionClick}
-              onFinishOptionClick={onFinishOptionClick}
+              onPostStatusClick={onPostStatusClick}
+              postStatus={postStatus}
             />
             <S.PostsWrapper>
               {posts.map(v => {

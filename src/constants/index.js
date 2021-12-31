@@ -18,6 +18,25 @@ export const flexBetween = css`
   align-items: center;
 `;
 
+//skills name-id
+export const SKILL_ID = {
+  Java: 1,
+  Python: 2,
+  C: 3,
+  'C++': 4,
+  Javascript: 5,
+  Springboot: 6,
+  React: 7,
+  Vue: 8,
+  NodeJS: 9,
+  Aws: 10,
+  Docker: 11,
+  Html: 12,
+  Css: 13,
+  Django: 14,
+  Flask: 15,
+};
+
 //최대 별점
 export const MAX_STAR = 5;
 
@@ -78,3 +97,7 @@ export const LIKE_POST_ERROR = 'LIKE_POST_ERROR';
 export const LOAD_USER_INFO = 'LOAD_USER_INFO';
 export const LOAD_USER_INFO_SUCCESS = 'LOAD_USER_INFO_SUCCESS';
 export const LOAD_USER_INFO_ERROR = 'LOAD_USER_INFO_ERROR';
+
+export const LOAD_TEAM_MEMBERS = 'LOAD_TEAM_MEMBERS';
+export const LOAD_TEAM_MEMBERS_SUCCESS = 'LOAD_TEAM_MEMBERS_SUCCESS';
+export const LOAD_TEAM_MEMBERS_ERROR = 'LOAD_TEAM_MEMBERS_ERROR';

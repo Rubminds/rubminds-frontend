@@ -9,18 +9,62 @@ import { loadPosts } from '../../modules/post';
 const LandingPage = () => {
   const [isCheck, setIsCheck] = useState(true);
   const [dropDownOptions, setDropDownOptions] = useState([]);
+  const [apiQuery, setApiQuery] = useState('?page=1&size=10');
+  const [kinds, setKinds] = useState('');
+  const [postStatus, setPostStatus] = useState('');
   const posts = useSelector(state => state.post.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadPosts());
-  }, []);
+    dispatch(loadPosts(apiQuery));
+  }, [apiQuery, dispatch]);
 
   const onCheck = useCallback(() => {
     setIsCheck(prev => !prev);
   }, []);
-  const onRecruitOptionClick = useCallback(() => {});
-  const onFinishOptionClick = useCallback(() => {});
+
+  const onKindsClick = useCallback(
+    option => () => {
+      if (apiQuery.includes('kinds')) {
+        const currentQuery = apiQuery;
+        let changedQuery;
+        if (kinds === option) {
+          changedQuery = currentQuery.replace(kinds, '');
+          changedQuery = changedQuery.replace('&kinds=', '');
+          setKinds('');
+        } else {
+          changedQuery = currentQuery.replace(kinds, option);
+          setKinds(option);
+        }
+        setApiQuery(changedQuery);
+      } else {
+        setApiQuery(prev => prev + `&kinds=${option}`);
+        setKinds(option);
+      }
+    },
+    [kinds, apiQuery],
+  );
+  const onPostStatusClick = useCallback(
+    option => () => {
+      if (apiQuery.includes('status')) {
+        const currentQuery = apiQuery;
+        let changedQuery;
+        if (postStatus === option) {
+          changedQuery = currentQuery.replace(postStatus, '');
+          changedQuery = changedQuery.replace('&status=', '');
+          setPostStatus('');
+        } else {
+          changedQuery = currentQuery.replace(postStatus, option);
+          setPostStatus(option);
+        }
+        setApiQuery(changedQuery);
+      } else {
+        setApiQuery(prev => prev + `&status=${option}`);
+        setPostStatus(option);
+      }
+    },
+    [apiQuery, postStatus],
+  );
 
   return (
     <S.LandingWrapper>
@@ -35,12 +79,12 @@ const LandingPage = () => {
                 &nbsp;전체보기
               </S.CheckboxWrapper>
             </S.TitleWrapper>
-            <CategoryArea />
+            <CategoryArea onKindsClick={onKindsClick} kinds={kinds} />
             <FilterArea
               dropDownOptions={dropDownOptions}
               setDropDownOptions={setDropDownOptions}
-              onRecruitOptionClick={onRecruitOptionClick}
-              onFinishOptionClick={onFinishOptionClick}
+              onPostStatusClick={onPostStatusClick}
+              postStatus={postStatus}
             />
             <S.PostsWrapper>
               {posts.map(v => {

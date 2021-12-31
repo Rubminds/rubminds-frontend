@@ -58,7 +58,7 @@ function* toggleChatModal() {
 }
 
 function loadUserInfoAPI(data) {
-  return axios.get('/user',data, {
+  return axios.get('/user', data, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

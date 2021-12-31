@@ -19,6 +19,8 @@ export const SortOption = styled.li`
   display: flex;
   white-space: nowrap;
   align-items: center;
+  font-weight:${props => props.option === props.selected ? 'bold':'initial'};
+  color:${props => props.option === props.selected ? '#80e9c6':'initial'};
   & + & {
     margin-left: 1rem;
   }

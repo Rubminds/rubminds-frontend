@@ -30,8 +30,9 @@ export const initialState = {
 };
 
 //액션 생성함수
-export const loadPosts = () => ({
+export const loadPosts = data => ({
   type: LOAD_POSTS,
+  data,
 });
 
 export const loadPost = id => ({
@@ -58,6 +59,7 @@ const post = (state = initialState, action) => {
         draft.loadPostsLoading = false;
         draft.loadPostsDone = true;
         draft.posts = draft.posts.concat(action.data.data.content);
+        console.log(draft.posts);
         break;
       case LOAD_POSTS_ERROR:
         draft.loadPostsLoading = false;

@@ -5,8 +5,10 @@ import axios from 'axios';
 
 import user from './user';
 import post from './post';
+import team from './team';
 import userSaga from './user/saga';
 import postSaga from './post/saga';
+import teamSaga from './team/saga';
 
 axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
 axios.defaults.withCredentials = true; //saga에서 보내는 axios는 전부 쿠키를 포함한다.
@@ -15,10 +17,11 @@ axios.defaults.withCredentials = true; //saga에서 보내는 axios는 전부 �
 const rootReducer = combineReducers({
   user,
   post,
+  team,
 });
 export default rootReducer;
 
 // 리듀서에 해당하는 사가 추가시 이쪽에다가
 export function* rootSaga() {
-  yield all([fork(userSaga), fork(postSaga)]);
+  yield all([fork(userSaga), fork(postSaga), fork(teamSaga)]);
 }

@@ -9,8 +9,8 @@ import { DropDown } from '../..';
 const FilterArea = ({
   dropDownOptions,
   setDropDownOptions,
-  onRecruitOptionClick,
-  onFinishOptionClick,
+  onPostStatusClick,
+  postStatus,
 }) => {
   return (
     <S.FilterWrapper>
@@ -31,11 +31,11 @@ const FilterArea = ({
           })}
         </S.AreaSelect>
         <S.SortOptionWrapper>
-          <S.SortOption onClick={onRecruitOptionClick}>
+          <S.SortOption onClick={onPostStatusClick('RECRUIT')} option={'RECRUIT'} selected={postStatus}>
             <BiBorderAll fontSize="2rem" />
             모집중
           </S.SortOption>
-          <S.SortOption onClick={onFinishOptionClick}>
+          <S.SortOption onClick={onPostStatusClick('FINISHED')} option={'FINISHED'} selected={postStatus}>
             <FaMedal fontSize="2rem" />
             진행완료
           </S.SortOption>

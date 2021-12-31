@@ -9,17 +9,34 @@ import { loadPosts } from '../../modules/post';
 const LandingPage = () => {
   const [isCheck, setIsCheck] = useState(true);
   const [dropDownOptions, setDropDownOptions] = useState([]);
-  const [apiQuery, setApiQuery] = useState('?page=1&size=10')
+  const [apiQuery, setApiQuery] = useState('?page=1&size=10');
+  const [kinds, setKinds] = useState('');
+  const [postStatus, setPostStatus] = useState('');
   const posts = useSelector(state => state.post.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadPosts(apiQuery));
-  }, [apiQuery]);
+  }, [apiQuery, dispatch]);
 
   const onCheck = useCallback(() => {
     setIsCheck(prev => !prev);
   }, []);
+
+  const onKindsClick = useCallback(
+    option => () => {
+      console.log(option);
+      if (apiQuery.includes('kinds')) {
+        const currentQuery = apiQuery;
+        const changedQuery = currentQuery.replace(kinds,option);
+        setApiQuery(changedQuery);
+      } else {
+        setApiQuery(prev => prev + `&kinds=${option}`);
+      }
+      setKinds(option);
+    },
+    [kinds, apiQuery],
+  );
   const onRecruitOptionClick = useCallback(() => {});
   const onFinishOptionClick = useCallback(() => {});
 
@@ -36,7 +53,7 @@ const LandingPage = () => {
                 &nbsp;전체보기
               </S.CheckboxWrapper>
             </S.TitleWrapper>
-            <CategoryArea />
+            <CategoryArea onKindsClick={onKindsClick} />
             <FilterArea
               dropDownOptions={dropDownOptions}
               setDropDownOptions={setDropDownOptions}

@@ -9,12 +9,13 @@ import { loadPosts } from '../../modules/post';
 const LandingPage = () => {
   const [isCheck, setIsCheck] = useState(true);
   const [dropDownOptions, setDropDownOptions] = useState([]);
+  const [apiQuery, setApiQuery] = useState('?page=1&size=10')
   const posts = useSelector(state => state.post.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadPosts());
-  }, []);
+    dispatch(loadPosts(apiQuery));
+  }, [apiQuery]);
 
   const onCheck = useCallback(() => {
     setIsCheck(prev => !prev);

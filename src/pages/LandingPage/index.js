@@ -25,29 +25,43 @@ const LandingPage = () => {
 
   const onKindsClick = useCallback(
     option => () => {
-      console.log(option);
       if (apiQuery.includes('kinds')) {
         const currentQuery = apiQuery;
-        const changedQuery = currentQuery.replace(kinds, option);
+        let changedQuery;
+        if (kinds === option) {
+          changedQuery = currentQuery.replace(kinds, '');
+          changedQuery = changedQuery.replace('&kinds=', '');
+          setKinds('');
+        } else {
+          changedQuery = currentQuery.replace(kinds, option);
+          setKinds(option);
+        }
         setApiQuery(changedQuery);
       } else {
         setApiQuery(prev => prev + `&kinds=${option}`);
+        setKinds(option);
       }
-      setKinds(option);
     },
     [kinds, apiQuery],
   );
   const onPostStatusClick = useCallback(
     option => () => {
-      console.log(option);
       if (apiQuery.includes('status')) {
         const currentQuery = apiQuery;
-        const changedQuery = currentQuery.replace(postStatus, option);
+        let changedQuery;
+        if (postStatus === option) {
+          changedQuery = currentQuery.replace(postStatus, '');
+          changedQuery = changedQuery.replace('&status=', '');
+          setPostStatus('');
+        } else {
+          changedQuery = currentQuery.replace(postStatus, option);
+          setPostStatus(option);
+        }
         setApiQuery(changedQuery);
       } else {
         setApiQuery(prev => prev + `&status=${option}`);
+        setPostStatus(option);
       }
-      setPostStatus(option);
     },
     [apiQuery, postStatus],
   );
@@ -65,7 +79,7 @@ const LandingPage = () => {
                 &nbsp;전체보기
               </S.CheckboxWrapper>
             </S.TitleWrapper>
-            <CategoryArea onKindsClick={onKindsClick} />
+            <CategoryArea onKindsClick={onKindsClick} kinds={kinds} />
             <FilterArea
               dropDownOptions={dropDownOptions}
               setDropDownOptions={setDropDownOptions}

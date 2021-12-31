@@ -12,7 +12,7 @@ export const CategoryCard = styled.button`
   justify-content: center;
   width: 20rem;
   height: 12rem;
-  background-color: #fff;
+  background-color: ${props => props.option === props.selected ? '#FBEAFF': '#fff'};
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);

@@ -60,15 +60,12 @@ export const CheckboxWrapper = styled.label`
   font-size: 2rem;
 `;
 
-
-
-
-
 export const PostsWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin-top:3rem;
   width:100%;
+  min-height:30rem;
   @media all and (max-width:768px){
     ${flexColumn};
     align-items:center;

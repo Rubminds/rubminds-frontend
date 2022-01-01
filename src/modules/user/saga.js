@@ -10,6 +10,9 @@ import {
   LOAD_USER_INFO,
   LOAD_USER_INFO_SUCCESS,
   LOAD_USER_INFO_ERROR,
+  LOGOUT_USER,
+  LOGOUT_USER_SUCCESS,
+  LOGOUT_USER_ERROR,
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 // 액션에서 axios 요청 필요할 때
@@ -81,6 +84,20 @@ function* loadUserInfo(action) {
   }
 }
 
+function* logoutUser() {console.log('logout user saga')
+  try {
+    yield put({
+      type: LOGOUT_USER_SUCCESS,
+    });
+  } catch (err) {
+    //에러 발생시 이벤트
+    yield put({
+      type: LOGOUT_USER_ERROR,
+      error: err,
+    });
+  }
+}
+
 //액션 감지 함수
 //takeLatest안의 액션을 감지.
 function* watchSignupUser() {
@@ -93,7 +110,15 @@ function* watchToggleChatModal() {
 function* watchLoadUserInfo() {
   yield takeLatest(LOAD_USER_INFO, loadUserInfo);
 }
+function* watchLogoutUser() {
+  yield takeLatest(LOGOUT_USER, logoutUser);
+}
 
 export default function* userSaga() {
-  yield all([fork(watchSignupUser), fork(watchToggleChatModal), fork(watchLoadUserInfo)]);
+  yield all([
+    fork(watchSignupUser),
+    fork(watchToggleChatModal),
+    fork(watchLoadUserInfo),
+    fork(watchLogoutUser),
+  ]);
 }

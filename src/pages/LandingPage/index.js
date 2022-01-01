@@ -13,6 +13,7 @@ const LandingPage = () => {
   const [kinds, setKinds] = useState('');
   const [postStatus, setPostStatus] = useState('');
   const posts = useSelector(state => state.post.posts);
+  const dibsPosts = posts.filter(e => e.isLike === true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -70,7 +71,7 @@ const LandingPage = () => {
     <S.LandingWrapper>
       {posts && (
         <>
-          <Banner posts={posts} />
+          <Banner posts={dibsPosts} />
           <S.LandingDetailWrapper>
             <S.TitleWrapper>
               <S.DetailTitle>어떤 동료를 찾으시나요? &nbsp;</S.DetailTitle>

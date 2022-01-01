@@ -22,15 +22,14 @@ const SignUpPageRight = () => {
   const [dropDownOptions, setDropDownOptions] = useState([])
   const [nickname, onChangeNickname] = useInput('')
 
-  const [job, onChangeJob, setJob] = useInput('')
-  const [introduce, onChangeIntroduce] = useInput(null)
+
 
   const [attachMent, setAttachment] = useState(null)
   const [fileInfo, setFileInfo] = useState(null) // img URL (for Server)
 
   const [skill, setSkill] = useState(); 
   const [skillId, setSkillId] = useState([])
-  const [skillName, setSkillName] = useState([])
+  const [skillName, setSkillName] = useState([]);
 
   useEffect(()=>{
     localStorage.setItem('accessToken', accessToken); 
@@ -64,49 +63,69 @@ const SignUpPageRight = () => {
       let index = skill.findIndex(v=>v.name == dropDownOptions[dropDownOptions.length-1]);
       skillId.push(skill[index].id);
     }
-  },[dropDownOptions]);
+  },[]);
+
+  useEffect(() => {
+    if (isSigninDone) {
+      history.push('/');
+    }
+  }, [history, isSigninDone]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      localStorage.setItem('accessToken', accessToken);
+
+      const result = await axios.get('https://dev.rubminds.site/api/skills', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
+      });
+      setSkillName(result.data.skills.map(e => e.name));
+    };
+    fetchData();
+  }, [accessToken]);
 
   const onProfileUpload = useCallback(() => {
-    imgInput.current.click()
-  }, [])
+    imgInput.current.click();
+  }, []);
 
   const onProfileURL = useCallback(
     e => {
-      let reader = new FileReader()
-      setFileInfo(e.target.files[0])
-      reader.readAsDataURL(e.target.files[0])
+      const reader = new FileReader();
+      setFileInfo(e.target.files[0]);
+      reader.readAsDataURL(e.target.files[0]);
       reader.onloadend = finished => {
-        setAttachment(finished.target.result)
-        e.target.value = ''
-      }
+        setAttachment(finished.target.result);
+        e.target.value = '';
+      };
     },
-    [attachMent, fileInfo]
-  )
+    [attachMent, fileInfo],
+  );
 
   const onDeleteURL = useCallback(() => {
-    setFileInfo(null)
-    setAttachment(null)
-  }, [fileInfo, attachMent])
+    setFileInfo(null);
+    setAttachment(null);
+  }, [fileInfo, attachMent]);
 
   const onSubmitHandler = useCallback(
     e => {
-      e.preventDefault(); 
-      console.log(skillId);
-      let data = {
-        nickname : nickname, 
-        job : job, 
-        introduce : introduce,
-        skillIds : skillId,
+      e.preventDefault();
+      const data = {
+        nickname: nickname,
+        job: job,
+        introduce: introduce,
+        skillIds: dropDownOptions.map(option => SKILL_ID[option]),
       };
-      const formData = new FormData()
+      const formData = new FormData();
       if (fileInfo) {
-        formData.append('avatar', fileInfo)
+        formData.append('avatar', fileInfo);
       }
-      formData.append('userInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
-      dispatch(signupUser(formData)); 
+      formData.append('userInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+      console.log(data);
+      dispatch(signupUser(formData));
     },
-    [attachMent, nickname, job, dropDownOptions, introduce]
-  )
+    [nickname, job, dropDownOptions, introduce, dispatch, fileInfo],
+  );
   return (
     <S.SignUpPageRightWrapper>
       <S.MainTitle fontSize="5rem" fontWeight="bold">
@@ -122,35 +141,23 @@ const SignUpPageRight = () => {
                 width="150px"
                 style={{ display: 'block', borderRadius: '5000px' }}
                 onClick={onDeleteURL}
+                alt=""
               />
             </>
           ) : (
             <CgProfile size="100" onClick={onProfileUpload} />
           )}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={onProfileURL}
-            hidden
-            ref={imgInput}
-          />
+          <input type="file" accept="image/*" onChange={onProfileURL} hidden ref={imgInput} />
         </S.ProfileWrapper>
 
         {/* 닉네임 */}
 
-        <S.MainTitle
-          marginTop="7.5%"
-          marginBottom="7.5%"
-          fontSize="2rem"
-          aquired
-        >
+        <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem" aquired>
           닉네임
         </S.MainTitle>
         <S.NickNameWrapper>
           <S.NickNameBox name="nickName" onChange={onChangeNickname} required />
-          <S.CheckBox>
-            중복 체크
-          </S.CheckBox>
+          <S.CheckBox>중복 체크</S.CheckBox>
         </S.NickNameWrapper>
 
         {/* 직업 */}
@@ -161,10 +168,9 @@ const SignUpPageRight = () => {
           <S.JobCheckBtn
             name="학생"
             onClick={e => {
-              setJob(e.target.name)
-              e.preventDefault()
+              setJob(e.target.name);
+              e.preventDefault();
             }}
-            name={'학생'}
             selected={job}
           >
             학생
@@ -172,10 +178,9 @@ const SignUpPageRight = () => {
           <S.JobCheckBtn
             name="직장인"
             onClick={e => {
-              setJob(e.target.name)
-              e.preventDefault()
+              setJob(e.target.name);
+              e.preventDefault();
             }}
-            name={'직장인'}
             selected={job}
           >
             직장인
@@ -194,12 +199,7 @@ const SignUpPageRight = () => {
         ></DropDown>
 
         {/* 자기소개 */}
-        <S.MainTitle
-          marginTop="7.5%"
-          marginBottom="7.5%"
-          fontSize="2rem"
-          aquired
-        >
+        <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem" aquired>
           자기소개
         </S.MainTitle>
         <S.Introduce onChange={onChangeIntroduce} />
@@ -207,7 +207,7 @@ const SignUpPageRight = () => {
         <S.Clear></S.Clear>
       </S.SignUpPageInnerForm>
     </S.SignUpPageRightWrapper>
-  )
-}
+  );
+};
 
-export default SignUpPageRight
+export default SignUpPageRight;

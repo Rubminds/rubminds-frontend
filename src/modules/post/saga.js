@@ -15,7 +15,6 @@ import {
   LIKE_POST_SUCCESS,
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
-
 function createPostAPI(data) {
   return axios.post('https://dev.rubminds.site/api/post', data , {
     headers : {
@@ -42,16 +41,15 @@ function* createPost(action) {
   console.log('finished createPosts saga');
 }
 
-
-function loadPostsAPI() {
-  return axios.get('/posts?page=1&size=10&kinds=&status=');
+function loadPostsAPI(query) {
+  return axios.get(`/posts${query}`);
 }
 
 //axios요청시 주석처럼 작성.
 //axios에서 받은 결과를 success 로 보내줌.
-function* loadPosts() {
+function* loadPosts(action) {
   console.log('access loadPosts saga');
-  const result = yield call(loadPostsAPI);
+  const result = yield call(loadPostsAPI, action.data);
   try {
     yield put({
       type: LOAD_POSTS_SUCCESS,

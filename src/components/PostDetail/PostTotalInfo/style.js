@@ -15,9 +15,9 @@ export const PostDetailInfo = styled.div`
 
 export const DetailInfoWrapper = styled.div`
   ${flexColumn};
-  width: ${(props) => (props.width ? props.width : '40%')};
+  width: ${props => (props.width ? props.width : '40%')};
   ${mediaQuery({ width: '60%', 'margin-top': '1rem' })};
-  ${(props) =>
+  ${props =>
     props.Group &&
     css`
       @media all and (max-width: 768px) {
@@ -27,27 +27,29 @@ export const DetailInfoWrapper = styled.div`
       }
     `}
 `;
-export const DetailInfoBetween = styled.div`
-  ${flexBetween};
-  font-size: 1.6rem;
-  margin-bottom: 5%;
-`;
-export const DetailInfoLeft = styled.div`
+export const DetailUserInfo = styled.div`
   display: flex;
   align-items: center;
-  flex: 1;
-  position: relative;
-  font-weight: ${(props) => props.bold && 'bold'};
-  ${mediaQuery({ 'justify-content': 'center' })};
+  font-size: 1.6rem;
+  margin-bottom: 5%;
+  font-weight: bold;
 `;
-export const DetailInfoRight = styled.div`
-  ${flexCenter}
-  flex: 2.5;
-  flex-wrap: wrap;
-  padding: 0 1%;
-  color: #707070;
-  ${mediaQuery({ flex: '1' })};
-`;
+// export const DetailInfoLeft = styled.div`
+//   display: flex;
+//   align-items: center;
+//   flex: 1;
+//   position: relative;
+//   font-weight: ${props => props.bold && 'bold'};
+//   ${mediaQuery({ 'justify-content': 'center' })};
+// `;
+// export const DetailInfoRight = styled.div`
+//   ${flexCenter}
+//   flex: 2.5;
+//   flex-wrap: wrap;
+//   padding: 0 1%;
+//   color: #707070;
+//   ${mediaQuery({ flex: '1' })};
+// `;
 
 export const AuthorAvatar = styled.img`
   width: 2.5rem;
@@ -62,7 +64,7 @@ export const DetailInfoContent = styled.div`
   font-size: 1.6rem;
   margin-bottom: 2rem;
 
-  ${(props) =>
+  ${props =>
     props.toBtn &&
     css`
       background-color: #ffa586;
@@ -88,7 +90,7 @@ export const PostStatusCircle = styled.button`
   color: #fff;
   font-size: 2.6rem;
   font-weight: bold;
-  background-color: ${(props) =>
+  background-color: ${props =>
     props.status === '모집중' ? '#aa8ae8' : props.status === '진행중' ? '#966BEB' : '#7944e3'};
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   & label {
@@ -102,6 +104,24 @@ export const GroupBox = styled.div`
   justify-content: center;
 `;
 
-export  const LikeWrapper = styled.div`
+export const LikeWrapper = styled.div``;
+export const UploadedFile = styled.a`
+  ${flexCenter};
+  cursor: pointer;
+  font-size: 1.6rem;
+  background-color: #ffa586;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: bold;
+  width: fit-content;
+  height: fit-content;
+  margin: 1rem 0;
+  & + & {
+    margin-left: 1rem;
+  }
+`;
 
-`
+export const FileContainer = styled.div`
+  display: flex;
+`;

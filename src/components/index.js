@@ -3,6 +3,7 @@ export { default as ChatButton } from './common/ChatButton';
 export { default as Footer } from './common/Footer';
 export { default as PostCard } from './common/PostCard';
 export { default as DropDown } from './common/DropDown';
+export { default as CustomDropDown } from './common/CustomDropDown';
 export { default as Input } from './common/Input';
 export { default as TextArea } from './common/TextArea';
 export { default as Carousel } from './common/Carousel';

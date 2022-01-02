@@ -7,7 +7,6 @@ import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../compon
 import { loadPosts } from '../../modules/post';
 
 const LandingPage = () => {
-  const [selectAll, setSelectAll] = useState(true);
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [apiQuery, setApiQuery] = useState('?page=1&size=10');
   const [kinds, setKinds] = useState('');
@@ -19,10 +18,6 @@ const LandingPage = () => {
   useEffect(() => {
     dispatch(loadPosts(apiQuery));
   }, [apiQuery, dispatch]);
-
-  const onCheck = useCallback(() => {
-    setSelectAll(prev => !prev);
-  }, []);
 
   const onKindsClick = useCallback(
     option => () => {

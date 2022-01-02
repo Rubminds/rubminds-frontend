@@ -4,7 +4,7 @@ import { BiBorderAll } from 'react-icons/bi';
 import { FaMedal } from 'react-icons/fa';
 
 import { LandingDropdownOptions, AreaOptions } from '../../../constants';
-import { DropDown } from '../..';
+import { CustomDropDown } from '../..';
 
 const FilterArea = ({
   dropDownOptions,
@@ -15,7 +15,7 @@ const FilterArea = ({
   return (
     <S.FilterWrapper>
       <S.DetailTitle>어떤 기술을 찾으시나요?</S.DetailTitle>
-      <DropDown
+      <CustomDropDown
         options={LandingDropdownOptions}
         marginTop="5rem"
         dropDownOptions={dropDownOptions}

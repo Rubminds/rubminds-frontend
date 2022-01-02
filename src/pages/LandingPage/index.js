@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../components';
 import { loadPosts, authLoadPosts } from '../../modules/post';
+import { SKILL_ID } from '../../constants';
 
 const LandingPage = () => {
   const [dropDownOptions, setDropDownOptions] = useState([]);
@@ -19,7 +20,7 @@ const LandingPage = () => {
 
   useEffect(() => {
     me ? dispatch(authLoadPosts(apiQuery)) : dispatch(loadPosts(apiQuery));
-  }, [apiQuery, dispatch]);
+  }, [apiQuery, me, dispatch]);
 
   const onKindsClick = useCallback(
     option => () => {
@@ -42,6 +43,7 @@ const LandingPage = () => {
     },
     [kinds, apiQuery],
   );
+
   const onPostStatusClick = useCallback(
     option => () => {
       if (apiQuery.includes('status')) {

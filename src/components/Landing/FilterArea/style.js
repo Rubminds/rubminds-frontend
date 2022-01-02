@@ -1,5 +1,9 @@
 import styled from 'styled-components';
+import { AiOutlineSearch } from 'react-icons/ai';
+
 import { flexColumn, flexCenter, flexBetween } from '../../../constants';
+import { CustomDropDown } from '../..';
+import mediaQuery from '../../../hooks/mediaQuery';
 
 export const FilterWrapper = styled.section`
   ${flexColumn};
@@ -19,8 +23,8 @@ export const SortOption = styled.li`
   display: flex;
   white-space: nowrap;
   align-items: center;
-  font-weight:${props => props.option === props.selected ? 'bold':'initial'};
-  color:${props => props.option === props.selected ? '#80e9c6':'initial'};
+  font-weight: ${props => (props.option === props.selected ? 'bold' : 'initial')};
+  color: ${props => (props.option === props.selected ? '#80e9c6' : 'initial')};
   & + & {
     margin-left: 1rem;
   }
@@ -42,4 +46,30 @@ export const AreaSelect = styled.select`
   border-radius: 30px;
   padding: 1rem 1.5rem;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+`;
+
+export const DropdownWrapper = styled.div`
+  ${flexCenter}
+  width:100%;
+  position: relative;
+  margin-top: 5rem;
+`;
+
+export const SearchBtnWrapper = styled.div`
+  width: 10%;
+  margin-left: 1rem;
+`;
+
+export const SearchBtn = styled(AiOutlineSearch)`
+  background-color: #aa8ae8;
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor:pointer;
+`;
+
+export const MyCustomDropDown = styled(CustomDropDown)`
+  margin-top: 0;
 `;

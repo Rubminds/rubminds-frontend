@@ -4,7 +4,6 @@ import { BiBorderAll } from 'react-icons/bi';
 import { FaMedal } from 'react-icons/fa';
 
 import { LandingDropdownOptions, AreaOptions } from '../../../constants';
-import { CustomDropDown } from '../..';
 
 const FilterArea = ({
   dropDownOptions,
@@ -17,14 +16,20 @@ const FilterArea = ({
   return (
     <S.FilterWrapper>
       <S.DetailTitle>어떤 기술을 찾으시나요?</S.DetailTitle>
-      <CustomDropDown
-        options={LandingDropdownOptions}
-        marginTop="5rem"
-        dropDownOptions={dropDownOptions}
-        setDropDownOptions={setDropDownOptions}
-        customOptions={customOptions}
-        setCustomOptions={setCustomOptions}
-      />
+      <S.DropdownWrapper>
+        <S.MyCustomDropDown
+          options={LandingDropdownOptions}
+          marginTop="5rem"
+          dropDownOptions={dropDownOptions}
+          setDropDownOptions={setDropDownOptions}
+          customOptions={customOptions}
+          setCustomOptions={setCustomOptions}
+        />
+        {/* <S.SearchBtnWrapper>
+          <S.SearchBtn onClick={onSkillSearchClick}>조회</S.SearchBtn>
+        </S.SearchBtnWrapper> */}
+      </S.DropdownWrapper>
+
       <S.SortWrapper>
         <S.AreaSelect name="area" defaultValue={'선택'}>
           <option value="선택" disabled>

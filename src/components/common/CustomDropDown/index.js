@@ -1,7 +1,14 @@
 import React, { useState, useCallback } from 'react';
 import * as S from './style';
 
-const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) => {
+const DropDown = ({
+  dropDownOptions,
+  setDropDownOptions,
+  customOptions,
+  setCustomOptions,
+  options,
+  ...props
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserInputOpen, setIsUserInputOpen] = useState(false);
 
@@ -10,31 +17,37 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
     setIsOpen(prev => !prev);
   }, []);
 
+  const getTotalLength = useCallback(() => {
+    return dropDownOptions.length + customOptions.length;
+  }, [dropDownOptions, customOptions]);
+
   //옵션 선택시 헤더 value 변경 + 토글용
   const onOptionClick = useCallback(
     option => () => {
-      if (dropDownOptions.length < 5) {
-        if (!dropDownOptions.find(e => e === option)) {
+      if (getTotalLength() < 5) {
+        if (!dropDownOptions.includes(option)) {
           setDropDownOptions(dropDownOptions.concat(option));
         }
       }
       setIsOpen(false);
     },
-    [dropDownOptions, setDropDownOptions],
+    [dropDownOptions, setDropDownOptions, getTotalLength],
   );
-  
+
   const onDeleteClick = useCallback(
     (e, option) => {
       e.stopPropagation();
-      setDropDownOptions(
-        dropDownOptions.filter(
-          (
-            i, //이름이 인자로 받은 option이 아니면 새로 구성
-          ) => i !== option,
-        ),
-      );
+      setDropDownOptions(dropDownOptions.filter(i => i !== option));
     },
     [dropDownOptions, setDropDownOptions],
+  );
+
+  const onCustomDeleteClick = useCallback(
+    (e, option) => {
+      e.stopPropagation();
+      setCustomOptions(customOptions.filter(i => i !== option));
+    },
+    [customOptions, setCustomOptions],
   );
 
   const openUserInput = useCallback(() => {
@@ -44,15 +57,15 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
   const onUserInputKeypress = useCallback(
     e => {
       const option = e.target.value;
-      if (dropDownOptions.length < 5) {
-        if (!dropDownOptions.includes(option)) {
-          setDropDownOptions(dropDownOptions.concat(option));
+      if (getTotalLength() < 5) {
+        if (!customOptions.includes(option) && !dropDownOptions.includes(option)) {
+          setCustomOptions(customOptions.concat(option));
         }
       }
       setIsOpen(false);
       setIsUserInputOpen(false);
     },
-    [dropDownOptions, setDropDownOptions],
+    [customOptions, setCustomOptions, dropDownOptions,getTotalLength],
   );
 
   return (
@@ -65,6 +78,13 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
             </S.HeaderTag>
           );
         })}{' '}
+        {customOptions.map((v, i) => {
+          return (
+            <S.HeaderTag onClick={e => onCustomDeleteClick(e, v)} key={i}>
+              {v}
+            </S.HeaderTag>
+          );
+        })}
         &nbsp;
         <S.HeaderArrow />
       </S.DropDownHeader>

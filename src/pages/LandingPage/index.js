@@ -75,10 +75,10 @@ const LandingPage = () => {
           <S.LandingDetailWrapper>
             <S.TitleWrapper>
               <S.DetailTitle>어떤 동료를 찾으시나요? &nbsp;</S.DetailTitle>
-              <S.CheckboxWrapper>
+              {/* <S.CheckboxWrapper>
                 <S.StyledCheckbox onClick={onCheck}>{selectAll && <BsCheckLg />}</S.StyledCheckbox>
                 &nbsp;전체보기
-              </S.CheckboxWrapper>
+              </S.CheckboxWrapper> */}
             </S.TitleWrapper>
             <CategoryArea onKindsClick={onKindsClick} kinds={kinds} />
             <FilterArea

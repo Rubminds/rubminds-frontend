@@ -8,6 +8,9 @@ import {
   LIKE_POST,
   LIKE_POST_SUCCESS,
   LIKE_POST_ERROR,
+  LOAD_LIKE_POSTS,
+  LOAD_LIKE_POSTS_SUCCESS,
+  LOAD_LIKE_POSTS_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
@@ -27,6 +30,10 @@ export const initialState = {
   likePostLoading: false,
   likePostDone: false,
   likePostError: null,
+
+  loadLikePostsLoading: false,
+  loadLikePostsDone: false,
+  loadLikePostsError: null,
 };
 
 //액션 생성함수
@@ -43,6 +50,10 @@ export const loadPost = id => ({
 export const likePost = id => ({
   type: LIKE_POST,
   data: id,
+});
+
+export const loadLikePosts = () => ({
+  type: LOAD_LIKE_POSTS,
 });
 
 //리듀서
@@ -94,6 +105,21 @@ const post = (state = initialState, action) => {
       case LIKE_POST_ERROR:
         draft.likePostLoading = false;
         draft.likePostError = action.error;
+        break;
+      case LOAD_LIKE_POSTS:
+        draft.loadLikePostsLoading = true;
+        draft.loadLikePostsDone = false;
+        draft.loadLikePostsError = null;
+        break;
+      case LOAD_LIKE_POSTS_SUCCESS: //액션 처리
+        console.log('load like success', action.data.data);
+        draft.loadLikePostsLoading = false;
+        draft.loadLikePostsDone = true;
+        draft.singlePost = action.data.data;
+        break;
+      case LOAD_LIKE_POSTS_ERROR:
+        draft.loadLikePostsLoading = false;
+        draft.loadLikePostsError = action.error;
         break;
       default:
         break;

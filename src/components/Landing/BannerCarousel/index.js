@@ -15,7 +15,6 @@ const BannerCarousel = ({ posts }) => {
   }, [currentPost]);
 
   const nextClick = useCallback(() => {
-    console.log(posts);
     if (currentPost >= totalPosts) {
       setcurrentPost(0);
     } else {
@@ -24,8 +23,6 @@ const BannerCarousel = ({ posts }) => {
   }, [currentPost]);
 
   const prevClick = useCallback(() => {
-    console.log(posts);
-    console.log(totalPosts);
     if (currentPost === 0) {
       setcurrentPost(totalPosts); // 마지막 사진으로
     } else {

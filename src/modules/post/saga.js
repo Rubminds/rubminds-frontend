@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { takeLatest, put, fork, all, call } from 'redux-saga/effects';
 import {
-  CREATE_POSTS, 
-  CREATE_POSTS_SUCCESS, 
-  CREATE_POSTS_ERROR,
+  CREATE_POST, 
+  CREATE_POST_SUCCESS, 
+  CREATE_POST_ERROR,
   LOAD_POSTS,
   LOAD_POSTS_ERROR,
   LOAD_POSTS_SUCCESS,
@@ -28,13 +28,13 @@ function* createPost(action) {
   const result = yield call(createPostAPI, action.data);
   try {
     yield put({
-      type: CREATE_POSTS_SUCCESS,
+      type: CREATE_POST_SUCCESS,
       data: result,
     });
   } catch (err) {
     //에러 발생시 이벤트
     yield put({
-      type: CREATE_POSTS_ERROR,
+      type: CREATE_POST_ERROR,
       error: err,
     });
   }
@@ -42,7 +42,8 @@ function* createPost(action) {
 }
 
 function loadPostsAPI(query) {
-  return axios.get(`/posts${query}`);
+  return axios.get(`https://dev.rubminds.site/api/posts${query}`);
+  // return axios.get(`/posts${query}`);
 }
 
 //axios요청시 주석처럼 작성.
@@ -66,7 +67,7 @@ function* loadPosts(action) {
 }
 
 function loadPostAPI(data) {
-  return axios.get(`/post/${data}`, {
+  return axios.get(`https://dev.rubminds.site/api/post/${data}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },
@@ -93,7 +94,7 @@ function* loadPost(action) {
 }
 
 function likePostAPI(data) {
-  return axios.post(`/post/${data}/like`, null, {
+  return axios.post(`https://dev.rubminds.site/api/post/${data}/like`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },
@@ -122,7 +123,7 @@ function* likePost(action) {
 //액션 감지 함수
 //takeLatest안의 액션을 감지.
 function* watchCreatePost() {
-  yield takeLatest(CREATE_POSTS, createPost); 
+  yield takeLatest(CREATE_POST, createPost); 
 }
 
 function* watchLoadPosts() {

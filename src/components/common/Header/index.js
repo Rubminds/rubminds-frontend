@@ -1,10 +1,18 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import * as S from './style'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { logoutUser } from '../../../modules/user'
 
 const Header = () => {
-  const me = useSelector(state => state.user.me);
+
+  const dispatch = useDispatch();
+  const {me} = useSelector(state => state.user)
+  const onLogoutClick = useCallback(()=>{
+    localStorage.removeItem('accessToken');
+    dispatch(logoutUser())
+  },[])
   return (
     <S.HeaderWrapper>
       <S.HeaderContent>
@@ -12,7 +20,7 @@ const Header = () => {
       </S.HeaderContent>
       <S.HeaderContent>
         {
-          me ? <Link to="/logout">로그아웃</Link>: <Link to="/login">로그인</Link>
+          me ? <S.LogoutText onClick={onLogoutClick}>로그아웃</S.LogoutText>: <Link to="/login">로그인</Link>
         }
         
       </S.HeaderContent>

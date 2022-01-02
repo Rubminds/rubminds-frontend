@@ -7,12 +7,13 @@ import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../compon
 import { loadPosts } from '../../modules/post';
 
 const LandingPage = () => {
-  const [isCheck, setIsCheck] = useState(true);
+  const [selectAll, setSelectAll] = useState(true);
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [apiQuery, setApiQuery] = useState('?page=1&size=10');
   const [kinds, setKinds] = useState('');
   const [postStatus, setPostStatus] = useState('');
   const posts = useSelector(state => state.post.posts);
+  const dibsPosts = posts.filter(e => e.isLike === true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const LandingPage = () => {
   }, [apiQuery, dispatch]);
 
   const onCheck = useCallback(() => {
-    setIsCheck(prev => !prev);
+    setSelectAll(prev => !prev);
   }, []);
 
   const onKindsClick = useCallback(
@@ -70,12 +71,12 @@ const LandingPage = () => {
     <S.LandingWrapper>
       {posts && (
         <>
-          <Banner posts={posts} />
+          <Banner posts={dibsPosts} />
           <S.LandingDetailWrapper>
             <S.TitleWrapper>
               <S.DetailTitle>어떤 동료를 찾으시나요? &nbsp;</S.DetailTitle>
               <S.CheckboxWrapper>
-                <S.StyledCheckbox onClick={onCheck}>{isCheck && <BsCheckLg />}</S.StyledCheckbox>
+                <S.StyledCheckbox onClick={onCheck}>{selectAll && <BsCheckLg />}</S.StyledCheckbox>
                 &nbsp;전체보기
               </S.CheckboxWrapper>
             </S.TitleWrapper>

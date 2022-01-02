@@ -6,12 +6,13 @@ import * as S from './style'
 import DropDown from '../../../components/common/DropDown'
 import { AreaOptions } from '../../../constants'
 import { Link } from 'react-router-dom'
-import { createPosts } from '../../../modules/post'
+import { createPost } from '../../../modules/post'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { AiOutlineConsoleSql } from 'react-icons/ai'
 
 const WrittingInnerForm = () => {
 
-  const done  = useSelector((state)=>state.post.createpostDone);
+  const createPostDone  = useSelector((state)=>state.post.createPostDone);
   const dispatch = useDispatch(); 
   const history = useHistory(); 
 
@@ -26,29 +27,31 @@ const WrittingInnerForm = () => {
   // 이미지 미리보기 데이터
   const [attachment, setAttachment] = useState(null)
 
-
   useEffect(()=>{
-    if(done){
+    if(createPostDone){
       history.push('/'); 
     }
-  },[done]);
+  },[createPostDone]);
 
-  useEffect(async () => {
-    const result = await axios.get('https://dev.rubminds.site/api/skills', {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-    })
-
-    let temp = result.data.skills
-    setSkill(temp)
-    temp.map(value => {
-      skillName.push(value.name)
-    })
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('https://dev.rubminds.site/api/skills', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
+      });
+      setSkillName(result.data.skills.map(e => e.name));
+      let temp = result.data.skills
+      setSkill(temp)
+      temp.map(value => {
+        skillName.push(value.name)
+      })
+    };
+    fetchData();
   }, [])
 
   useEffect(() => {
-    if (skill != 'undefined' && skill != null) {
+    if (skill !== undefined && skill !== null) {
       let index = skill.findIndex(
         v => v.name == dropDownOptions[dropDownOptions.length - 1]
       )
@@ -63,9 +66,7 @@ const WrittingInnerForm = () => {
   }, [])
 
   const blockText = useCallback(e => {
-    e.target.value = e.target.value
-      .replace(/[^0-9.]/g, '')
-      .replace(/(\..*)\./g, '$1')
+    e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
   }, [])
 
   const [body, setBody] = useState({
@@ -78,74 +79,73 @@ const WrittingInnerForm = () => {
     file: null,
   })
 
-  const onBodyChange = useCallback(
-    e => {
-      if (e.target.getAttribute('name') === 'kinds') {
-        setBody({
-          ...body,
-          [e.target.getAttribute('name')]: e.target.getAttribute('value'),
-        })
-        switch (e.target.getAttribute('value')) {
-          case 'STUDY':
-            setIsScout(false)
-            setBtnColor(['#FBEAFF', 'white', 'white'])
-            break
-          case 'SCOUT':
-            setIsScout(true)
-            setBtnColor(['white', '#FBEAFF', 'white'])
-            break
-          case 'PROJECT':
-            setIsScout(false)
-            setBtnColor(['white', 'white', '#FBEAFF'])
-            break
-        }
-      }
-      if (e.target.name === 'file') {
-        let reader = new FileReader()
-        setFileInfo(e.target.files[0])
-        reader.readAsDataURL(e.target.files[0])
-        reader.onloadend = finished => {
-          setAttachment(finished.target.result)
-          e.target.value = ''
-        }
-        setBody({
-          ...body,
-          [e.target.name]: fileInfo,
-        })
-      }
+  useEffect(()=>{
+    console.log(body); 
+  }, [body]); 
 
-      if (e.target.name === 'headcount') {
-        const { value } = e.currentTarget
-        const onlyNumber = value
-          .replace(/[^0-9.]/g, '')
-          .replace(/(\.*)\./g, '$1')
-        setBody({
-          ...body,
-          [e.target.name]: onlyNumber,
-        })
-      }
 
-      setBody({
-        ...body,
-        [e.target.name]: e.target.value,
-      })
-    },
-    [
-      body.meeting,
-      body.title,
-      body.skillSet,
-      body.meetEnviroment,
-      body.headcount,
-      body.region,
-      body.file,
-      body.content,
-    ]
-  )
+  const onKindsChange = useCallback((e)=>{
+    setBody({
+      ...body,
+      [e.target.getAttribute('name')]: e.target.getAttribute('value'),
+    })
+    switch (e.target.getAttribute('value')) {
+      case 'STUDY':
+        setIsScout(false)
+        setBtnColor(['#FBEAFF', 'white', 'white'])
+        break
+      case 'SCOUT':
+        setIsScout(true) 
+        setBtnColor(['white', '#FBEAFF', 'white'])
+        break
+      case 'PROJECT':
+        setIsScout(false)
+        setBtnColor(['white', 'white', '#FBEAFF'])
+        break
+    }
+  }, [body.kinds]);
+
+
+  const onFileChange = useCallback((e)=>{
+    let reader = new FileReader()
+    setFileInfo(e.target.files[0])
+    reader.readAsDataURL(e.target.files[0])
+    reader.onloadend = finished => {
+      setAttachment(finished.target.result)
+      e.target.value = ''
+    }
+    setBody({
+      ...body,
+      [e.target.name]: fileInfo,
+    })
+  },[body.file]); 
+
+  const onHeadCountChange = useCallback((e)=>{
+    console.log(e.target.value); 
+    const { value } = e.currentTarget
+    const onlyNumber = value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1')
+    setBody({
+      ...body,
+      [e.target.name]: onlyNumber,
+    })
+  },[body.headcount]);
+  
+  const onBodyChange = useCallback((e)=>{
+    setBody({
+      ...body,
+      [e.target.name] : e.target.value,
+    })
+  }, [body.title, 
+      body.content, 
+      body.region, 
+      // body.
+    ]); 
 
   const onSubmitHandler = e => {
-    e.preventDefault()
+    e.preventDefault();
+    console.log(body); 
     if(window.confirm('글을 등록하시겠습니까?')){
-      let data = {
+      const data = {
         title : body.title, 
         content : body.content,
         headcount : body.headcount, 
@@ -160,10 +160,10 @@ const WrittingInnerForm = () => {
         formData.append('headcount', parseInt(body.headcount))
       }
       if (body.file) {
-        formData.append('files',body.file)
+        formData.append('files', body.file)
       }
       formData.append('postInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
-      dispatch(createPosts(formData)); 
+      dispatch(createPost(formData)); 
     }
   }
 
@@ -178,7 +178,7 @@ const WrittingInnerForm = () => {
           name="kinds"
           value="STUDY"
           backgroundColor={btnColor[0]}
-          onClick={onBodyChange}
+          onClick={onKindsChange}
         >
           <S.Book fontSize="3rem" />
           <S.MainTitle fontSize="1.3rem">스터디</S.MainTitle>
@@ -187,7 +187,7 @@ const WrittingInnerForm = () => {
           name="kinds"
           value="SCOUT"
           backgroundColor={btnColor[1]}
-          onClick={onBodyChange}
+          onClick={onKindsChange}
         >
           <S.PersonAdd fontSize="3rem" />
           <S.MainTitle fontSize="1.3rem">스카웃</S.MainTitle>
@@ -196,7 +196,7 @@ const WrittingInnerForm = () => {
           name="kinds"
           value="PROJECT"
           backgroundColor={btnColor[2]}
-          onClick={onBodyChange}
+          onClick={onKindsChange}
         >
           <S.UserGroup fontSize="3rem" />
           <S.MainTitle fontSize="1.3rem">프로젝트</S.MainTitle>
@@ -276,7 +276,7 @@ const WrittingInnerForm = () => {
                   name="headcount"
                   type="number"
                   onInput={blockText}
-                  onChange={onBodyChange}
+                  onChange={onHeadCountChange}
                 />
                 <S.InputBoxPeople>명</S.InputBoxPeople>
               </S.InputWrapper>
@@ -310,7 +310,7 @@ const WrittingInnerForm = () => {
             type="file"
             id="input-file"
             style={{ display: 'none' }}
-            onChange={onBodyChange}
+            onChange={onFileChange}
           />
         </S.FileLeft>
         <S.FileRight>

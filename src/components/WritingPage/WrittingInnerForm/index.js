@@ -3,23 +3,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 import * as S from './style'
-import DropDown from '../../../components/common/DropDown'
+import { CustomDropDown } from '../../../components'
 import { AreaOptions } from '../../../constants'
 import { Link } from 'react-router-dom'
 import { createPost } from '../../../modules/post'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import { AiOutlineConsoleSql } from 'react-icons/ai'
+import { SKILL_ID } from '../../../constants'
+import useInput from '../../../hooks/useInput'
 
 const WrittingInnerForm = () => {
 
-  const createPostDone  = useSelector((state)=>state.post.createPostDone);
-  const dispatch = useDispatch(); 
-  const history = useHistory(); 
-
-  const [skill, setSkill] = useState()
-  const [skillId, setSkillId] = useState([])
+  const createPostDone = useSelector(state => state.post.createPostDone)
+  const dispatch = useDispatch()
+  const history = useHistory()
   const [skillName, setSkillName] = useState([])
   const [dropDownOptions, setDropDownOptions] = useState([])
+  const [customOptions, setCustomOptions] = useState([])
   const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
   const [isScout, setIsScout] = useState(false)
   // 이미지 서버 전송용 데이터
@@ -27,11 +26,11 @@ const WrittingInnerForm = () => {
   // 이미지 미리보기 데이터
   const [attachment, setAttachment] = useState(null)
 
-  useEffect(()=>{
-    if(createPostDone){
-      history.push('/'); 
+  useEffect(() => {
+    if (createPostDone) {
+      history.push('/')
     }
-  },[createPostDone]);
+  }, [createPostDone])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,26 +38,11 @@ const WrittingInnerForm = () => {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },
-      });
-      setSkillName(result.data.skills.map(e => e.name));
-      let temp = result.data.skills
-      setSkill(temp)
-      temp.map(value => {
-        skillName.push(value.name)
       })
-    };
-    fetchData();
-  }, [])
-
-  useEffect(() => {
-    if (skill !== undefined && skill !== null) {
-      let index = skill.findIndex(
-        v => v.name == dropDownOptions[dropDownOptions.length - 1]
-      )
-      skillId.push(skill[index].id)
+      setSkillName(result.data.skills.map(e => e.name))
     }
-  }, [dropDownOptions])
-
+    fetchData()
+  }, [])
 
   const deleteImg = useCallback(() => {
     setFileInfo('')
@@ -66,7 +50,9 @@ const WrittingInnerForm = () => {
   }, [])
 
   const blockText = useCallback(e => {
-    e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+    e.target.value = e.target.value
+      .replace(/[^0-9.]/g, '')
+      .replace(/(\..*)\./g, '$1')
   }, [])
 
   const [body, setBody] = useState({
@@ -79,92 +65,103 @@ const WrittingInnerForm = () => {
     file: null,
   })
 
-  useEffect(()=>{
-    console.log(body); 
-  }, [body]); 
+  useEffect(() => {
+    console.log(body)
+  }, [body])
 
+  const onKindsChange = useCallback(
+    e => {
+      setBody({
+        ...body,
+        [e.target.getAttribute('name')]: e.target.getAttribute('value'),
+      })
+      switch (e.target.getAttribute('value')) {
+        case 'STUDY':
+          setIsScout(false)
+          setBtnColor(['#FBEAFF', 'white', 'white'])
+          break
+        case 'SCOUT':
+          setIsScout(true)
+          setBtnColor(['white', '#FBEAFF', 'white'])
+          break
+        case 'PROJECT':
+          setIsScout(false)
+          setBtnColor(['white', 'white', '#FBEAFF'])
+          break
+      }
+    },
+    [body.kinds]
+  )
 
-  const onKindsChange = useCallback((e)=>{
-    setBody({
-      ...body,
-      [e.target.getAttribute('name')]: e.target.getAttribute('value'),
-    })
-    switch (e.target.getAttribute('value')) {
-      case 'STUDY':
-        setIsScout(false)
-        setBtnColor(['#FBEAFF', 'white', 'white'])
-        break
-      case 'SCOUT':
-        setIsScout(true) 
-        setBtnColor(['white', '#FBEAFF', 'white'])
-        break
-      case 'PROJECT':
-        setIsScout(false)
-        setBtnColor(['white', 'white', '#FBEAFF'])
-        break
-    }
-  }, [body.kinds]);
+  const onFileChange = useCallback(
+    e => {
+      let reader = new FileReader()
+      setFileInfo(e.target.files[0])
+      reader.readAsDataURL(e.target.files[0])
+      reader.onloadend = finished => {
+        setAttachment(finished.target.result)
+        e.target.value = ''
+      }
+      setBody({
+        ...body,
+        [e.target.name]: fileInfo,
+      })
+    },
+    [body.file]
+  )
 
+  const onHeadCountChange = useCallback(
+    e => {
+      console.log(e.target.value)
+      const { value } = e.currentTarget
+      const onlyNumber = value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1')
+      setBody({
+        ...body,
+        [e.target.name]: onlyNumber,
+      })
+    },
+    [body.headcount]
+  )
 
-  const onFileChange = useCallback((e)=>{
-    let reader = new FileReader()
-    setFileInfo(e.target.files[0])
-    reader.readAsDataURL(e.target.files[0])
-    reader.onloadend = finished => {
-      setAttachment(finished.target.result)
-      e.target.value = ''
-    }
-    setBody({
-      ...body,
-      [e.target.name]: fileInfo,
-    })
-  },[body.file]); 
-
-  const onHeadCountChange = useCallback((e)=>{
-    console.log(e.target.value); 
-    const { value } = e.currentTarget
-    const onlyNumber = value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1')
-    setBody({
-      ...body,
-      [e.target.name]: onlyNumber,
-    })
-  },[body.headcount]);
-  
-  const onBodyChange = useCallback((e)=>{
-    setBody({
-      ...body,
-      [e.target.name] : e.target.value,
-    })
-  }, [body.title, 
-      body.content, 
-      body.region, 
-      // body.
-    ]); 
+  const onBodyChange = useCallback(
+    e => {
+      console.log(e.target.name, e.target.value)
+      setBody({
+        ...body,
+        [e.target.name]: e.target.value,
+      })
+    },[
+      body.title,
+      body.content,
+      body.region,
+      body.meeting
+    ])
 
   const onSubmitHandler = e => {
-    e.preventDefault();
-    console.log(body); 
-    if(window.confirm('글을 등록하시겠습니까?')){
-      const data = {
-        title : body.title, 
-        content : body.content,
-        headcount : body.headcount, 
-        kinds : body.kinds,
-        meeting : body.meeting, 
-        region : body.region, 
-        skillIds : skillId,
-        customSkillName : ['python'],
-      }
-      const formData = new FormData()
-      if (body.headcount) {
-        formData.append('headcount', parseInt(body.headcount))
-      }
-      if (body.file) {
-        formData.append('files', body.file)
-      }
-      formData.append('postInfo',  new Blob([JSON.stringify(data)], {type: "application/json"}))
-      dispatch(createPost(formData)); 
+    e.preventDefault()
+    console.log(body)
+    const data = {
+      title: body.title,
+      content: body.content,
+      headcount: body.headcount,
+      kinds: body.kinds,
+      meeting: body.meeting,
+      region: body.region,
+      skillIds: dropDownOptions.map(option => SKILL_ID[option]),
+      customSkillName: customOptions,
     }
+    const formData = new FormData()
+    if (body.headcount) {
+      formData.append('headcount', parseInt(body.headcount))
+    }
+    if (body.file) {
+      formData.append('files', body.file)
+    }
+    formData.append(
+      'postInfo',
+      new Blob([JSON.stringify(data)], { type: 'application/json' })
+    )
+    dispatch(createPost(formData))
   }
 
   return (
@@ -217,12 +214,15 @@ const WrittingInnerForm = () => {
       <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
         기술 스택
       </S.MainTitle>
-      <DropDown
+
+      <CustomDropDown
         dropDownOptions={dropDownOptions}
         setDropDownOptions={setDropDownOptions}
+        customOptions={customOptions}
+        setCustomOptions={setCustomOptions}
         style={{ width: '100%' }}
         options={skillName}
-      ></DropDown>
+      />
 
       <S.MiddleWrapper>
         {/* 회의 환경 */}

@@ -11,7 +11,7 @@ import postSaga from './post/saga';
 import teamSaga from './team/saga';
 
 axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
-axios.defaults.withCredentials = true; //saga에서 보내는 axios는 전부 쿠키를 포함한다.
+// axios.defaults.withCredentials = true; //saga에서 보내는 axios는 전부 쿠키를 포함한다.
 
 // 새로운 리듀서 장착시 이쪽에 추가
 const rootReducer = combineReducers({

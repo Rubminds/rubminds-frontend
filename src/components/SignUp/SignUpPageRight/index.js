@@ -1,69 +1,33 @@
-import React from 'react'
-import axios from 'axios'
-import { useEffect, useState, useRef, useCallback } from 'react'
-import { useParams } from 'react-router-dom'
-import { CgProfile } from 'react-icons/cg'
-import * as S from './style'
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { CgProfile } from 'react-icons/cg';
+import * as S from './style';
 
-import { DropDown } from '../../../components'
-import useInput from '../../../hooks/useInput'
-import { useDispatch, useSelector } from 'react-redux'
-import { signupUser } from '../../../modules/user'
-import { useHistory } from 'react-router-dom'
+import { DropDown } from '../../../components';
+import useInput from '../../../hooks/useInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { signupUser } from '../../../modules/user';
+import { useHistory } from 'react-router-dom';
+import { SKILL_ID } from '../../../constants';
 
-const SignUpPageRight = () => { 
+const SignUpPageRight = () => {
+  const isSigninDone = useSelector(state => state.user.isSigninDone);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { accessToken, signupCheck } = useParams();
+  const imgInput = useRef();
+  const [dropDownOptions, setDropDownOptions] = useState([]);
+  const [nickname, onChangeNickname] = useInput('');
 
-  const isSigninDone = useSelector((state) => state.user.isSigninDone); 
+  const [job, onChangeJob, setJob] = useInput('');
+  const [introduce, onChangeIntroduce] = useInput(null);
 
-  const history = useHistory()
-  const dispatch = useDispatch()
-  const { accessToken, signupCheck } = useParams()
-  const imgInput = useRef()
-  const [dropDownOptions, setDropDownOptions] = useState([])
-  const [nickname, onChangeNickname] = useInput('')
+  // attachment : img URL (for Server)
+  const [attachMent, setAttachment] = useState(null);
+  const [fileInfo, setFileInfo] = useState(null);
 
-
-
-  const [attachMent, setAttachment] = useState(null)
-  const [fileInfo, setFileInfo] = useState(null) // img URL (for Server)
-
-  const [skill, setSkill] = useState(); 
-  const [skillId, setSkillId] = useState([])
   const [skillName, setSkillName] = useState([]);
-
-  useEffect(()=>{
-    localStorage.setItem('accessToken', accessToken); 
-    localStorage.setItem('signupCheck', signupCheck);
-  },[]); 
-
-  useEffect(()=> {
-    if(isSigninDone){
-      history.push('/'); 
-    }
-
-  }, [isSigninDone, signupCheck]); 
-
-  
-  useEffect(async() => {
-    const result = await axios.get('https://dev.rubminds.site/api/skills', {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-    })
-
-    let temp = result.data.skills;
-    setSkill(temp); 
-      temp.map((value) => {
-        skillName.push(value.name) 
-      })
-  }, [])
-
-  useEffect(()=>{
-    if (skill != 'undefined' && skill != null){
-      let index = skill.findIndex(v=>v.name == dropDownOptions[dropDownOptions.length-1]);
-      skillId.push(skill[index].id);
-    }
-  },[]);
 
   useEffect(() => {
     if (isSigninDone) {

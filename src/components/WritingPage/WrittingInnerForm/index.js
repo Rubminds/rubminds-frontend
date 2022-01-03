@@ -1,21 +1,34 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-
 import * as S from './style'
+
+import Kinds from '../Kinds'
+import Title from '../Title'
+import MiddleArea from '../MiddleArea'
+import Region from '../Region'
+import File from '../File'
+import Content from '../Content'; 
+
 import { CustomDropDown } from '../../../components'
 import { AreaOptions } from '../../../constants'
 import { Link } from 'react-router-dom'
 import { createPost } from '../../../modules/post'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { SKILL_ID } from '../../../constants'
-import useInput from '../../../hooks/useInput'
+
 
 const WrittingInnerForm = () => {
-
   const createPostDone = useSelector(state => state.post.createPostDone)
   const dispatch = useDispatch()
   const history = useHistory()
+  const [title, setTitle] = useState(null)
+  const [content, setContent] = useState(null)
+  const [headCount, setHeadCount] = useState(null)
+  const [kinds, setKinds] = useState('STUDY')
+  const [meeting, setMeeting] = useState(null)
+  const [region, setRegion] = useState(null)
+  const [file, setFile] = useState(null)
   const [skillName, setSkillName] = useState([])
   const [dropDownOptions, setDropDownOptions] = useState([])
   const [customOptions, setCustomOptions] = useState([])
@@ -27,6 +40,7 @@ const WrittingInnerForm = () => {
   const [attachment, setAttachment] = useState(null)
 
   useEffect(() => {
+    console.log(createPostDone); 
     if (createPostDone) {
       history.push('/')
     }
@@ -44,118 +58,25 @@ const WrittingInnerForm = () => {
     fetchData()
   }, [])
 
-  const deleteImg = useCallback(() => {
-    setFileInfo('')
-    setAttachment('')
-  }, [])
-
-  const blockText = useCallback(e => {
-    e.target.value = e.target.value
-      .replace(/[^0-9.]/g, '')
-      .replace(/(\..*)\./g, '$1')
-  }, [])
-
-  const [body, setBody] = useState({
-    title: null,
-    content: null,
-    headcount: null,
-    kinds: 'STUDY',
-    meeting: null,
-    region: null,
-    file: null,
-  })
-
-  useEffect(() => {
-    console.log(body)
-  }, [body])
-
-  const onKindsChange = useCallback(
-    e => {
-      setBody({
-        ...body,
-        [e.target.getAttribute('name')]: e.target.getAttribute('value'),
-      })
-      switch (e.target.getAttribute('value')) {
-        case 'STUDY':
-          setIsScout(false)
-          setBtnColor(['#FBEAFF', 'white', 'white'])
-          break
-        case 'SCOUT':
-          setIsScout(true)
-          setBtnColor(['white', '#FBEAFF', 'white'])
-          break
-        case 'PROJECT':
-          setIsScout(false)
-          setBtnColor(['white', 'white', '#FBEAFF'])
-          break
-      }
-    },
-    [body.kinds]
-  )
-
-  const onFileChange = useCallback(
-    e => {
-      let reader = new FileReader()
-      setFileInfo(e.target.files[0])
-      reader.readAsDataURL(e.target.files[0])
-      reader.onloadend = finished => {
-        setAttachment(finished.target.result)
-        e.target.value = ''
-      }
-      setBody({
-        ...body,
-        [e.target.name]: fileInfo,
-      })
-    },
-    [body.file]
-  )
-
-  const onHeadCountChange = useCallback(
-    e => {
-      console.log(e.target.value)
-      const { value } = e.currentTarget
-      const onlyNumber = value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1')
-      setBody({
-        ...body,
-        [e.target.name]: onlyNumber,
-      })
-    },
-    [body.headcount]
-  )
-
-  const onBodyChange = useCallback(
-    e => {
-      console.log(e.target.name, e.target.value)
-      setBody({
-        ...body,
-        [e.target.name]: e.target.value,
-      })
-    },[
-      body.title,
-      body.content,
-      body.region,
-      body.meeting
-    ])
-
   const onSubmitHandler = e => {
     e.preventDefault()
-    console.log(body)
     const data = {
-      title: body.title,
-      content: body.content,
-      headcount: body.headcount,
-      kinds: body.kinds,
-      meeting: body.meeting,
-      region: body.region,
+      title: title,
+      content: content,
+      headcount: parseInt(headCount),
+      kinds: kinds,
+      meeting: meeting,
+      region: region,
       skillIds: dropDownOptions.map(option => SKILL_ID[option]),
       customSkillName: customOptions,
     }
+    console.log(data)
     const formData = new FormData()
-    if (body.headcount) {
-      formData.append('headcount', parseInt(body.headcount))
+    if (headCount) {
+      formData.append('headcount', headCount)
     }
-    if (body.file) {
-      formData.append('files', body.file)
+    if (file) {
+      formData.append('files', file)
     }
     formData.append(
       'postInfo',
@@ -166,49 +87,18 @@ const WrittingInnerForm = () => {
 
   return (
     <S.WrittingInnerForm onSubmit={onSubmitHandler}>
+
       {/* 모집 유형 */}
-      <S.MainTitle fontSize="3rem" marginBottom="3%">
-        모집 유형
-      </S.MainTitle>
-      <S.CategoryWrapper>
-        <S.CategoryCard
-          name="kinds"
-          value="STUDY"
-          backgroundColor={btnColor[0]}
-          onClick={onKindsChange}
-        >
-          <S.Book fontSize="3rem" />
-          <S.MainTitle fontSize="1.3rem">스터디</S.MainTitle>
-        </S.CategoryCard>
-        <S.CategoryCard
-          name="kinds"
-          value="SCOUT"
-          backgroundColor={btnColor[1]}
-          onClick={onKindsChange}
-        >
-          <S.PersonAdd fontSize="3rem" />
-          <S.MainTitle fontSize="1.3rem">스카웃</S.MainTitle>
-        </S.CategoryCard>
-        <S.CategoryCard
-          name="kinds"
-          value="PROJECT"
-          backgroundColor={btnColor[2]}
-          onClick={onKindsChange}
-        >
-          <S.UserGroup fontSize="3rem" />
-          <S.MainTitle fontSize="1.3rem">프로젝트</S.MainTitle>
-        </S.CategoryCard>
-      </S.CategoryWrapper>
+      <Kinds
+        kinds={kinds}
+        setKinds={setKinds}
+        setIsScout={setIsScout}
+        btnColor={btnColor}
+        setBtnColor={setBtnColor}
+      />
 
       {/* 제목 */}
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
-        제목
-      </S.MainTitle>
-      <S.InputBox
-        name="title"
-        placeholder="제목을 입력하세요."
-        onChange={onBodyChange}
-      />
+      <Title title={title} setTitle={setTitle} />
 
       {/* 기술 스택 */}
       <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
@@ -224,110 +114,30 @@ const WrittingInnerForm = () => {
         options={skillName}
       />
 
-      <S.MiddleWrapper>
-        {/* 회의 환경 */}
-        <S.MeetEnviromentWrapper>
-          <S.MainTitle fontSize="3rem" marginBottom="11%">
-            회의 환경
-          </S.MainTitle>
-          <S.RadioWrapper>
-            <S.CheckBoxWrapper>
-              <input
-                name="meeting"
-                value="ONLINE"
-                id="ONLINE"
-                type="radio"
-                onChange={onBodyChange}
-              />
-              <label htmlFor="ONLINE">온라인</label>
-            </S.CheckBoxWrapper>
-            <S.CheckBoxWrapper>
-              <input
-                name="meeting"
-                value="OFFLINE"
-                id="OFFLINE"
-                type="radio"
-                onChange={onBodyChange}
-              />
-              <label htmlFor="OFFLINE">오프라인</label>
-            </S.CheckBoxWrapper>
-            <S.CheckBoxWrapper>
-              <input
-                name="meeting"
-                value="BOTH"
-                id="BOTH"
-                type="radio"
-                onChange={onBodyChange}
-              />
-              <label htmlFor="BOTH">혼합</label>
-            </S.CheckBoxWrapper>
-          </S.RadioWrapper>
-        </S.MeetEnviromentWrapper>
+      {/* 회의환경 및 모집인원 */}
+      <MiddleArea
+        meeting={meeting}
+        setMeeting={setMeeting}
+        headCount={headCount}
+        setHeadCount={setHeadCount}
+        isScout={isScout}
+      />
 
-        <S.RecruitPeopleWrapper>
-          {!isScout && (
-            <>
-              <S.MainTitle fontSize="3rem" marginBottom="13%">
-                모집 인원
-              </S.MainTitle>
-              <S.InputWrapper>
-                <S.InputBox
-                  width="15rem"
-                  name="headcount"
-                  type="number"
-                  onInput={blockText}
-                  onChange={onHeadCountChange}
-                />
-                <S.InputBoxPeople>명</S.InputBoxPeople>
-              </S.InputWrapper>
-            </>
-          )}
-        </S.RecruitPeopleWrapper>
-      </S.MiddleWrapper>
-
+      
       {/* 지역 */}
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
-        지역
-      </S.MainTitle>
-      <S.AreaSelect name="region" onChange={onBodyChange}>
-        <option value="" selected disabled hidden>
-          == 선택 ==
-        </option>
-        {AreaOptions.map((value, index) => {
-          return <option key={index}>{value}</option>
-        })}
-      </S.AreaSelect>
+      <Region region={region} setRegion={setRegion} AreaOptions={AreaOptions} />
 
-      <S.FileWrapper>
-        <S.FileLeft>
-          <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="6%">
-            참고 자료
-          </S.MainTitle>
+      {/* 참고자료 */}
+      <File
+        attachment={attachment}
+        setAttachment={setAttachment}
+        file={file}
+        setFile={setFile}
+        fileInfo={fileInfo}
+        setFileInfo={setFileInfo}
+      />
 
-          <S.FileInput htmlFor="input-file">업로드</S.FileInput>
-          <input
-            name="file"
-            type="file"
-            id="input-file"
-            style={{ display: 'none' }}
-            onChange={onFileChange}
-          />
-        </S.FileLeft>
-        <S.FileRight>
-          {attachment && (
-            <img src={attachment} width="100%" onClick={deleteImg} />
-          )}
-        </S.FileRight>
-      </S.FileWrapper>
-      {/* 모집 내용 */}
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
-        모집 내용
-      </S.MainTitle>
-      <S.MainTextArea
-        name="content"
-        placeholder="프로젝트에 대한 자세한 설명을 부탁드립니다."
-        onChange={onBodyChange}
-      ></S.MainTextArea>
+      <Content content={content} setContent={setContent}/>
 
       <S.BtnWrapper>
         <S.BtnLeft>

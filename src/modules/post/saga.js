@@ -168,6 +168,7 @@ function* watchAuthLoadPosts() {
 
 export default function* postSaga() {
   yield all([
+    fork(watchCreatePost), 
     fork(watchLoadPosts),
     fork(watchLoadPost),
     fork(watchLikePost),

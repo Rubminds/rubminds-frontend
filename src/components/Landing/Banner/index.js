@@ -1,11 +1,12 @@
 import React from 'react';
 import * as S from './style';
 import {Link} from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 import { BannerCarousel } from '../..';
 
 const Banner = ({posts}) => {
-  const me = 'someone'; //로그인 여부
+  const {me} = useSelector(state => state.user)
   return (
     <S.LandingBanner>
       <S.BannerTextBox>
@@ -16,7 +17,7 @@ const Banner = ({posts}) => {
         <S.BannerText fontSize="md">Rubminds에서 당신의 팀원을 찾으세요!</S.BannerText>
         <S.RecruitBtn> <Link to='/write'> 모집하기 </Link> </S.RecruitBtn>
       </S.BannerTextBox>
-      {me ? <BannerCarousel posts={posts}/> : <S.IphoneImg />}
+      {me && posts.length !== 0 ? <BannerCarousel posts={posts}/> : <S.IphoneImg />}
     </S.LandingBanner>
   );
 };

@@ -11,6 +11,7 @@ const LogInPageRight = () => {
     window.location.href =
       'https://dev.rubminds.site/oauth2/authorization/kakao'
   }, [])
+  
   return (
     <S.LogInPageRight>
       <S.MainTitle fontSize="big" fontWeight="bold">

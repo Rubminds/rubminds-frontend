@@ -1,7 +1,13 @@
 import {
+  CREATE_POST, 
+  CREATE_POST_SUCCESS, 
+  CREATE_POST_ERROR,
   LOAD_POSTS,
   LOAD_POSTS_SUCCESS,
   LOAD_POSTS_ERROR,
+  AUTH_LOAD_POSTS,
+  AUTH_LOAD_POSTS_SUCCESS,
+  AUTH_LOAD_POSTS_ERROR,
   LOAD_POST,
   LOAD_POST_SUCCESS,
   LOAD_POST_ERROR,
@@ -16,9 +22,17 @@ export const initialState = {
   posts: [],
   singlePost: null,
 
+  createPostLoading : false,
+  createPostDone : false, 
+  createPostError : null, 
+
   loadPostsLoading: false,
   loadPostsDone: false,
   loadPostsError: null,
+
+  authLoadPostsLoading: false,
+  authLoadPostsDone: false,
+  authLoadPostsError: null,
 
   loadPostLoading: false,
   loadPostDone: false,
@@ -30,8 +44,19 @@ export const initialState = {
 };
 
 //액션 생성함수
+export const createPost = (data) => ({
+  type : CREATE_POST, 
+  data, 
+})
+
+
 export const loadPosts = data => ({
   type: LOAD_POSTS,
+  data,
+});
+
+export const authLoadPosts = data => ({
+  type: AUTH_LOAD_POSTS,
   data,
 });
 
@@ -49,6 +74,21 @@ export const likePost = id => ({
 const post = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
+      case CREATE_POST :
+        draft.createPostLoading = true; 
+        draft.createPostDone = false; 
+        draft.createPostError = null; 
+        break; 
+      case CREATE_POST_SUCCESS :
+        draft.createPostLoading = false; 
+        draft.createPostDone = true; 
+        draft.createPostError = null; 
+        break;
+      case CREATE_POST_ERROR :
+        draft.createPostLoading = false;
+        draft.createPostError = action.error;  
+        console.log(action.data); 
+        break;
       case LOAD_POSTS:
         draft.loadPostsLoading = true;
         draft.loadPostsDone = false;
@@ -64,6 +104,22 @@ const post = (state = initialState, action) => {
       case LOAD_POSTS_ERROR:
         draft.loadPostsLoading = false;
         draft.loadPostsError = action.error;
+        break;
+      case AUTH_LOAD_POSTS:
+        draft.authLoadPostsLoading = true;
+        draft.authLoadPostsDone = false;
+        draft.authLoadPostsError = null;
+        break;
+      case AUTH_LOAD_POSTS_SUCCESS: //액션 처리
+        draft.posts = [];
+        draft.authLoadPostsLoading = false;
+        draft.authLoadPostsDone = true;
+        draft.posts = draft.posts.concat(action.data.data.content);
+        console.log(draft.posts);
+        break;
+      case AUTH_LOAD_POSTS_ERROR:
+        draft.authLoadPostsLoading = false;
+        draft.authLoadPostsError = action.error;
         break;
       case LOAD_POST:
         draft.loadPostLoading = true;

@@ -1,314 +1,143 @@
 import React, { useState, useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-
 import * as S from './style'
-import DropDown from '../../../components/common/DropDown'
-import { LandingDropdownOptions } from '../../../constants'
+
+import Kinds from '../Kinds'
+import Title from '../Title'
+import MiddleArea from '../MiddleArea'
+import Region from '../Region'
+import File from '../File'
+import Content from '../Content'; 
+
+import { CustomDropDown } from '../../../components'
 import { AreaOptions } from '../../../constants'
 import { Link } from 'react-router-dom'
+import { createPost } from '../../../modules/post'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { SKILL_ID } from '../../../constants'
+
 
 const WrittingInnerForm = () => {
-  const [skill, setSkill] = useState()
-  const [skillId, setSkillId] = useState([])
+  const createPostDone = useSelector(state => state.post.createPostDone)
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const [title, setTitle] = useState(null)
+  const [content, setContent] = useState(null)
+  const [headCount, setHeadCount] = useState(null)
+  const [kinds, setKinds] = useState('STUDY')
+  const [meeting, setMeeting] = useState(null)
+  const [region, setRegion] = useState(null)
+  const [file, setFile] = useState(null)
   const [skillName, setSkillName] = useState([])
   const [dropDownOptions, setDropDownOptions] = useState([])
-
-  useEffect(async () => {
-    const result = await axios.get('https://dev.rubminds.site/api/skills', {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-    })
-
-    let temp = result.data.skills
-    setSkill(temp)
-    temp.map(value => {
-      skillName.push(value.name)
-    })
-  }, [])
-
-  useEffect(() => {
-    if (skill != 'undefined' && skill != null) {
-      let index = skill.findIndex(
-        v => v.name == dropDownOptions[dropDownOptions.length - 1]
-      )
-      skillId.push(skill[index].id)
-    }
-  }, [dropDownOptions])
-
+  const [customOptions, setCustomOptions] = useState([])
   const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
   const [isScout, setIsScout] = useState(false)
-
-
   // 이미지 서버 전송용 데이터
   const [fileInfo, setFileInfo] = useState(null)
-
   // 이미지 미리보기 데이터
   const [attachment, setAttachment] = useState(null)
 
-  const deleteImg = useCallback(() => {
-    setFileInfo('')
-    setAttachment('')
-  }, [])
+  useEffect(() => {
+    console.log(createPostDone); 
+    if (createPostDone) {
+      history.push('/')
+    }
+  }, [createPostDone])
 
-  const blockText = useCallback(e => {
-    e.target.value = e.target.value
-      .replace(/[^0-9.]/g, '')
-      .replace(/(\..*)\./g, '$1')
-  }, [])
-
-  const [body, setBody] = useState({
-    recruitType: 'study',
-    title: null,
-    skillSet: null,
-    meetEnviroment: null,
-    recruitPeople: null,
-    area: null,
-    file: null,
-    mainText: null,
-  })
-
-  const onBodyChange = useCallback(
-    e => {
-      if (e.target.getAttribute('name') === 'recruitType') {
-        setBody({
-          ...body,
-          [e.target.getAttribute('name')]: e.target.getAttribute('value'),
-        })
-        switch (e.target.getAttribute('value')) {
-          case 'study':
-            setIsScout(false)
-            setBtnColor(['#FBEAFF', 'white', 'white'])
-            break
-          case 'scout':
-            setIsScout(true)
-            setBtnColor(['white', '#FBEAFF', 'white'])
-            break
-          case 'project':
-            setIsScout(false)
-            setBtnColor(['white', 'white', '#FBEAFF'])
-            break
-        }
-      }
-      if (e.target.name === 'file') {
-        let reader = new FileReader()
-        setFileInfo(e.target.files[0])
-        reader.readAsDataURL(e.target.files[0])
-        reader.onloadend = finished => {
-          setAttachment(finished.target.result)
-          e.target.value = ''
-        }
-        setBody({
-          ...body,
-          [e.target.name]: fileInfo,
-        })
-      }
-
-      if (e.target.name === 'recruitPeople') {
-        const { value } = e.currentTarget
-        const onlyNumber = value
-          .replace(/[^0-9.]/g, '')
-          .replace(/(\.*)\./g, '$1')
-        setBody({
-          ...body,
-          [e.target.name]: onlyNumber,
-        })
-      }
-
-      setBody({
-        ...body,
-        [e.target.name]: e.target.value,
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('https://dev.rubminds.site/api/skills', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
       })
-    },
-    [
-      body.recruitType,
-      body.title,
-      body.skillSet,
-      body.meetEnviroment,
-      body.recruitPeople,
-      body.area,
-      body.file,
-      body.mainText,
-    ]
-  )
+      setSkillName(result.data.skills.map(e => e.name))
+    }
+    fetchData()
+  }, [])
 
   const onSubmitHandler = e => {
     e.preventDefault()
-
-    console.log(body); 
-    const formData = new FormData()
-    if (body.recruitPeople) {
-      formData.append('recruitPeople', body.recruitPeople)
+    const data = {
+      title: title,
+      content: content,
+      headcount: parseInt(headCount),
+      kinds: kinds,
+      meeting: meeting,
+      region: region,
+      skillIds: dropDownOptions.map(option => SKILL_ID[option]),
+      customSkillName: customOptions,
     }
-    formData.append('recruitType', body.recruitType)
-    formData.append('title', body.title)
-    formData.append('meetEnviroment', body.meetEnviroment)
-    formData.append('recruitPeople', body.recruitPeople)
-    formData.append('area', body.area)
-    formData.append('mainText', body.mainText)
+    console.log(data)
+    const formData = new FormData()
+    if (headCount) {
+      formData.append('headcount', headCount)
+    }
+    if (file) {
+      formData.append('files', file)
+    }
+    formData.append(
+      'postInfo',
+      new Blob([JSON.stringify(data)], { type: 'application/json' })
+    )
+    dispatch(createPost(formData))
   }
 
   return (
     <S.WrittingInnerForm onSubmit={onSubmitHandler}>
+
       {/* 모집 유형 */}
-      <S.MainTitle fontSize="3rem" marginBottom="3%">
-        모집 유형
-      </S.MainTitle>
-      <S.CategoryWrapper>
-        <S.CategoryCard
-          name="recruitType"
-          value="study"
-          backgroundColor={btnColor[0]}
-          onClick={onBodyChange}
-        >
-          <S.Book fontSize="3rem" />
-          <S.MainTitle fontSize="1.3rem">스터디</S.MainTitle>
-        </S.CategoryCard>
-        <S.CategoryCard
-          name="recruitType"
-          value="scout"
-          backgroundColor={btnColor[1]}
-          onClick={onBodyChange}
-        >
-          <S.PersonAdd fontSize="3rem" />
-          <S.MainTitle fontSize="1.3rem">스카웃</S.MainTitle>
-        </S.CategoryCard>
-        <S.CategoryCard
-          name="recruitType"
-          value="project"
-          backgroundColor={btnColor[2]}
-          onClick={onBodyChange}
-        >
-          <S.UserGroup fontSize="3rem" />
-          <S.MainTitle fontSize="1.3rem">프로젝트</S.MainTitle>
-        </S.CategoryCard>
-      </S.CategoryWrapper>
+      <Kinds
+        kinds={kinds}
+        setKinds={setKinds}
+        setIsScout={setIsScout}
+        btnColor={btnColor}
+        setBtnColor={setBtnColor}
+      />
 
       {/* 제목 */}
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
-        제목
-      </S.MainTitle>
-      <S.InputBox
-        name="title"
-        placeholder="제목을 입력하세요."
-        onChange={onBodyChange}
-      />
+      <Title title={title} setTitle={setTitle} />
 
       {/* 기술 스택 */}
       <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
         기술 스택
       </S.MainTitle>
-      <DropDown
+
+      <CustomDropDown
         dropDownOptions={dropDownOptions}
         setDropDownOptions={setDropDownOptions}
+        customOptions={customOptions}
+        setCustomOptions={setCustomOptions}
         style={{ width: '100%' }}
         options={skillName}
-      ></DropDown>
+      />
 
-      <S.MiddleWrapper>
-        {/* 회의 환경 */}
-        <S.MeetEnviromentWrapper>
-          <S.MainTitle fontSize="3rem" marginBottom="11%">
-            회의 환경
-          </S.MainTitle>
-          <S.RadioWrapper>
-            <S.CheckBoxWrapper>
-              <input
-                name="meetEnviroment"
-                value="online"
-                id="online"
-                type="radio"
-                onChange={onBodyChange}
-              />
-              <label htmlFor="online">온라인</label>
-            </S.CheckBoxWrapper>
-            <S.CheckBoxWrapper>
-              <input
-                name="meetEnviroment"
-                value="offline"
-                id="offline"
-                type="radio"
-                onChange={onBodyChange}
-              />
-              <label htmlFor="offline">오프라인</label>
-            </S.CheckBoxWrapper>
-            <S.CheckBoxWrapper>
-              <input
-                name="meetEnviroment"
-                value="mix"
-                id="mix"
-                type="radio"
-                onChange={onBodyChange}
-              />
-              <label htmlFor="mix">혼합</label>
-            </S.CheckBoxWrapper>
-          </S.RadioWrapper>
-        </S.MeetEnviromentWrapper>
+      {/* 회의환경 및 모집인원 */}
+      <MiddleArea
+        meeting={meeting}
+        setMeeting={setMeeting}
+        headCount={headCount}
+        setHeadCount={setHeadCount}
+        isScout={isScout}
+      />
 
-        <S.RecruitPeopleWrapper>
-          {!isScout && (
-            <>
-              <S.MainTitle fontSize="3rem" marginBottom="13%">
-                모집 인원
-              </S.MainTitle>
-              <S.InputWrapper>
-                <S.InputBox
-                  width="15rem"
-                  name="recruitPeople"
-                  type="number"
-                  onInput={blockText}
-                  onChange={onBodyChange}
-                />
-                <S.InputBoxPeople>명</S.InputBoxPeople>
-              </S.InputWrapper>
-            </>
-          )}
-        </S.RecruitPeopleWrapper>
-      </S.MiddleWrapper>
-
+      
       {/* 지역 */}
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
-        지역
-      </S.MainTitle>
-      <S.AreaSelect name="area" onChange={onBodyChange}>
-        <option value="" selected disabled hidden>
-          == 선택 ==
-        </option>
-        {AreaOptions.map((value, index) => {
-          return <option key={index}>{value}</option>
-        })}
-      </S.AreaSelect>
+      <Region region={region} setRegion={setRegion} AreaOptions={AreaOptions} />
 
-      <S.FileWrapper>
-        <S.FileLeft>
-          <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="6%">
-            참고 자료
-          </S.MainTitle>
+      {/* 참고자료 */}
+      <File
+        attachment={attachment}
+        setAttachment={setAttachment}
+        file={file}
+        setFile={setFile}
+        fileInfo={fileInfo}
+        setFileInfo={setFileInfo}
+      />
 
-          <S.FileInput htmlFor="input-file">업로드</S.FileInput>
-          <input
-            name="file"
-            type="file"
-            id="input-file"
-            style={{ display: 'none' }}
-            onChange={onBodyChange}
-          />
-        </S.FileLeft>
-        <S.FileRight>
-          {attachment && (
-            <img src={attachment} width="100%" onClick={deleteImg} />
-          )}
-        </S.FileRight>
-      </S.FileWrapper>
-      {/* 모집 내용 */}
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
-        모집 내용
-      </S.MainTitle>
-      <S.MainTextArea
-        name="mainText"
-        placeholder="프로젝트에 대한 자세한 설명을 부탁드립니다."
-        onChange={onBodyChange}
-      ></S.MainTextArea>
+      <Content content={content} setContent={setContent}/>
 
       <S.BtnWrapper>
         <S.BtnLeft>

@@ -44,7 +44,7 @@ export const RecruitBtn = styled.button`
   font-weight: bold;
 `;
 export const IphoneImg = styled(Iphone)`
-  width: 60rem;
+  width: 50rem;
   height: 100%;
   @media all and (max-width: 767px) {
     height:auto;

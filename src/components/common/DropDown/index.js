@@ -3,7 +3,6 @@ import * as S from './style';
 
 const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isUserInputOpen, setIsUserInputOpen] = useState(false);
 
   //헤더나 옵션 클릭시 열려진 옵션리스트 닫기용
   const toggle = useCallback(() => {
@@ -37,24 +36,6 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
     [dropDownOptions, setDropDownOptions],
   );
 
-  const openUserInput = useCallback(() => {
-    setIsUserInputOpen(true);
-  }, []);
-
-  const onUserInputKeypress = useCallback(
-    e => {
-      const option = e.target.value;
-      if (dropDownOptions.length < 5) {
-        if (!dropDownOptions.includes(option)) {
-          setDropDownOptions(dropDownOptions.concat(option));
-        }
-      }
-      setIsOpen(false);
-      setIsUserInputOpen(false);
-    },
-    [dropDownOptions, setDropDownOptions],
-  );
-
   return (
     <S.DropDownContainer isOpen={isOpen} {...props}>
       <S.DropDownHeader onClick={toggle}>
@@ -75,11 +56,6 @@ const DropDown = ({ dropDownOptions, setDropDownOptions, options, ...props }) =>
               {option}
             </S.ListItem>
           ))}
-          {isUserInputOpen ? (
-            <S.UserInput onKeyPress={e => e.key === 'Enter' && onUserInputKeypress(e)} />
-          ) : (
-            <S.ListItem onClick={openUserInput}>직접입력</S.ListItem>
-          )}
         </S.DropDownList>
       )}
     </S.DropDownContainer>

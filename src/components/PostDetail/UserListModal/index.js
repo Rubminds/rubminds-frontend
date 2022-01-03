@@ -8,14 +8,14 @@ const UserListModal = ({ userList, headcount, closeModal }) => {
     //팀원 추가 액션
   }, []);
   //모집되지 않은 인원자리에 팀원추가 버튼 생성
-  const rendering = () => {
+  const rendering = () => {console.log(userList)
     const empty = [];
-    for (let i = 0; i < headcount - userList.length; i++) {
+    for (let i = 0; i < headcount; i++) {
       empty.push(
-        <S.User key={i} onClick={AddUser}>
+        <S.AddMember key={i} onClick={AddUser}>
           <BsPlusCircleDotted fontSize="3rem" />
           &nbsp;&nbsp;팀원 추가
-        </S.User>
+        </S.AddMember>
       );
     }
     return empty;
@@ -28,9 +28,9 @@ const UserListModal = ({ userList, headcount, closeModal }) => {
       <S.UserList>
         {userList.map((v) => {
           return (
-            <S.User key={v.id}>
-              <S.UserAvatar src={Test} />
-              &nbsp;&nbsp;{v.userName}
+            <S.User key={`user${v.userId}`} to={`/mypage/${v.userId}`}>
+              <S.UserAvatar src={Test} key={`avatar${v.userId}`}/>
+              &nbsp;&nbsp;{v.userNickname}
             </S.User>
           );
         })}

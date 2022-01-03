@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import * as S from './style.js';
 import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdPersonAdd } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { DetailInfo, UserListModal } from '../..';
 import { likePost } from '../../../modules/post';
@@ -13,6 +13,7 @@ import { loadTeamMembers } from '../../../modules/team';
 const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
+  const {members} = useSelector(state => state.team)
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
@@ -49,11 +50,11 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
 
       <S.DetailInfoWrapper width="20%" Group>
         {modalOpen ? (
-          <UserListModal userList={[]} headcount={post.headcount} closeModal={closeModal} />
+          <UserListModal userList={members} headcount={post.headcount} closeModal={closeModal} />
         ) : (
           <>
             <S.GroupBox>
-              {me === post.writer ? (
+              {me.nickname === post.writer.nickname ? (
                 <>
                   {post.postsStatus === 'RECRUIT' ? (
                     <>

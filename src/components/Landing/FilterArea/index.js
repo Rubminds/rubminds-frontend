@@ -3,7 +3,7 @@ import * as S from './style';
 import { BiBorderAll } from 'react-icons/bi';
 import { FaMedal } from 'react-icons/fa';
 
-import { LandingDropdownOptions, AreaOptions } from '../../../constants';
+import { AreaOptions } from '../../../constants';
 
 const FilterArea = ({
   dropDownOptions,
@@ -12,13 +12,14 @@ const FilterArea = ({
   setCustomOptions,
   onPostStatusClick,
   postStatus,
+  skills,
 }) => {
   return (
     <S.FilterWrapper>
       <S.DetailTitle>어떤 기술을 찾으시나요?</S.DetailTitle>
       <S.DropdownWrapper>
         <S.MyCustomDropDown
-          options={LandingDropdownOptions}
+          options={skills.map(v => v.name)}
           marginTop="5rem"
           dropDownOptions={dropDownOptions}
           setDropDownOptions={setDropDownOptions}

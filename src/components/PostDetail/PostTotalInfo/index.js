@@ -50,7 +50,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
 
       <S.DetailInfoWrapper width="20%" Group>
         {modalOpen ? (
-          <UserListModal userList={members} headcount={post.headcount} closeModal={closeModal} />
+          <UserListModal userList={members} headcount={post.headcount} closeModal={closeModal} writerName={post.writer.nickname}/>
         ) : (
           <>
             <S.GroupBox>

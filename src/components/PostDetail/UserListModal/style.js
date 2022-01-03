@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import {AiFillCrown} from 'react-icons/ai'
 import { flexCenter, flexColumn } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
 
@@ -41,6 +42,7 @@ export const AddMember = styled.label`
   align-items: center;
   border-top: 1px solid rgba(128, 128, 128, 0.199);
   font-size: 14px;
+  cursor:pointer;
 `;
 
 export const UserAvatar = styled.img`
@@ -48,3 +50,7 @@ export const UserAvatar = styled.img`
   width: 30px;
   height: 30px;
 `;
+
+export const WriterMark = styled(AiFillCrown)`
+color:red;
+`

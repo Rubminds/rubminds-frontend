@@ -66,6 +66,14 @@ const LandingPage = () => {
     [apiQuery, postStatus],
   );
 
+  const isFilteredSkill = useCallback(post => () => {
+    const allPostSkills = post.skill.concat(post.customSkill);
+    const allFilteredSkills = dropDownOptions.concat(customOptions);
+    const combinedSkills = allPostSkills.concat(allFilteredSkills);
+    const allSkillSet = new Set([...combinedSkills]);
+    return allSkillSet.size !== combinedSkills.length;
+  }, [dropDownOptions, customOptions]);
+
   return (
     <S.LandingWrapper>
       {posts && (
@@ -90,7 +98,7 @@ const LandingPage = () => {
             />
             <S.PostsWrapper>
               {posts.map(v => {
-                return <PostCard post={v} key={`post${v.id}`} />;
+                return  <PostCard post={v} key={`post${v.id}`} />;
               })}
             </S.PostsWrapper>
           </S.LandingDetailWrapper>

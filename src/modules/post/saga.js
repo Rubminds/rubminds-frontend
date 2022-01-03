@@ -64,7 +64,7 @@ function* authLoadPosts(action) {
 }
 
 function loadPostAPI(data) {
-  return axios.get(`/post/${data}`,null, {
+  return axios.get(`/post/${data}`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

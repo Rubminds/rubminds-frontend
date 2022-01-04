@@ -8,6 +8,7 @@ import LandingPage from './LandingPage';
 import WrittingPage from './WrittingPage';
 import PostDetailPage from './PostDetailPage';
 import LogInPage from './LogInPage';
+import LogInProcess from './LogInProcess'; 
 import SignUpPage from './SignUpPage';
 import MyPage from './MyPage'
 import DibsPage from './DibsPage'
@@ -16,6 +17,7 @@ import ProjectStatusPage from './ProjectStatusPage';
 import { Header, ChatButton } from '../components';
 
 const App = () => {
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -23,7 +25,8 @@ const App = () => {
         <Header />
         <ChatButton />
         <Switch>
-          <Route path="/callback/:accessToken/:signupCheck" component={SignUpPage} />
+          <Route exact path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar" component={LogInProcess} />
+          <Route path='/signup' component={SignUpPage} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />

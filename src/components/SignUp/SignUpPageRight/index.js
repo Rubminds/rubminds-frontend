@@ -38,7 +38,6 @@ const SignUpPageRight = () => {
   useEffect(() => {
     const fetchData = async () => {
       localStorage.setItem('accessToken', accessToken);
-
       const result = await axios.get('https://dev.rubminds.site/api/skills', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),

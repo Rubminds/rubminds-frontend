@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { takeLatest, put, fork, all, call } from 'redux-saga/effects';
 import {
+  SIGNIN_USER, 
+  SIGNIN_USER_SUCCESS,
+  SIGNIN_USER_ERROR, 
   SIGNUP_USER,
   SIGNUP_USER_ERROR,
   SIGNUP_USER_SUCCESS,
@@ -98,8 +101,28 @@ function* logoutUser() {console.log('logout user saga')
   }
 }
 
+function* signinUser(action) {
+  console.log('SignIn user saga')
+  try {
+    yield put({
+      type: SIGNIN_USER_SUCCESS,
+      data : action, 
+    });
+  } catch (err) {
+    //에러 발생시 이벤트
+    yield put({
+      type: SIGNIN_USER_ERROR,
+      error: err,
+    });
+  }
+}
+
 //액션 감지 함수
 //takeLatest안의 액션을 감지.
+
+function* watchSigninUser(){
+  yield takeLatest(SIGNIN_USER, signinUser); 
+}
 function* watchSignupUser() {
   yield takeLatest(SIGNUP_USER, signupUser);
 }
@@ -116,6 +139,7 @@ function* watchLogoutUser() {
 
 export default function* userSaga() {
   yield all([
+    fork(watchSigninUser), 
     fork(watchSignupUser),
     fork(watchToggleChatModal),
     fork(watchLoadUserInfo),

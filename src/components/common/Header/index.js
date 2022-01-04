@@ -10,6 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const {me} = useSelector(state => state.user)
   const onLogoutClick = useCallback(()=>{
+    console.log('로그아웃 클릭'); 
     localStorage.removeItem('accessToken');
     dispatch(logoutUser())
   },[])

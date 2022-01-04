@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import * as S from './style';
 
@@ -12,10 +11,9 @@ import { useHistory } from 'react-router-dom';
 import { SKILL_ID } from '../../../constants';
 
 const SignUpPageRight = () => {
-  const isSigninDone = useSelector(state => state.user.isSigninDone);
+  const isSignupDone = useSelector(state => state.user.isSignupDone);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { accessToken, signupCheck } = useParams();
   const imgInput = useRef();
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [nickname, onChangeNickname] = useInput('');
@@ -30,15 +28,14 @@ const SignUpPageRight = () => {
   const [skillName, setSkillName] = useState([]);
 
   useEffect(() => {
-    if (isSigninDone) {
+    if (isSignupDone) {
       history.push('/');
     }
-  }, [history, isSigninDone]);
-  
+  }, [isSignupDone]);
+ 
+
   useEffect(() => {
     const fetchData = async () => {
-      localStorage.setItem('accessToken', accessToken);
-
       const result = await axios.get('https://dev.rubminds.site/api/skills', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
@@ -47,7 +44,7 @@ const SignUpPageRight = () => {
       setSkillName(result.data.skills.map(e => e.name));
     };
     fetchData();
-  }, [accessToken]);
+  }, []);
 
   const onProfileUpload = useCallback(() => {
     imgInput.current.click();

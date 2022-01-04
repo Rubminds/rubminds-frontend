@@ -15,13 +15,13 @@ const SignUpPageRight = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const imgInput = useRef();
+  
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [nickname, onChangeNickname] = useInput('');
 
   const [job, onChangeJob, setJob] = useInput('');
   const [introduce, onChangeIntroduce] = useInput(null);
 
-  // attachment : img URL (for Server)
   const [attachMent, setAttachment] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
 
@@ -67,6 +67,19 @@ const SignUpPageRight = () => {
     setFileInfo(null);
     setAttachment(null);
   }, [fileInfo, attachMent]);
+
+  const nicknameCheckHandler = useCallback(()=>{
+    const fetch = async() => {
+      const result = await axios.get('https://dev.rubminds.site/api/check', nickname, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
+      }
+      );
+      fetch();
+      console.log(result);  
+    } 
+  },[]);
 
   const onSubmitHandler = useCallback(
     e => {
@@ -118,7 +131,7 @@ const SignUpPageRight = () => {
         </S.MainTitle>
         <S.NickNameWrapper>
           <S.NickNameBox name="nickName" onChange={onChangeNickname} required />
-          <S.CheckBox>중복 체크</S.CheckBox>
+          <S.CheckBox onClick={nicknameCheckHandler}>중복 체크</S.CheckBox>
         </S.NickNameWrapper>
 
         {/* 직업 */}

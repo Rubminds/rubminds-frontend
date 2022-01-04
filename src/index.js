@@ -12,8 +12,6 @@ import { Provider } from 'react-redux';
 import rootReducer, { rootSaga } from './modules';
 require('dotenv').config();
 
-console.log("DB_HOST:", process.env.REACT_APP_DB_HOST);
-
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 // const persistor = persistStore(store);

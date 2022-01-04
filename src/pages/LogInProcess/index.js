@@ -1,15 +1,37 @@
-import React, {useEffect} from 'react'
-import { Redirect, useParams } from 'react-router-dom';
+import React, {useEffect, useState} from 'react'
+import { useDispatch } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
+import { signinUser } from '../../modules/user';
 
 const LogInProcess = () => {
-    // /:id/:nickname/:accessToken/:signupCheck/:avatar
-    const {id, nickname, accessToken, signupCheck, avatar} = useParams();
-    useEffect(()=>{
-        console.log(id, nickname, accessToken, signupCheck, avatar); 
+    // callBack URL 에서 얻을 수 있는 정보
+    // :id/:nickname/:accessToken/:signupCheck/:avatar
+  
+    const { id, nickname, accessToken, signupCheck, avatar } = useParams();
+    const dispatch = useDispatch(); 
+    const history = useHistory(); 
+
+    const [data] = useState({
+        id : parseInt(id), 
+        nickname : nickname,  
+        avatar : avatar === '0' || undefined ? "DefaultImg" : avatar
+    })
+
+    useEffect(() => {
+        localStorage.setItem('accessToken', accessToken);
+        if (JSON.parse(signupCheck)){
+            console.log(data); 
+            dispatch(signinUser(data));
+            history.push('/'); 
+        }
+        else{
+            history.push('/signup');
+        }
     }, []); 
+
     return (
         <>
-        <h1>여기 로그인 로직 처리</h1> 
+            <h1>로그인 프로세스</h1>
         </>
     )
 }

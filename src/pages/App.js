@@ -1,23 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 
-import theme from '../common/theme';
-import GlobalStyles from '../common/GlobalStyle';
-import LandingPage from './LandingPage';
-import WrittingPage from './WrittingPage';
-import PostDetailPage from './PostDetailPage';
-import LogInPage from './LogInPage';
-import LogInProcess from './LogInProcess'; 
-import SignUpPage from './SignUpPage';
+import theme from '../common/theme'
+import GlobalStyles from '../common/GlobalStyle'
+import LandingPage from './LandingPage'
+import WrittingPage from './WrittingPage'
+import PostDetailPage from './PostDetailPage'
+import LogInPage from './LogInPage'
+import LogInProcess from './LogInProcess'
+import SignUpPage from './SignUpPage'
 import MyPage from './MyPage'
 import DibsPage from './DibsPage'
-import ProjectStatusPage from './ProjectStatusPage';
+import ProjectStatusPage from './ProjectStatusPage'
 
-import { Header, ChatButton } from '../components';
+import { Header, ChatButton } from '../components'
 
 const App = () => {
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -25,8 +24,11 @@ const App = () => {
         <Header />
         <ChatButton />
         <Switch>
-          <Route exact path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar" component={LogInProcess} />
-          <Route path='/signup' component={SignUpPage} />
+          <Route
+            exact path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar"
+            component={LogInProcess}
+          />
+          <Route path="/signup" component={SignUpPage} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
@@ -37,7 +39,7 @@ const App = () => {
         </Switch>
       </Router>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -74,6 +74,10 @@ export const AreaOptions = [
 export const RecruitmentType = ['study', 'scout', 'project'];
 
 //actions
+export const SIGNIN_USER = 'SIGNIN_USER'; 
+export const SIGNIN_USER_SUCCESS = 'SIGNIN_USER_SUCCESS'; 
+export const SIGNIN_USER_ERROR = 'SIGNIN_USER_ERROR'; 
+
 export const SIGNUP_USER = 'SIGNUP_USER';
 export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';
 export const SIGNUP_USER_ERROR = 'SIGNUP_USER_ERROR';

@@ -54,7 +54,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
         ) : (
           <>
             <S.GroupBox>
-              {me.nickname === post.writer.nickname ? (
+              {me.id === post.writer.id ? (
                 <>
                   {post.postsStatus === 'RECRUIT' ? (
                     <>

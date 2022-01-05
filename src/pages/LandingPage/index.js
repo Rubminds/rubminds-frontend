@@ -22,7 +22,7 @@ const LandingPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    me ? dispatch(authLoadPosts(apiQuery)) : dispatch(loadPosts(apiQuery));
+    (me && localStorage.getItem('accessToken')) ? dispatch(authLoadPosts(apiQuery)) : dispatch(loadPosts(apiQuery));
   }, [apiQuery, me, dispatch]);
 
   useEffect(() => {

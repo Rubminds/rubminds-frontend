@@ -23,6 +23,7 @@ export { default as UserListModal } from './PostDetail/UserListModal';
 export { default as ProcessEndModal } from './PostDetail/ProcessEndModal';
 export { default as PostTotalInfo } from './PostDetail/PostTotalInfo';
 export { default as ResultForm } from './PostDetail/ResultForm';
+export { default as TeamEvaluation} from './PostDetail/TeamEvaluation'
 
 export { default as UserProfile } from './MyPage/UserProfile';
 export { default as UserProjects } from './MyPage/UserProjects';

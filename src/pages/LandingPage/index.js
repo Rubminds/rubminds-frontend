@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import * as S from './style';
 import { BsCheckLg } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../components';
 import { loadPosts, authLoadPosts } from '../../modules/post';
@@ -12,6 +13,9 @@ const LandingPage = () => {
   const [apiQuery, setApiQuery] = useState('?page=1&size=10');
   const [kinds, setKinds] = useState('');
   const [postStatus, setPostStatus] = useState('');
+  const [region, setRegion] = useState('');
+  const [skills, setSkills] = useState([]);
+
   const posts = useSelector(state => state.post.posts);
   const { me } = useSelector(state => state.user);
   const dibsPosts = posts.filter(e => e.isLike === true);
@@ -19,7 +23,15 @@ const LandingPage = () => {
 
   useEffect(() => {
     me ? dispatch(authLoadPosts(apiQuery)) : dispatch(loadPosts(apiQuery));
-  }, [apiQuery, dispatch]);
+  }, [apiQuery, me, dispatch]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('/skills');
+      setSkills(result.data.skills);
+    };
+    fetchData();
+  }, []);
 
   const onKindsClick = useCallback(
     option => () => {
@@ -42,6 +54,7 @@ const LandingPage = () => {
     },
     [kinds, apiQuery],
   );
+
   const onPostStatusClick = useCallback(
     option => () => {
       if (apiQuery.includes('status')) {
@@ -64,6 +77,29 @@ const LandingPage = () => {
     [apiQuery, postStatus],
   );
 
+  const onRegionClick = useCallback(
+    option => () => {
+      console.log(option);
+      const currentQuery = apiQuery;
+      let changedQuery = currentQuery.replace(region, '');
+      changedQuery = changedQuery.replace('&region=', '');
+      setRegion(option);
+      setApiQuery(`${changedQuery}&region=${option}`);
+    },
+    [apiQuery, region],
+  );
+
+  const isFilteredSkill = post => {
+    if (dropDownOptions.length === 0 && customOptions.length === 0) {
+      return true;
+    }
+    const allPostSkills = post.skill.concat(post.customSkills);
+    const allFilteredSkills = dropDownOptions.concat(customOptions);
+    const combinedSkills = allPostSkills.concat(allFilteredSkills);
+    const allSkillSet = new Set([...combinedSkills]);
+    return allSkillSet.size !== combinedSkills.length;
+  };
+
   return (
     <S.LandingWrapper>
       {posts && (
@@ -84,11 +120,13 @@ const LandingPage = () => {
               customOptions={customOptions}
               setCustomOptions={setCustomOptions}
               onPostStatusClick={onPostStatusClick}
+              onRegionClick={onRegionClick}
               postStatus={postStatus}
+              skills={skills}
             />
             <S.PostsWrapper>
               {posts.map(v => {
-                return <PostCard post={v} key={`post${v.id}`} />;
+                return isFilteredSkill(v) && <PostCard post={v} key={`post${v.id}`} />;
               })}
             </S.PostsWrapper>
           </S.LandingDetailWrapper>

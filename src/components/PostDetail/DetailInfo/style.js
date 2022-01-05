@@ -8,6 +8,7 @@ export const DetailInfoBetween = styled.div`
   & + & {
     margin-top: 5%;
   }
+  ${mediaQuery({'font-size':'2rem'})}
 `;
 export const DetailInfoLeft = styled.div`
   display: flex;

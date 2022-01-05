@@ -16,7 +16,7 @@ export const PostDetailInfo = styled.div`
 export const DetailInfoWrapper = styled.div`
   ${flexColumn};
   width: ${props => (props.width ? props.width : '40%')};
-  ${mediaQuery({ width: '60%', 'margin-top': '1rem' })};
+  ${mediaQuery({ width: '60%', 'margin-top': '2rem' })};
   ${props =>
     props.Group &&
     css`
@@ -33,6 +33,7 @@ export const DetailUserInfo = styled.div`
   font-size: 1.6rem;
   margin-bottom: 5%;
   font-weight: bold;
+  ${mediaQuery({'justify-content':'center', 'font-size':'2rem'})}
 `;
 // export const DetailInfoLeft = styled.div`
 //   display: flex;

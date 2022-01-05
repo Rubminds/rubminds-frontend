@@ -86,16 +86,16 @@ const ProjectStatusPage = () => {
       <S.ContentsWrapper>
         <S.Title>
           {me}님의&nbsp;
-          {params.type === '모집중'
+          {params.type === 'RECRUIT'
             ? '모집중인'
-            : params.type === '진행중'
+            : params.type === 'WORKING'
             ? '진행중인'
             : '진행종료된'}
           &nbsp;프로젝트 현황
         </S.Title>
         <S.PostsWrapper>
           {Posts.map((v) => {
-            return params.type === v.status && <PostCard post={v} key={v.id} />;
+            return params.type === v.postStatus && <PostCard post={v} key={v.id} />;
           })}
         </S.PostsWrapper>
       </S.ContentsWrapper>

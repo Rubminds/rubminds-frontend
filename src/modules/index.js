@@ -12,7 +12,9 @@ import userSaga from './user/saga';
 import postSaga from './post/saga';
 import teamSaga from './team/saga';
 
-// axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
+axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
+//axios.defaults.withCredentials = true; //saga에서 보내는 axios는 전부 쿠키를 포함한다.
+
 const persistConfig = {
   key:'root',
   storage,

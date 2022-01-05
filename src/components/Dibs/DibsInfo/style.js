@@ -26,6 +26,7 @@ export const Type = styled.div`
   ${flexColumn}
   justify-content:center;
   align-items: center;
+  cursor:pointer;
 `;
 export const TypeName = styled.label`
   font-size: 1.6rem;

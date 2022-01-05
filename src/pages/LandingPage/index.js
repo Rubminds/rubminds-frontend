@@ -6,16 +6,16 @@ import axios from 'axios';
 
 import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../components';
 import { loadPosts, authLoadPosts } from '../../modules/post';
-import { SKILL_ID } from '../../constants';
 
 const LandingPage = () => {
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [customOptions, setCustomOptions] = useState([]);
-  const [apiQuery, setApiQuery] = useState('?page=1&size=10&region=');
+  const [apiQuery, setApiQuery] = useState('?page=1&size=10');
   const [kinds, setKinds] = useState('');
   const [postStatus, setPostStatus] = useState('');
   const [region, setRegion] = useState('');
   const [skills, setSkills] = useState([]);
+
   const posts = useSelector(state => state.post.posts);
   const { me } = useSelector(state => state.user);
   const dibsPosts = posts.filter(e => e.isLike === true);
@@ -79,26 +79,26 @@ const LandingPage = () => {
 
   const onRegionClick = useCallback(
     option => () => {
-      console.log(option)
-        const currentQuery = apiQuery;
-        let changedQuery = currentQuery.replace(region, '');
-        changedQuery = changedQuery.replace('&region=', '');
-        setRegion(option);
-        setApiQuery(`${changedQuery}&region=${option}`);
+      console.log(option);
+      const currentQuery = apiQuery;
+      let changedQuery = currentQuery.replace(region, '');
+      changedQuery = changedQuery.replace('&region=', '');
+      setRegion(option);
+      setApiQuery(`${changedQuery}&region=${option}`);
     },
     [apiQuery, region],
   );
 
-  const isFilteredSkill = useCallback(
-    post => () => {
-      const allPostSkills = post.skill.concat(post.customSkill);
-      const allFilteredSkills = dropDownOptions.concat(customOptions);
-      const combinedSkills = allPostSkills.concat(allFilteredSkills);
-      const allSkillSet = new Set([...combinedSkills]);
-      return allSkillSet.size !== combinedSkills.length;
-    },
-    [dropDownOptions, customOptions],
-  );
+  const isFilteredSkill = post => {
+    if (dropDownOptions.length === 0 && customOptions.length === 0) {
+      return true;
+    }
+    const allPostSkills = post.skill.concat(post.customSkills);
+    const allFilteredSkills = dropDownOptions.concat(customOptions);
+    const combinedSkills = allPostSkills.concat(allFilteredSkills);
+    const allSkillSet = new Set([...combinedSkills]);
+    return allSkillSet.size !== combinedSkills.length;
+  };
 
   return (
     <S.LandingWrapper>
@@ -126,7 +126,7 @@ const LandingPage = () => {
             />
             <S.PostsWrapper>
               {posts.map(v => {
-                return <PostCard post={v} key={`post${v.id}`} />;
+                return isFilteredSkill(v) && <PostCard post={v} key={`post${v.id}`} />;
               })}
             </S.PostsWrapper>
           </S.LandingDetailWrapper>

@@ -7,6 +7,7 @@ import { HiUserGroup } from 'react-icons/hi';
 
 import { Python } from '../../../assets/imgs';
 const PostCard = ({ post, ...props }) => {
+  const combinedSkills = post.skill.concat(post.customSkills);
   return (
     <S.CardLinkWrapper to={`post/${post.id}`}>
       <S.CardWrapper status={post.status} {...props}>
@@ -28,7 +29,7 @@ const PostCard = ({ post, ...props }) => {
         </S.CardSkills>
         <S.CardFooter status={post.status}>
           <S.FooterTags>
-            {post.skill?.map((v, i) => {
+            {combinedSkills?.map((v, i) => {
               return <S.FooterTag key={`footerskills${i}`}>#{v}&nbsp;</S.FooterTag>;
             })}
           </S.FooterTags>

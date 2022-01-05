@@ -21,10 +21,10 @@ const PostDetailPage = () => {
 
   const openModal = useCallback(() => {
     setModalOpen(true);
-  }, [modalOpen]);
+  }, []);
   const closeModal = useCallback(() => {
     setModalOpen(false);
-  }, [modalOpen]);
+  }, []);
   return (
     <S.PostDetailWrapper>
       <BackButton />

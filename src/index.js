@@ -6,22 +6,22 @@ import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
-// import { persistStore } from 'redux-persist';
-// import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import rootReducer, { rootSaga } from './modules';
+import persistedReducer, { rootSaga } from './modules';
 require('dotenv').config();
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
-// const persistor = persistStore(store);
+const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+const persistor = persistStore(store);
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <PersistGate persistor={persistor}> */}
+    <PersistGate persistor={persistor}>
       <App />
-    {/* </PersistGate> */}
+    </PersistGate>
   </Provider>,
 
   document.getElementById('root'),

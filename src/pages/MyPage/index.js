@@ -55,7 +55,8 @@ const MyPage = () => {
       {user && (
         <S.MyPageWrapper>
           <BackButton />
-          <S.EditProfile>프로필 수정</S.EditProfile>
+          {user.isMine && <S.EditProfile>프로필 수정</S.EditProfile>}
+
           <UserProfile user={user} />
           <S.Division>
             <UserProjects user={user} />

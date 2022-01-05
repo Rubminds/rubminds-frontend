@@ -23,4 +23,5 @@ export const EditProfile = styled.label`
   color: rgba(128, 128, 128);
   text-decoration: underline;
   text-underline-position: under;
+  cursor:pointer;
 `

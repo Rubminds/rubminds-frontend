@@ -12,19 +12,19 @@ const UserProjects = ({ user }) => {
     <S.CardWrapper>
       <S.Title>{user.nickname}님의 프로젝트 현황</S.Title>
       <S.Content>
-        <Link to="/projects/모집중">
+        <Link to="/projects/RECRUIT">
           <S.StatusCircle status="모집중">
             <S.CircleLabel>모집중</S.CircleLabel>
             <S.CircleLabel>{getProjectInfoLength('RECRUIT')}</S.CircleLabel>
           </S.StatusCircle>
         </Link>
-        <Link to="/projects/진행중">
+        <Link to="/projects/WORKING">
           <S.StatusCircle status="진행중">
             <S.CircleLabel>진행중</S.CircleLabel>
             <S.CircleLabel>{getProjectInfoLength('WORKING')}</S.CircleLabel>
           </S.StatusCircle>
         </Link>
-        <Link to="/projects/진행종료">
+        <Link to="/projects/FINISHED">
           <S.StatusCircle status="진행종료">
             <S.CircleLabel>진행종료</S.CircleLabel>
             <S.CircleLabel>{getProjectInfoLength('FINISHED')}</S.CircleLabel>

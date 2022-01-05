@@ -8,7 +8,7 @@ import {
 
 function loadTeamMembersAPI(data) {
   console.log(data);
-  return axios.get(`/team/${data}`, {
+  return axios.get(`/team/${data}`,{
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

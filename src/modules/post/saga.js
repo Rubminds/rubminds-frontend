@@ -45,8 +45,7 @@ function* createPost(action) {
 }
 
 function loadPostsAPI(query) {
-  return axios.get(`https://dev.rubminds.site/api/posts${query}`);
-  // return axios.get(`/posts${query}`);
+  return axios.get(`/posts${query}`);
 }
 
 function* loadPosts(action) {
@@ -68,7 +67,7 @@ function* loadPosts(action) {
 }
 
 function authLoadPostsAPI(query) {
-  return axios.get(`/posts${query}`, null, {
+  return axios.get(`/posts${query}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },
@@ -94,7 +93,7 @@ function* authLoadPosts(action) {
 }
 
 function loadPostAPI(data) {
-  return axios.get(`https://dev.rubminds.site/api/post/${data}`, {
+  return axios.get(`/post/${data}`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

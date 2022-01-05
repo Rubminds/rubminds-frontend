@@ -3,8 +3,7 @@ import * as S from './style';
 import { BiBorderAll } from 'react-icons/bi';
 import { FaMedal } from 'react-icons/fa';
 
-import { LandingDropdownOptions, AreaOptions } from '../../../constants';
-import { CustomDropDown } from '../..';
+import { AreaOptions } from '../../../constants';
 
 const FilterArea = ({
   dropDownOptions,
@@ -12,27 +11,35 @@ const FilterArea = ({
   customOptions,
   setCustomOptions,
   onPostStatusClick,
+  onRegionClick,
   postStatus,
+  skills,
 }) => {
   return (
     <S.FilterWrapper>
       <S.DetailTitle>어떤 기술을 찾으시나요?</S.DetailTitle>
-      <CustomDropDown
-        options={LandingDropdownOptions}
-        marginTop="5rem"
-        dropDownOptions={dropDownOptions}
-        setDropDownOptions={setDropDownOptions}
-        customOptions={customOptions}
-        setCustomOptions={setCustomOptions}
-      />
+      <S.DropdownWrapper>
+        <S.MyCustomDropDown
+          options={skills.map(v => v.name)}
+          marginTop="5rem"
+          dropDownOptions={dropDownOptions}
+          setDropDownOptions={setDropDownOptions}
+          customOptions={customOptions}
+          setCustomOptions={setCustomOptions}
+        />
+        {/* <S.SearchBtnWrapper>
+          <S.SearchBtn onClick={onSkillSearchClick}>조회</S.SearchBtn>
+        </S.SearchBtnWrapper> */}
+      </S.DropdownWrapper>
+
       <S.SortWrapper>
-        <S.AreaSelect name="area" defaultValue={'선택'}>
-          <option value="선택" disabled>
-            선택
+        <S.AreaSelect name="area">
+          <option value="" onClick={onRegionClick('')}>
+            -
           </option>
           {AreaOptions.map((option, index) => {
             return (
-              <option key={index} value={option}>
+              <option key={index} value={option} onClick={onRegionClick(option)}>
                 {option}
               </option>
             );

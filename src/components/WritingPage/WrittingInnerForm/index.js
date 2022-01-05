@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import * as S from './style'
@@ -25,7 +25,7 @@ const WrittingInnerForm = () => {
   const [title, setTitle] = useState(null)
   const [content, setContent] = useState(null)
   const [headCount, setHeadCount] = useState(null)
-  const [kinds, setKinds] = useState('STUDY')
+  const [kinds, setKinds] = useState("STUDY");
   const [meeting, setMeeting] = useState(null)
   const [region, setRegion] = useState(null)
   const [file, setFile] = useState(null)
@@ -38,6 +38,10 @@ const WrittingInnerForm = () => {
   const [fileInfo, setFileInfo] = useState(null)
   // 이미지 미리보기 데이터
   const [attachment, setAttachment] = useState(null)
+
+  useEffect(()=>{
+    console.log('kinds', kinds); 
+  }, [kinds]); 
 
   useEffect(() => {
     console.log(createPostDone); 
@@ -58,32 +62,51 @@ const WrittingInnerForm = () => {
     fetchData()
   }, [])
 
-  const onSubmitHandler = e => {
+  // useCallback ver
+  const onSubmitHandler= useCallback((e)=>{
     e.preventDefault()
+
     const data = {
       title: title,
       content: content,
-      headcount: parseInt(headCount),
+      headcount: headCount != null ? parseInt(headCount) : null,
       kinds: kinds,
       meeting: meeting,
       region: region,
       skillIds: dropDownOptions.map(option => SKILL_ID[option]),
       customSkillName: customOptions,
     }
-    console.log(data)
     const formData = new FormData()
-    if (headCount) {
-      formData.append('headcount', headCount)
-    }
     if (file) {
       formData.append('files', file)
     }
-    formData.append(
-      'postInfo',
-      new Blob([JSON.stringify(data)], { type: 'application/json' })
-    )
+    formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }))
     dispatch(createPost(formData))
-  }
+  }, [title,content,headCount,kinds,meeting,region,dropDownOptions,customOptions]); 
+
+
+  // 그냥 ver
+  // const onSubmitHandler = e => {
+  //   e.preventDefault()
+
+  //   const data = {
+  //     title: title,
+  //     content: content,
+  //     headcount: headCount != null ? parseInt(headCount) : null,
+  //     kinds: kinds,
+  //     meeting: meeting,
+  //     region: region,
+  //     skillIds: dropDownOptions.map(option => SKILL_ID[option]),
+  //     customSkillName: customOptions,
+  //   }
+  //   const formData = new FormData()
+  //   if (file) {
+  //     formData.append('files', file)
+  //   }
+  //   formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }))
+    
+  //   dispatch(createPost(formData))
+  // }
 
   return (
     <S.WrittingInnerForm onSubmit={onSubmitHandler}>

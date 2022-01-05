@@ -51,7 +51,7 @@ export const NickNameBox = styled.input`
   font-size: 2rem;
 `;
 
-export const CheckBox = styled.button`
+export const CheckBox = styled.input`
   flex: 1;
   margin-left: 3rem;
   border: none;
@@ -66,7 +66,7 @@ export const JobWrapper = styled.div`
   ${flexBetween}
 `;
 
-export const JobCheckBtn = styled.button`
+export const JobCheckBtn = styled.input`
   width: 30%;
   white-space: nowrap;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);

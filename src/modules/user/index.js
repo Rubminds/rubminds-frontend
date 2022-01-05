@@ -122,6 +122,7 @@ const user = (state = initialState, action) => {
         draft.logoutUserLoading = true;
         draft.logoutUserDone = false;
         draft.logoutUserError = null;
+        draft.me = null;
         break;
       case LOGOUT_USER_SUCCESS:
         console.log('logout user reducer');

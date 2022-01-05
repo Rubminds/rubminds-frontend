@@ -11,9 +11,10 @@ import { SKILL_ID } from '../../constants';
 const LandingPage = () => {
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [customOptions, setCustomOptions] = useState([]);
-  const [apiQuery, setApiQuery] = useState('?page=1&size=10');
+  const [apiQuery, setApiQuery] = useState('?page=1&size=10&region=');
   const [kinds, setKinds] = useState('');
   const [postStatus, setPostStatus] = useState('');
+  const [region, setRegion] = useState('');
   const [skills, setSkills] = useState([]);
   const posts = useSelector(state => state.post.posts);
   const { me } = useSelector(state => state.user);
@@ -23,11 +24,11 @@ const LandingPage = () => {
   useEffect(() => {
     me ? dispatch(authLoadPosts(apiQuery)) : dispatch(loadPosts(apiQuery));
   }, [apiQuery, me, dispatch]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get('/skills');
-      setSkills(result.data.skills)
+      setSkills(result.data.skills);
     };
     fetchData();
   }, []);
@@ -76,6 +77,18 @@ const LandingPage = () => {
     [apiQuery, postStatus],
   );
 
+  const onRegionClick = useCallback(
+    option => () => {
+      console.log(option)
+        const currentQuery = apiQuery;
+        let changedQuery = currentQuery.replace(region, '');
+        changedQuery = changedQuery.replace('&region=', '');
+        setRegion(option);
+        setApiQuery(`${changedQuery}&region=${option}`);
+    },
+    [apiQuery, region],
+  );
+
   const isFilteredSkill = useCallback(
     post => () => {
       const allPostSkills = post.skill.concat(post.customSkill);
@@ -107,6 +120,7 @@ const LandingPage = () => {
               customOptions={customOptions}
               setCustomOptions={setCustomOptions}
               onPostStatusClick={onPostStatusClick}
+              onRegionClick={onRegionClick}
               postStatus={postStatus}
               skills={skills}
             />

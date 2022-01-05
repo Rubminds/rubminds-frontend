@@ -11,6 +11,7 @@ const FilterArea = ({
   customOptions,
   setCustomOptions,
   onPostStatusClick,
+  onRegionClick,
   postStatus,
   skills,
 }) => {
@@ -32,13 +33,13 @@ const FilterArea = ({
       </S.DropdownWrapper>
 
       <S.SortWrapper>
-        <S.AreaSelect name="area" defaultValue={'선택'}>
-          <option value="선택" disabled>
-            선택
+        <S.AreaSelect name="area">
+          <option value="" onClick={onRegionClick('')}>
+            -
           </option>
           {AreaOptions.map((option, index) => {
             return (
-              <option key={index} value={option}>
+              <option key={index} value={option} onClick={onRegionClick(option)}>
                 {option}
               </option>
             );

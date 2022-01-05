@@ -97,6 +97,7 @@ const user = (state = initialState, action) => {
         draft.isSignupError = action.error;
         break;
       case TOGGLE_CHAT_MODAL:
+        console.log('toggle chat reducer')
         break;
       case TOGGLE_CHAT_MODAL_SUCCESS:
         draft.isChatOpen = !draft.isChatOpen;

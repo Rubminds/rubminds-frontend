@@ -48,11 +48,10 @@ function* signupUser(action) {
 }
 
 function* toggleChatModal() {
-  const result = ''; //yield call(signupUserAPI, action.data);
+  console.log('togglechat saga')
   try {
     yield put({
       type: TOGGLE_CHAT_MODAL_SUCCESS,
-      data: result,
     });
   } catch (err) {
     //에러 발생시 이벤트

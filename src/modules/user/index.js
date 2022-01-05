@@ -1,4 +1,7 @@
 import {
+  SIGNIN_USER,
+  SIGNIN_USER_SUCCESS,
+  SIGNIN_USER_ERROR,
   SIGNUP_USER,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_ERROR,
@@ -19,9 +22,9 @@ export const initialState = {
   me: null,
   isChatOpen: false,
 
-  isSigninLoading: false,
-  isSigninDone: false,
-  isSigninError: null,
+  isSignupLoading: false,
+  isSignupDone: false,
+  isSignupError: null,
 
   loadUserInfoLoading: false,
   loadUserInfoDone: false,
@@ -32,10 +35,15 @@ export const initialState = {
   logoutUserError: null,
 };
 
+export const signinUser = data => ({
+  type: SIGNIN_USER,
+  data,
+});
+
 //액션 생성함수
 export const signupUser = data => ({
   type: SIGNUP_USER,
-  data: data,
+  data,
 });
 
 export const toggleChatModal = () => ({
@@ -55,20 +63,38 @@ export const logoutUser = () => ({
 const user = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case SIGNUP_USER:console.log('signup user')
+      case SIGNIN_USER:
         draft.isSigninLoading = true;
         draft.isSigninDone = false;
         draft.isSigninError = null;
         break;
-      case SIGNUP_USER_SUCCESS: //액션 처리
-        draft.isSigninLoading = false;console.log('signup user success')
+      case SIGNIN_USER_SUCCESS:
+        console.log('로그인 성공', action.data.data);
+        draft.isSigninLoading = false;
         draft.isSigninDone = true;
         draft.isSigninError = null;
         draft.me = action.data.data;
         break;
-      case SIGNUP_USER_ERROR:
+      case SIGNIN_USER_ERROR:
+        console.log('로그인 실패', action.error);
         draft.isSigninLoading = false;
         draft.isSigninError = action.error;
+        break;
+      case SIGNUP_USER:
+        console.log('signup user');
+        draft.isSignupLoading = true;
+        draft.isSignupDone = false;
+        draft.isSignupError = null;
+        break;
+      case SIGNUP_USER_SUCCESS: //액션 처리
+        draft.isSignupLoading = false;
+        draft.isSignupDone = true;
+        draft.isSignupError = null;
+        draft.me = action.data.data;
+        break;
+      case SIGNUP_USER_ERROR:
+        draft.isSignupLoading = false;
+        draft.isSignupError = action.error;
         break;
       case TOGGLE_CHAT_MODAL:
         break;
@@ -91,13 +117,13 @@ const user = (state = initialState, action) => {
         draft.loadUserInfoLoading = false;
         draft.loadUserInfoError = action.error;
         break;
-      case LOGOUT_USER:
+      case LOGOUT_USER:console.log('go')
         draft.logoutUserLoading = true;
         draft.logoutUserDone = false;
         draft.logoutUserError = null;
         break;
       case LOGOUT_USER_SUCCESS:
-        console.log('logout user reducer')
+        console.log('logout user reducer');
         draft.isSigninLoading = true;
         draft.isSigninDone = false;
         draft.isSigninError = null;

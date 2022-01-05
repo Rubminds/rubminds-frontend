@@ -30,7 +30,7 @@ const UserListModal = ({ userList, headcount, closeModal, writerName }) => {
         {userList.map(v => {
           return (
             <S.User key={`user${v.userId}`} to={`/mypage/${v.userId}`}>
-              <S.UserAvatar src={Test} key={`avatar${v.userId}`} />
+              <S.UserAvatar src={v.avatar} key={`avatar${v.userId}`} />
               &nbsp;&nbsp;{v.userNickname} {v.userNickname === writerName && <>&nbsp;<S.WriterMark/></>}
             </S.User>
           );

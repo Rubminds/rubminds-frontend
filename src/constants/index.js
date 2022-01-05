@@ -74,6 +74,10 @@ export const AreaOptions = [
 export const RecruitmentType = ['study', 'scout', 'project'];
 
 //actions
+export const SIGNIN_USER = 'SIGNIN_USER'; 
+export const SIGNIN_USER_SUCCESS = 'SIGNIN_USER_SUCCESS'; 
+export const SIGNIN_USER_ERROR = 'SIGNIN_USER_ERROR'; 
+
 export const SIGNUP_USER = 'SIGNUP_USER';
 export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';
 export const SIGNUP_USER_ERROR = 'SIGNUP_USER_ERROR';
@@ -81,6 +85,10 @@ export const SIGNUP_USER_ERROR = 'SIGNUP_USER_ERROR';
 export const TOGGLE_CHAT_MODAL = 'TOGGLE_CHAT_MODAL';
 export const TOGGLE_CHAT_MODAL_SUCCESS = 'TOGGLE_CHAT_MODAL_SUCCESS';
 export const TOGGLE_CHAT_MODAL_ERROR = 'TOGGLE_CHAT_MODAL_ERROR';
+
+export const CREATE_POST = 'CREATE_POST';
+export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
+export const CREATE_POST_ERROR = 'CREATE_POST_ERROR';
 
 export const AUTH_LOAD_POSTS = 'AUTH_LOAD_POSTS';
 export const AUTH_LOAD_POSTS_SUCCESS = 'AUTH_LOAD_POSTS_SUCCESS';

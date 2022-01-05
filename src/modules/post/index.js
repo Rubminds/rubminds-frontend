@@ -1,4 +1,7 @@
 import {
+  CREATE_POST, 
+  CREATE_POST_SUCCESS, 
+  CREATE_POST_ERROR,
   LOAD_POSTS,
   LOAD_POSTS_SUCCESS,
   LOAD_POSTS_ERROR,
@@ -19,6 +22,10 @@ export const initialState = {
   posts: [],
   singlePost: null,
 
+  createPostLoading : false,
+  createPostDone : false, 
+  createPostError : null, 
+
   loadPostsLoading: false,
   loadPostsDone: false,
   loadPostsError: null,
@@ -37,6 +44,12 @@ export const initialState = {
 };
 
 //액션 생성함수
+export const createPost = (data) => ({
+  type : CREATE_POST, 
+  data, 
+})
+
+
 export const loadPosts = data => ({
   type: LOAD_POSTS,
   data,
@@ -61,6 +74,21 @@ export const likePost = id => ({
 const post = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
+      case CREATE_POST :
+        draft.createPostLoading = true; 
+        draft.createPostDone = false; 
+        draft.createPostError = null; 
+        break; 
+      case CREATE_POST_SUCCESS :
+        draft.createPostLoading = false; 
+        draft.createPostDone = true; 
+        draft.createPostError = null; 
+        break;
+      case CREATE_POST_ERROR :
+        draft.createPostLoading = false;
+        draft.createPostError = action.error;  
+        console.log(action.data); 
+        break;
       case LOAD_POSTS:
         draft.loadPostsLoading = true;
         draft.loadPostsDone = false;

@@ -39,12 +39,7 @@ const WrittingInnerForm = () => {
   // 이미지 미리보기 데이터
   const [attachment, setAttachment] = useState(null)
 
-  useEffect(()=>{
-    console.log('kinds', kinds); 
-  }, [kinds]); 
-
   useEffect(() => {
-    console.log(createPostDone); 
     if (createPostDone) {
       history.push('/')
     }

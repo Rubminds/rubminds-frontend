@@ -17,8 +17,11 @@ const SignUpPageRight = () => {
 
   const history = useHistory()
   const dispatch = useDispatch()
+
+  const [nicknameCheck, setnicknameCheck] = useState(false)
+
   const [dropDownOptions, setDropDownOptions] = useState([])
-  const [nickname, onChangeNickname] = useInput('')
+  const [nickname, onChangeNickname, setNickname] = useInput('')
   const [job, onChangeJob, setJob] = useInput('')
   const [introduce, onChangeIntroduce] = useInput(null)
   const [fileInfo, setFileInfo] = useState(null)
@@ -26,7 +29,7 @@ const SignUpPageRight = () => {
 
   useEffect(() => {
     if (isSignupDone) {
-      history.push('/')
+      history.push('/') 
     }
   }, [isSignupDone])
 
@@ -45,22 +48,29 @@ const SignUpPageRight = () => {
   const onSubmitHandler = useCallback(
     e => {
       e.preventDefault()
-      const data = {
-        nickname: nickname,
-        job: job,
-        introduce: introduce,
-        skillIds: dropDownOptions.map(option => SKILL_ID[option]),
+      
+      if(nicknameCheck){
+        const data = {
+          nickname: nickname,
+          job: job,
+          introduce: introduce,
+          skillIds: dropDownOptions.map(option => SKILL_ID[option]),
+        }
+        console.log(data); 
+        const formData = new FormData()
+        if (fileInfo) {
+          formData.append('avatar', fileInfo)
+        }
+        formData.append(
+          'userInfo',
+          new Blob([JSON.stringify(data)], { type: 'application/json' })
+        )
+        console.log(data)
+        dispatch(signupUser(formData))
       }
-      const formData = new FormData()
-      if (fileInfo) {
-        formData.append('avatar', fileInfo)
+      else{
+        alert('닉네임 중복체크를 해주세요')
       }
-      formData.append(
-        'userInfo',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      )
-      console.log(data)
-      dispatch(signupUser(formData))
     },
     [nickname, job, dropDownOptions, introduce, dispatch, fileInfo]
   )
@@ -73,7 +83,12 @@ const SignUpPageRight = () => {
 
       <S.SignUpPageInnerForm onSubmit={onSubmitHandler}>
         <Avatar fileInfo={fileInfo} setFileInfo={setFileInfo} />
-        <Nickname nickname={nickname} onChangeNickname={onChangeNickname} />
+        <Nickname
+          nickname={nickname}
+          onChangeNickname={onChangeNickname}
+          setNickname={setNickname}
+          setnicknameCheck={setnicknameCheck}
+        />
         <Job job={job} setJob={setJob} />
         <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
           기술 스택
@@ -85,7 +100,7 @@ const SignUpPageRight = () => {
           options={skillName}
         ></DropDown>
 
-        <Introduce onChangeIntroduce={onChangeIntroduce}/>
+        <Introduce onChangeIntroduce={onChangeIntroduce} />
         <S.SubmitBtn onClick={onSubmitHandler}>회원 가입</S.SubmitBtn>
         <S.Clear></S.Clear>
       </S.SignUpPageInnerForm>

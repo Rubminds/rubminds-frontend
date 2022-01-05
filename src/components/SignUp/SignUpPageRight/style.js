@@ -60,6 +60,7 @@ export const CheckBox = styled.input`
   font-size: 2rem;
   background-color: #cdf6e8;
   white-space: nowrap;
+  cursor: pointer;
 `;
 
 export const JobWrapper = styled.div`
@@ -75,6 +76,7 @@ export const JobCheckBtn = styled.input`
   background-color: ${props => props.name === props.selected ? '#CDF6E8' : '#fff'};
   padding: 2rem;
   font-size: 2rem;
+  cursor : pointer; 
 `;
 
 export const Introduce = styled.textarea`

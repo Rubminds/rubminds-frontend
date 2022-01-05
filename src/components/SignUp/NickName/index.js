@@ -1,25 +1,31 @@
-import React, {useState, useEffect } from 'react'
-import axios from 'axios';
+import React, { useState, useCallback } from 'react'
+import axios from 'axios'
 import * as S from '../SignUpPageRight/style'
 
-const Nickname = ({ nickname, onChangeNickname}) => {
+const Nickname = ({ nickname, onChangeNickname, setNickname, setnicknameCheck }) => {
+  const onNicknameChange = e => {
+    setNickname(e.target.value)
+  }
 
-  const [result, setResult] = useState(null); 
-
-    const nicknameCheckHandler = (nickname)=>{
-      axios.get(`https://dev.rubminds.site/api/user/check?nickname=${nickname}`, {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+  const nicknameCheckHandler = useCallback(e => {
+    axios
+      .get(
+        `https://dev.rubminds.site/api/user/nickname/check?nickname=${nickname}`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+          },
         }
-      }
       )
-      .then((res)=>console.log(res))
-      .catch((e)=>console.log(e)); 
-    };
-
-    useEffect(()=>{
-      console.log(result); 
-    },[result]); 
+      .then(res => {
+        alert('사용 가능한 닉네임 입니다.');
+        setnicknameCheck(true);
+      })
+      .catch(e => { 
+        alert('이미 사용 중인 닉네임 입니다.');
+        setnicknameCheck(false)
+      })
+  }, [])
 
   return (
     <>
@@ -27,8 +33,18 @@ const Nickname = ({ nickname, onChangeNickname}) => {
         닉네임
       </S.MainTitle>
       <S.NickNameWrapper>
-        <S.NickNameBox name="nickname" onChange={onChangeNickname} required />
-        <S.CheckBox type='button' value='중복체크' onClick={nicknameCheckHandler} />
+        <S.NickNameBox
+          data-id="1"
+          name="nickname"
+          onChange={onNicknameChange}
+          required
+        />
+        <S.CheckBox
+          data-id="1"
+          type="button"
+          value="중복체크"
+          onClick={nicknameCheckHandler}
+        />
       </S.NickNameWrapper>
     </>
   )

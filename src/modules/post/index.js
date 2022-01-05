@@ -145,7 +145,6 @@ const post = (state = initialState, action) => {
         console.log('like success');
         draft.likePostLoading = false;
         draft.likePostDone = true;
-        draft.singlePost.isLike = !draft.singlePost.isLike;
         break;
       case LIKE_POST_ERROR:
         draft.likePostLoading = false;

@@ -16,7 +16,6 @@ const PostDetailPage = () => {
   useEffect(() => {
     console.log('page start');
     dispatch(loadPost(params.id));
-    console.log(singlePost);
   }, []);
 
   const openModal = useCallback(() => {
@@ -29,7 +28,7 @@ const PostDetailPage = () => {
     <S.PostDetailWrapper>
       <BackButton />
       {singlePost && singlePost.postsStatus === 'FINISHED' ? (
-        <TeamEvaluation teamId={singlePost.teamId}/>
+        <TeamEvaluation teamId={singlePost.teamId} writerId={singlePost.writer.id}/>
       ) : (
         <>
           <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import axios from 'axios'
 import * as S from '../SignUpPageRight/style'
 
-const Nickname = ({ nickname, onChangeNickname, setNickname, setnicknameCheck }) => {
+const Nickname = ({ nickname, setNickname, setnicknameCheck }) => {
   const onNicknameChange = e => {
     setNickname(e.target.value)
   }

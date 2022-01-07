@@ -85,7 +85,6 @@ const SignUpPageRight = () => {
         <Avatar fileInfo={fileInfo} setFileInfo={setFileInfo} />
         <Nickname
           nickname={nickname}
-          onChangeNickname={onChangeNickname}
           setNickname={setNickname}
           setnicknameCheck={setnicknameCheck}
         />

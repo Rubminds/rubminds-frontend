@@ -8,7 +8,7 @@ import Title from '../Title'
 import MiddleArea from '../MiddleArea'
 import Region from '../Region'
 import File from '../File'
-import Content from '../Content'; 
+import Content from '../Content'
 
 import { CustomDropDown } from '../../../components'
 import { AreaOptions } from '../../../constants'
@@ -17,15 +17,15 @@ import { createPost } from '../../../modules/post'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { SKILL_ID } from '../../../constants'
 
-
 const WrittingInnerForm = () => {
   const createPostDone = useSelector(state => state.post.createPostDone)
+
   const dispatch = useDispatch()
   const history = useHistory()
   const [title, setTitle] = useState(null)
   const [content, setContent] = useState(null)
   const [headCount, setHeadCount] = useState(null)
-  const [kinds, setKinds] = useState("STUDY");
+  const [kinds, setKinds] = useState('STUDY')
   const [meeting, setMeeting] = useState(null)
   const [region, setRegion] = useState(null)
   const [file, setFile] = useState(null)
@@ -40,12 +40,6 @@ const WrittingInnerForm = () => {
   const [attachment, setAttachment] = useState(null)
 
   useEffect(() => {
-    if (createPostDone) {
-      history.push('/')
-    }
-  }, [createPostDone])
-
-  useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get('https://dev.rubminds.site/api/skills', {
         headers: {
@@ -58,54 +52,46 @@ const WrittingInnerForm = () => {
   }, [])
 
   // useCallback ver
-  const onSubmitHandler= useCallback((e)=>{
-    e.preventDefault()
+  const onSubmitHandler = useCallback(
+    e => {
+      e.preventDefault()
 
-    const data = {
-      title: title,
-      content: content,
-      headcount: headCount != null ? parseInt(headCount) : null,
-      kinds: kinds,
-      meeting: meeting,
-      region: region,
-      skillIds: dropDownOptions.map(option => SKILL_ID[option]),
-      customSkillName: customOptions,
-    }
-    const formData = new FormData()
-    if (file) {
-      formData.append('files', file)
-    }
-    formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }))
-    dispatch(createPost(formData))
-  }, [title,content,headCount,kinds,meeting,region,dropDownOptions,customOptions]); 
+      const data = {
+        title: title,
+        content: content,
+        headcount: headCount != null ? parseInt(headCount) : null,
+        kinds: kinds,
+        meeting: meeting,
+        region: region,
+        skillIds: dropDownOptions.map(option => SKILL_ID[option]),
+        customSkillName: customOptions,
+      }
+      const formData = new FormData()
+      if (file) {
+        formData.append('files', file)
+      }
+      formData.append(
+        'postInfo',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      )
 
-
-  // 그냥 ver
-  // const onSubmitHandler = e => {
-  //   e.preventDefault()
-
-  //   const data = {
-  //     title: title,
-  //     content: content,
-  //     headcount: headCount != null ? parseInt(headCount) : null,
-  //     kinds: kinds,
-  //     meeting: meeting,
-  //     region: region,
-  //     skillIds: dropDownOptions.map(option => SKILL_ID[option]),
-  //     customSkillName: customOptions,
-  //   }
-  //   const formData = new FormData()
-  //   if (file) {
-  //     formData.append('files', file)
-  //   }
-  //   formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }))
-    
-  //   dispatch(createPost(formData))
-  // }
+      dispatch(createPost(formData))
+      history.push('/')
+    },
+    [
+      title,
+      content,
+      headCount,
+      kinds,
+      meeting,
+      region,
+      dropDownOptions,
+      customOptions,
+    ]
+  )
 
   return (
     <S.WrittingInnerForm onSubmit={onSubmitHandler}>
-
       {/* 모집 유형 */}
       <Kinds
         kinds={kinds}
@@ -141,7 +127,6 @@ const WrittingInnerForm = () => {
         isScout={isScout}
       />
 
-      
       {/* 지역 */}
       <Region region={region} setRegion={setRegion} AreaOptions={AreaOptions} />
 
@@ -155,7 +140,7 @@ const WrittingInnerForm = () => {
         setFileInfo={setFileInfo}
       />
 
-      <Content content={content} setContent={setContent}/>
+      <Content content={content} setContent={setContent} />
 
       <S.BtnWrapper>
         <S.BtnLeft>

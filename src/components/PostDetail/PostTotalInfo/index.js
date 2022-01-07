@@ -17,7 +17,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
-  }, []);
+  }, [dispatch, post.id]);
 
   const onStatusCircleClick = useCallback(()=>{
     dispatch(loadTeamMembers(post.teamId))

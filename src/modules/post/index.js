@@ -14,6 +14,9 @@ import {
   LIKE_POST,
   LIKE_POST_SUCCESS,
   LIKE_POST_ERROR,
+  SUBMIT_RESULT_POST,
+  SUBMIT_RESULT_POST_SUCCESS,
+  SUBMIT_RESULT_POST_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
@@ -41,6 +44,10 @@ export const initialState = {
   likePostLoading: false,
   likePostDone: false,
   likePostError: null,
+
+  submitResultPostLoading: false,
+  submitResultPostDone: false,
+  submitResultPostError: null,
 };
 
 //액션 생성함수
@@ -67,6 +74,11 @@ export const loadPost = id => ({
 export const likePost = id => ({
   type: LIKE_POST,
   data: id,
+});
+
+export const submitResultPost = postId => ({
+  type: SUBMIT_RESULT_POST,
+  data: postId,
 });
 
 //리듀서
@@ -121,7 +133,6 @@ const post = (state = initialState, action) => {
         draft.authLoadPostsError = action.error;
         break;
       case LOAD_POST:
-        //draft.singlePost = null;
         draft.loadPostLoading = true;
         draft.loadPostDone = false;
         draft.loadPostError = null;
@@ -150,6 +161,21 @@ const post = (state = initialState, action) => {
         console.log('like error');
         draft.likePostLoading = false;
         draft.likePostError = action.error;
+        break;
+      case SUBMIT_RESULT_POST:
+        draft.submitResultPostLoading = true;
+        draft.submitResultPostDone = false;
+        draft.submitResultPostError = null;
+        break;
+      case SUBMIT_RESULT_POST_SUCCESS: //액션 처리
+        console.log('submit result success');
+        draft.submitResultPostLoading = false;
+        draft.submitResultPostDone = true;
+        break;
+      case SUBMIT_RESULT_POST_ERROR:
+        console.log('submit result error');
+        draft.submitResultPostLoading = false;
+        draft.submitResultPostError = action.error;
         break;
       default:
         break;

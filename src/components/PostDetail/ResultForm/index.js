@@ -10,8 +10,9 @@ const ResultForm = () => {
   const [completeContent, onChangeCompleteContent] = useInput('')
   const [images, onChangeImages, setImages] = useInput([]);
   
-  const onSubmitResultClick = useCallback(e => () => {
-    console.log(refLink, completeContent, images)
+  const onSubmitResultClick = useCallback(e => {
+    e.preventDefault();
+    console.log(refLink, completeContent, images, fn)
   },[completeContent, refLink, images])
   return (
     <S.ResultFormWrapper>

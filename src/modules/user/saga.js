@@ -21,7 +21,7 @@ import {
 // 액션에서 axios 요청 필요할 때
 
 function signupUserAPI(data) {
-  return axios.post('https://dev.rubminds.site/api/user/signup', data, {
+  return axios.post('/user/signup', data, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
     },

@@ -41,7 +41,7 @@ const WrittingInnerForm = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('https://dev.rubminds.site/api/skills', {
+      const result = await axios.get('/skills', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },

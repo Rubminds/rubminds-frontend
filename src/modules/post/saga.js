@@ -120,7 +120,7 @@ function* loadPost(action) {
 }
 
 function likePostAPI(data) {
-  return axios.post(`https://dev.rubminds.site/api/post/${data}/like`, null, {
+  return axios.post(`/post/${data}/like`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

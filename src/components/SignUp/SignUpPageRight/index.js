@@ -26,9 +26,10 @@ const SignUpPageRight = () => {
   const [skillName, setSkillName] = useState([])
 
 
+
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('https://dev.rubminds.site/api/skills', {
+      const result = await axios.get('/skills', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },

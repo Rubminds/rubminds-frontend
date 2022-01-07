@@ -19,7 +19,7 @@ import {
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 function createPostAPI(data) {
-  return axios.post('/api/post', data , {
+  return axios.post('/post', data , {
     headers : {
       Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
     }

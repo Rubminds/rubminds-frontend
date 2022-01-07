@@ -27,22 +27,26 @@ const PostDetailPage = () => {
   return (
     <S.PostDetailWrapper>
       <BackButton />
-      {singlePost && singlePost.postsStatus === 'FINISHED' ? (
-        <TeamEvaluation teamId={singlePost.teamId} writerId={singlePost.writer.id} />
+      {singlePost ? (
+        singlePost.postsStatus === 'FINISHED' ? (
+          <TeamEvaluation teamId={singlePost.teamId} writerId={singlePost.writer.id} />
+        ) : (
+          <>
+            <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>
+            <S.PostDetailDate>{singlePost.createAt}</S.PostDetailDate>
+            <PostTotalInfo
+              post={singlePost}
+              modalOpen={modalOpen}
+              closeModal={closeModal}
+              openModal={openModal}
+              me={me}
+            />
+            <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
+            <ResultForm />
+          </>
+        )
       ) : (
-        <>
-          <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>
-          <S.PostDetailDate>{singlePost.createAt}</S.PostDetailDate>
-          <PostTotalInfo
-            post={singlePost}
-            modalOpen={modalOpen}
-            closeModal={closeModal}
-            openModal={openModal}
-            me={me}
-          />
-          <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
-          <ResultForm />
-        </>
+        <></>
       )}
     </S.PostDetailWrapper>
   );

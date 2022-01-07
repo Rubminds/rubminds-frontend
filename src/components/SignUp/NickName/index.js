@@ -8,16 +8,15 @@ const Nickname = ({ nickname, setNickname, setnicknameCheck }) => {
   }
 
   const nicknameCheckHandler = useCallback(e => {
-    axios
-      .get(
-        `https://dev.rubminds.site/api/user/nickname/check?nickname=${nickname}`,
+    axios.get(
+        `api/user/nickname/check?nickname=${nickname}`,
         {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
           },
         }
       )
-      .then(res => {
+      .then(res => { 
         alert('사용 가능한 닉네임 입니다.');
         setnicknameCheck(true);
       })

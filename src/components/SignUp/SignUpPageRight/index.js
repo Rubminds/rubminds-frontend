@@ -3,7 +3,7 @@ import axios from 'axios'
 import * as S from './style'
 import { DropDown } from '../../../components'
 import useInput from '../../../hooks/useInput'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { signupUser } from '../../../modules/user'
 import { useHistory } from 'react-router-dom'
 import { SKILL_ID } from '../../../constants'
@@ -13,8 +13,6 @@ import Avatar from '../Avatar'
 import Introduce from '../Introduce'
 
 const SignUpPageRight = () => {
-  const isSignupDone = useSelector(state => state.user.isSignupDone)
-
   const history = useHistory()
   const dispatch = useDispatch()
 
@@ -27,11 +25,6 @@ const SignUpPageRight = () => {
   const [fileInfo, setFileInfo] = useState(null)
   const [skillName, setSkillName] = useState([])
 
-  useEffect(() => {
-    if (isSignupDone) {
-      history.push('/') 
-    }
-  }, [isSignupDone])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,8 +58,8 @@ const SignUpPageRight = () => {
           'userInfo',
           new Blob([JSON.stringify(data)], { type: 'application/json' })
         )
-        console.log(data)
         dispatch(signupUser(formData))
+        history.push('/') 
       }
       else{
         alert('닉네임 중복체크를 해주세요')

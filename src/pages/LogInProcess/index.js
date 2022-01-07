@@ -5,26 +5,28 @@ import { signinUser } from '../../modules/user';
 
 const LogInProcess = () => {
     // callBack URL 에서 얻을 수 있는 정보
-    // :id/:nickname/:accessToken/:signupCheck/:avatar
+    // :id/:nickname/:accessToken/:signupCheck/:avatar1/:avatar2/:avatar3
   
-    const { id, nickname, accessToken, signupCheck, avatar } = useParams();
+    const { id, nickname, accessToken, signupCheck, avatar1, avatar2, avatar3 } = useParams();
     const dispatch = useDispatch(); 
-    const history = useHistory(); 
-
-    const [data] = useState({
-        id : parseInt(id), 
-        nickname : nickname,  
-        avatar : avatar === '0' || undefined ? "DefaultImg" : avatar
-    })
-
+    const history = useHistory();
+    
+    useEffect(()=> {
+        console.log(JSON.parse(signupCheck)); 
+    },[]); 
+    
     useEffect(() => {
         localStorage.setItem('accessToken', accessToken);
         if (JSON.parse(signupCheck)){
-            console.log(data); 
+            const data = {
+                id : parseInt(id), 
+                nickname : nickname,  
+                avatar : avatar1 === '0' ? 'DefaultImg': `/${avatar1}/${avatar2}/${avatar3}`
+            };
             dispatch(signinUser(data));
             history.push('/'); 
         }
-        else{
+        else {
             history.push('/signup');
         }
     }, []); 

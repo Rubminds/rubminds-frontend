@@ -22,7 +22,7 @@ const LandingPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    me ? dispatch(authLoadPosts(apiQuery)) : dispatch(loadPosts(apiQuery));
+    (me && localStorage.getItem('accessToken')) ? dispatch(authLoadPosts(apiQuery)) : dispatch(loadPosts(apiQuery));
   }, [apiQuery, me, dispatch]);
 
   useEffect(() => {
@@ -84,7 +84,9 @@ const LandingPage = () => {
       let changedQuery = currentQuery.replace(region, '');
       changedQuery = changedQuery.replace('&region=', '');
       setRegion(option);
-      setApiQuery(`${changedQuery}&region=${option}`);
+      option === ''
+        ? setApiQuery(`${changedQuery}`)
+        : setApiQuery(`${changedQuery}&region=${option}`);
     },
     [apiQuery, region],
   );
@@ -121,6 +123,7 @@ const LandingPage = () => {
               setCustomOptions={setCustomOptions}
               onPostStatusClick={onPostStatusClick}
               onRegionClick={onRegionClick}
+              region={region}
               postStatus={postStatus}
               skills={skills}
             />

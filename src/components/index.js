@@ -12,6 +12,7 @@ export { default as BackButton } from './common/BackButton';
 export { default as Avatar } from './common/Avatar';
 export { default as ChatModal } from './common/ChatModal';
 
+export { default as AreaDropdown } from './Landing/AreaDropdown';
 export { default as Banner } from './Landing/Banner';
 export { default as BannerCarousel } from './Landing/BannerCarousel';
 export { default as CategoryArea } from './Landing/CategoryArea';
@@ -22,6 +23,7 @@ export { default as UserListModal } from './PostDetail/UserListModal';
 export { default as ProcessEndModal } from './PostDetail/ProcessEndModal';
 export { default as PostTotalInfo } from './PostDetail/PostTotalInfo';
 export { default as ResultForm } from './PostDetail/ResultForm';
+export { default as TeamEvaluation} from './PostDetail/TeamEvaluation'
 
 export { default as UserProfile } from './MyPage/UserProfile';
 export { default as UserProjects } from './MyPage/UserProjects';

@@ -17,7 +17,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
-  }, []);
+  }, [dispatch, post.id]);
 
   const onStatusCircleClick = useCallback(()=>{
     dispatch(loadTeamMembers(post.teamId))
@@ -54,7 +54,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
         ) : (
           <>
             <S.GroupBox>
-              {me.nickname === post.writer.nickname ? (
+              {me.id === post.writer.id ? (
                 <>
                   {post.postsStatus === 'RECRUIT' ? (
                     <>

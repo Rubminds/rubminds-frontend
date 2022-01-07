@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import * as S from './style'
@@ -8,7 +8,7 @@ import Title from '../Title'
 import MiddleArea from '../MiddleArea'
 import Region from '../Region'
 import File from '../File'
-import Content from '../Content'; 
+import Content from '../Content'
 
 import { CustomDropDown } from '../../../components'
 import { AreaOptions } from '../../../constants'
@@ -17,9 +17,9 @@ import { createPost } from '../../../modules/post'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { SKILL_ID } from '../../../constants'
 
-
 const WrittingInnerForm = () => {
   const createPostDone = useSelector(state => state.post.createPostDone)
+
   const dispatch = useDispatch()
   const history = useHistory()
   const [title, setTitle] = useState(null)
@@ -40,15 +40,8 @@ const WrittingInnerForm = () => {
   const [attachment, setAttachment] = useState(null)
 
   useEffect(() => {
-    console.log(createPostDone); 
-    if (createPostDone) {
-      history.push('/')
-    }
-  }, [createPostDone])
-
-  useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('https://dev.rubminds.site/api/skills', {
+      const result = await axios.get('/skills', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },
@@ -58,36 +51,47 @@ const WrittingInnerForm = () => {
     fetchData()
   }, [])
 
-  const onSubmitHandler = e => {
-    e.preventDefault()
-    const data = {
-      title: title,
-      content: content,
-      headcount: parseInt(headCount),
-      kinds: kinds,
-      meeting: meeting,
-      region: region,
-      skillIds: dropDownOptions.map(option => SKILL_ID[option]),
-      customSkillName: customOptions,
-    }
-    console.log(data)
-    const formData = new FormData()
-    if (headCount) {
-      formData.append('headcount', headCount)
-    }
-    if (file) {
-      formData.append('files', file)
-    }
-    formData.append(
-      'postInfo',
-      new Blob([JSON.stringify(data)], { type: 'application/json' })
-    )
-    dispatch(createPost(formData))
-  }
+  // useCallback ver
+  const onSubmitHandler = useCallback(
+    e => {
+      e.preventDefault()
+
+      const data = {
+        title: title,
+        content: content,
+        headcount: headCount != null ? parseInt(headCount) : null,
+        kinds: kinds,
+        meeting: meeting,
+        region: region,
+        skillIds: dropDownOptions.map(option => SKILL_ID[option]),
+        customSkillName: customOptions,
+      }
+      const formData = new FormData()
+      if (file) {
+        formData.append('files', file)
+      }
+      formData.append(
+        'postInfo',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      )
+
+      dispatch(createPost(formData))
+      history.push('/')
+    },
+    [
+      title,
+      content,
+      headCount,
+      kinds,
+      meeting,
+      region,
+      dropDownOptions,
+      customOptions,
+    ]
+  )
 
   return (
     <S.WrittingInnerForm onSubmit={onSubmitHandler}>
-
       {/* 모집 유형 */}
       <Kinds
         kinds={kinds}
@@ -123,7 +127,6 @@ const WrittingInnerForm = () => {
         isScout={isScout}
       />
 
-      
       {/* 지역 */}
       <Region region={region} setRegion={setRegion} AreaOptions={AreaOptions} />
 
@@ -137,7 +140,7 @@ const WrittingInnerForm = () => {
         setFileInfo={setFileInfo}
       />
 
-      <Content content={content} setContent={setContent}/>
+      <Content content={content} setContent={setContent} />
 
       <S.BtnWrapper>
         <S.BtnLeft>

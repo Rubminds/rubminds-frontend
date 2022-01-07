@@ -25,7 +25,7 @@ const App = () => {
         <ChatButton />
         <Switch>
           <Route
-            exact path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar"
+            exact path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar1/:avatar2?/:avatar3?"
             component={LogInProcess}
           />
           <Route path="/signup" component={SignUpPage} />

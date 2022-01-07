@@ -23,6 +23,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
     dispatch(loadTeamMembers(post.teamId))
     openModal();
   },[])
+  
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
@@ -54,7 +55,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
         ) : (
           <>
             <S.GroupBox>
-              {me.nickname === post.writer.nickname ? (
+              {me.id === post.writer.id ? (
                 <>
                   {post.postsStatus === 'RECRUIT' ? (
                     <>

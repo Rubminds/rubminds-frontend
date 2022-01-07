@@ -23,7 +23,7 @@ const team = (state = initialState, action) => {
       case LOAD_TEAM_MEMBERS:
         break;
       case LOAD_TEAM_MEMBERS_SUCCESS: //액션 처리
-        console.log(action.data);
+        console.log('load team member success', action.data.data);
         draft.members = [];
         draft.members = action.data.data.teamUsers;
         break;

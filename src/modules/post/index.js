@@ -121,6 +121,7 @@ const post = (state = initialState, action) => {
         draft.authLoadPostsError = action.error;
         break;
       case LOAD_POST:
+        //draft.singlePost = null;
         draft.loadPostLoading = true;
         draft.loadPostDone = false;
         draft.loadPostError = null;
@@ -144,7 +145,6 @@ const post = (state = initialState, action) => {
         console.log('like success');
         draft.likePostLoading = false;
         draft.likePostDone = true;
-        //draft.singlePost.isLike = !draft.singlePost.isLike;
         break;
       case LIKE_POST_ERROR:
         console.log('like error');

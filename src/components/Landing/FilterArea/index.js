@@ -4,6 +4,7 @@ import { BiBorderAll } from 'react-icons/bi';
 import { FaMedal } from 'react-icons/fa';
 
 import { AreaOptions } from '../../../constants';
+import {AreaDropdown} from '../../';
 
 const FilterArea = ({
   dropDownOptions,
@@ -12,6 +13,7 @@ const FilterArea = ({
   setCustomOptions,
   onPostStatusClick,
   onRegionClick,
+  region,
   postStatus,
   skills,
 }) => {
@@ -33,18 +35,7 @@ const FilterArea = ({
       </S.DropdownWrapper>
 
       <S.SortWrapper>
-        <S.AreaSelect name="area">
-          <option value="" onClick={onRegionClick('')}>
-            -
-          </option>
-          {AreaOptions.map((option, index) => {
-            return (
-              <option key={index} value={option} onClick={onRegionClick(option)}>
-                {option}
-              </option>
-            );
-          })}
-        </S.AreaSelect>
+        <AreaDropdown region={region} onRegionClick={onRegionClick}/>
         <S.SortOptionWrapper>
           <S.SortOption
             onClick={onPostStatusClick('RECRUIT')}

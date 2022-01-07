@@ -93,11 +93,12 @@ function* authLoadPosts(action) {
 }
 
 function loadPostAPI(data) {
-  return axios.get(`/post/${data}`, null, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-    },
-  });
+  return axios.get(`/post/${data}`);
+  // return axios.get(`/post/${data}`, {
+  //   headers: {
+  //     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  //   },
+  // });
 }
 function* loadPost(action) {
   console.log(action.data);

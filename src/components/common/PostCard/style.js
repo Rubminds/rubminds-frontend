@@ -78,4 +78,5 @@ export const DibBtn = styled.button`
   background-color: inherit;
   display:flex;
   align-items:center;
+  cursor:pointer;
 `;

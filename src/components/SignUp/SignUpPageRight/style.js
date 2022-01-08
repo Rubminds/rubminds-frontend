@@ -51,6 +51,16 @@ export const NickNameBox = styled.input`
   font-size: 2rem;
 `;
 
+export const NickNameChecked = styled.div`
+  flex: 2;
+  border: none;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 0rem 3rem 0rem 3rem;
+  border-radius: 3rem;
+  padding: 2rem;
+  font-size: 2rem;
+`;
+
 export const CheckBox = styled.input`
   flex: 1;
   margin-left: 3rem;

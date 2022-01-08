@@ -16,6 +16,7 @@ const Job = ({ job, setJob }) => {
             setJob(e.target.name) 
           }}
           selected={job}
+          required
         />
         <S.JobCheckBtn
           value='직장인'
@@ -25,6 +26,7 @@ const Job = ({ job, setJob }) => {
             setJob(e.target.name)
           }}
           selected={job}
+          required
         />
       </S.JobWrapper>
     </>

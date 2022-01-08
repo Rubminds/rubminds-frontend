@@ -19,13 +19,11 @@ const SignUpPageRight = () => {
   const [nicknameCheck, setnicknameCheck] = useState(false)
 
   const [dropDownOptions, setDropDownOptions] = useState([])
-  const [nickname, onChangeNickname, setNickname] = useInput('')
+  const [nickname, setNickname] = useState(null); 
   const [job, onChangeJob, setJob] = useInput('')
   const [introduce, onChangeIntroduce] = useInput(null)
   const [fileInfo, setFileInfo] = useState(null)
   const [skillName, setSkillName] = useState([])
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +40,6 @@ const SignUpPageRight = () => {
   const onSubmitHandler = useCallback(
     e => {
       e.preventDefault()
-      
       if(nicknameCheck){
         const data = {
           nickname: nickname,
@@ -66,7 +63,7 @@ const SignUpPageRight = () => {
         alert('닉네임 중복체크를 해주세요')
       }
     },
-    [nickname, job, dropDownOptions, introduce, dispatch, fileInfo]
+    [nickname, job, dropDownOptions, introduce, fileInfo, nicknameCheck]
   )
 
   return (
@@ -80,11 +77,12 @@ const SignUpPageRight = () => {
         <Nickname
           nickname={nickname}
           setNickname={setNickname}
+          nicknameCheck={nicknameCheck}
           setnicknameCheck={setnicknameCheck}
         />
         <Job job={job} setJob={setJob} />
         <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
-          기술 스택
+          기술스택 ( 선택 )
         </S.MainTitle>
         <DropDown
           dropDownOptions={dropDownOptions}
@@ -94,7 +92,7 @@ const SignUpPageRight = () => {
         ></DropDown>
 
         <Introduce onChangeIntroduce={onChangeIntroduce} />
-        <S.SubmitBtn onClick={onSubmitHandler}>회원 가입</S.SubmitBtn>
+        <S.SubmitBtn  onClick={onSubmitHandler} > 회원가입 </S.SubmitBtn>
         <S.Clear></S.Clear>
       </S.SignUpPageInnerForm>
     </S.SignUpPageRightWrapper>

@@ -32,7 +32,7 @@ export const SubTitle = styled.h3`
   font-weight: initial;
 `;
 
-export const ContentsWrapper = styled.div`
+export const ContentsWrapper = styled.form`
   width: 100%;
   ${flexCenter}
   flex-direction:column;

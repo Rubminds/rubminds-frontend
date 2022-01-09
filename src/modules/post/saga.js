@@ -97,14 +97,8 @@ function* authLoadPosts(action) {
 
 function loadPostAPI(data) {
   return axios.get(`/post/${data}`);
-  // return axios.get(`/post/${data}`, {
-  //   headers: {
-  //     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-  //   },
-  // });
 }
 function* loadPost(action) {
-  console.log(action.data);
   console.log('access loadPost saga');
   const result = yield call(loadPostAPI, action.data);
   console.log(result);
@@ -151,6 +145,7 @@ function* likePost(action) {
 }
 
 function submitResultPostAPI(data) {
+  console.log(data)
   return axios.post(`/post/${data.postId}/complete`, data.content, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,

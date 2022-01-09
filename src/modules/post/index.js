@@ -136,6 +136,7 @@ const post = (state = initialState, action) => {
         draft.loadPostLoading = true;
         draft.loadPostDone = false;
         draft.loadPostError = null;
+        draft.singlePost=null;
         break;
       case LOAD_POST_SUCCESS: //액션 처리
         console.log(action.data.data);

@@ -10,19 +10,20 @@ import { loadTeamMembers } from '../../../modules/team';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
-const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
+const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) => {
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
-  const {members} = useSelector(state => state.team)
+  //const {members} = useSelector(state => state.team)
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
   }, [dispatch, post.id]);
 
   const onStatusCircleClick = useCallback(()=>{
-    dispatch(loadTeamMembers(post.teamId))
+    console.log('open team members')
+    //dispatch(loadTeamMembers(post.teamId))
     openModal();
-  },[])
+  },[dispatch, openModal, post.teamId])
   
   return (
     <S.PostDetailInfo>

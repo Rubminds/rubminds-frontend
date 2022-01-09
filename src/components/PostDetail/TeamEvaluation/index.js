@@ -1,22 +1,19 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import * as S from './style';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { loadTeamMembers } from '../../../modules/team';
+import { evaluateTeamMembers } from '../../../modules/team';
 import { Test } from '../../../assets/imgs';
 
-const TeamEvaluation = ({ teamId, writerId }) => {
+const TeamEvaluation = ({ teamId, writerId, members }) => {
   const [evaluationArray, setEvaluationArray] = useState([]);
   const dispatch = useDispatch();
-  const { members } = useSelector(state => state.team);
 
   useEffect(() => {
-    dispatch(loadTeamMembers(teamId));
-    setEvaluationArray(
-      members.map(v => {
-        return { userId: v.userId, attendLevel: 0, workLevel: 0 };
-      }),
-    );
+    const copyArray = members.map(v => {
+      return { userId: v.userId, attendLevel: 0, workLevel: 0 };
+    });
+    setEvaluationArray(copyArray);
   }, []);
 
   const checkInput = useCallback(e => {
@@ -29,6 +26,7 @@ const TeamEvaluation = ({ teamId, writerId }) => {
   const onAttendChange = useCallback(
     (e, i, type) => {
       const copyArray = [...evaluationArray];
+      console.log(copyArray)
       type === 'work'
         ? (copyArray[i].workLevel = parseInt(e.target.value))
         : (copyArray[i].attendLevel = parseInt(e.target.value));
@@ -39,9 +37,9 @@ const TeamEvaluation = ({ teamId, writerId }) => {
 
   const onSubmitClick = useCallback(() => {
     const formData = new FormData();
-    //formData.append('kinds', kinds);
+    formData.append('kinds', 'PROJECT');
     formData.append('evaluation', evaluationArray);
-    dispatch()
+    dispatch(evaluateTeamMembers({ teamId, content: formData }));
   }, [evaluationArray]);
 
   return (

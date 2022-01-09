@@ -51,7 +51,17 @@ export const NickNameBox = styled.input`
   font-size: 2rem;
 `;
 
-export const CheckBox = styled.button`
+export const NickNameChecked = styled.div`
+  flex: 2;
+  border: none;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 0rem 3rem 0rem 3rem;
+  border-radius: 3rem;
+  padding: 2rem;
+  font-size: 2rem;
+`;
+
+export const CheckBox = styled.input`
   flex: 1;
   margin-left: 3rem;
   border: none;
@@ -60,13 +70,14 @@ export const CheckBox = styled.button`
   font-size: 2rem;
   background-color: #cdf6e8;
   white-space: nowrap;
+  cursor: pointer;
 `;
 
 export const JobWrapper = styled.div`
   ${flexBetween}
 `;
 
-export const JobCheckBtn = styled.button`
+export const JobCheckBtn = styled.input`
   width: 30%;
   white-space: nowrap;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
@@ -75,6 +86,7 @@ export const JobCheckBtn = styled.button`
   background-color: ${props => props.name === props.selected ? '#CDF6E8' : '#fff'};
   padding: 2rem;
   font-size: 2rem;
+  cursor : pointer; 
 `;
 
 export const Introduce = styled.textarea`

@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-
 import theme from '../common/theme'
 import GlobalStyles from '../common/GlobalStyle'
 import LandingPage from './LandingPage'
@@ -25,7 +24,7 @@ const App = () => {
         <ChatButton />
         <Switch>
           <Route
-            exact path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar"
+            exact path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar1/:avatar2?/:avatar3?"
             component={LogInProcess}
           />
           <Route path="/signup" component={SignUpPage} />

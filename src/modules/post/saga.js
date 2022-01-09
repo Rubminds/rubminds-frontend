@@ -19,7 +19,7 @@ import {
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 function createPostAPI(data) {
-  return axios.post('https://dev.rubminds.site/api/post', data , {
+  return axios.post('/post', data , {
     headers : {
       Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
     }
@@ -120,7 +120,7 @@ function* loadPost(action) {
 }
 
 function likePostAPI(data) {
-  return axios.post(`https://dev.rubminds.site/api/post/${data}/like`, null, {
+  return axios.post(`/post/${data}/like`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

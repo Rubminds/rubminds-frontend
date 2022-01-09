@@ -4,6 +4,7 @@ import * as S from '../WrittingInnerForm/style'
 const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
   const onKindsChange = useCallback(
     e => {
+      console.log(JSON.stringify(e.target.getAttribute('value'))); 
       setKinds(e.target.getAttribute('value'))
       switch (e.target.getAttribute('value')) {
         case 'STUDY':

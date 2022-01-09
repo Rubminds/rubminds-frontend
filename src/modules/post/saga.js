@@ -16,6 +16,9 @@ import {
   LIKE_POST,
   LIKE_POST_ERROR,
   LIKE_POST_SUCCESS,
+  SUBMIT_RESULT_POST,
+  SUBMIT_RESULT_POST_ERROR,
+  SUBMIT_RESULT_POST_SUCCESS,
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 function createPostAPI(data) {
@@ -147,12 +150,37 @@ function* likePost(action) {
   console.log('finished likePost saga');
 }
 
+function submitResultPostAPI(data) {
+  return axios.post(`/post/${data}/like`, null, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  });
+}
+function* submitResultPost(action) {
+  console.log(action.data);
+  console.log('access submitResultPost saga');
+  const result = yield call(submitResultPostAPI, action.data);
+  console.log(result);
+  try {
+    yield put({
+      type: SUBMIT_RESULT_POST_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    yield put({
+      type: SUBMIT_RESULT_POST_ERROR,
+      error: err,
+    });
+  }
+  console.log('finished likePost saga');
+}
+
 //액션 감지 함수
 //takeLatest안의 액션을 감지.
 function* watchCreatePost() {
   yield takeLatest(CREATE_POST, createPost); 
 }
-
 function* watchLoadPosts() {
   yield takeLatest(LOAD_POSTS, loadPosts);
 }
@@ -165,6 +193,9 @@ function* watchLikePost() {
 function* watchAuthLoadPosts() {
   yield takeLatest(AUTH_LOAD_POSTS, authLoadPosts);
 }
+function* watchSubmitResultPost() {
+  yield takeLatest(SUBMIT_RESULT_POST, submitResultPost);
+}
 
 export default function* postSaga() {
   yield all([
@@ -173,5 +204,6 @@ export default function* postSaga() {
     fork(watchLoadPost),
     fork(watchLikePost),
     fork(watchAuthLoadPosts),
+    fork(watchSubmitResultPost),
   ]);
 }

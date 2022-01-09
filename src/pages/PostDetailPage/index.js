@@ -28,7 +28,7 @@ const PostDetailPage = () => {
     <S.PostDetailWrapper>
       <BackButton />
       {singlePost ? (
-        singlePost.postsStatus === 'FINISHED' ? (
+        singlePost.postsStatus === 'RANKING' ? (
           <TeamEvaluation teamId={singlePost.teamId} writerId={singlePost.writer.id} />
         ) : (
           <>
@@ -42,7 +42,8 @@ const PostDetailPage = () => {
               me={me}
             />
             <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
-            <ResultForm />
+
+            {singlePost.postsStatus === 'FINISHED' && <ResultForm />}
           </>
         )
       ) : (

@@ -76,9 +76,9 @@ export const likePost = id => ({
   data: id,
 });
 
-export const submitResultPost = postId => ({
+export const submitResultPost = data => ({
   type: SUBMIT_RESULT_POST,
-  data: postId,
+  data,
 });
 
 //리듀서

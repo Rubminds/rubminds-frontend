@@ -43,7 +43,7 @@ const PostDetailPage = () => {
             />
             <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
 
-            {singlePost.postsStatus === 'FINISHED' && <ResultForm />}
+            {singlePost.postsStatus === 'FINISHED' && <ResultForm postId={singlePost.id}/>}
           </>
         )
       ) : (

@@ -6,7 +6,7 @@ import { Input, TextArea, Carousel } from '../..';
 import useInput from '../../../hooks/useInput';
 import { submitResultPost } from '../../../modules/post';
 
-const ResultForm = () => {
+const ResultForm = ({ postId }) => {
   const [file, onChangeFile] = useInput('');
   const [refLink, onChangeRefLink] = useInput('');
   const [completeContent, onChangeCompleteContent] = useInput('');
@@ -28,9 +28,9 @@ const ResultForm = () => {
         'resultInfo',
         new Blob([JSON.stringify(dataObj)], { type: 'application/json' }),
       );
-      dispatch(submitResultPost(formData));
+      dispatch(submitResultPost({ postId, content: formData }));
     },
-    [completeContent, refLink, images, file],
+    [completeContent, refLink, images, file, dispatch],
   );
   return (
     <S.ResultFormWrapper>

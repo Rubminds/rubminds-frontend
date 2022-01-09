@@ -7,7 +7,7 @@ import { BackButton, DibsInfo, DibsPosts } from '../../components';
 const DibsPage = () => {
   const [dibsPosts, setDibsPosts] = useState([]);
   const [dibsNum, setDibsNum] = useState({STUDY:0, PROJECT:0, SCOUT:0});
-  const [apiQuery, setApiQuery] = useState('/api/posts/like?page=1&size=10');
+  const [apiQuery, setApiQuery] = useState('/posts/like?page=1&size=10');
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(apiQuery, {

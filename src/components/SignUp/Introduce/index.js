@@ -7,7 +7,7 @@ const Introduce = ({onChangeIntroduce}) => {
         <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem" aquired>
           자기소개
         </S.MainTitle>
-        <S.Introduce onChange={onChangeIntroduce} />
+        <S.Introduce onChange={onChangeIntroduce} required/>
         </>
     )
 }

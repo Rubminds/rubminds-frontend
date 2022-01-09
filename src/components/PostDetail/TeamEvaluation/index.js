@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import * as S from './style';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,11 +6,17 @@ import { loadTeamMembers } from '../../../modules/team';
 import { Test } from '../../../assets/imgs';
 
 const TeamEvaluation = ({ teamId, writerId }) => {
+  const [evaluationArray, setEvaluationArray] = useState([]);
   const dispatch = useDispatch();
   const { members } = useSelector(state => state.team);
 
   useEffect(() => {
     dispatch(loadTeamMembers(teamId));
+    setEvaluationArray(
+      members.map(v => {
+        return { userId: v.userId, attendLevel: 0, workLevel: 0 };
+      }),
+    );
   }, []);
 
   const checkInput = useCallback(e => {
@@ -19,6 +25,24 @@ const TeamEvaluation = ({ teamId, writerId }) => {
       e.target.value = '';
     }
   }, []);
+
+  const onAttendChange = useCallback(
+    (e, i, type) => {
+      const copyArray = [...evaluationArray];
+      type === 'work'
+        ? (copyArray[i].workLevel = parseInt(e.target.value))
+        : (copyArray[i].attendLevel = parseInt(e.target.value));
+      setEvaluationArray(copyArray);
+    },
+    [evaluationArray],
+  );
+
+  const onSubmitClick = useCallback(() => {
+    const formData = new FormData();
+    //formData.append('kinds', kinds);
+    formData.append('evaluation', evaluationArray);
+    dispatch()
+  }, [evaluationArray]);
 
   return (
     <S.TeamEvaluationWrapper>
@@ -34,12 +58,17 @@ const TeamEvaluation = ({ teamId, writerId }) => {
           <S.UserWrapper key={i}>
             <S.UserLeftWrapper>
               <S.UserAvatar src={Test} />
-              &nbsp;{v.userNickname}{v.userId === writerId && <S.WriterMark/>}
+              &nbsp;{v.userNickname}
+              {v.userId === writerId && <S.WriterMark />}
             </S.UserLeftWrapper>
             <S.UserRightWrapper>
               <S.EvaluationContent>
                 <S.EvaluationTitle>참여도</S.EvaluationTitle>
-                <S.EvaluationLevel onInput={checkInput} maxLength="1" />
+                <S.EvaluationLevel
+                  onInput={checkInput}
+                  maxLength="1"
+                  onChange={e => onAttendChange(e, i, 'attend')}
+                />
                 <S.EvaluationStars>
                   <S.Star />
                   <S.Star />
@@ -50,7 +79,11 @@ const TeamEvaluation = ({ teamId, writerId }) => {
               </S.EvaluationContent>
               <S.EvaluationContent>
                 <S.EvaluationTitle>숙련도</S.EvaluationTitle>
-                <S.EvaluationLevel />
+                <S.EvaluationLevel
+                  onInput={checkInput}
+                  maxLength="1"
+                  onChange={e => onAttendChange(e, i, 'work')}
+                />
                 <S.EvaluationStars>
                   <S.Star />
                   <S.Star />
@@ -62,7 +95,7 @@ const TeamEvaluation = ({ teamId, writerId }) => {
             </S.UserRightWrapper>
           </S.UserWrapper>
         ))}
-        <S.SubmitBtn>평가 완료</S.SubmitBtn>
+        <S.SubmitBtn onClick={onSubmitClick}>평가 완료</S.SubmitBtn>
       </S.ContentsWrapper>
     </S.TeamEvaluationWrapper>
   );

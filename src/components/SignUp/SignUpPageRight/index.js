@@ -15,9 +15,7 @@ import Introduce from '../Introduce'
 const SignUpPageRight = () => {
   const history = useHistory()
   const dispatch = useDispatch()
-
   const [nicknameCheck, setnicknameCheck] = useState(false)
-
   const [dropDownOptions, setDropDownOptions] = useState([])
   const [nickname, setNickname] = useState(null); 
   const [job, onChangeJob, setJob] = useInput('')

@@ -55,7 +55,17 @@ const Nickname = ({ nickname, setNickname, nicknameCheck,  setnicknameCheck }) =
             />
           </>
           )
-          : <S.NickNameChecked onClick={onEditNickname}>{nickname}</S.NickNameChecked>
+          : (
+            <>
+                <S.NickNameChecked onClick={onEditNickname}>{nickname}</S.NickNameChecked>
+                <S.CheckBox
+                type="button"
+                value="중복체크"
+                onClick={nicknameCheckHandler}
+                disabled
+                />
+            </>
+              )
         }
       </S.NickNameWrapper>
     </>

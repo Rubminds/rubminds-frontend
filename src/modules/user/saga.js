@@ -32,7 +32,6 @@ function signupUserAPI(data) {
 
 //axios요청시 주석처럼 작성.
 //axios에서 받은 결과를 success 로 보내줌.
-
 function* signupUser(action) {
   const result = yield call(signupUserAPI, action.data)
   try {
@@ -64,19 +63,18 @@ function* signinUser(action) {
     })
   }
 }
+
 function updateUserAPI(data) {
-  console.log('api 통신', data); 
-  return axios.get('/user/update', data, {
+  return axios.post('/user/update', data, {
     headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },
   })
 }
 
 function* updateUser(action) {
-  console.log('updateUser saga connected', action)
-  const result = yield call(updateUserAPI, action.data)
-  console.log('api 통신 완료'); 
+  console.log(action.data); 
+  const result = yield call(updateUserAPI, action.data) 
   try {
     yield put({
       type: UPDATE_USER_SUCCESS,

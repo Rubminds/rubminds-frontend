@@ -34,6 +34,7 @@ const WrittingInnerForm = () => {
   const [customOptions, setCustomOptions] = useState([])
   const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white'])
   const [isScout, setIsScout] = useState(false)
+
   // 이미지 서버 전송용 데이터
   const [fileInfo, setFileInfo] = useState(null)
   // 이미지 미리보기 데이터
@@ -46,7 +47,7 @@ const WrittingInnerForm = () => {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },
       })
-      setSkillName(result.data.skills.map(e => e.name))
+      console.log(result); 
     }
     fetchData()
   }, [])

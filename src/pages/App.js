@@ -12,8 +12,11 @@ import SignUpPage from './SignUpPage'
 import MyPage from './MyPage'
 import DibsPage from './DibsPage'
 import ProjectStatusPage from './ProjectStatusPage'
+import EditProfilePage from './EditProfilePage'
 
 import { Header, ChatButton } from '../components'
+
+
 
 const App = () => {
   return (
@@ -33,6 +36,7 @@ const App = () => {
           <Route path="/login" component={LogInPage} />
           <Route path="/write" component={WrittingPage} />
           <Route path="/mypage/:id" component={MyPage} />
+          <Route path='/editprofile' component={EditProfilePage} />
           <Route path="/dibs" component={DibsPage} />
           <Route path="/projects/:type" component={ProjectStatusPage} />
         </Switch>

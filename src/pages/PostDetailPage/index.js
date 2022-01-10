@@ -5,14 +5,12 @@ import * as S from './style';
 
 import { PostTotalInfo, ResultForm, BackButton, TeamEvaluation } from '../../components';
 import { loadPost } from '../../modules/post';
-import { loadTeamMembers } from '../../modules/team';
 
 const PostDetailPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
   const params = useParams();
   const { singlePost } = useSelector(state => state.post);
-  //const { members } = useSelector(state => state.team);
   const { me } = useSelector(state => state.user);
 
   useEffect(() => {
@@ -25,6 +23,7 @@ const PostDetailPage = () => {
   const closeModal = useCallback(() => {
     setModalOpen(false);
   }, []);
+  
   return (
     <S.PostDetailWrapper>
       <BackButton />
@@ -33,6 +32,7 @@ const PostDetailPage = () => {
           <TeamEvaluation
             teamId={singlePost.teamId}
             writerId={singlePost.writer.id}
+            kinds={singlePost.kinds}
           />
         ) : (
           <>

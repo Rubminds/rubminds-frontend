@@ -6,9 +6,9 @@ import axios from 'axios';
 import { evaluateTeamMembers } from '../../../modules/team';
 import { Test } from '../../../assets/imgs';
 
-const TeamEvaluation = ({ teamId, writerId }) => {
+const TeamEvaluation = ({ teamId, writerId, kinds }) => {
   const [evaluationArray, setEvaluationArray] = useState([]);
-  const [members, setMembers] = useState([])
+  const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,10 +18,10 @@ const TeamEvaluation = ({ teamId, writerId }) => {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
+      setMembers(response.data.teamUsers);
       const copyArray = response.data.teamUsers.map(v => {
         return { userId: v.userId, attendLevel: 0, workLevel: 0 };
       });
-      setMembers(response.data.teamUsers)
       setEvaluationArray(copyArray);
     };
     fetchData();
@@ -46,14 +46,17 @@ const TeamEvaluation = ({ teamId, writerId }) => {
     [evaluationArray],
   );
 
-  const onSubmitClick = useCallback((e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('kinds', 'PROJECT');
-    formData.append('evaluation', evaluationArray);
-    //console.log(evaluationArray)
-    dispatch(evaluateTeamMembers({ teamId, content: formData }));
-  }, [evaluationArray]);
+  const onSubmitClick = useCallback(
+    e => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('kinds', 'PROJECT');
+      formData.append('evaluation', evaluationArray);
+      //console.log(evaluationArray)
+      dispatch(evaluateTeamMembers({ teamId, content: formData }));
+    },
+    [evaluationArray],
+  );
 
   return (
     <S.TeamEvaluationWrapper>
@@ -88,21 +91,23 @@ const TeamEvaluation = ({ teamId, writerId }) => {
                   <S.Star />
                 </S.EvaluationStars>
               </S.EvaluationContent>
-              <S.EvaluationContent>
-                <S.EvaluationTitle>숙련도</S.EvaluationTitle>
-                <S.EvaluationLevel
-                  onInput={checkInput}
-                  maxLength="1"
-                  onChange={e => onAttendChange(e, i, 'work')}
-                />
-                <S.EvaluationStars>
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                </S.EvaluationStars>
-              </S.EvaluationContent>
+              {kinds !== 'STUDY' && (
+                <S.EvaluationContent>
+                  <S.EvaluationTitle>숙련도</S.EvaluationTitle>
+                  <S.EvaluationLevel
+                    onInput={checkInput}
+                    maxLength="1"
+                    onChange={e => onAttendChange(e, i, 'work')}
+                  />
+                  <S.EvaluationStars>
+                    <S.Star />
+                    <S.Star />
+                    <S.Star />
+                    <S.Star />
+                    <S.Star />
+                  </S.EvaluationStars>
+                </S.EvaluationContent>
+              )}
             </S.UserRightWrapper>
           </S.UserWrapper>
         ))}

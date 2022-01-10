@@ -33,7 +33,7 @@ function* loadTeamMembers(action) {
 }
 
 function evaluateTeamMembersAPI(data) {
-  return axios.get(`/team/${data.teamId}`, data.content, {
+  return axios.post(`/team/${data.teamId}`, data.content, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

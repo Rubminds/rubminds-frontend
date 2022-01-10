@@ -66,7 +66,7 @@ export const UserLeftWrapper = styled.div`
 export const UserRightWrapper = styled.div`
   width: 50%;
   ${flexColumn}
-  justify-content:space-between;
+  justify-content:space-around;
   height: 100%;
 `;
 

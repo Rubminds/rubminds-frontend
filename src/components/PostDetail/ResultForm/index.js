@@ -21,11 +21,11 @@ const ResultForm = ({ postId }) => {
         completeContent,
       };
       const formData = new FormData();
-      file && formData.append('file', file);
+      file && formData.append('files', file);
       images.length > 0 && formData.append('images', images);
 
       formData.append(
-        'resultInfo',
+        'completeInfo',
         new Blob([JSON.stringify(dataObj)], { type: 'application/json' }),
       );
       dispatch(submitResultPost({ postId, content: formData }));

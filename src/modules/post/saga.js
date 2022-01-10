@@ -144,7 +144,6 @@ function* likePost(action) {
 }
 
 function submitResultPostAPI(data) {
-  console.log(data)
   return axios.post(`/post/${data.postId}/complete`, data.content, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,

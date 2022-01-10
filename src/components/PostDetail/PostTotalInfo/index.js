@@ -1,48 +1,54 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import * as S from './style.js';
 import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdPersonAdd } from 'react-icons/md';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import { DetailInfo, UserListModal } from '../..';
 import { likePost } from '../../../modules/post';
 
-
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
 const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
+  const [members, setMembers] = useState([]);
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
-  //const {members} = useSelector(state => state.team)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(`/team/${post.teamId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setMembers(response.data.teamUsers);
+    };
+    fetchData();
+  }, []);
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
   }, [dispatch, post.id]);
 
-  const onStatusCircleClick = useCallback(()=>{
-    console.log('open team members')
-    
+  const onStatusCircleClick = useCallback(() => {
+    console.log('open team members');
+
     openModal();
-  },[dispatch, openModal, post.teamId])
-  
+  }, [openModal]);
+
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
-        <S.DetailUserInfo >
+        <S.DetailUserInfo>
           <S.AuthorAvatar src={post.writer.avatar} /> &nbsp;{post.writer.nickname}
         </S.DetailUserInfo>
-        {/* <S.DetailInfoBetween>
-          <S.DetailInfoLeft bold>
-            <S.AuthorAvatar src={post.writer.avatar} /> &nbsp;{post.writer.nickname}
-          </S.DetailInfoLeft>
-          <S.DetailInfoRight>{post.Date}</S.DetailInfoRight>
-        </S.DetailInfoBetween> */}
-        <DetailInfo title="모집유형" info={post.postsStatus} />
+        <DetailInfo title="모집유형" info={post.kinds} />
         <DetailInfo title="기술스택" info={combinedSkills} />
         <DetailInfo title="회의형태" info={post.meeting} />
         <DetailInfo title="지역" info={post.region} />
         <S.FileContainer>
-          {post.files.map((v,i) => (
+          {post.files.map((v, i) => (
             <S.UploadedFile download href={v.url} key={i}>
               첨부파일
             </S.UploadedFile>
@@ -50,9 +56,15 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
         </S.FileContainer>
       </S.DetailInfoWrapper>
 
-      <S.DetailInfoWrapper width="20%" Group>
+      <S.DetailInfoWrapper width="30%" Group>
         {modalOpen ? (
-          <UserListModal headcount={post.headcount} closeModal={closeModal} writerName={post.writer.nickname} teamId={post.teamId}/>
+          <UserListModal
+            headcount={post.headcount}
+            closeModal={closeModal}
+            writerName={post.writer.nickname}
+            teamId={post.teamId}
+            members={members}
+          />
         ) : (
           <>
             <S.GroupBox>
@@ -97,7 +109,11 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
             <S.DetailInfoContent>
               <S.PostStatusCircle status={post.postsStatus} onClick={onStatusCircleClick}>
                 <label>{post.postsStatus}</label>
-                {post.kinds !== 'SCOUT' && <label>1/{post.headcount}</label>}
+                {post.kinds !== 'SCOUT' && (
+                  <label>
+                    {members.length}/{post.headcount}
+                  </label>
+                )}
               </S.PostStatusCircle>
             </S.DetailInfoContent>
           </>

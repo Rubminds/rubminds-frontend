@@ -37,7 +37,6 @@ const TeamEvaluation = ({ teamId, writerId, kinds }) => {
   const onAttendChange = useCallback(
     (e, i, type) => {
       const copyArray = [...evaluationArray];
-      console.log(copyArray);
       type === 'work'
         ? (copyArray[i].workLevel = parseInt(e.target.value))
         : (copyArray[i].attendLevel = parseInt(e.target.value));
@@ -50,9 +49,9 @@ const TeamEvaluation = ({ teamId, writerId, kinds }) => {
     e => {
       e.preventDefault();
       const formData = new FormData();
-      formData.append('kinds', 'PROJECT');
+      formData.append('kinds', kinds);
       formData.append('evaluation', evaluationArray);
-      //console.log(evaluationArray)
+      console.log(evaluationArray)
       dispatch(evaluateTeamMembers({ teamId, content: formData }));
     },
     [evaluationArray],

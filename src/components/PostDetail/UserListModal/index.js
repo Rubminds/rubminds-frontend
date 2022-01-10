@@ -1,41 +1,41 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import * as S from './style';
 import { BsPlusCircleDotted } from 'react-icons/bs';
-import axios from 'axios'
+import { useDispatch } from 'react-redux';
 
 import { ExitBtn } from '../../../assets/imgs';
+import { addTeamUser } from '../../../modules/team';
 
-const UserListModal = ({ headcount, closeModal, writerName, teamId }) => {
-  const [members, setMembers] = useState([]);
-  const AddUser = useCallback(() => {
-    //팀원 추가 액션
-  }, []);
-  
-  const rendering = () => {//모집되지 않은 인원자리에 팀원추가 버튼 생성
+const UserListModal = ({ headcount, closeModal, writerName, teamId, members }) => {
+  const dispatch = useDispatch();
+
+  const onAddUserKeypress = useCallback(
+    e => {
+      //팀원 추가 액션
+      dispatch(addTeamUser({ teamId, userId: e.target.value }));
+      e.target.value='';
+    },
+    [dispatch, teamId],
+  );
+
+  const rendering = () => {
+    //모집되지 않은 인원자리에 팀원추가 버튼 생성
     console.log(members);
     const empty = [];
-    for (let i = 0; i < headcount-1; i++) {
+    for (let i = 0; i < headcount - members.length; i++) {
       empty.push(
-        <S.AddMember key={i} onClick={AddUser}>
+        <S.AddMember key={i}>
           <BsPlusCircleDotted fontSize="3rem" />
-          &nbsp;&nbsp;팀원 추가
+          &nbsp;&nbsp;
+          <S.AddUserInput
+            onKeyPress={e => e.key === 'Enter' && onAddUserKeypress(e)}
+            placeholder="ID로 팀원 추가"
+          />
         </S.AddMember>,
       );
     }
     return empty;
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(`/team/${teamId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
-      setMembers(response.data.teamUsers)
-    };
-    fetchData();
-  }, []);
 
   return (
     <S.UserListWrapper>

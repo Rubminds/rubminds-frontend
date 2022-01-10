@@ -5,12 +5,11 @@ import axios from 'axios';
 
 import { BackButton, UserProfile, UserProjects, UserRating, UserDibs } from '../../components';
 
-const MyPage = () => {
+const UserPage = () => {
   const params = useParams();
   const [user, setUser] = useState('');
   useEffect(() => {
     const fetchData = async () => {
-      console.log('start');
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${params.id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
       });
@@ -53,7 +52,7 @@ const MyPage = () => {
   return (
     <>
       {user && (
-        <S.MyPageWrapper>
+        <S.UserPageWrapper>
           <BackButton />
           {user.isMine && <S.EditProfile>프로필 수정</S.EditProfile>}
 
@@ -63,10 +62,10 @@ const MyPage = () => {
             <UserRating user={user} />
           </S.Division>
           <UserDibs user={user} />
-        </S.MyPageWrapper>
+        </S.UserPageWrapper>
       )}
     </>
   );
 };
 
-export default MyPage;
+export default UserPage;

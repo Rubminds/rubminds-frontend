@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { flexBetween, flexColumn } from '../../constants';
 import mediaQuery from '../../hooks/mediaQuery';
 
-export const MyPageWrapper = styled.div`
+export const UserPageWrapper = styled.div`
   width: 100%;
   padding: 4rem 16rem 20rem 16rem;
   background-color: #f9fbfc;

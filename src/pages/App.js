@@ -10,7 +10,7 @@ import PostDetailPage from './PostDetailPage'
 import LogInPage from './LogInPage'
 import LogInProcess from './LogInProcess'
 import SignUpPage from './SignUpPage'
-import MyPage from './MyPage'
+import UserPage from './UserPage'
 import DibsPage from './DibsPage'
 import ProjectStatusPage from './ProjectStatusPage'
 
@@ -33,7 +33,7 @@ const App = () => {
           <Route exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
           <Route path="/write" component={WrittingPage} />
-          <Route path="/mypage/:id" component={MyPage} />
+          <Route path="/userPage/:id" component={UserPage} />
           <Route path="/dibs" component={DibsPage} />
           <Route path="/projects/:type" component={ProjectStatusPage} />
         </Switch>

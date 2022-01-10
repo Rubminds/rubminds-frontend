@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { DetailInfo, UserListModal } from '../..';
 import { likePost } from '../../../modules/post';
-import { loadTeamMembers } from '../../../modules/team';
+
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
-const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) => {
+const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
   //const {members} = useSelector(state => state.team)
@@ -21,7 +21,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
 
   const onStatusCircleClick = useCallback(()=>{
     console.log('open team members')
-    //dispatch(loadTeamMembers(post.teamId))
+    
     openModal();
   },[dispatch, openModal, post.teamId])
   
@@ -52,7 +52,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
 
       <S.DetailInfoWrapper width="20%" Group>
         {modalOpen ? (
-          <UserListModal userList={members} headcount={post.headcount} closeModal={closeModal} writerName={post.writer.nickname}/>
+          <UserListModal headcount={post.headcount} closeModal={closeModal} writerName={post.writer.nickname} teamId={post.teamId}/>
         ) : (
           <>
             <S.GroupBox>
@@ -97,7 +97,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
             <S.DetailInfoContent>
               <S.PostStatusCircle status={post.postsStatus} onClick={onStatusCircleClick}>
                 <label>{post.postsStatus}</label>
-                <label>1/{post.headcount}</label>
+                {post.kinds !== 'SCOUT' && <label>1/{post.headcount}</label>}
               </S.PostStatusCircle>
             </S.DetailInfoContent>
           </>

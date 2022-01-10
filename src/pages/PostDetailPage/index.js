@@ -12,16 +12,11 @@ const PostDetailPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { singlePost } = useSelector(state => state.post);
-  const { members } = useSelector(state => state.team);
+  //const { members } = useSelector(state => state.team);
   const { me } = useSelector(state => state.user);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(loadPost(params.id));
-      await dispatch(loadTeamMembers(singlePost.teamId));
-    };
-    console.log('page start');
-    fetchData();
+    dispatch(loadPost(params.id));
   }, []);
 
   const openModal = useCallback(() => {
@@ -34,11 +29,10 @@ const PostDetailPage = () => {
     <S.PostDetailWrapper>
       <BackButton />
       {singlePost ? (
-        (singlePost.postsStatus === 'RANKING' && members.length !== 0) ? (
+        singlePost.postsStatus === 'RANKING'  ? (
           <TeamEvaluation
             teamId={singlePost.teamId}
             writerId={singlePost.writer.id}
-            members={members}
           />
         ) : (
           <>
@@ -50,7 +44,6 @@ const PostDetailPage = () => {
               closeModal={closeModal}
               openModal={openModal}
               me={me}
-              members={members}
             />
             <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
 

@@ -41,20 +41,20 @@ const team = (state = initialState, action) => {
         break;
       case LOAD_TEAM_MEMBERS_ERROR:
         break;
-        case EVALUATE_TEAM_MEMBERS:
-          draft.evaluateTeamMembersLoading = true;
-          draft.evaluateTeamMembersDone = false;
-          draft.evaluateTeamMembersError = null;
-          break;
-        case EVALUATE_TEAM_MEMBERS_SUCCESS: //액션 처리
-          draft.evaluateTeamMembersLoading = false;
-          draft.evaluateTeamMembersDone = true;
-          draft.evaluateTeamMembersError = null;
-          break;
-        case EVALUATE_TEAM_MEMBERS_ERROR:
-          draft.evaluateTeamMembersLoading = false;
-          draft.evaluateTeamMembersError = action.error;
-          break;
+      case EVALUATE_TEAM_MEMBERS:
+        draft.evaluateTeamMembersLoading = true;
+        draft.evaluateTeamMembersDone = false;
+        draft.evaluateTeamMembersError = null;
+        break;
+      case EVALUATE_TEAM_MEMBERS_SUCCESS: //액션 처리
+        draft.evaluateTeamMembersLoading = false;
+        draft.evaluateTeamMembersDone = true;
+        draft.evaluateTeamMembersError = null;
+        break;
+      case EVALUATE_TEAM_MEMBERS_ERROR:
+        draft.evaluateTeamMembersLoading = false;
+        draft.evaluateTeamMembersError = action.error;
+        break;
       default:
         break;
     }

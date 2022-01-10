@@ -101,7 +101,6 @@ function loadPostAPI(data) {
 function* loadPost(action) {
   console.log('access loadPost saga');
   const result = yield call(loadPostAPI, action.data);
-  console.log(result);
   try {
     yield put({
       type: LOAD_POST_SUCCESS,

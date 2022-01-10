@@ -1,19 +1,30 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import * as S from './style';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import { evaluateTeamMembers } from '../../../modules/team';
 import { Test } from '../../../assets/imgs';
 
-const TeamEvaluation = ({ teamId, writerId, members }) => {
+const TeamEvaluation = ({ teamId, writerId }) => {
   const [evaluationArray, setEvaluationArray] = useState([]);
+  const [members, setMembers] = useState([])
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const copyArray = members.map(v => {
-      return { userId: v.userId, attendLevel: 0, workLevel: 0 };
-    });
-    setEvaluationArray(copyArray);
+    const fetchData = async () => {
+      const response = await axios.get(`/team/${teamId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      const copyArray = response.data.teamUsers.map(v => {
+        return { userId: v.userId, attendLevel: 0, workLevel: 0 };
+      });
+      setMembers(response.data.teamUsers)
+      setEvaluationArray(copyArray);
+    };
+    fetchData();
   }, []);
 
   const checkInput = useCallback(e => {
@@ -26,7 +37,7 @@ const TeamEvaluation = ({ teamId, writerId, members }) => {
   const onAttendChange = useCallback(
     (e, i, type) => {
       const copyArray = [...evaluationArray];
-      console.log(copyArray)
+      console.log(copyArray);
       type === 'work'
         ? (copyArray[i].workLevel = parseInt(e.target.value))
         : (copyArray[i].attendLevel = parseInt(e.target.value));
@@ -35,10 +46,12 @@ const TeamEvaluation = ({ teamId, writerId, members }) => {
     [evaluationArray],
   );
 
-  const onSubmitClick = useCallback(() => {
+  const onSubmitClick = useCallback((e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append('kinds', 'PROJECT');
     formData.append('evaluation', evaluationArray);
+    //console.log(evaluationArray)
     dispatch(evaluateTeamMembers({ teamId, content: formData }));
   }, [evaluationArray]);
 

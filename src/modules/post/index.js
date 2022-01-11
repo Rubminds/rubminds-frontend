@@ -17,6 +17,9 @@ import {
   SUBMIT_RESULT_POST,
   SUBMIT_RESULT_POST_SUCCESS,
   SUBMIT_RESULT_POST_ERROR,
+  CHANGE_POST_STATUS,
+  CHANGE_POST_STATUS_SUCCESS,
+  CHANGE_POST_STATUS_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
@@ -48,6 +51,10 @@ export const initialState = {
   submitResultPostLoading: false,
   submitResultPostDone: false,
   submitResultPostError: null,
+
+  changePostStatusLoading: false,
+  changePostStatusDone: false,
+  changePostStatusError: null,
 };
 
 //액션 생성함수
@@ -78,6 +85,11 @@ export const likePost = id => ({
 
 export const submitResultPost = data => ({
   type: SUBMIT_RESULT_POST,
+  data,
+});
+
+export const changePostStatus = data => ({
+  type: CHANGE_POST_STATUS,
   data,
 });
 
@@ -136,7 +148,7 @@ const post = (state = initialState, action) => {
         draft.loadPostLoading = true;
         draft.loadPostDone = false;
         draft.loadPostError = null;
-        draft.singlePost=null;
+        draft.singlePost = null;
         break;
       case LOAD_POST_SUCCESS: //액션 처리
         console.log(action.data.data);
@@ -177,6 +189,21 @@ const post = (state = initialState, action) => {
         console.log('submit result error');
         draft.submitResultPostLoading = false;
         draft.submitResultPostError = action.error;
+        break;
+      case CHANGE_POST_STATUS:
+        draft.changePostStatusLoading = true;
+        draft.changePostStatusDone = false;
+        draft.changePostStatusError = null;
+        break;
+      case CHANGE_POST_STATUS_SUCCESS: //액션 처리
+        console.log('change status success');
+        draft.changePostStatusLoading = false;
+        draft.changePostStatusDone = true;
+        break;
+      case CHANGE_POST_STATUS_ERROR:
+        console.log('change status error');
+        draft.changePostStatusLoading = false;
+        draft.changePostStatusError = action.error;
         break;
       default:
         break;

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import { DetailInfo, UserListModal } from '../..';
-import { likePost } from '../../../modules/post';
+import { likePost, changePostStatus } from '../../../modules/post';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
@@ -33,10 +33,16 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
 
   const onStatusCircleClick = useCallback(() => {
     console.log('open team members');
-
     openModal();
   }, [openModal]);
 
+  const onChangeStatusClick = useCallback(
+    status => () => {
+      dispatch(changePostStatus({ postId: post.id, content: { postStatus: status } }));
+      window.location.replace(`/post/${post.id}`)
+    },
+    [post.id, dispatch],
+  );
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
@@ -72,14 +78,18 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                 <>
                   {post.postsStatus === 'RECRUIT' ? (
                     <>
-                      <S.DetailInfoContent toBtn>모집 종료하기</S.DetailInfoContent>
+                      <S.DetailInfoContent toBtn onClick={onChangeStatusClick('WORKING')}>
+                        모집 종료하기
+                      </S.DetailInfoContent>
                       <S.DetailInfoContent>
                         <AiOutlineEdit /> &nbsp;수정
                       </S.DetailInfoContent>
                     </>
                   ) : post.postsStatus === 'WORKING' ? (
                     <>
-                      <S.DetailInfoContent toBtn>모집중으로 변경</S.DetailInfoContent>
+                      <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
+                        모집중으로 변경
+                      </S.DetailInfoContent>
                       <S.DetailInfoContent>
                         <AiOutlineEdit /> &nbsp;수정
                       </S.DetailInfoContent>

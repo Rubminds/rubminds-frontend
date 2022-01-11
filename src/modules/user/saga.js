@@ -72,8 +72,7 @@ function updateUserAPI(data) {
   })
 }
 
-function* updateUser(action) {
-  console.log(action.data); 
+function* updateUser(action) { 
   const result = yield call(updateUserAPI, action.data) 
   try {
     yield put({

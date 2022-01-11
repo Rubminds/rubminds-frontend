@@ -6,7 +6,7 @@ import axios from 'axios';
 import { evaluateTeamMembers } from '../../../modules/team';
 import { Test } from '../../../assets/imgs';
 
-const TeamEvaluation = ({ teamId, writerId, kinds }) => {
+const TeamEvaluation = ({ teamId, writerId, kinds, postId }) => {
   const [evaluationArray, setEvaluationArray] = useState([]);
   const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
@@ -48,11 +48,13 @@ const TeamEvaluation = ({ teamId, writerId, kinds }) => {
   const onSubmitClick = useCallback(
     e => {
       e.preventDefault();
-      const formData = new FormData();
-      formData.append('kinds', kinds);
-      formData.append('evaluation', evaluationArray);
-      console.log(evaluationArray)
-      dispatch(evaluateTeamMembers({ teamId, content: formData }));
+      const obj = {
+        kinds,
+        evaluation:evaluationArray
+      }
+      console.log(evaluationArray);
+      dispatch(evaluateTeamMembers({ teamId, content: obj }));
+      //window.location.replace(`/post/${postId}`)
     },
     [evaluationArray],
   );

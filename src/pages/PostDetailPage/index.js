@@ -33,6 +33,7 @@ const PostDetailPage = () => {
             teamId={singlePost.teamId}
             writerId={singlePost.writer.id}
             kinds={singlePost.kinds}
+            postId={singlePost.id}
           />
         ) : (
           <>

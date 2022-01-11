@@ -18,8 +18,6 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { SKILL_ID } from '../../../constants'
 
 const WrittingInnerForm = () => {
-  const createPostDone = useSelector(state => state.post.createPostDone)
-
   const dispatch = useDispatch()
   const history = useHistory()
   const [title, setTitle] = useState(null)
@@ -47,7 +45,7 @@ const WrittingInnerForm = () => {
           Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },
       })
-      console.log(result); 
+      setSkillName(result.data.skills.map(e => e.name))
     }
     fetchData()
   }, [])

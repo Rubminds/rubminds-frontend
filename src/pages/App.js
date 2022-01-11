@@ -13,6 +13,7 @@ import MyPage from './MyPage'
 import DibsPage from './DibsPage'
 import ProjectStatusPage from './ProjectStatusPage'
 import EditProfilePage from './EditProfilePage'
+import EditWrittingPage from './EditWrittingPage'
 
 import { Header, ChatButton } from '../components'
 
@@ -35,6 +36,7 @@ const App = () => {
           <Route exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
           <Route path="/write" component={WrittingPage} />
+          <Route path="/editwritting" component={EditWrittingPage} />
           <Route path="/mypage/:id" component={MyPage} />
           <Route path='/editprofile' component={EditProfilePage} />
           <Route path="/dibs" component={DibsPage} />

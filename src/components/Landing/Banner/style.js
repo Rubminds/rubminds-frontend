@@ -59,3 +59,9 @@ export const IphoneImg = styled(Iphone)`
     margin-top:5rem;
   }
 `;
+
+export const BannerCarouselWrapper = styled.div`
+  height:100%;
+  display:flex;
+  align-items:center;
+`

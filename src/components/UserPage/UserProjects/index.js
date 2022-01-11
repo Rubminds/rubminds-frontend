@@ -21,7 +21,7 @@ const UserProjects = ({ user }) => {
         <Link to="/projects/WORKING">
           <S.StatusCircle status="진행중">
             <S.CircleLabel>진행중</S.CircleLabel>
-            <S.CircleLabel>{getProjectInfoLength('WORKING')}</S.CircleLabel>
+            <S.CircleLabel>{getProjectInfoLength('WORKING')+getProjectInfoLength('RANKING')}</S.CircleLabel>
           </S.StatusCircle>
         </Link>
         <Link to="/projects/FINISHED">

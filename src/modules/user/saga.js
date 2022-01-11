@@ -132,7 +132,7 @@ function* watchToggleChatModal() {
 function* watchLoadUserInfo() {
   yield takeLatest(LOAD_USER_INFO, loadUserInfo);
 }
-function* watchLogoutUser() {console.log('watch logout')
+function* watchLogoutUser() {
   yield takeLatest(LOGOUT_USER, logoutUser);
 }
 

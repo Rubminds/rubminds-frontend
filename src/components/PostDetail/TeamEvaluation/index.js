@@ -54,7 +54,7 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId }) => {
       }
       console.log(evaluationArray);
       dispatch(evaluateTeamMembers({ teamId, content: obj }));
-      //window.location.replace(`/post/${postId}`)
+      window.location.replace(`/post/${postId}`)
     },
     [evaluationArray],
   );

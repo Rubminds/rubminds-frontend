@@ -72,7 +72,6 @@ export const UserRow = styled.div`
   ${flexColumn}
   width: 100%;
   padding: 1rem 1.5rem;
-
   &:after {
     position: absolute;
     content: '';

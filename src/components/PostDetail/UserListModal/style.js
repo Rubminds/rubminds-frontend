@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import {AiFillCrown} from 'react-icons/ai'
+import { AiFillCrown } from 'react-icons/ai';
+import { CgCloseO } from 'react-icons/cg';
+
 import { flexCenter, flexColumn } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
 
 export const UserListWrapper = styled.div`
   position: relative;
-  padding: 2% 2%;
+  padding: 1.5rem 1rem 1rem 1rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   border-radius: 5px;
@@ -26,6 +28,7 @@ export const UserList = styled.ul`
 `;
 
 export const User = styled(Link)`
+  position: relative;
   padding: 5%;
   display: flex;
   align-items: center;
@@ -42,7 +45,7 @@ export const AddMember = styled.label`
   align-items: center;
   border-top: 1px solid rgba(128, 128, 128, 0.199);
   font-size: 14px;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 export const UserAvatar = styled.img`
@@ -52,9 +55,17 @@ export const UserAvatar = styled.img`
 `;
 
 export const WriterMark = styled(AiFillCrown)`
-color:red;
-`
+  color: red;
+`;
 
 export const AddUserInput = styled.input`
-  width:100%;
+  width: 100%;
+`;
+
+export const DeleteUserButton = styled(CgCloseO)`
+  position:absolute;
+  transform:translate(-50%, -50%);
+  top:50%;
+  right:5%;
+  z-index:999;
 `

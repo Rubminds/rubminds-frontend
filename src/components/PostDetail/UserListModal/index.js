@@ -4,16 +4,15 @@ import { BsPlusCircleDotted } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 
 import { ExitBtn } from '../../../assets/imgs';
-import { addTeamUser } from '../../../modules/team';
+import { addTeamUser, deleteTeamUser } from '../../../modules/team';
 
-const UserListModal = ({ headcount, closeModal, writerName, teamId, members }) => {
+const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId }) => {
   const dispatch = useDispatch();
 
   const onAddUserKeypress = useCallback(
     e => {
-      //팀원 추가 액션
       dispatch(addTeamUser({ teamId, userId: e.target.value }));
-      e.target.value='';
+      e.target.value = '';
     },
     [dispatch, teamId],
   );
@@ -37,6 +36,17 @@ const UserListModal = ({ headcount, closeModal, writerName, teamId, members }) =
     return empty;
   };
 
+  const onDeleteUserClick = useCallback(
+    (e,user) => {
+      e.preventDefault();
+      const deleteConfirm = window.confirm(`정말 ${user.userNickname}님을 추방하시겠습니까?`);
+      if (deleteConfirm) {
+        //dispatch(deleteTeamUser({ teamId, userId: user.userId }));
+      }
+    },
+    [dispatch, teamId],
+  );
+
   return (
     <S.UserListWrapper>
       <S.CloseBtn onClick={closeModal}>
@@ -48,10 +58,14 @@ const UserListModal = ({ headcount, closeModal, writerName, teamId, members }) =
             <S.User key={`user${v.userId}`} to={`/userpage/${v.userId}`}>
               <S.UserAvatar src={v.avatar} key={`avatar${v.userId}`} />
               &nbsp;&nbsp;{v.userNickname}{' '}
-              {v.userNickname === writerName && (
+              {v.userId === writerId ? (
                 <>
                   &nbsp;
                   <S.WriterMark />
+                </>
+              ) : meId ===writerId && (
+                <>
+                  <S.DeleteUserButton onClick={e => onDeleteUserClick(e,v)} />
                 </>
               )}
             </S.User>

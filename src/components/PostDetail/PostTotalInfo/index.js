@@ -67,9 +67,10 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
           <UserListModal
             headcount={post.headcount}
             closeModal={closeModal}
-            writerName={post.writer.nickname}
+            writerId={post.writer.id}
             teamId={post.teamId}
             members={members}
+            meId={me.id}
           />
         ) : (
           <>

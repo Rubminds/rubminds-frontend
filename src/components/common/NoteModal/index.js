@@ -7,85 +7,61 @@ import { Test } from '../../../assets/imgs';
 
 const NoteModal = () => {
   const dispatch = useDispatch();
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
+  const userList = [
+    { name: '한놈', content: '나랑 같이 프젝 하던가' },
+    { name: '두식이', content: '쟤랑 하지마' },
+    { name: '석삼', content: '내용엄청길게 ㅁㄴ어 ㅁㄴ알넘ㅇ람너라ㅣㅁㄴ어라럼닐ㄴㅁ' },
+    { name: '너구리', content: '프 던가' },
+    { name: '한놈', content: '나랑 같이 프젝 하던가' },
+    { name: '두식이', content: '쟤랑 하지마' },
+    { name: '석삼', content: '내용엄청길게 ㅁㄴ어 ㅁㄴ알넘ㅇ람너라ㅣㅁㄴ어라럼닐ㄴㅁ' },
+    { name: '너구리', content: '프 던가' },
+  ];
+
   const onCloseClick = useCallback(() => {
     dispatch(toggleNoteModal());
   }, []);
+
+  const onModalStatusClick = useCallback(
+    status => () => {
+      setStep(status);
+    },
+    [],
+  );
   return (
     <S.NoteModalWrapper>
       <S.ModalHeader>
-        <S.HeaderTitle>Rubminds Contact</S.HeaderTitle>
+        <S.HeaderTitle>쪽지함</S.HeaderTitle>
         <S.CloseButton onClick={onCloseClick} />
       </S.ModalHeader>
-      <S.Contents>
+      <S.ModalStatusWrapper>
+        <S.ModalStatus current={step} value={1} onClick={onModalStatusClick(1)}>
+          받은 쪽지함
+        </S.ModalStatus>
+        <S.ModalStatus current={step} value={2} onClick={onModalStatusClick(2)}>
+          보낸 쪽지함
+        </S.ModalStatus>
+      </S.ModalStatusWrapper>
         {step === 1 ? (
           <S.UserListWrapper>
-            <S.UserRow>
-              <S.UserAvatar src={Test} onClick={() => setStep(2)} />
-              <S.UserInfo>
-                <S.UserName onClick={() => setStep(2)}>닉네임</S.UserName>
-                <S.LastMessage>
-                  이 공간에 마지막으로 쓴 말이 나올건데 너무 길면 한 줄에서 ...으로 풀어나갈 것
-                </S.LastMessage>
-              </S.UserInfo>
-              <S.NoticeNumber>99</S.NoticeNumber>
-            </S.UserRow>
-            <S.UserRow>asd</S.UserRow>
-            <S.UserRow>asd</S.UserRow>
+            {userList.map(v => (
+              <S.UserRow>
+                <S.UserName>{v.name}</S.UserName>
+                <S.LastMessage>{v.content}</S.LastMessage>
+              </S.UserRow>
+            ))}
           </S.UserListWrapper>
         ) : (
-          <S.ChatroomWrapper>
-            <S.ChatroomHeader>
-              <S.HeaderBackBtn onClick={() => setStep(1)} />
-              <S.HeaderAvatar src={Test} />
-              <S.HeaderUser>
-                김경원
-                <br />
-                <S.UserStatus />
-                현재접속중
-              </S.HeaderUser>
-            </S.ChatroomHeader>
-            <S.ChatroomBody>
-              <S.MessageWrapper>
-                <S.MessageAvatar src={Test} />
-                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
-              </S.MessageWrapper>
-              <S.MessageWrapper>
-                <S.MessageAvatar src={Test} />
-                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
-              </S.MessageWrapper>
-              <S.MessageWrapper>
-                <S.MessageAvatar src={Test} />
-                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
-              </S.MessageWrapper>
-              <S.MessageWrapper>
-                <S.MessageAvatar src={Test} />
-                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
-              </S.MessageWrapper>
-              <S.MessageWrapper>
-                <S.MessageAvatar src={Test} />
-                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
-              </S.MessageWrapper>
-              <S.MessageWrapper>
-                <S.MessageAvatar src={Test} />
-                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
-              </S.MessageWrapper>
-              <S.MessageWrapper>
-                <S.MessageAvatar src={Test} />
-                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
-              </S.MessageWrapper>
-              <S.MessageWrapper>
-                <S.MessageAvatar src={Test} />
-                <S.MessageText>dasdasdasdasdddddddddddddddddddddddddsd</S.MessageText>
-              </S.MessageWrapper>
-            </S.ChatroomBody>
-            <S.ChatInputWrapper>
-              <S.ChatroomInput placeholder={'메시지를 입력해주세요.'} />
-              <S.sendBtn />
-            </S.ChatInputWrapper>
-          </S.ChatroomWrapper>
+          <S.UserListWrapper>
+            {userList.map(v => (
+              <S.UserRow>
+                <S.UserName>{v.name}</S.UserName>
+                <S.LastMessage>{v.content}</S.LastMessage>
+              </S.UserRow>
+            ))}
+          </S.UserListWrapper>
         )}
-      </S.Contents>
     </S.NoteModalWrapper>
   );
 };

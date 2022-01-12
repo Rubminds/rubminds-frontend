@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import * as S from './style';
-import { HiOutlineChatAlt2 } from 'react-icons/hi';
+import { FaRegPaperPlane } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { NoteModal } from '../..';
@@ -16,7 +16,7 @@ const NoteButton = () => {
   return (
     <>
       <S.StyledNoteButton onClick={onClick}>
-        <HiOutlineChatAlt2 fontSize="50px" color="#ffffff" />
+        <FaRegPaperPlane fontSize="40px" color="#ffffff" />
       </S.StyledNoteButton>
       {isChatOpen && <NoteModal />}
     </>

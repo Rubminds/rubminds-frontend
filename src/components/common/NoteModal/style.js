@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { RiSendPlaneFill } from 'react-icons/ri';
@@ -13,11 +13,12 @@ export const NoteModalWrapper = styled(Paper)`
   bottom: 3%;
   right: 3%;
   z-index: 9999;
-  background-color: #aa8ae8;
-  width: 45rem;
-  height: 60rem;
+  background-color: #fff7d1;
+  width: 40rem;
+  height: 52rem;
   padding: 2rem 2rem;
-  ${mediaQuery({ width: '100%', height: '80%', bottom: 0, right: 0 })}
+  ${flexColumn}
+  ${mediaQuery({ width: '100%', height: '60%', bottom: 0, right: 0 })}
 `;
 
 export const ModalHeader = styled.div`
@@ -26,7 +27,6 @@ export const ModalHeader = styled.div`
 `;
 
 export const HeaderTitle = styled.label`
-  color: #fff;
   font-size: 2rem;
   font-weight: bold;
 `;
@@ -36,23 +36,43 @@ export const CloseButton = styled(GrClose)`
   cursor: pointer;
 `;
 
-export const Contents = styled(Paper)`
-  width: 100%;
-  height: 95%;
-  margin-top: 1rem;
+export const ModalStatusWrapper = styled.div`
+  margin-top: 2rem;
+`;
+
+export const ModalStatus = styled.button`
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-color:rgba(0, 0, 0, 0.2);
+  font-weight:bold;
+  padding: 1rem 1rem;
+  box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.1);
+  ${props =>
+    props.current === props.value
+      ? css`
+          background-color: #fff7d1;
+          padding-top:1.5rem;
+        `
+      : css`
+          background-color: #fff;
+        `}
 `;
 
 export const UserListWrapper = styled.div`
   ${flexColumn};
+  overflow-y: auto;
+  height: 100%;
+  margin-top: 1rem;
+  background-color: #fff7d1;
 `;
 
 export const UserRow = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
+  ${flexColumn}
   width: 100%;
-  height: 10rem;
   padding: 1rem 1.5rem;
+
   &:after {
     position: absolute;
     content: '';
@@ -66,18 +86,18 @@ export const UserRow = styled.div`
   }
 `;
 
-export const UserAvatar = styled(Avatar)`
-  width: 6rem;
-  height: 6rem;
-  cursor: pointer;
-`;
+// export const UserAvatar = styled(Avatar)`
+//   width: 6rem;
+//   height: 6rem;
+//   cursor: pointer;
+// `;
 
-export const UserInfo = styled.div`
-  flex: 6;
-  padding: 0 1rem;
-  ${flexColumn}
-  width:60%;
-`;
+// export const UserInfo = styled.div`
+//   flex: 6;
+//   padding: 0 1rem;
+//   ${flexColumn}
+//   width:60%;
+// `;
 
 export const UserName = styled.label`
   font-size: 1.6rem;

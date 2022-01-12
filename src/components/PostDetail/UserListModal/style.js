@@ -54,3 +54,7 @@ export const UserAvatar = styled.img`
 export const WriterMark = styled(AiFillCrown)`
 color:red;
 `
+
+export const AddUserInput = styled.input`
+  width:100%;
+`

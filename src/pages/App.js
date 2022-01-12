@@ -12,6 +12,7 @@ import SignUpPage from './SignUpPage'
 import UserPage from './UserPage'
 import DibsPage from './DibsPage'
 import ProjectStatusPage from './ProjectStatusPage'
+import EditProfilePage from './EditProfilePage'
 
 import { Header, ChatButton } from '../components'
 
@@ -24,7 +25,8 @@ const App = () => {
         <ChatButton />
         <Switch>
           <Route
-            exact path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar1/:avatar2?/:avatar3?"
+            exact
+            path="/callback/:id/:nickname/:accessToken/:signupCheck/:avatar1/:avatar2?/:avatar3?"
             component={LogInProcess}
           />
           <Route path="/signup" component={SignUpPage} />
@@ -32,6 +34,7 @@ const App = () => {
           <Route exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
           <Route path="/write" component={WrittingPage} />
+          <Route path="/editprofile" component={EditProfilePage} />
           <Route path="/userPage/:id" component={UserPage} />
           <Route path="/dibs" component={DibsPage} />
           <Route path="/projects/:type" component={ProjectStatusPage} />

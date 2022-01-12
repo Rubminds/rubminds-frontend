@@ -77,7 +77,7 @@ const DropDown = ({
               {v}
             </S.HeaderTag>
           );
-        })}{' '}
+        })}
         {customOptions.map((v, i) => {
           return (
             <S.HeaderTag onClick={e => onCustomDeleteClick(e, v)} key={i}>

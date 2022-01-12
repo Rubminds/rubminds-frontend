@@ -76,6 +76,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
             <S.GroupBox>
               {me.id === post.writer.id ? (
                 <>
+
                   {post.postsStatus === 'RECRUIT' ? (
                     <>
                       <S.DetailInfoContent toBtn onClick={onChangeStatusClick('WORKING')}>
@@ -103,6 +104,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                   <MdPersonAdd /> &nbsp;모집자와 채팅하기
                 </S.DetailInfoContent>
               )}
+
               <S.DetailInfoContent>
                 {post.isLike ? (
                   <S.LikeWrapper onClick={onLikeClick}>

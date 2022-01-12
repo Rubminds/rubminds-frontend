@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
 import * as S from './style'
-import { DropDown } from '../../../components'
 import useInput from '../../../hooks/useInput'
 import { useDispatch } from 'react-redux'
 import { signupUser } from '../../../modules/user'
@@ -11,6 +10,7 @@ import Nickname from '../NickName'
 import Job from '../Job'
 import Avatar from '../Avatar'
 import Introduce from '../Introduce'
+import DropDown from '../../common/DropDown'
 
 const SignUpPageRight = () => {
   const history = useHistory()

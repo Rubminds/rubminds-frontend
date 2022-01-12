@@ -7,10 +7,6 @@ const Nickname = ({ nickname, setNickname, nicknameCheck,  setnicknameCheck }) =
 
   const { me } = useSelector(state=>state.user); 
   
-  useEffect(()=>{
-    console.log(me, nickname); 
-  }, []); 
-
   const onNicknameChange = useCallback((e)=>{
     setNickname(e.target.value)
   }, [nickname]);
@@ -20,7 +16,6 @@ const Nickname = ({ nickname, setNickname, nicknameCheck,  setnicknameCheck }) =
   },[nicknameCheck]); 
 
   const nicknameCheckHandler = useCallback(async() => {
-    console.log('들어와서',me.nickname, nickname); 
     if(me.nickname === nickname){
       alert('기존의 닉네임입니다. 사용 가능합니다.'); 
       setnicknameCheck(true);  

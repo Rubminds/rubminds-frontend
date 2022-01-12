@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import * as S from './style'
-import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import useInput from '../../hooks/useInput'
@@ -17,7 +16,6 @@ import Introduce from '../../components/EditPage/Introduce'
 const EditProfilePage = () => {
   const { me } = useSelector(state => state.user)
 
-  const history = useHistory()
   const dispatch = useDispatch()
   const [nicknameCheck, setnicknameCheck] = useState(false)
   const [dropDownOptions, setDropDownOptions] = useState([])
@@ -88,7 +86,7 @@ const EditProfilePage = () => {
         )
         console.log(data); 
         dispatch(updateUser(formData))
-        history.push(`/mypage/${me.id}`)
+        window.location.replace(`/mypage/${me.id}`)
       } else {
         alert('닉네임 중복체크를 해주세요')
       }

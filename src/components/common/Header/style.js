@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { flexBetween } from '../../../constants';
-import theme from '../../../common/theme';
+import styled from 'styled-components'
+import { flexBetween } from '../../../constants'
+import theme from '../../../common/theme'
 
 export const HeaderWrapper = styled.nav`
   background: linear-gradient(
@@ -18,15 +18,16 @@ export const HeaderWrapper = styled.nav`
   @media all and (max-width: 768px) {
     padding: 0 5%;
   }
-`;
+`
 
 export const HeaderContent = styled.label`
   font-size: 2.6rem;
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
-`;
+`
 
 export const LogoutText = styled.label`
   cursor: pointer;
-`;
+`
+

@@ -1,11 +1,12 @@
 import React from 'react';
 import * as S from './style';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { BackButton,PostCard } from '../../components';
 
 const ProjectStatusPage = () => {
-  const me = '김경원';
+  const {me} = useSelector(state => state.user)
   const params = useParams();
   const Posts = [
     {
@@ -85,7 +86,7 @@ const ProjectStatusPage = () => {
       <BackButton />
       <S.ContentsWrapper>
         <S.Title>
-          {me}님의&nbsp;
+          {me.nickname}님의&nbsp;
           {params.type === 'RECRUIT'
             ? '모집중인'
             : params.type === 'WORKING'

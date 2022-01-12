@@ -72,8 +72,8 @@ function updateUserAPI(data) {
   })
 }
 
-function* updateUser(action) { 
-  const result = yield call(updateUserAPI, action.data) 
+function* updateUser(action) {
+  const result = yield call(updateUserAPI, action.data)
   try {
     yield put({
       type: UPDATE_USER_SUCCESS,
@@ -165,7 +165,6 @@ function* watchLoadUserInfo() {
 }
 
 function* watchLogoutUser() {
-  console.log('watch logout')
   yield takeLatest(LOGOUT_USER, logoutUser)
 }
 

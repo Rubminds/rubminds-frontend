@@ -7,14 +7,13 @@ import { PostTotalInfo, ResultForm, BackButton, TeamEvaluation } from '../../com
 import { loadPost } from '../../modules/post';
 
 const PostDetailPage = () => {
-  const me = '김경원'; //추후에 리덕스 상태를 가져올 것
   const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
   const params = useParams();
   const { singlePost } = useSelector(state => state.post);
+  const { me } = useSelector(state => state.user);
 
   useEffect(() => {
-    console.log('page start');
     dispatch(loadPost(params.id));
   }, []);
 
@@ -24,25 +23,36 @@ const PostDetailPage = () => {
   const closeModal = useCallback(() => {
     setModalOpen(false);
   }, []);
+  
   return (
     <S.PostDetailWrapper>
       <BackButton />
-      {singlePost && singlePost.postsStatus === 'FINISHED' ? (
-        <TeamEvaluation teamId={singlePost.teamId} writerId={singlePost.writer.id}/>
-      ) : (
-        <>
-          <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>
-          <S.PostDetailDate>{singlePost.createAt}</S.PostDetailDate>
-          <PostTotalInfo
-            post={singlePost}
-            modalOpen={modalOpen}
-            closeModal={closeModal}
-            openModal={openModal}
-            me={me}
+      {singlePost ? (
+        singlePost.postsStatus === 'RANKING'  ? (
+          <TeamEvaluation
+            teamId={singlePost.teamId}
+            writerId={singlePost.writer.id}
+            kinds={singlePost.kinds}
+            postId={singlePost.id}
           />
-          <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
-          <ResultForm />
-        </>
+        ) : (
+          <>
+            <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>
+            <S.PostDetailDate>{singlePost.createAt}</S.PostDetailDate>
+            <PostTotalInfo
+              post={singlePost}
+              modalOpen={modalOpen}
+              closeModal={closeModal}
+              openModal={openModal}
+              me={me}
+            />
+            <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
+
+            {singlePost.postsStatus === 'FINISHED' && <ResultForm postId={singlePost.id} />}
+          </>
+        )
+      ) : (
+        <></>
       )}
     </S.PostDetailWrapper>
   );

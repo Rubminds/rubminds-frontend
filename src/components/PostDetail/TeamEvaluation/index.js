@@ -1,16 +1,30 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import * as S from './style';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
-import { loadTeamMembers } from '../../../modules/team';
+import { evaluateTeamMembers } from '../../../modules/team';
 import { Test } from '../../../assets/imgs';
 
-const TeamEvaluation = ({ teamId, writerId }) => {
+const TeamEvaluation = ({ teamId, writerId, kinds, postId }) => {
+  const [evaluationArray, setEvaluationArray] = useState([]);
+  const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
-  const { members } = useSelector(state => state.team);
 
   useEffect(() => {
-    dispatch(loadTeamMembers(teamId));
+    const fetchData = async () => {
+      const response = await axios.get(`/team/${teamId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setMembers(response.data.teamUsers);
+      const copyArray = response.data.teamUsers.map(v => {
+        return { userId: v.userId, attendLevel: 0, workLevel: 0 };
+      });
+      setEvaluationArray(copyArray);
+    };
+    fetchData();
   }, []);
 
   const checkInput = useCallback(e => {
@@ -19,6 +33,31 @@ const TeamEvaluation = ({ teamId, writerId }) => {
       e.target.value = '';
     }
   }, []);
+
+  const onAttendChange = useCallback(
+    (e, i, type) => {
+      const copyArray = [...evaluationArray];
+      type === 'work'
+        ? (copyArray[i].workLevel = parseInt(e.target.value))
+        : (copyArray[i].attendLevel = parseInt(e.target.value));
+      setEvaluationArray(copyArray);
+    },
+    [evaluationArray],
+  );
+
+  const onSubmitClick = useCallback(
+    e => {
+      e.preventDefault();
+      const obj = {
+        kinds,
+        evaluation:evaluationArray
+      }
+      console.log(evaluationArray);
+      dispatch(evaluateTeamMembers({ teamId, content: obj }));
+      window.location.replace(`/post/${postId}`)
+    },
+    [evaluationArray],
+  );
 
   return (
     <S.TeamEvaluationWrapper>
@@ -34,12 +73,17 @@ const TeamEvaluation = ({ teamId, writerId }) => {
           <S.UserWrapper key={i}>
             <S.UserLeftWrapper>
               <S.UserAvatar src={Test} />
-              &nbsp;{v.userNickname}{v.userId === writerId && <S.WriterMark/>}
+              &nbsp;{v.userNickname}
+              {v.userId === writerId && <S.WriterMark />}
             </S.UserLeftWrapper>
             <S.UserRightWrapper>
               <S.EvaluationContent>
                 <S.EvaluationTitle>참여도</S.EvaluationTitle>
-                <S.EvaluationLevel onInput={checkInput} maxLength="1" />
+                <S.EvaluationLevel
+                  onInput={checkInput}
+                  maxLength="1"
+                  onChange={e => onAttendChange(e, i, 'attend')}
+                />
                 <S.EvaluationStars>
                   <S.Star />
                   <S.Star />
@@ -48,21 +92,27 @@ const TeamEvaluation = ({ teamId, writerId }) => {
                   <S.Star />
                 </S.EvaluationStars>
               </S.EvaluationContent>
-              <S.EvaluationContent>
-                <S.EvaluationTitle>숙련도</S.EvaluationTitle>
-                <S.EvaluationLevel />
-                <S.EvaluationStars>
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                </S.EvaluationStars>
-              </S.EvaluationContent>
+              {kinds !== 'STUDY' && (
+                <S.EvaluationContent>
+                  <S.EvaluationTitle>숙련도</S.EvaluationTitle>
+                  <S.EvaluationLevel
+                    onInput={checkInput}
+                    maxLength="1"
+                    onChange={e => onAttendChange(e, i, 'work')}
+                  />
+                  <S.EvaluationStars>
+                    <S.Star />
+                    <S.Star />
+                    <S.Star />
+                    <S.Star />
+                    <S.Star />
+                  </S.EvaluationStars>
+                </S.EvaluationContent>
+              )}
             </S.UserRightWrapper>
           </S.UserWrapper>
         ))}
-        <S.SubmitBtn>평가 완료</S.SubmitBtn>
+        <S.SubmitBtn onClick={onSubmitClick}>평가 완료</S.SubmitBtn>
       </S.ContentsWrapper>
     </S.TeamEvaluationWrapper>
   );

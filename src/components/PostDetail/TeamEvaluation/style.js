@@ -32,7 +32,7 @@ export const SubTitle = styled.h3`
   font-weight: initial;
 `;
 
-export const ContentsWrapper = styled.div`
+export const ContentsWrapper = styled.form`
   width: 100%;
   ${flexCenter}
   flex-direction:column;
@@ -66,7 +66,7 @@ export const UserLeftWrapper = styled.div`
 export const UserRightWrapper = styled.div`
   width: 50%;
   ${flexColumn}
-  justify-content:space-between;
+  justify-content:space-around;
   height: 100%;
 `;
 

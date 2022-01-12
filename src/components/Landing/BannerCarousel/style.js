@@ -3,11 +3,8 @@ import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import mediaQuery from '../../../hooks/mediaQuery';
 export const CarouselContainer = styled.div`
   width: 38rem;
-  height: 100%;
   overflow: hidden;
   position: relative;
-  display:flex;
-  align-items:center;
   ${mediaQuery({width:"280px", "margin-top":"5rem"})}
 `;
 

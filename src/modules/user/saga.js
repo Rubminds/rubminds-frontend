@@ -165,8 +165,7 @@ function* watchLoadUserInfo() {
 }
 
 function* watchLogoutUser() {
-  console.log('watch logout')
-  yield takeLatest(LOGOUT_USER, logoutUser)
+  yield takeLatest(LOGOUT_USER, logoutUser);
 }
 
 export default function* userSaga() {

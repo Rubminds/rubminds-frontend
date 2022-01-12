@@ -1,6 +1,6 @@
 import {
-  CREATE_POST, 
-  CREATE_POST_SUCCESS, 
+  CREATE_POST,
+  CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
   LOAD_POSTS,
   LOAD_POSTS_SUCCESS,
@@ -14,6 +14,12 @@ import {
   LIKE_POST,
   LIKE_POST_SUCCESS,
   LIKE_POST_ERROR,
+  SUBMIT_RESULT_POST,
+  SUBMIT_RESULT_POST_SUCCESS,
+  SUBMIT_RESULT_POST_ERROR,
+  CHANGE_POST_STATUS,
+  CHANGE_POST_STATUS_SUCCESS,
+  CHANGE_POST_STATUS_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
@@ -22,9 +28,9 @@ export const initialState = {
   posts: [],
   singlePost: null,
 
-  createPostLoading : false,
-  createPostDone : false, 
-  createPostError : null, 
+  createPostLoading: false,
+  createPostDone: false,
+  createPostError: null,
 
   loadPostsLoading: false,
   loadPostsDone: false,
@@ -41,14 +47,21 @@ export const initialState = {
   likePostLoading: false,
   likePostDone: false,
   likePostError: null,
+
+  submitResultPostLoading: false,
+  submitResultPostDone: false,
+  submitResultPostError: null,
+
+  changePostStatusLoading: false,
+  changePostStatusDone: false,
+  changePostStatusError: null,
 };
 
 //액션 생성함수
-export const createPost = (data) => ({
-  type : CREATE_POST, 
-  data, 
-})
-
+export const createPost = data => ({
+  type: CREATE_POST,
+  data,
+});
 
 export const loadPosts = data => ({
   type: LOAD_POSTS,
@@ -70,24 +83,34 @@ export const likePost = id => ({
   data: id,
 });
 
+export const submitResultPost = data => ({
+  type: SUBMIT_RESULT_POST,
+  data,
+});
+
+export const changePostStatus = data => ({
+  type: CHANGE_POST_STATUS,
+  data,
+});
+
 //리듀서
 const post = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case CREATE_POST :
-        draft.createPostLoading = true; 
-        draft.createPostDone = false; 
-        draft.createPostError = null; 
-        break; 
-      case CREATE_POST_SUCCESS :
-        draft.createPostLoading = false; 
-        draft.createPostDone = true; 
-        draft.createPostError = null; 
+      case CREATE_POST:
+        draft.createPostLoading = true;
+        draft.createPostDone = false;
+        draft.createPostError = null;
         break;
-      case CREATE_POST_ERROR :
+      case CREATE_POST_SUCCESS:
         draft.createPostLoading = false;
-        draft.createPostError = action.error;  
-        console.log(action.data); 
+        draft.createPostDone = true;
+        draft.createPostError = null;
+        break;
+      case CREATE_POST_ERROR:
+        draft.createPostLoading = false;
+        draft.createPostError = action.error;
+        console.log(action.data);
         break;
       case LOAD_POSTS:
         draft.loadPostsLoading = true;
@@ -125,6 +148,7 @@ const post = (state = initialState, action) => {
         draft.loadPostLoading = true;
         draft.loadPostDone = false;
         draft.loadPostError = null;
+        draft.singlePost = null;
         break;
       case LOAD_POST_SUCCESS: //액션 처리
         console.log(action.data.data);
@@ -147,8 +171,39 @@ const post = (state = initialState, action) => {
         draft.likePostDone = true;
         break;
       case LIKE_POST_ERROR:
+        console.log('like error');
         draft.likePostLoading = false;
         draft.likePostError = action.error;
+        break;
+      case SUBMIT_RESULT_POST:
+        draft.submitResultPostLoading = true;
+        draft.submitResultPostDone = false;
+        draft.submitResultPostError = null;
+        break;
+      case SUBMIT_RESULT_POST_SUCCESS: //액션 처리
+        console.log('submit result success');
+        draft.submitResultPostLoading = false;
+        draft.submitResultPostDone = true;
+        break;
+      case SUBMIT_RESULT_POST_ERROR:
+        console.log('submit result error');
+        draft.submitResultPostLoading = false;
+        draft.submitResultPostError = action.error;
+        break;
+      case CHANGE_POST_STATUS:
+        draft.changePostStatusLoading = true;
+        draft.changePostStatusDone = false;
+        draft.changePostStatusError = null;
+        break;
+      case CHANGE_POST_STATUS_SUCCESS: //액션 처리
+        console.log('change status success');
+        draft.changePostStatusLoading = false;
+        draft.changePostStatusDone = true;
+        break;
+      case CHANGE_POST_STATUS_ERROR:
+        console.log('change status error');
+        draft.changePostStatusLoading = false;
+        draft.changePostStatusError = action.error;
         break;
       default:
         break;

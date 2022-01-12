@@ -23,7 +23,7 @@ const PostCard = ({ post, ...props }) => {
   return (
     <S.CardLinkWrapper to={`post/${post.id}`}>
       <S.CardWrapper status={post.status} {...props}>
-        <S.CardStatusWrapper status={post.status}>{post.status}</S.CardStatusWrapper>
+        <S.CardStatusWrapper status={post.status}>진행 종료</S.CardStatusWrapper>
         <S.CardCategory>
           {post.kinds === 'STUDY' ? (
             <FaBook fontSize="30px" />

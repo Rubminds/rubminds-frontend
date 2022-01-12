@@ -5,10 +5,10 @@ import { RiSendPlaneFill } from 'react-icons/ri';
 import { BsCircleFill, BsChatLeft } from 'react-icons/bs';
 
 import { flexBetween, flexCenter, flexColumn } from '../../../constants';
-import { Paper, Avatar, Input } from '../../';
+import { Paper, Avatar, Input } from '../..';
 import mediaQuery from '../../../hooks/mediaQuery';
 
-export const ChatModalWrapper = styled(Paper)`
+export const NoteModalWrapper = styled(Paper)`
   position: fixed;
   bottom: 3%;
   right: 3%;

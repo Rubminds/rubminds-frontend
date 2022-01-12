@@ -2,17 +2,17 @@ import React, { useCallback, useState } from 'react';
 import * as S from './style';
 import { useDispatch } from 'react-redux';
 
-import { toggleChatModal } from '../../../modules/user';
+import { toggleNoteModal } from '../../../modules/user';
 import { Test } from '../../../assets/imgs';
 
-const ChatModal = () => {
+const NoteModal = () => {
   const dispatch = useDispatch();
   const [step, setStep] = useState(2);
   const onCloseClick = useCallback(() => {
-    dispatch(toggleChatModal());
+    dispatch(toggleNoteModal());
   }, []);
   return (
-    <S.ChatModalWrapper>
+    <S.NoteModalWrapper>
       <S.ModalHeader>
         <S.HeaderTitle>Rubminds Contact</S.HeaderTitle>
         <S.CloseButton onClick={onCloseClick} />
@@ -86,7 +86,7 @@ const ChatModal = () => {
           </S.ChatroomWrapper>
         )}
       </S.Contents>
-    </S.ChatModalWrapper>
+    </S.NoteModalWrapper>
   );
 };
-export default ChatModal;
+export default NoteModal;

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import mediaQuery from '../../../hooks/mediaQuery'
 
-export const StyledChatButton = styled.button`
+export const StyledNoteButton = styled.button`
     position:fixed;
     width:80px;
     height:80px;

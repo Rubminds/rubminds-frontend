@@ -13,6 +13,7 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId,
     e => {
       dispatch(addTeamUser({ teamId, userId: e.target.value }));
       e.target.value = '';
+      closeModal();
     },
     [dispatch, teamId],
   );
@@ -27,6 +28,7 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId,
           <BsPlusCircleDotted fontSize="3rem" />
           &nbsp;&nbsp;
           <S.AddUserInput
+            type="text"
             onKeyPress={e => e.key === 'Enter' && onAddUserKeypress(e)}
             placeholder="ID로 팀원 추가"
           />

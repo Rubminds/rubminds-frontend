@@ -37,7 +37,7 @@ const App = () => {
           <Route path="/editprofile" component={EditProfilePage} />
           <Route path="/userPage/:id" component={UserPage} />
           <Route path="/dibs" component={DibsPage} />
-          <Route path="/projects/:type" component={ProjectStatusPage} />
+          <Route path="/projects/:status/:userId" component={ProjectStatusPage} />
         </Switch>
       </Router>
     </ThemeProvider>

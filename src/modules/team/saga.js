@@ -85,7 +85,7 @@ function* addTeamUser(action) {
 }
 
 function deleteTeamUserAPI(data) {
-  return axios.post(`/team/${data.teamId}/user/${data.userId}`, null, {
+  return axios.delete(`/team/${data.teamId}/user/${data.userId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

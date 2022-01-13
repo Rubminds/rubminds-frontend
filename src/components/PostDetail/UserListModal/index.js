@@ -41,7 +41,7 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId 
       e.preventDefault();
       const deleteConfirm = window.confirm(`정말 ${user.userNickname}님을 추방하시겠습니까?`);
       if (deleteConfirm) {
-        //dispatch(deleteTeamUser({ teamId, userId: user.userId }));
+        dispatch(deleteTeamUser({ teamId, userId: user.userId }));
       }
     },
     [dispatch, teamId],

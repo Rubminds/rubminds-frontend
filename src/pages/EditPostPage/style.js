@@ -4,6 +4,13 @@ import { FaBook } from 'react-icons/fa'
 import { MdPersonAdd } from 'react-icons/md'
 import { HiUserGroup } from 'react-icons/hi'
 
+export const AllWrapper = styled.div`
+  display : flex;  
+  justify-content : center;
+  padding : 5rem 0px;
+  background: #f9fbfc;
+`; 
+
 export const WrittingInnerForm = styled.form`
   background-color: white;
   border-radius: 30px;

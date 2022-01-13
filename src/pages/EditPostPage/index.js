@@ -10,7 +10,6 @@ import Content from '../../components/EditPost/Content'
 import * as S from './style'
 import { Link, useHistory } from 'react-router-dom'
 import { AreaOptions, SKILL_ID } from '../../constants'
-import { createPost } from '../../modules/post'
 
 const EditPostPage = () => {
   const { singlePost } = useSelector(state => state.post)
@@ -73,66 +72,67 @@ const EditPostPage = () => {
         'postInfo',
         new Blob([JSON.stringify(data)], { type: 'application/json' })
       )
-
     },
     [title, content, headCount, meeting, region, dropDownOptions, customOptions]
   )
 
   return (
     <>
-      <S.WrittingInnerForm onSubmit={onSubmitHandler}>
-        {/* 제목 */}
-        <Title title={title} setTitle={setTitle} />
+      <S.AllWrapper>
+        <S.WrittingInnerForm onSubmit={onSubmitHandler}>
+          {/* 제목 */}
+          <Title title={title} setTitle={setTitle} />
 
-        {/* 기술 스택 */}
-        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
-          기술 스택
-        </S.MainTitle>
+          {/* 기술 스택 */}
+          <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+            기술 스택
+          </S.MainTitle>
 
-        <CustomDropDown
-          dropDownOptions={dropDownOptions}
-          setDropDownOptions={setDropDownOptions}
-          customOptions={customOptions}
-          setCustomOptions={setCustomOptions}
-          style={{ width: '100%' }}
-          options={skillName}
-        />
+          <CustomDropDown
+            dropDownOptions={dropDownOptions}
+            setDropDownOptions={setDropDownOptions}
+            customOptions={customOptions}
+            setCustomOptions={setCustomOptions}
+            style={{ width: '100%' }}
+            options={skillName}
+          />
 
-        {/* 회의환경 및 모집인원 */}
-        <MiddleArea
-          meeting={meeting}
-          setMeeting={setMeeting}
-          headCount={headCount}
-          setHeadCount={setHeadCount}
-          isScout={isScout}
-        />
+          {/* 회의환경 및 모집인원 */}
+          <MiddleArea
+            meeting={meeting}
+            setMeeting={setMeeting}
+            headCount={headCount}
+            setHeadCount={setHeadCount}
+            isScout={isScout}
+          />
 
-        {/* 지역 */}
-        <Region
-          region={region}
-          setRegion={setRegion}
-          AreaOptions={AreaOptions}
-        />
+          {/* 지역 */}
+          <Region
+            region={region}
+            setRegion={setRegion}
+            AreaOptions={AreaOptions}
+          />
 
-        {/* 참고자료 */}
-        <File
-          attachment={attachment}
-          setAttachment={setAttachment}
-          file={file}
-          setFile={setFile}
-          fileInfo={fileInfo}
-          setFileInfo={setFileInfo}
-        />
+          {/* 참고자료 */}
+          <File
+            attachment={attachment}
+            setAttachment={setAttachment}
+            file={file}
+            setFile={setFile}
+            fileInfo={fileInfo}
+            setFileInfo={setFileInfo}
+          />
 
-        <Content content={content} setContent={setContent} />
+          <Content content={content} setContent={setContent} />
 
-        <S.BtnWrapper>
-          <S.BtnLeft>
-            <Link to="/">취소</Link>
-          </S.BtnLeft>
-          <S.BtnRight onClick={onSubmitHandler}>수정하기</S.BtnRight>
-        </S.BtnWrapper>
-      </S.WrittingInnerForm>
+          <S.BtnWrapper>
+            <S.BtnLeft>
+              <Link to="/">취소</Link>
+            </S.BtnLeft>
+            <S.BtnRight onClick={onSubmitHandler}>수정하기</S.BtnRight>
+          </S.BtnWrapper>
+        </S.WrittingInnerForm>
+      </S.AllWrapper>
     </>
   )
 }

@@ -12,6 +12,7 @@ export const MainTitle = styled.div`
 
 export const AllWrapper = styled.div` 
   background: #f9fbfc;
+  padding : 5rem 0px;
   display : flex; 
   justify-content : center; 
 `; 

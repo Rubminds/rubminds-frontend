@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { ExitBtn } from '../../../assets/imgs';
 import { addTeamUser, deleteTeamUser } from '../../../modules/team';
 
-const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId }) => {
+const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId, postStatus }) => {
   const dispatch = useDispatch();
 
   const onAddUserKeypress = useCallback(
@@ -37,7 +37,7 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId 
   };
 
   const onDeleteUserClick = useCallback(
-    (e,user) => {
+    (e, user) => {
       e.preventDefault();
       const deleteConfirm = window.confirm(`정말 ${user.userNickname}님을 추방하시겠습니까?`);
       if (deleteConfirm) {
@@ -63,15 +63,19 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId 
                   &nbsp;
                   <S.WriterMark />
                 </>
-              ) : meId ===writerId && (
-                <>
-                  <S.DeleteUserButton onClick={e => onDeleteUserClick(e,v)} />
-                </>
+              ) : (
+                meId === writerId &&
+                postStatus !== 'RANKING' &&
+                postStatus !== 'FINISHED' && (
+                  <>
+                    <S.DeleteUserButton onClick={e => onDeleteUserClick(e, v)} />
+                  </>
+                )
               )}
             </S.User>
           );
         })}
-        {rendering()}
+        {postStatus === 'RECRUIT' && rendering()}
       </S.UserList>
     </S.UserListWrapper>
   );

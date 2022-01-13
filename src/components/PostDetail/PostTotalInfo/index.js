@@ -39,7 +39,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   const onChangeStatusClick = useCallback(
     status => () => {
       dispatch(changePostStatus({ postId: post.id, content: { postStatus: status } }));
-      window.location.replace(`/post/${post.id}`)
+      window.location.replace(`/post/${post.id}`);
     },
     [post.id, dispatch],
   );
@@ -71,13 +71,13 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
             teamId={post.teamId}
             members={members}
             meId={me.id}
+            postStatus={post.postsStatus}
           />
         ) : (
           <>
             <S.GroupBox>
               {me.id === post.writer.id ? (
                 <>
-
                   {post.postsStatus === 'RECRUIT' ? (
                     <>
                       <S.DetailInfoContent toBtn onClick={onChangeStatusClick('WORKING')}>
@@ -89,9 +89,17 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                     </>
                   ) : post.postsStatus === 'WORKING' ? (
                     <>
+                      <S.DetailInfoContent
+                        toBtn
+                        onClick={onChangeStatusClick('RANKING')}
+                        blue="true"
+                      >
+                        평가 후 완료하기
+                      </S.DetailInfoContent>
                       <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
                         모집중으로 변경
                       </S.DetailInfoContent>
+
                       <S.DetailInfoContent>
                         <AiOutlineEdit /> &nbsp;수정
                       </S.DetailInfoContent>

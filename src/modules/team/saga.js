@@ -46,8 +46,8 @@ function evaluateTeamMembersAPI(data) {
   });
 }
 function* evaluateTeamMembers(action) {
-  console.log(action.data);
   const result = yield call(evaluateTeamMembersAPI, action.data);
+  console.log(result);
   try {
     yield put({
       type: EVALUATE_TEAM_MEMBERS_SUCCESS,

@@ -34,6 +34,7 @@ const PostDetailPage = () => {
             writerId={singlePost.writer.id}
             kinds={singlePost.kinds}
             postId={singlePost.id}
+            meId={me.id}
           />
         ) : (
           <>
@@ -48,7 +49,7 @@ const PostDetailPage = () => {
             />
             <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
 
-            {singlePost.postsStatus === 'FINISHED' && <ResultForm postId={singlePost.id} />}
+            {singlePost.postsStatus === 'FINISHED' && <ResultForm post={singlePost} />}
           </>
         )
       ) : (

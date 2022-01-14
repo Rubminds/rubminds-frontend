@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import mediaQuery from '../../../hooks/mediaQuery';
-import { flexCenter } from '../../../constants';
+import mediaQuery from '../../../../hooks/mediaQuery';
+import { flexCenter } from '../../../../constants';
 
 export const StyledNoteButton = styled.button`
   position: fixed;

@@ -4,9 +4,9 @@ import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { BsCircleFill, BsChatLeft } from 'react-icons/bs';
 
-import { flexBetween, flexCenter, flexColumn } from '../../../constants';
-import { Paper, Avatar, Input } from '../..';
-import mediaQuery from '../../../hooks/mediaQuery';
+import { flexBetween, flexCenter, flexColumn } from '../../../../constants';
+import { Paper, Avatar, Input } from '../../..';
+import mediaQuery from '../../../../hooks/mediaQuery';
 
 export const NoteModalWrapper = styled(Paper)`
   position: fixed;
@@ -75,6 +75,7 @@ export const UserRow = styled.div`
   ${flexColumn}
   width: 100%;
   padding: 1rem 1.5rem;
+  cursor: pointer;
   &:after {
     position: absolute;
     content: '';

@@ -3,8 +3,8 @@ import * as S from './style';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { NoteModal } from '../..';
-import { toggleNoteModal } from '../../../modules/user';
+import { NoteModal } from '../../..';
+import { toggleNoteModal } from '../../../../modules/user';
 
 const NoteButton = () => {
   const dispatch = useDispatch();

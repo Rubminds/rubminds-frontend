@@ -44,18 +44,21 @@ export const ModalStatus = styled.button`
   border-bottom: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  border-color:rgba(0, 0, 0, 0.2);
-  font-weight:bold;
+  border-color: rgba(0, 0, 0, 0.2);
+  font-weight: bold;
   padding: 1rem 1rem;
   box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.1);
   ${props =>
     props.current === props.value
       ? css`
           background-color: #fff7d1;
-          padding-top:1.5rem;
+          padding-top: 1.5rem;
         `
       : css`
           background-color: #fff;
+          &:hover {
+            padding-top: 1.5rem;
+          }
         `}
 `;
 

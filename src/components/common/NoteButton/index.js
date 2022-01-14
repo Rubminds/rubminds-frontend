@@ -8,7 +8,7 @@ import { toggleNoteModal } from '../../../modules/user';
 
 const NoteButton = () => {
   const dispatch = useDispatch();
-  const isChatOpen = useSelector(state => state.user.isChatOpen);
+  const isNoteOpen = useSelector(state => state.user.isNoteOpen);
   const onClick = useCallback(() => {
     dispatch(toggleNoteModal());
   }, []);
@@ -18,7 +18,7 @@ const NoteButton = () => {
       <S.StyledNoteButton onClick={onClick}>
         <FaRegPaperPlane fontSize="40px" color="#ffffff" />
       </S.StyledNoteButton>
-      {isChatOpen && <NoteModal />}
+      {isNoteOpen && <NoteModal />}
     </>
   );
 };

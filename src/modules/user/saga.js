@@ -10,9 +10,9 @@ import {
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
-  TOGGLE_CHAT_MODAL,
-  TOGGLE_CHAT_MODAL_ERROR,
-  TOGGLE_CHAT_MODAL_SUCCESS,
+  TOGGLE_NOTE_MODAL,
+  TOGGLE_NOTE_MODAL_ERROR,
+  TOGGLE_NOTE_MODAL_SUCCESS,
   LOAD_USER_INFO,
   LOAD_USER_INFO_SUCCESS,
   LOAD_USER_INFO_ERROR,
@@ -91,12 +91,12 @@ function* toggleNoteModal() {
   console.log('togglechat saga');
   try {
     yield put({
-      type: TOGGLE_CHAT_MODAL_SUCCESS,
+      type: TOGGLE_NOTE_MODAL_SUCCESS,
     });
   } catch (err) {
     //에러 발생시 이벤트
     yield put({
-      type: TOGGLE_CHAT_MODAL_ERROR,
+      type: TOGGLE_NOTE_MODAL_ERROR,
       error: err,
     });
   }
@@ -157,7 +157,7 @@ function* watchUpdateUser() {
 }
 
 function* watchToggleNoteModal() {
-  yield takeLatest(TOGGLE_CHAT_MODAL, toggleNoteModal);
+  yield takeLatest(TOGGLE_NOTE_MODAL, toggleNoteModal);
 }
 
 function* watchLoadUserInfo() {

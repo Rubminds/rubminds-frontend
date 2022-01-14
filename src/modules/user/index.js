@@ -8,9 +8,9 @@ import {
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
-  TOGGLE_CHAT_MODAL,
-  TOGGLE_CHAT_MODAL_SUCCESS,
-  TOGGLE_CHAT_MODAL_ERROR,
+  TOGGLE_NOTE_MODAL,
+  TOGGLE_NOTE_MODAL_SUCCESS,
+  TOGGLE_NOTE_MODAL_ERROR,
   LOAD_USER_INFO,
   LOAD_USER_INFO_SUCCESS,
   LOAD_USER_INFO_ERROR,
@@ -23,7 +23,7 @@ import produce from 'immer';
 //초기 상태 초기화
 export const initialState = {
   me: null,
-  isChatOpen: false,
+  isNoteOpen: false,
 
   isSigninLoading: false,
   isSigninDone: false,
@@ -63,7 +63,7 @@ export const updateUser = data => ({
 });
 
 export const toggleNoteModal = () => ({
-  type: TOGGLE_CHAT_MODAL,
+  type: TOGGLE_NOTE_MODAL,
 });
 
 export const loadUserInfo = id => ({
@@ -131,14 +131,14 @@ const user = (state = initialState, action) => {
         draft.isUserUpdateLoading = false;
         draft.isUserUpdateError = action.error;
         break;
-      case TOGGLE_CHAT_MODAL:
+      case TOGGLE_NOTE_MODAL:
         console.log('toggle chat reducer');
         break;
-      case TOGGLE_CHAT_MODAL_SUCCESS:
-        draft.isChatOpen = !draft.isChatOpen;
+      case TOGGLE_NOTE_MODAL_SUCCESS:
+        draft.isNoteOpen = !draft.isNoteOpen;
         break;
-      case TOGGLE_CHAT_MODAL_ERROR:
-        draft.isChatOpen = false;
+      case TOGGLE_NOTE_MODAL_ERROR:
+        draft.isNoteOpen = false;
         break;
       case LOAD_USER_INFO:
         draft.loadUserInfoLoading = true;

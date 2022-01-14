@@ -2,12 +2,12 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import * as S from './style';
 import { useDispatch } from 'react-redux';
 
-import { Input, TextArea, Carousel } from '../..';
+import { Carousel } from '../..';
 import useInput from '../../../hooks/useInput';
 import { submitResultPost } from '../../../modules/post';
 
 const ResultForm = ({ post }) => {
-  const [file, onChangeFile] = useInput('');
+  const [file, setFile] = useState(null);
   const [refLink, onChangeRefLink] = useInput('');
   const [completeContent, onChangeCompleteContent] = useInput('');
   const [images, onChangeImages, setImages] = useInput([]);
@@ -17,6 +17,11 @@ const ResultForm = ({ post }) => {
   const refLinkInput = useRef();
   const submitBtn = useRef();
 
+  const onChangeFile = useCallback(e => {
+    console.log(e.target.files[0])
+    setFile(e.target.files[0]);
+  }, []);
+
   const onSubmitResultClick = useCallback(
     e => {
       e.preventDefault();
@@ -25,13 +30,15 @@ const ResultForm = ({ post }) => {
         completeContent,
       };
       const formData = new FormData();
-      file && formData.append('files', file);
+      file && formData.append('completeFiles', file);
+      console.log(file);
       images.length > 0 && formData.append('images', images);
 
       formData.append(
         'completeInfo',
         new Blob([JSON.stringify(dataObj)], { type: 'application/json' }),
       );
+
       dispatch(submitResultPost({ postId: post.id, content: formData }));
     },
     [completeContent, refLink, images, file, dispatch, post.id],
@@ -51,12 +58,13 @@ const ResultForm = ({ post }) => {
       completeContentInput.current.value = post.completeContent;
     }
   }, []);
+
   return (
     <S.ResultFormWrapper>
       <S.FormBigTitle>결과</S.FormBigTitle>
       <S.FileWrapper>
         <S.UploadFile htmlFor="input-file">파일 업로드</S.UploadFile>
-        <S.UploadFileName>{file}</S.UploadFileName>
+        <S.UploadFileName>{ file && file.name}</S.UploadFileName>
       </S.FileWrapper>
       <input
         type="file"

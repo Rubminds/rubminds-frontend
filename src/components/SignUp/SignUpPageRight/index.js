@@ -40,9 +40,9 @@ const SignUpPageRight = () => {
       e.preventDefault()
       if(nicknameCheck){
         const data = {
-          nickname: nickname,
-          job: job,
-          introduce: introduce,
+          nickname,
+          job,
+          introduce,
           skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         }
         console.log(data); 

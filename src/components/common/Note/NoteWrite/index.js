@@ -8,7 +8,11 @@ const NoteWrite = ({ user, setStep }) => {
   return (
     <S.ContentWrapper>
       <S.BackBtn onClick={onBackClick} />
-      <S.UserName>{user.name}</S.UserName>
+      <S.Content>
+        <S.UserName>받는이 : {user.name}</S.UserName>
+        <S.TextArea></S.TextArea>
+        <S.SendBtn>전송</S.SendBtn>
+      </S.Content>
     </S.ContentWrapper>
   );
 };

@@ -73,8 +73,8 @@ const EditPostPage = () => {
         'postInfo',
         new Blob([JSON.stringify(data)], { type: 'application/json' })
       )
-      // dispatch(editPost({ id : singlePost.id, formData}))
-      // window.location.replace(`/`);
+      dispatch(editPost({ id : singlePost.id, formData}))
+      window.location.replace(`/`);
     },
     [title, content, headCount, meeting, region, dropDownOptions, customOptions]
   )

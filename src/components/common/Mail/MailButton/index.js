@@ -3,24 +3,24 @@ import * as S from './style';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { NoteModal } from '../../..';
-import { toggleNoteModal } from '../../../../modules/user';
+import { MailModal } from '../../..';
+import { toggleMailModal } from '../../../../modules/user';
 
-const NoteButton = () => {
+const MailButton = () => {
   const dispatch = useDispatch();
-  const isNoteOpen = useSelector(state => state.user.isNoteOpen);
+  const isMailOpen = useSelector(state => state.user.isMailOpen);
   const onClick = useCallback(() => {
-    dispatch(toggleNoteModal());
+    dispatch(toggleMailModal());
   }, []);
 
   return (
     <>
-      <S.StyledNoteButton onClick={onClick}>
+      <S.StyledMailButton onClick={onClick}>
         <FaRegPaperPlane fontSize="40px" color="#ffffff" />
-      </S.StyledNoteButton>
-      {isNoteOpen && <NoteModal />}
+      </S.StyledMailButton>
+      {isMailOpen && <MailModal />}
     </>
   );
 };
 
-export default NoteButton;
+export default MailButton;

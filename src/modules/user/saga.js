@@ -87,7 +87,7 @@ function* updateUser(action) {
   }
 }
 
-function* toggleNoteModal() {
+function* toggleMailModal() {
   console.log('togglechat saga');
   try {
     yield put({
@@ -156,8 +156,8 @@ function* watchUpdateUser() {
   yield takeLatest(UPDATE_USER, updateUser);
 }
 
-function* watchToggleNoteModal() {
-  yield takeLatest(TOGGLE_NOTE_MODAL, toggleNoteModal);
+function* watchToggleMailModal() {
+  yield takeLatest(TOGGLE_NOTE_MODAL, toggleMailModal);
 }
 
 function* watchLoadUserInfo() {
@@ -173,7 +173,7 @@ export default function* userSaga() {
     fork(watchSigninUser),
     fork(watchSignupUser),
     fork(watchUpdateUser),
-    fork(watchToggleNoteModal),
+    fork(watchToggleMailModal),
     fork(watchLoadUserInfo),
     fork(watchLogoutUser),
   ]);

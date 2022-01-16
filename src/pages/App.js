@@ -14,7 +14,7 @@ import DibsPage from './DibsPage';
 import ProjectStatusPage from './ProjectStatusPage';
 import EditProfilePage from './EditProfilePage';
 
-import { Header, NoteButton } from '../components';
+import { Header, MailButton } from '../components';
 
 const App = () => {
   return (
@@ -22,7 +22,7 @@ const App = () => {
       <GlobalStyles />
       <Router>
         <Header />
-        <NoteButton />
+        <MailButton />
         <Switch>
           <Route
             exact

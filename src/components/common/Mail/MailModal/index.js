@@ -3,16 +3,16 @@ import * as S from './style';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
-import { toggleNoteModal } from '../../../../modules/user';
-import { NoteWrite, NoteRead, NoteUserList } from '../../../';
+import { toggleMailModal } from '../../../../modules/user';
+import { MailWrite, MailRead, MailUserList } from '../../..';
 
-const NoteModal = () => {
+const MailModal = () => {
   const dispatch = useDispatch();
   const { me } = useSelector(state => state.user);
   const [step, setStep] = useState(1);
   const [target, setTarget] = useState(null);
-  const [sendNoteList, setSendNoteList] = useState([]);
-  const [receiveNoteList, setReceiveNoteList] = useState([]);
+  const [sendMailList, setSendMailList] = useState([]);
+  const [receiveMailList, setReceiveMailList] = useState([]);
   const userList = [
     { id: 1, name: '한놈', content: '나랑 같이 프젝 하던가' },
     { id: 2, name: '두식이', content: '쟤랑 하지마' },
@@ -43,7 +43,7 @@ const NoteModal = () => {
   }, []);
 
   const onCloseClick = useCallback(() => {
-    dispatch(toggleNoteModal());
+    dispatch(toggleMailModal());
   }, []);
 
   const onModalStatusClick = useCallback(
@@ -61,7 +61,7 @@ const NoteModal = () => {
     [],
   );
   return (
-    <S.NoteModalWrapper>
+    <S.MailModalWrapper>
       <S.ModalHeader>
         <S.HeaderTitle>쪽지함</S.HeaderTitle>
         <S.CloseButton onClick={onCloseClick} />
@@ -79,24 +79,24 @@ const NoteModal = () => {
             </S.ModalStatusWrapper>
             <S.UserListWrapper>
               {step === 1 ? (
-                <NoteUserList userList={userList} onUserClick={onUserClick} />
+                <MailUserList userList={userList} onUserClick={onUserClick} />
               ) : (
-                <NoteUserList userList={userList2} onUserClick={onUserClick} />
+                <MailUserList userList={userList2} onUserClick={onUserClick} />
               )}
             </S.UserListWrapper>
           </>
         ) : step === 3 ? (
-          <NoteRead user={target} setStep={setStep} />
+          <MailRead user={target} setStep={setStep} />
         ) : (
-          <NoteWrite user={target} setStep={setStep} />
+          <MailWrite user={target} setStep={setStep} />
         )
       ) : (
         <S.DisabledForm>
-          <S.DisabledIcon/>
+          <S.DisabledIcon />
           <S.DisabledLabel>로그인을 해주세요.</S.DisabledLabel>
         </S.DisabledForm>
       )}
-    </S.NoteModalWrapper>
+    </S.MailModalWrapper>
   );
 };
-export default NoteModal;
+export default MailModal;

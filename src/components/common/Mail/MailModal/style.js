@@ -9,7 +9,7 @@ import { flexBetween, flexCenter, flexColumn } from '../../../../constants';
 import { Paper, Avatar, Input } from '../../..';
 import mediaQuery from '../../../../hooks/mediaQuery';
 
-export const NoteModalWrapper = styled(Paper)`
+export const MailModalWrapper = styled(Paper)`
   position: fixed;
   bottom: 3%;
   right: 3%;

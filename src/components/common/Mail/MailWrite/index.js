@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import * as S from './style';
 
-const NoteWrite = ({ user, setStep }) => {
+const MailWrite = ({ user, setStep }) => {
   const onBackClick = useCallback(() => {
     setStep(1);
   }, []);
@@ -21,4 +21,4 @@ const NoteWrite = ({ user, setStep }) => {
   );
 };
 
-export default NoteWrite;
+export default MailWrite;

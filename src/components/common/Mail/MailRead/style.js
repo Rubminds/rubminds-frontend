@@ -36,13 +36,29 @@ export const Messages = styled.div`
   overflow-y: auto;
 `;
 
-export const ResendBtn = styled.button`
+export const BtnWrapper = styled.div`
   margin-top: 1rem;
+  display:flex;
+`;
+
+export const ResendBtn = styled.button`
   width: 10rem;
-  height: 5rem;
+  height: 4rem;
+  border: none;
+  background-color: #fff8;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+`;
+
+export const DeleteBtn = styled.button`
+  width: 10rem;
+  height: 4rem;
   border: none;
   background-color: #ffa586;
   border-radius: 30px;
   color: #fff;
   font-weight: bold;
+  margin-left:1rem;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
 `;

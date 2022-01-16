@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
 
-const NoteUserList = ({ userList, onUserClick }) => {
+const MailUserList = ({ userList, onUserClick }) => {
   return (
     <>
       {userList.map(v => (
@@ -14,4 +14,4 @@ const NoteUserList = ({ userList, onUserClick }) => {
   );
 };
 
-export default NoteUserList;
+export default MailUserList;

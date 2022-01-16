@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import mediaQuery from '../../../../hooks/mediaQuery';
 import { flexCenter } from '../../../../constants';
 
-export const StyledNoteButton = styled.button`
+export const StyledMailButton = styled.button`
   position: fixed;
   width: 75px;
   height: 75px;

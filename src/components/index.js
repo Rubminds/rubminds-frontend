@@ -1,8 +1,8 @@
 export { default as Header } from './common/Header';
-export { default as NoteButton } from './common/Note/NoteButton';
-export { default as NoteUserList } from './common/Note/NoteUserList';
-export { default as NoteWrite } from './common/Note/NoteWrite';
-export { default as NoteRead } from './common/Note/NoteRead';
+export { default as MailButton } from './common/Mail/MailButton';
+export { default as MailUserList } from './common/Mail/MailUserList';
+export { default as MailWrite } from './common/Mail/MailWrite';
+export { default as MailRead } from './common/Mail/MailRead';
 export { default as Footer } from './common/Footer';
 export { default as PostCard } from './common/PostCard';
 export { default as DropDown } from './common/DropDown';
@@ -13,7 +13,7 @@ export { default as Carousel } from './common/Carousel';
 export { default as Paper } from './common/Paper';
 export { default as BackButton } from './common/BackButton';
 export { default as Avatar } from './common/Avatar';
-export { default as NoteModal } from './common/Note/NoteModal';
+export { default as MailModal } from './common/Mail/MailModal';
 
 export { default as AreaDropdown } from './Landing/AreaDropdown';
 export { default as Banner } from './Landing/Banner';

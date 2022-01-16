@@ -40,10 +40,11 @@ export const TextArea = styled.textarea`
 export const SendBtn = styled.button`
   margin-top: 1rem;
   width: 10rem;
-  height: 5rem;
+  height: 4rem;
   border: none;
   background-color: #ffa586;
   border-radius: 30px;
   color: #fff;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
   font-weight: bold;
 `;

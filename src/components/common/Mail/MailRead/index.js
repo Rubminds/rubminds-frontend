@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import * as S from './style';
 
-const NoteRead = ({ user, setStep }) => {
+const MailRead = ({ user, setStep }) => {
   const onBackClick = useCallback(() => {
     setStep(1);
   });
@@ -9,16 +9,21 @@ const NoteRead = ({ user, setStep }) => {
   const onResendClick = useCallback(() => {
     setStep(4);
   });
+
+  const onDeleteClick = useCallback(() => {}, []);
   return (
     <S.ContentWrapper>
       <S.BackBtn onClick={onBackClick} />
       <S.Content>
         <S.UserName>보낸이 : {user.name}</S.UserName>
         <S.Messages>{user.content}</S.Messages>
-        <S.ResendBtn onClick={onResendClick}>답장</S.ResendBtn>
+        <S.BtnWrapper>
+          <S.ResendBtn onClick={onResendClick}>답장</S.ResendBtn>
+          <S.DeleteBtn onClick={onDeleteClick}>삭제</S.DeleteBtn>
+        </S.BtnWrapper>
       </S.Content>
     </S.ContentWrapper>
   );
 };
 
-export default NoteRead;
+export default MailRead;

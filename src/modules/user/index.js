@@ -23,7 +23,7 @@ import produce from 'immer';
 //초기 상태 초기화
 export const initialState = {
   me: null,
-  isNoteOpen: false,
+  isMailOpen: false,
 
   isSigninLoading: false,
   isSigninDone: false,
@@ -62,7 +62,7 @@ export const updateUser = data => ({
   data,
 });
 
-export const toggleNoteModal = () => ({
+export const toggleMailModal = () => ({
   type: TOGGLE_NOTE_MODAL,
 });
 
@@ -135,10 +135,10 @@ const user = (state = initialState, action) => {
         console.log('toggle chat reducer');
         break;
       case TOGGLE_NOTE_MODAL_SUCCESS:
-        draft.isNoteOpen = !draft.isNoteOpen;
+        draft.isMailOpen = !draft.isMailOpen;
         break;
       case TOGGLE_NOTE_MODAL_ERROR:
-        draft.isNoteOpen = false;
+        draft.isMailOpen = false;
         break;
       case LOAD_USER_INFO:
         draft.loadUserInfoLoading = true;

@@ -74,7 +74,7 @@ const EditPostPage = () => {
         new Blob([JSON.stringify(data)], { type: 'application/json' })
       )
       dispatch(editPost({ id : singlePost.id, formData}))
-      window.location.replace(`/`);
+      window.location.replace(`/post/${singlePost.id}`);
     },
     [title, content, headCount, meeting, region, dropDownOptions, customOptions]
   )

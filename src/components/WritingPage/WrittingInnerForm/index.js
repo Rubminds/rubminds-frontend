@@ -21,7 +21,7 @@ const WrittingInnerForm = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const [title, setTitle] = useState(null)
-  const [content, setContent] = useState(null)
+  const [content, setContent] = useState('')
   const [headCount, setHeadCount] = useState(null)
   const [kinds, setKinds] = useState('STUDY')
   const [meeting, setMeeting] = useState(null)
@@ -53,7 +53,7 @@ const WrittingInnerForm = () => {
 
       const data = {
         title: title,
-        content: content,
+        content: content, 
         headcount: headCount != null ? parseInt(headCount) : null,
         kinds: kinds,
         meeting: meeting,
@@ -72,7 +72,7 @@ const WrittingInnerForm = () => {
       )
 
       dispatch(createPost(formData))
-      history.push('/')
+      window.location.replace(`/`)
     },
     [
       title,

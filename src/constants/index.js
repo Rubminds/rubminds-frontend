@@ -41,16 +41,7 @@ export const SKILL_ID = {
 export const MAX_STAR = 5;
 
 //options
-//dropdown
-export const LandingDropdownOptions = [
-  '파이썬',
-  '리액트',
-  '자바',
-  '자바스크립트',
-  'NODEJS',
-  '엄청긴거테스트용ㅇㅇㅇㅇ',
-];
-// 지역 options
+// 지역 
 export const AreaOptions = [
   '서울특별시',
   '경기도',
@@ -145,3 +136,11 @@ export const CHANGE_POST_STATUS_ERROR = 'CHANGE_POST_STATUS_ERROR';
 export const DELETE_TEAM_USER = 'DELETE_TEAM_USER';
 export const DELETE_TEAM_USER_SUCCESS = 'DELETE_TEAM_USER_SUCCESS';
 export const DELETE_TEAM_USER_ERROR = 'DELETE_TEAM_USER_ERROR';
+
+export const SEND_MAIL = 'SEND_MAIL';
+export const SEND_MAIL_SUCCESS = 'SEND_MAIL_SUCCESS';
+export const SEND_MAIL_ERROR = 'SEND_MAIL_ERROR';
+
+export const DELETE_MAIL = 'DELETE_MAIL';
+export const DELETE_MAIL_SUCCESS = 'DELETE_MAIL_SUCCESS';
+export const DELETE_MAIL_ERROR = 'DELETE_MAIL_ERROR';

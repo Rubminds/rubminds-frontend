@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react'
-import * as S from '../../../pages/EditPostPage/style'
+import React, { useCallback } from 'react';
+import * as S from '../../../pages/EditPostPage/style';
 
 const Content = ({ content, setContent }) => {
   const onContentChange = useCallback(
     e => {
-      setContent(e.target.value)
+      setContent(e.target.value);
     },
     [content]
-  )
+  );
   return (
     <>
       <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
@@ -20,7 +20,7 @@ const Content = ({ content, setContent }) => {
         value={content}
       ></S.MainTextArea>
     </>
-  )
-}
+  );
+};
 
-export default Content
+export default Content;

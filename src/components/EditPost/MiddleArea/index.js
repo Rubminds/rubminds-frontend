@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef } from 'react'
-import * as S from '../../../pages/EditPostPage/style'
+import React, { useCallback, useEffect, useRef } from 'react';
+import * as S from '../../../pages/EditPostPage/style';
 
 const MiddleArea = ({
   meeting,
@@ -8,37 +8,38 @@ const MiddleArea = ({
   setHeadCount,
   isScout,
 }) => {
-
-  const ref = useRef([]); 
+  const ref = useRef([]);
 
   useEffect(() => {
-     ref.current.map((value)=>{
-       if(value.id === meeting){
-        value.setAttribute('checked', true); 
+    ref.current.map(value => {
+      if (value.id === meeting) {
+        value.setAttribute('checked', true);
       }
-     }) 
-  },[meeting])
+    });
+  }, [meeting]);
 
   const onMeetingChange = useCallback(
     e => {
-      setMeeting(e.target.value)
+      setMeeting(e.target.value);
     },
     [meeting]
-  )
+  );
 
   const onHeadCountChange = useCallback(
     e => {
-      const { value } = e.currentTarget
-      const onlyNumber = value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1')
-      setHeadCount(onlyNumber)
+      const { value } = e.currentTarget;
+      const onlyNumber = value
+        .replace(/[^0-9.]/g, '')
+        .replace(/(\.*)\./g, '$1');
+      setHeadCount(onlyNumber);
     },
     [headCount]
-  )
+  );
   const blockText = useCallback(e => {
     e.target.value = e.target.value
       .replace(/[^0-9.]/g, '')
-      .replace(/(\..*)\./g, '$1')
-  }, [])
+      .replace(/(\..*)\./g, '$1');
+  }, []);
 
   return (
     <>
@@ -106,7 +107,7 @@ const MiddleArea = ({
         </S.RecruitPeopleWrapper>
       </S.MiddleWrapper>
     </>
-  )
-}
+  );
+};
 
-export default MiddleArea
+export default MiddleArea;

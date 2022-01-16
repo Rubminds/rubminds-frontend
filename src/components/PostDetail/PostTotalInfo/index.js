@@ -1,22 +1,22 @@
-import React, { useCallback, useState, useEffect } from 'react'
-import * as S from './style.js'
-import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai'
-import { MdPersonAdd } from 'react-icons/md'
-import { useDispatch } from 'react-redux'
-import axios from 'axios'
-import { useHistory, useParams } from 'react-router-dom'
+import React, { useCallback, useState, useEffect } from 'react';
+import * as S from './style.js';
+import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import { MdPersonAdd } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useHistory, useParams } from 'react-router-dom';
 
-import { DetailInfo, UserListModal } from '../..'
-import { likePost, changePostStatus } from '../../../modules/post'
+import { DetailInfo, UserListModal } from '../..';
+import { likePost, changePostStatus } from '../../../modules/post';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
 const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
-  const [members, setMembers] = useState([])
-  const combinedSkills = post.postSkills.concat(post.customSkills)
-  const dispatch = useDispatch()
-  const { id } = useParams()
-  const history = useHistory()
+  const [members, setMembers] = useState([]);
+  const combinedSkills = post.postSkills.concat(post.customSkills);
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,34 +24,34 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
-      })
-      setMembers(response.data.teamUsers)
-    }
-    fetchData()
-  }, [])
+      });
+      setMembers(response.data.teamUsers);
+    };
+    fetchData();
+  }, []);
 
   const onEditPage = () => {
-    history.push(`/editpost`)
-  }
+    history.push(`/editpost`);
+  };
 
   const onLikeClick = useCallback(() => {
-    dispatch(likePost(post.id))
-  }, [dispatch, post.id])
+    dispatch(likePost(post.id));
+  }, [dispatch, post.id]);
 
   const onStatusCircleClick = useCallback(() => {
-    console.log('open team members')
-    openModal()
-  }, [openModal])
+    console.log('open team members');
+    openModal();
+  }, [openModal]);
 
   const onChangeStatusClick = useCallback(
     status => () => {
       dispatch(
         changePostStatus({ postId: post.id, content: { postStatus: status } })
-      )
-      window.location.replace(`/post/${post.id}`)
+      );
+      window.location.replace(`/post/${post.id}`);
     },
     [post.id, dispatch]
-  )
+  );
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
@@ -152,7 +152,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
         )}
       </S.DetailInfoWrapper>
     </S.PostDetailInfo>
-  )
-}
+  );
+};
 
-export default PostTotalInfo
+export default PostTotalInfo;

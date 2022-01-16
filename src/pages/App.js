@@ -1,21 +1,21 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
-import theme from '../common/theme'
-import GlobalStyles from '../common/GlobalStyle'
-import LandingPage from './LandingPage'
-import WrittingPage from './WrittingPage'
-import PostDetailPage from './PostDetailPage'
-import LogInPage from './LogInPage'
-import LogInProcess from './LogInProcess'
-import SignUpPage from './SignUpPage'
-import UserPage from './UserPage'
-import DibsPage from './DibsPage'
-import ProjectStatusPage from './ProjectStatusPage'
-import EditProfilePage from './EditProfilePage'
-import EditPostPage from './EditPostPage'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import theme from '../common/theme';
+import GlobalStyles from '../common/GlobalStyle';
+import LandingPage from './LandingPage';
+import WrittingPage from './WrittingPage';
+import PostDetailPage from './PostDetailPage';
+import LogInPage from './LogInPage';
+import LogInProcess from './LogInProcess';
+import SignUpPage from './SignUpPage';
+import UserPage from './UserPage';
+import DibsPage from './DibsPage';
+import ProjectStatusPage from './ProjectStatusPage';
+import EditProfilePage from './EditProfilePage';
+import EditPostPage from './EditPostPage';
 
-import { Header, ChatButton } from '../components'
+import { Header, ChatButton } from '../components';
 
 const App = () => {
   return (
@@ -43,7 +43,7 @@ const App = () => {
         </Switch>
       </Router>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

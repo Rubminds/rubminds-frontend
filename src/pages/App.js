@@ -33,13 +33,13 @@ const App = () => {
           />
           <Route path="/signup" component={SignUpPage} />
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/post/:id" component={PostDetailPage} />
+          <AuthRoute exact path="/post/:id" Component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
-          <AuthRoute path="/write" Component={WrittingPage}/>
-          <Route path="/editprofile" component={EditProfilePage} />
-          <Route path="/userPage/:id" component={UserPage} />
-          <Route path="/dibs" component={DibsPage} />
-          <Route path="/projects/:status/:userId" component={ProjectStatusPage} />
+          <AuthRoute path="/write" Component={WrittingPage} />
+          <AuthRoute path="/editprofile" Component={EditProfilePage} />
+          <AuthRoute path="/userPage/:id" component={UserPage} />
+          <AuthRoute path="/dibs" component={DibsPage} />
+          <AuthRoute path="/projects/:status/:userId" component={ProjectStatusPage} />
         </Switch>
       </Router>
     </ThemeProvider>

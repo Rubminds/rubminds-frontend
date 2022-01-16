@@ -39,7 +39,7 @@ const MailModal = () => {
       const response = await axios.get(``);
     };
 
-    fetchData();
+    //fetchData();
   }, []);
 
   const onCloseClick = useCallback(() => {

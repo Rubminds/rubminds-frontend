@@ -106,7 +106,7 @@ const LandingPage = () => {
     <S.LandingWrapper>
       {posts && (
         <>
-          <Banner posts={dibsPosts} />
+          <Banner dibsPosts={dibsPosts} />
           <S.LandingDetailWrapper>
             <S.TitleWrapper>
               <S.DetailTitle>어떤 동료를 찾으시나요? &nbsp;</S.DetailTitle>

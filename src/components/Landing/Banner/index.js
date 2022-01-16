@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { BannerCarousel } from '../..';
 
-const Banner = ({posts}) => {
+const Banner = ({dibsPosts}) => {
   const {me} = useSelector(state => state.user)
   return (
     <S.LandingBanner>
@@ -17,7 +17,7 @@ const Banner = ({posts}) => {
         <S.BannerText fontSize="md">Rubminds에서 당신의 팀원을 찾으세요!</S.BannerText>
         <S.RecruitBtn> <Link to='/write'> 모집하기 </Link> </S.RecruitBtn>
       </S.BannerTextBox>
-      {me && posts.length !== 0 ? <S.BannerCarouselWrapper><BannerCarousel posts={posts}/></S.BannerCarouselWrapper> : <S.IphoneImg />}
+      {me && dibsPosts.length !== 0 ? <S.BannerCarouselWrapper><BannerCarousel posts={dibsPosts}/></S.BannerCarouselWrapper> : <S.IphoneImg />}
     </S.LandingBanner>
   );
 };

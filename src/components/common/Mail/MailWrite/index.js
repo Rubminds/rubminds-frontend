@@ -1,13 +1,19 @@
 import React, { useCallback } from 'react';
 import * as S from './style';
+import { useDispatch } from 'react-redux';
+
+import { sendMail } from '../../../../modules/mail';
 
 const MailWrite = ({ user, setStep }) => {
+  const dispatch = useDispatch();
+
   const onBackClick = useCallback(() => {
     setStep(1);
   }, []);
 
   const onSendClick = useCallback(() => {
     setStep(1);
+    //dispatch(sendMail());
   }, []);
   return (
     <S.ContentWrapper>

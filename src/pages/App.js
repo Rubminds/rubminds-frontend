@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+
+import { AuthRoute } from '../routes';
 import theme from '../common/theme';
 import GlobalStyles from '../common/GlobalStyle';
 import LandingPage from './LandingPage';
@@ -33,7 +35,7 @@ const App = () => {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
-          <Route path="/write" component={WrittingPage} />
+          <AuthRoute path="/write" Component={WrittingPage}/>
           <Route path="/editprofile" component={EditProfilePage} />
           <Route path="/userPage/:id" component={UserPage} />
           <Route path="/dibs" component={DibsPage} />

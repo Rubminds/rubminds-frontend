@@ -33,7 +33,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
 
   const onStatusCircleClick = useCallback(() => {
     console.log('open team members');
-    openModal();
+    me && openModal();
   }, [openModal]);
 
   const onChangeStatusClick = useCallback(
@@ -76,7 +76,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
         ) : (
           <>
             <S.GroupBox>
-              {me.id === post.writer.id ? (
+              {me && me.id === post.writer.id ? (
                 <>
                   {post.postsStatus === 'RECRUIT' ? (
                     <>

@@ -1,7 +1,12 @@
 import React, { useCallback } from 'react';
 import * as S from './style';
+import { useDispatch } from 'react-redux';
+
+import { deleteMail } from '../../../../modules/mail';
 
 const MailRead = ({ user, setStep }) => {
+  const dispatch = useDispatch();
+
   const onBackClick = useCallback(() => {
     setStep(1);
   });
@@ -10,7 +15,9 @@ const MailRead = ({ user, setStep }) => {
     setStep(4);
   });
 
-  const onDeleteClick = useCallback(() => {}, []);
+  const onDeleteClick = useCallback(() => {
+    //dispatch(deleteMail());
+  }, []);
   return (
     <S.ContentWrapper>
       <S.BackBtn onClick={onBackClick} />

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { evaluateTeamMembers } from '../../../modules/team';
 import { Test } from '../../../assets/imgs';
 
-const TeamEvaluation = ({ teamId, writerId, kinds, postId, meId }) => {
+const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
   const [evaluationArray, setEvaluationArray] = useState([]);
   const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, meId }) => {
       <S.ContentsWrapper>
         {members.map(
           (v, i) =>
-            v.userId !== meId && (
+            v.userId !== me.id && (
               <S.UserWrapper key={i}>
                 <S.UserLeftWrapper>
                   <S.UserAvatar src={Test} />

@@ -40,11 +40,7 @@ const WrittingInnerForm = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('/skills', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-        },
-      })
+      const result = await axios.get('/skills')
       setSkillName(result.data.skills.map(e => e.name))
     }
     fetchData()
@@ -65,6 +61,7 @@ const WrittingInnerForm = () => {
         skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         customSkillName: customOptions,
       }
+
       const formData = new FormData()
       if (file) {
         formData.append('files', file)

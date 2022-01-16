@@ -8,13 +8,13 @@ import Region from '../../components/EditPost/Region'
 import Title from '../../components/EditPost/Title'
 import Content from '../../components/EditPost/Content'
 import * as S from './style'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AreaOptions, SKILL_ID } from '../../constants'
+import { editPost } from '../../modules/post'
 
 const EditPostPage = () => {
   const { singlePost } = useSelector(state => state.post)
   const dispatch = useDispatch()
-  const history = useHistory()
   const [title, setTitle] = useState(null)
   const [content, setContent] = useState(null)
   const [headCount, setHeadCount] = useState(null)
@@ -32,6 +32,7 @@ const EditPostPage = () => {
   const [attachment, setAttachment] = useState(null)
 
   useEffect(() => {
+    console.log(singlePost.meeting); 
     setTitle(singlePost.title)
     setMeeting(singlePost.meeting)
     setHeadCount(singlePost.headcount)
@@ -43,11 +44,7 @@ const EditPostPage = () => {
     setDropDownOptions(array)
 
     const fetchData = async () => {
-      const result = await axios.get('/skills', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-        },
-      })
+      const result = await axios.get('/skills')
       setSkillName(result.data.skills.map(e => e.name))
     }
     fetchData()
@@ -61,17 +58,23 @@ const EditPostPage = () => {
         title: title,
         content: content,
         headcount: headCount != null ? parseInt(headCount) : null,
-        kinds: null,
+        kinds: singlePost.kinds,
         meeting: meeting,
         region: region,
         skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         customSkillName: customOptions,
       }
+      console.log(data); 
       const formData = new FormData()
+      if (file) {
+        formData.append('files', file)
+      }
       formData.append(
         'postInfo',
         new Blob([JSON.stringify(data)], { type: 'application/json' })
       )
+      // dispatch(editPost({ id : singlePost.id, formData}))
+      // window.location.replace(`/`);
     },
     [title, content, headCount, meeting, region, dropDownOptions, customOptions]
   )
@@ -97,14 +100,18 @@ const EditPostPage = () => {
             options={skillName}
           />
 
+
           {/* 회의환경 및 모집인원 */}
-          <MiddleArea
+          {
+            meeting && <MiddleArea
             meeting={meeting}
             setMeeting={setMeeting}
             headCount={headCount}
             setHeadCount={setHeadCount}
             isScout={isScout}
-          />
+          /> 
+          }
+          
 
           {/* 지역 */}
           <Region

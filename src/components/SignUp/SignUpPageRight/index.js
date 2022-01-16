@@ -25,11 +25,7 @@ const SignUpPageRight = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('/skills', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-        },
-      })
+      const result = await axios.get('/skills')
       setSkillName(result.data.skills.map(e => e.name))
     }
     fetchData()

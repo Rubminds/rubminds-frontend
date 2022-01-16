@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import * as S from '../../../pages/EditPostPage/style'
 
 const MiddleArea = ({
@@ -9,10 +9,15 @@ const MiddleArea = ({
   isScout,
 }) => {
 
-  const [meet, setMeet] = useState(['ONLINE', 'OFFLINE', 'BOTH']); 
+  const ref = useRef([]); 
+
   useEffect(() => {
-         
-  }, [])
+     ref.current.map((value)=>{
+       if(value.id === meeting){
+        value.setAttribute('checked', true); 
+      }
+     }) 
+  },[meeting])
 
   const onMeetingChange = useCallback(
     e => {
@@ -43,32 +48,14 @@ const MiddleArea = ({
             회의 환경
           </S.MainTitle>
           <S.RadioWrapper>
-            {
-                meeting !== null
-                ? ()
-                : ( 
-            ['ONLINE', 'OFFLINE', 'BOTH'].map(value => {
-              return (
-                <S.CheckBoxWrapper>
-                  <input
-                    name="meeting"
-                    value={value}
-                    id={value}
-                    type="radio"
-                    onChange={onMeetingChange}
-                  />
-                  <label htmlFor={value}>{value}</label>
-                </S.CheckBoxWrapper>
-              )
-            )
-            })}
-            {/* <S.CheckBoxWrapper>
+            <S.CheckBoxWrapper>
               <input
                 name="meeting"
                 value="ONLINE"
                 id="ONLINE"
                 type="radio"
                 onChange={onMeetingChange}
+                ref={el => (ref.current[0] = el)}
               />
               <label htmlFor="ONLINE">온라인</label>
             </S.CheckBoxWrapper>
@@ -79,6 +66,7 @@ const MiddleArea = ({
                 id="OFFLINE"
                 type="radio"
                 onChange={onMeetingChange}
+                ref={el => (ref.current[1] = el)}
               />
               <label htmlFor="OFFLINE">오프라인</label>
             </S.CheckBoxWrapper>
@@ -89,9 +77,10 @@ const MiddleArea = ({
                 id="BOTH"
                 type="radio"
                 onChange={onMeetingChange}
+                ref={el => (ref.current[2] = el)}
               />
               <label htmlFor="BOTH">혼합</label>
-            </S.CheckBoxWrapper> */}
+            </S.CheckBoxWrapper>
           </S.RadioWrapper>
         </S.MeetEnviromentWrapper>
 

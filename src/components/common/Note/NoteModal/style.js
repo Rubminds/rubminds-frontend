@@ -70,51 +70,7 @@ export const UserListWrapper = styled.div`
   background-color: #fff7d1;
 `;
 
-export const UserRow = styled.div`
-  position: relative;
-  ${flexColumn}
-  width: 100%;
-  padding: 1rem 1.5rem;
-  cursor: pointer;
-  &:after {
-    position: absolute;
-    content: '';
-    bottom: 0;
-    left: 0;
-    width: calc(100% - 2rem);
-    height: 1px;
-    margin: 0 1rem;
-    -webkit-box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
-    box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
-  }
-`;
 
-// export const UserAvatar = styled(Avatar)`
-//   width: 6rem;
-//   height: 6rem;
-//   cursor: pointer;
-// `;
-
-// export const UserInfo = styled.div`
-//   flex: 6;
-//   padding: 0 1rem;
-//   ${flexColumn}
-//   width:60%;
-// `;
-
-export const UserName = styled.label`
-  font-size: 1.6rem;
-  font-weight: bold;
-  line-height: 2;
-  cursor: pointer;
-`;
-
-export const LastMessage = styled.label`
-  font-size: 1.4rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
 
 export const NoticeNumber = styled.label`
   ${flexCenter}

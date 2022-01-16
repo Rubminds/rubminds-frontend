@@ -1,6 +1,8 @@
 export { default as Header } from './common/Header';
 export { default as NoteButton } from './common/Note/NoteButton';
+export { default as NoteUserList } from './common/Note/NoteUserList';
 export { default as NoteWrite } from './common/Note/NoteWrite';
+export { default as NoteRead } from './common/Note/NoteRead';
 export { default as Footer } from './common/Footer';
 export { default as PostCard } from './common/PostCard';
 export { default as DropDown } from './common/DropDown';

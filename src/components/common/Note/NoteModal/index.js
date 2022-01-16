@@ -3,7 +3,7 @@ import * as S from './style';
 import { useDispatch } from 'react-redux';
 
 import { toggleNoteModal } from '../../../../modules/user';
-import { NoteWrite } from '../../../';
+import { NoteWrite, NoteRead, NoteUserList } from '../../../';
 
 const NoteModal = () => {
   const dispatch = useDispatch();
@@ -65,25 +65,17 @@ const NoteModal = () => {
             </S.ModalStatus>
           </S.ModalStatusWrapper>
           <S.UserListWrapper>
-            {step === 1
-              ? userList.map(v => (
-                  <S.UserRow onClick={onUserClick(v)} key={v.id}>
-                    <S.UserName>{v.name}</S.UserName>
-                    <S.LastMessage>{v.content}</S.LastMessage>
-                  </S.UserRow>
-                ))
-              : userList2.map(v => (
-                  <S.UserRow key={v.id}>
-                    <S.UserName>{v.name}</S.UserName>
-                    <S.LastMessage>{v.content}</S.LastMessage>
-                  </S.UserRow>
-                ))}
+            {step === 1 ? (
+              <NoteUserList userList={userList} onUserClick={onUserClick} />
+            ) : (
+              <NoteUserList userList={userList2} onUserClick={onUserClick} />
+            )}
           </S.UserListWrapper>
         </>
       ) : step === 3 ? (
-        <NoteWrite user={target} setStep={setStep} />
+        <NoteRead user={target} setStep={setStep} />
       ) : (
-        <></>
+        <NoteWrite user={target} setStep={setStep} />
       )}
     </S.NoteModalWrapper>
   );

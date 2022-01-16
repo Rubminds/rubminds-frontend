@@ -3,6 +3,7 @@ import { GrClose } from 'react-icons/gr';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { BsCircleFill, BsChatLeft } from 'react-icons/bs';
+import { RiMailCloseLine } from 'react-icons/ri';
 
 import { flexBetween, flexCenter, flexColumn } from '../../../../constants';
 import { Paper, Avatar, Input } from '../../..';
@@ -70,8 +71,6 @@ export const UserListWrapper = styled.div`
   background-color: #fff7d1;
 `;
 
-
-
 export const NoticeNumber = styled.label`
   ${flexCenter}
   width:3rem;
@@ -130,11 +129,6 @@ export const ChatroomBody = styled.div`
   flex: 8;
   overflow-y: auto;
   padding: 1rem 0;
-  /* -ms-overflow-style: none;
-  scrollbar-width: none;
-  &:-webkit-scrollbar {
-    display: none;
-  } */
 `;
 
 export const ChatInputWrapper = styled(Paper)`
@@ -193,4 +187,20 @@ export const MessageText = styled.div`
     bottom: 10px;
     width: 0;
   }
+`;
+
+export const DisabledForm = styled.div`
+  height: 100%;
+  ${flexCenter}
+  flex-direction:column;
+`;
+
+export const DisabledIcon = styled(RiMailCloseLine)`
+  font-size: 10rem;
+  color: #707070;
+`;
+
+export const DisabledLabel = styled.label`
+  font-size: 3rem;
+  color: #707070;
 `;

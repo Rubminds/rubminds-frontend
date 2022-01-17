@@ -11,7 +11,7 @@ const MiddleArea = ({
   const ref = useRef([]);
 
   useEffect(() => {
-    ref.current.map(value => {
+    ref.current.forEach(value => {
       if (value.id === meeting) {
         value.setAttribute('checked', true);
       }

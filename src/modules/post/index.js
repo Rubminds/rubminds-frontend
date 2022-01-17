@@ -17,6 +17,9 @@ import {
   LIKE_POST,
   LIKE_POST_SUCCESS,
   LIKE_POST_ERROR,
+  DELETE_POST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR,
   SUBMIT_RESULT_POST,
   SUBMIT_RESULT_POST_SUCCESS,
   SUBMIT_RESULT_POST_ERROR,
@@ -54,6 +57,10 @@ export const initialState = {
   likePostLoading: false,
   likePostDone: false,
   likePostError: null,
+
+  deletePostLoading: false,
+  deletePostDone: false,
+  deletePostError: null,
 
   submitResultPostLoading: false,
   submitResultPostDone: false,
@@ -93,6 +100,11 @@ export const loadPost = id => ({
 export const likePost = id => ({
   type: LIKE_POST,
   data: id,
+});
+
+export const deletePost = data => ({
+  type: DELETE_POST,
+  data,
 });
 
 export const submitResultPost = data => ({
@@ -203,6 +215,21 @@ const post = (state = initialState, action) => {
         console.log('like error');
         draft.likePostLoading = false;
         draft.likePostError = action.error;
+        break;
+      case DELETE_POST:
+        draft.deletePostLoading = true;
+        draft.deletePostDone = false;
+        draft.deletePostError = null;
+        break;
+      case DELETE_POST_SUCCESS: //액션 처리
+        console.log('delete success');
+        draft.deletePostLoading = false;
+        draft.deletePostDone = true;
+        break;
+      case DELETE_POST_ERROR:
+        console.log('delete error');
+        draft.deletePostLoading = false;
+        draft.deletePostError = action.error;
         break;
       case SUBMIT_RESULT_POST:
         draft.submitResultPostLoading = true;

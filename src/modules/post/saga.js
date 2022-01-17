@@ -19,6 +19,9 @@ import {
   LIKE_POST,
   LIKE_POST_ERROR,
   LIKE_POST_SUCCESS,
+  DELETE_POST,
+  DELETE_POST_ERROR,
+  DELETE_POST_SUCCESS,
   SUBMIT_RESULT_POST,
   SUBMIT_RESULT_POST_ERROR,
   SUBMIT_RESULT_POST_SUCCESS,
@@ -175,6 +178,33 @@ function* likePost(action) {
   console.log('finished likePost saga');
 }
 
+function deletePostAPI(data) {
+  return axios.delete(`/post/${data}/like`, null, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  });
+}
+function* deletePost(action) {
+  console.log(action.data);
+  console.log('access deletePost saga');
+  const result = yield call(deletePostAPI, action.data);
+  console.log(result);
+  try {
+    yield put({
+      type: DELETE_POST_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    //에러 발생시 이벤트
+    yield put({
+      type: DELETE_POST_ERROR,
+      error: err,
+    });
+  }
+  console.log('finished deletePost saga');
+}
+
 function submitResultPostAPI(data) {
   return axios.post(`/post/${data.postId}/complete`, data.content, {
     headers: {
@@ -244,6 +274,9 @@ function* watchLoadPost() {
 function* watchLikePost() {
   yield takeLatest(LIKE_POST, likePost);
 }
+function* watchDeletePost() {
+  yield takeLatest(DELETE_POST, deletePost);
+}
 function* watchAuthLoadPosts() {
   yield takeLatest(AUTH_LOAD_POSTS, authLoadPosts);
 }
@@ -261,6 +294,7 @@ export default function* postSaga() {
     fork(watchLoadPosts),
     fork(watchLoadPost),
     fork(watchLikePost),
+    fork(watchDeletePost),
     fork(watchAuthLoadPosts),
     fork(watchSubmitResultPost),
     fork(watchChangePostStatus),

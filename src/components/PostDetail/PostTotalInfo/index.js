@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import * as S from './style.js';
 import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdPersonAdd } from 'react-icons/md';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
@@ -30,9 +31,16 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
     fetchData();
   }, []);
 
-  const onEditPage = () => {
+  const onEditClick = () => {
     history.push(`/editpost`);
   };
+
+  const onDeleteClick = useCallback(() => {
+    const deleteConfirm = window.confirm(`정말 게시글을 삭제하시겠습니까?`);
+    if (deleteConfirm) {
+      //dispatch(deletePost());
+    }
+  }, []);
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
@@ -92,8 +100,13 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                         모집 종료하기
                       </S.DetailInfoContent>
                       <S.DetailInfoContent>
-                        <div onClick={onEditPage}>
+                        <div onClick={onEditClick}>
                           <AiOutlineEdit /> &nbsp;수정
+                        </div>
+                      </S.DetailInfoContent>
+                      <S.DetailInfoContent>
+                        <div onClick={onDeleteClick}>
+                          <RiDeleteBin5Fill /> &nbsp;삭제
                         </div>
                       </S.DetailInfoContent>
                     </>
@@ -107,12 +120,12 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                         평가 후 완료하기
                       </S.DetailInfoContent>
                       <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
-                        onClick={onChangeStatusClick('RECRUIT')}
                         모집중으로 변경
                       </S.DetailInfoContent>
-
                       <S.DetailInfoContent>
-                        <AiOutlineEdit /> &nbsp;수정
+                        <div onClick={onEditClick}>
+                          <AiOutlineEdit /> &nbsp;수정
+                        </div>
                       </S.DetailInfoContent>
                     </>
                   ) : (

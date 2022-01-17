@@ -8,8 +8,8 @@ const UserRating = ({ user }) => {
   const render = (ratio, type) => {
     const empty = [];
     let decimal = Number((ratio % 1).toFixed(2)); // 소수점자리
-    let integer = ratio - decimal; // 정수자리
-
+    let integer = parseInt(ratio - decimal); // 정수자리
+    console.log(decimal, integer);
     // 꽉찬 별 추가
     for (let i = 0; i < integer; i++) {
       empty.push(<S.Star filled="true" key={idx++}/>);
@@ -39,7 +39,7 @@ const UserRating = ({ user }) => {
       <S.Title>{user.nickname}님의 평가도</S.Title>
       <S.Content>
         <S.RatingWrapper>
-          <label>참여도 &nbsp; {user.attendLevel}</label>
+          <label>참여도 &nbsp; {Number(user.attendLevel.toFixed(1))}</label>
           <S.StarWrapper>{render(user.attendLevel, 'attendance')}</S.StarWrapper>
         </S.RatingWrapper>
         <S.RatingWrapper>

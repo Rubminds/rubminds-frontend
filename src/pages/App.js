@@ -33,10 +33,10 @@ const App = () => {
           />
           <Route path="/signup" component={SignUpPage} />
           <Route exact path="/" component={LandingPage} />
-          <AuthRoute exact path="/post/:id" Component={PostDetailPage} />
+          <AuthRoute exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
-          <AuthRoute path="/write" Component={WrittingPage} />
-          <AuthRoute path="/editprofile" Component={EditProfilePage} />
+          <AuthRoute path="/write" component={WrittingPage} />
+          <AuthRoute path="/editprofile" component={EditProfilePage} />
           <AuthRoute path="/userPage/:id" component={UserPage} />
           <AuthRoute path="/dibs" component={DibsPage} />
           <AuthRoute path="/projects/:status/:userId" component={ProjectStatusPage} />

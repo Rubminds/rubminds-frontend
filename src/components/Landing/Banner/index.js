@@ -33,7 +33,6 @@ const Banner = () => {
           {' '}
           <Link to="/write"> 모집하기 </Link>{' '}
         </S.RecruitBtn>
-        <Link to='/write'><S.RecruitBtn>모집하기</S.RecruitBtn></Link>
       </S.BannerTextBox>
       {me && dibsPosts.length !== 0 ? (
         <S.BannerCarouselWrapper>

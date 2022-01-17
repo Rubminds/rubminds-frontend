@@ -87,19 +87,11 @@ function* updateUser(action) {
   }
 }
 
-<<<<<<< HEAD
 function* toggleMailModal() {
   console.log('togglechat saga');
   try {
     yield put({
       type: TOGGLE_NOTE_MODAL_SUCCESS,
-=======
-function* toggleChatModal() {
-  console.log('togglechat saga');
-  try {
-    yield put({
-      type: TOGGLE_CHAT_MODAL_SUCCESS,
->>>>>>> 199549392ea85c46cedb1952b1267b546a1d0a71
     });
   } catch (err) {
     //에러 발생시 이벤트
@@ -164,13 +156,8 @@ function* watchUpdateUser() {
   yield takeLatest(UPDATE_USER, updateUser);
 }
 
-<<<<<<< HEAD
 function* watchToggleMailModal() {
   yield takeLatest(TOGGLE_NOTE_MODAL, toggleMailModal);
-=======
-function* watchToggleChatModal() {
-  yield takeLatest(TOGGLE_CHAT_MODAL, toggleChatModal);
->>>>>>> 199549392ea85c46cedb1952b1267b546a1d0a71
 }
 
 function* watchLoadUserInfo() {

@@ -2,6 +2,9 @@ import {
   CREATE_POST,
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
+  EDIT_POST,
+  EDIT_POST_SUCCESS,
+  EDIT_POST_ERROR,
   LOAD_POSTS,
   LOAD_POSTS_SUCCESS,
   LOAD_POSTS_ERROR,
@@ -32,6 +35,10 @@ export const initialState = {
   createPostDone: false,
   createPostError: null,
 
+  editPostLoading: false,
+  editPostDone: false,
+  editPostError: null,
+
   loadPostsLoading: false,
   loadPostsDone: false,
   loadPostsError: null,
@@ -60,6 +67,11 @@ export const initialState = {
 //액션 생성함수
 export const createPost = data => ({
   type: CREATE_POST,
+  data,
+});
+
+export const editPost = data => ({
+  type: EDIT_POST,
   data,
 });
 
@@ -108,6 +120,23 @@ const post = (state = initialState, action) => {
         draft.createPostError = null;
         break;
       case CREATE_POST_ERROR:
+        draft.createPostLoading = false;
+        draft.createPostError = action.error;
+        console.log(action.data);
+        break;
+      case EDIT_POST:
+        draft.editPostLoading = true;
+        draft.editPostDone = false;
+        draft.editPostError = null;
+        break;
+      case EDIT_POST_SUCCESS:
+        console.log('edit success', action.data);
+        draft.editPostLoading = false;
+        draft.editPostDone = true;
+        draft.editPostError = null;
+        break;
+      case EDIT_POST_ERROR:
+        console.log('edit error');
         draft.createPostLoading = false;
         draft.createPostError = action.error;
         console.log(action.data);

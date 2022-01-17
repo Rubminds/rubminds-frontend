@@ -1,12 +1,12 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import * as S from '../WrittingInnerForm/style'
 
 const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
+  
   const onKindsChange = useCallback(
-    e => {
-      console.log(JSON.stringify(e.target.getAttribute('value'))); 
-      setKinds(e.target.getAttribute('value'))
-      switch (e.target.getAttribute('value')) {
+    e => {  
+      setKinds(e.currentTarget.getAttribute('value'))
+      switch (e.currentTarget.getAttribute('value')) {
         case 'STUDY':
           setIsScout(false)
           setBtnColor(['#FBEAFF', 'white', 'white'])
@@ -38,6 +38,7 @@ const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
           <S.Book fontSize="3rem" />
           <S.MainTitle fontSize="1.3rem">스터디</S.MainTitle>
         </S.CategoryCard>
+
         <S.CategoryCard
           name="kinds"
           value="SCOUT"
@@ -47,6 +48,7 @@ const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
           <S.PersonAdd fontSize="3rem" />
           <S.MainTitle fontSize="1.3rem">스카웃</S.MainTitle>
         </S.CategoryCard>
+        
         <S.CategoryCard
           name="kinds"
           value="PROJECT"

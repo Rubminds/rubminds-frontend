@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { takeLatest, put, fork, all, call } from 'redux-saga/effects';
 import {
-  CREATE_POST, 
-  CREATE_POST_SUCCESS, 
+  CREATE_POST,
+  CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
+  EDIT_POST,
+  EDIT_POST_SUCCESS,
+  EDIT_POST_ERROR,
   LOAD_POSTS,
   LOAD_POSTS_ERROR,
   LOAD_POSTS_SUCCESS,
@@ -25,14 +28,14 @@ import {
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 function createPostAPI(data) {
-  return axios.post('/post', data , {
-    headers : {
-      Authorization : 'Bearer ' +  localStorage.getItem('accessToken')
-    }
-  })
+  return axios.post('/post', data, {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+    },
+  });
 }
 
-function* createPost(action) { 
+function* createPost(action) {
   console.log('요청 전 데이터', action.data);
   const result = yield call(createPostAPI, action.data);
   try {
@@ -70,6 +73,32 @@ function* loadPosts(action) {
     });
   }
   console.log('finished loadPosts saga');
+}
+
+function editPostAPI(data) {
+  return axios.post(`/post/${data.id}/update`, data.formData, {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+    },
+  });
+}
+
+function* editPost(action) {
+  console.log('access editPosts saga');
+  const result = yield call(editPostAPI, action.data);
+  try {
+    yield put({
+      type: EDIT_POST_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    //에러 발생시 이벤트
+    yield put({
+      type: EDIT_POST_ERROR,
+      error: err,
+    });
+  }
+  console.log('finished editPost saga');
 }
 
 function authLoadPostsAPI(query) {
@@ -201,7 +230,10 @@ function* changePostStatus(action) {
 //액션 감지 함수
 //takeLatest안의 액션을 감지.
 function* watchCreatePost() {
-  yield takeLatest(CREATE_POST, createPost); 
+  yield takeLatest(CREATE_POST, createPost);
+}
+function* watchEditPost() {
+  yield takeLatest(EDIT_POST, editPost);
 }
 function* watchLoadPosts() {
   yield takeLatest(LOAD_POSTS, loadPosts);
@@ -224,7 +256,8 @@ function* watchChangePostStatus() {
 
 export default function* postSaga() {
   yield all([
-    fork(watchCreatePost), 
+    fork(watchCreatePost),
+    fork(watchEditPost),
     fork(watchLoadPosts),
     fork(watchLoadPost),
     fork(watchLikePost),

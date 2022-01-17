@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+
+import { AuthRoute } from '../routes';
 import theme from '../common/theme';
 import GlobalStyles from '../common/GlobalStyle';
 import LandingPage from './LandingPage';
@@ -13,9 +15,8 @@ import UserPage from './UserPage';
 import DibsPage from './DibsPage';
 import ProjectStatusPage from './ProjectStatusPage';
 import EditProfilePage from './EditProfilePage';
-import EditPostPage from './EditPostPage';
 
-import { Header, ChatButton } from '../components';
+import { Header, MailButton } from '../components';
 
 const App = () => {
   return (
@@ -23,7 +24,7 @@ const App = () => {
       <GlobalStyles />
       <Router>
         <Header />
-        <ChatButton />
+        <MailButton />
         <Switch>
           <Route
             exact
@@ -32,14 +33,13 @@ const App = () => {
           />
           <Route path="/signup" component={SignUpPage} />
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/post/:id" component={PostDetailPage} />
+          <AuthRoute exact path="/post/:id" Component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
-          <Route path="/write" component={WrittingPage} />
-          <Route path="/editprofile" component={EditProfilePage} />
-          <Route path="/editpost" component={EditPostPage} />
-          <Route path="/userPage/:id" component={UserPage} />
-          <Route path="/dibs" component={DibsPage} />
-          <Route path="/projects/:type" component={ProjectStatusPage} />
+          <AuthRoute path="/write" Component={WrittingPage} />
+          <AuthRoute path="/editprofile" Component={EditProfilePage} />
+          <AuthRoute path="/userPage/:id" component={UserPage} />
+          <AuthRoute path="/dibs" component={DibsPage} />
+          <AuthRoute path="/projects/:status/:userId" component={ProjectStatusPage} />
         </Switch>
       </Router>
     </ThemeProvider>

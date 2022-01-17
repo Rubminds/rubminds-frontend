@@ -10,9 +10,9 @@ import {
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
-  TOGGLE_CHAT_MODAL,
-  TOGGLE_CHAT_MODAL_ERROR,
-  TOGGLE_CHAT_MODAL_SUCCESS,
+  TOGGLE_NOTE_MODAL,
+  TOGGLE_NOTE_MODAL_ERROR,
+  TOGGLE_NOTE_MODAL_SUCCESS,
   LOAD_USER_INFO,
   LOAD_USER_INFO_SUCCESS,
   LOAD_USER_INFO_ERROR,
@@ -87,16 +87,16 @@ function* updateUser(action) {
   }
 }
 
-function* toggleChatModal() {
+function* toggleMailModal() {
   console.log('togglechat saga');
   try {
     yield put({
-      type: TOGGLE_CHAT_MODAL_SUCCESS,
+      type: TOGGLE_NOTE_MODAL_SUCCESS,
     });
   } catch (err) {
     //에러 발생시 이벤트
     yield put({
-      type: TOGGLE_CHAT_MODAL_ERROR,
+      type: TOGGLE_NOTE_MODAL_ERROR,
       error: err,
     });
   }
@@ -156,8 +156,8 @@ function* watchUpdateUser() {
   yield takeLatest(UPDATE_USER, updateUser);
 }
 
-function* watchToggleChatModal() {
-  yield takeLatest(TOGGLE_CHAT_MODAL, toggleChatModal);
+function* watchToggleMailModal() {
+  yield takeLatest(TOGGLE_NOTE_MODAL, toggleMailModal);
 }
 
 function* watchLoadUserInfo() {
@@ -173,7 +173,7 @@ export default function* userSaga() {
     fork(watchSigninUser),
     fork(watchSignupUser),
     fork(watchUpdateUser),
-    fork(watchToggleChatModal),
+    fork(watchToggleMailModal),
     fork(watchLoadUserInfo),
     fork(watchLogoutUser),
   ]);

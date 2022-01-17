@@ -38,9 +38,9 @@ export const ContentsWrapper = styled.div`
 `;
 
 export const FileWrapper = styled.div`
-  display:flex;
-  align-items:center;
-`
+  display: flex;
+  align-items: center;
+`;
 export const UploadFile = styled.label`
   background-color: #ffa586;
   color: #fff;
@@ -53,7 +53,28 @@ export const UploadFile = styled.label`
   cursor: pointer;
 `;
 export const UploadFileName = styled.label`
-  font-size:1.2rem;
-  margin-left:1rem;
-  font-weight:bold;
-`
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  font-weight: bold;
+`;
+export const TextArea = styled.input`
+  width: ${props => (props.width ? props.width : '100%')};
+  background-color: #fff;
+  font-size: 1.6rem;
+  padding: 1rem;
+  border: 1px solid rgba(128, 128, 128, 0.199);
+  border-radius: 10px;
+  height: auto;
+  min-height: 15rem;
+  resize: none;
+`;
+
+export const Input = styled.input`
+  width: ${props => (props.width ? props.width : '100%')};
+  background-color: #fff;
+  font-size: 1.6rem;
+  padding: 1rem;
+  border: 1px solid rgba(128, 128, 128, 0.199);
+  border-radius: 10px;
+  box-sizing: border-box;
+`;

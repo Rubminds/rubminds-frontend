@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { AiFillStar,AiFillCrown } from 'react-icons/ai';
+import { AiFillStar, AiFillCrown } from 'react-icons/ai';
+
 import { flexColumn, flexCenter } from '../../../constants/';
 import { Avatar, Input } from '../..';
+import mediaQuery from '../../../hooks/mediaQuery';
 
 export const TeamEvaluationWrapper = styled.div`
   width: 100%;
@@ -20,6 +22,7 @@ export const TitleWrapper = styled.div`
   ${flexCenter}
   justify-content:space-around;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  ${mediaQuery({ width: '100%' })}
 `;
 
 export const MainTitle = styled.h1`
@@ -111,7 +114,8 @@ export const SubmitBtn = styled.button`
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
   margin-top: 5rem;
+  font-weight:bold;
 `;
 export const WriterMark = styled(AiFillCrown)`
-color:red;
-`
+  color: red;
+`;

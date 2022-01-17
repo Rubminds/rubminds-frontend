@@ -1,19 +1,22 @@
-import React, { useCallback } from 'react'
-import * as S from './style'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useCallback } from 'react';
+import * as S from './style';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { logoutUser } from '../../../modules/user'
+import { logoutUser } from '../../../modules/user';
 
 const Header = () => {
-  const dispatch = useDispatch()
-  const { me } = useSelector(state => state.user)
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { me } = useSelector(state => state.user);
   const onLogoutClick = useCallback(() => {
-    console.log('로그아웃 클릭')
-    dispatch(logoutUser())
-    console.log('log out click out')
-    localStorage.removeItem('accessToken')
-  }, [])
+    console.log('로그아웃 클릭');
+    history.push('/');
+    dispatch(logoutUser());
+    console.log('log out click out');
+    localStorage.removeItem('accessToken');
+  }, []);
   return (
     <S.HeaderWrapper>
       <S.HeaderContent>
@@ -29,7 +32,7 @@ const Header = () => {
         )}
       </S.HeaderContent>
     </S.HeaderWrapper>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

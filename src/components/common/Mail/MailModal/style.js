@@ -1,23 +1,25 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { BsCircleFill, BsChatLeft } from 'react-icons/bs';
+import { RiMailCloseLine } from 'react-icons/ri';
 
-import { flexBetween, flexCenter, flexColumn } from '../../../constants';
-import { Paper, Avatar, Input } from '../../';
-import mediaQuery from '../../../hooks/mediaQuery';
+import { flexBetween, flexCenter, flexColumn } from '../../../../constants';
+import { Paper, Avatar, Input } from '../../..';
+import mediaQuery from '../../../../hooks/mediaQuery';
 
-export const ChatModalWrapper = styled(Paper)`
+export const MailModalWrapper = styled(Paper)`
   position: fixed;
   bottom: 3%;
   right: 3%;
   z-index: 9999;
-  background-color: #aa8ae8;
-  width: 45rem;
-  height: 60rem;
+  background-color: #fff7d1;
+  width: 40rem;
+  height: 52rem;
   padding: 2rem 2rem;
-  ${mediaQuery({ width: '100%', height: '80%', bottom: 0, right: 0 })}
+  ${flexColumn}
+  ${mediaQuery({ width: '100%', height: '60%', bottom: 0, right: 0 })}
 `;
 
 export const ModalHeader = styled.div`
@@ -26,7 +28,6 @@ export const ModalHeader = styled.div`
 `;
 
 export const HeaderTitle = styled.label`
-  color: #fff;
   font-size: 2rem;
   font-weight: bold;
 `;
@@ -36,61 +37,38 @@ export const CloseButton = styled(GrClose)`
   cursor: pointer;
 `;
 
-export const Contents = styled(Paper)`
-  width: 100%;
-  height: 95%;
-  margin-top: 1rem;
+export const ModalStatusWrapper = styled.div`
+  margin-top: 2rem;
+`;
+
+export const ModalStatus = styled.button`
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-color: rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  padding: 1rem 1rem;
+  box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.1);
+  ${props =>
+    props.current === props.value
+      ? css`
+          background-color: #fff7d1;
+          padding-top: 1.5rem;
+        `
+      : css`
+          background-color: #fff;
+          &:hover {
+            padding-top: 1.5rem;
+          }
+        `}
 `;
 
 export const UserListWrapper = styled.div`
   ${flexColumn};
-`;
-
-export const UserRow = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 10rem;
-  padding: 1rem 1.5rem;
-  &:after {
-    position: absolute;
-    content: '';
-    bottom: 0;
-    left: 0;
-    width: calc(100% - 2rem);
-    height: 1px;
-    margin: 0 1rem;
-    -webkit-box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
-    box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
-  }
-`;
-
-export const UserAvatar = styled(Avatar)`
-  width: 6rem;
-  height: 6rem;
-  cursor: pointer;
-`;
-
-export const UserInfo = styled.div`
-  flex: 6;
-  padding: 0 1rem;
-  ${flexColumn}
-  width:60%;
-`;
-
-export const UserName = styled.label`
-  font-size: 1.6rem;
-  font-weight: bold;
-  line-height: 2;
-  cursor: pointer;
-`;
-
-export const LastMessage = styled.label`
-  font-size: 1.4rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-y: auto;
+  height: 100%;
+  margin-top: 1rem;
+  background-color: #fff7d1;
 `;
 
 export const NoticeNumber = styled.label`
@@ -151,11 +129,6 @@ export const ChatroomBody = styled.div`
   flex: 8;
   overflow-y: auto;
   padding: 1rem 0;
-  /* -ms-overflow-style: none;
-  scrollbar-width: none;
-  &:-webkit-scrollbar {
-    display: none;
-  } */
 `;
 
 export const ChatInputWrapper = styled(Paper)`
@@ -214,4 +187,20 @@ export const MessageText = styled.div`
     bottom: 10px;
     width: 0;
   }
+`;
+
+export const DisabledForm = styled.div`
+  height: 100%;
+  ${flexCenter}
+  flex-direction:column;
+`;
+
+export const DisabledIcon = styled(RiMailCloseLine)`
+  font-size: 10rem;
+  color: #707070;
+`;
+
+export const DisabledLabel = styled.label`
+  font-size: 3rem;
+  color: #707070;
 `;

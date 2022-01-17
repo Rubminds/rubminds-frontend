@@ -40,17 +40,15 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
 
   const onStatusCircleClick = useCallback(() => {
     console.log('open team members');
-    openModal();
+    me && openModal();
   }, [openModal]);
 
   const onChangeStatusClick = useCallback(
     status => () => {
-      dispatch(
-        changePostStatus({ postId: post.id, content: { postStatus: status } })
-      );
+      dispatch(changePostStatus({ postId: post.id, content: { postStatus: status } }));
       window.location.replace(`/post/${post.id}`);
     },
-    [post.id, dispatch]
+    [post.id, dispatch],
   );
   return (
     <S.PostDetailInfo>
@@ -77,21 +75,20 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
           <UserListModal
             headcount={post.headcount}
             closeModal={closeModal}
-            writerName={post.writer.nickname}
+            writerId={post.writer.id}
             teamId={post.teamId}
             members={members}
+            meId={me.id}
+            postStatus={post.postsStatus}
           />
         ) : (
           <>
             <S.GroupBox>
-              {me.id === post.writer.id ? (
+              {me && me.id === post.writer.id ? (
                 <>
                   {post.postsStatus === 'RECRUIT' ? (
                     <>
-                      <S.DetailInfoContent
-                        toBtn
-                        onClick={onChangeStatusClick('WORKING')}
-                      >
+                      <S.DetailInfoContent toBtn onClick={onChangeStatusClick('WORKING')}>
                         모집 종료하기
                       </S.DetailInfoContent>
                       <S.DetailInfoContent>
@@ -104,10 +101,16 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                     <>
                       <S.DetailInfoContent
                         toBtn
-                        onClick={onChangeStatusClick('RECRUIT')}
+                        onClick={onChangeStatusClick('RANKING')}
+                        blue="true"
                       >
+                        평가 후 완료하기
+                      </S.DetailInfoContent>
+                      <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
+                        onClick={onChangeStatusClick('RECRUIT')}
                         모집중으로 변경
                       </S.DetailInfoContent>
+
                       <S.DetailInfoContent>
                         <AiOutlineEdit /> &nbsp;수정
                       </S.DetailInfoContent>
@@ -136,10 +139,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
               </S.DetailInfoContent>
             </S.GroupBox>
             <S.DetailInfoContent>
-              <S.PostStatusCircle
-                status={post.postsStatus}
-                onClick={onStatusCircleClick}
-              >
+              <S.PostStatusCircle status={post.postsStatus} onClick={onStatusCircleClick}>
                 <label>{post.postsStatus}</label>
                 {post.kinds !== 'SCOUT' && (
                   <label>

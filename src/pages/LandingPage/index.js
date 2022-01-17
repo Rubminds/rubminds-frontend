@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import * as S from './style';
-import { BsCheckLg } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -18,7 +17,6 @@ const LandingPage = () => {
 
   const posts = useSelector(state => state.post.posts);
   const { me } = useSelector(state => state.user);
-  const dibsPosts = posts.filter(e => e.isLike === true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -106,14 +104,10 @@ const LandingPage = () => {
     <S.LandingWrapper>
       {posts && (
         <>
-          <Banner posts={dibsPosts} />
+          <Banner />
           <S.LandingDetailWrapper>
             <S.TitleWrapper>
               <S.DetailTitle>어떤 동료를 찾으시나요? &nbsp;</S.DetailTitle>
-              {/* <S.CheckboxWrapper>
-                <S.StyledCheckbox onClick={onCheck}>{selectAll && <BsCheckLg />}</S.StyledCheckbox>
-                &nbsp;전체보기
-              </S.CheckboxWrapper> */}
             </S.TitleWrapper>
             <CategoryArea onKindsClick={onKindsClick} kinds={kinds} />
             <FilterArea

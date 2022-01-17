@@ -6,7 +6,7 @@ import axios from 'axios';
 import { evaluateTeamMembers } from '../../../modules/team';
 import { Test } from '../../../assets/imgs';
 
-const TeamEvaluation = ({ teamId, writerId, kinds, postId }) => {
+const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
   const [evaluationArray, setEvaluationArray] = useState([]);
   const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
@@ -50,11 +50,11 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId }) => {
       e.preventDefault();
       const obj = {
         kinds,
-        evaluation:evaluationArray
-      }
+        evaluation: evaluationArray,
+      };
       console.log(evaluationArray);
       dispatch(evaluateTeamMembers({ teamId, content: obj }));
-      window.location.replace(`/post/${postId}`)
+      //window.location.replace(`/post/${postId}`);
     },
     [evaluationArray],
   );
@@ -69,49 +69,52 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId }) => {
         </S.SubTitle>
       </S.TitleWrapper>
       <S.ContentsWrapper>
-        {members.map((v, i) => (
-          <S.UserWrapper key={i}>
-            <S.UserLeftWrapper>
-              <S.UserAvatar src={Test} />
-              &nbsp;{v.userNickname}
-              {v.userId === writerId && <S.WriterMark />}
-            </S.UserLeftWrapper>
-            <S.UserRightWrapper>
-              <S.EvaluationContent>
-                <S.EvaluationTitle>참여도</S.EvaluationTitle>
-                <S.EvaluationLevel
-                  onInput={checkInput}
-                  maxLength="1"
-                  onChange={e => onAttendChange(e, i, 'attend')}
-                />
-                <S.EvaluationStars>
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                  <S.Star />
-                </S.EvaluationStars>
-              </S.EvaluationContent>
-              {kinds !== 'STUDY' && (
-                <S.EvaluationContent>
-                  <S.EvaluationTitle>숙련도</S.EvaluationTitle>
-                  <S.EvaluationLevel
-                    onInput={checkInput}
-                    maxLength="1"
-                    onChange={e => onAttendChange(e, i, 'work')}
-                  />
-                  <S.EvaluationStars>
-                    <S.Star />
-                    <S.Star />
-                    <S.Star />
-                    <S.Star />
-                    <S.Star />
-                  </S.EvaluationStars>
-                </S.EvaluationContent>
-              )}
-            </S.UserRightWrapper>
-          </S.UserWrapper>
-        ))}
+        {members.map(
+          (v, i) =>
+            v.userId !== me.id && (
+              <S.UserWrapper key={i}>
+                <S.UserLeftWrapper>
+                  <S.UserAvatar src={Test} />
+                  &nbsp;{v.userNickname}
+                  {v.userId === writerId && <S.WriterMark />}
+                </S.UserLeftWrapper>
+                <S.UserRightWrapper>
+                  <S.EvaluationContent>
+                    <S.EvaluationTitle>참여도</S.EvaluationTitle>
+                    <S.EvaluationLevel
+                      onInput={checkInput}
+                      maxLength="1"
+                      onChange={e => onAttendChange(e, i, 'attend')}
+                    />
+                    <S.EvaluationStars>
+                      <S.Star />
+                      <S.Star />
+                      <S.Star />
+                      <S.Star />
+                      <S.Star />
+                    </S.EvaluationStars>
+                  </S.EvaluationContent>
+                  {kinds !== 'STUDY' && (
+                    <S.EvaluationContent>
+                      <S.EvaluationTitle>숙련도</S.EvaluationTitle>
+                      <S.EvaluationLevel
+                        onInput={checkInput}
+                        maxLength="1"
+                        onChange={e => onAttendChange(e, i, 'work')}
+                      />
+                      <S.EvaluationStars>
+                        <S.Star />
+                        <S.Star />
+                        <S.Star />
+                        <S.Star />
+                        <S.Star />
+                      </S.EvaluationStars>
+                    </S.EvaluationContent>
+                  )}
+                </S.UserRightWrapper>
+              </S.UserWrapper>
+            ),
+        )}
         <S.SubmitBtn onClick={onSubmitClick}>평가 완료</S.SubmitBtn>
       </S.ContentsWrapper>
     </S.TeamEvaluationWrapper>

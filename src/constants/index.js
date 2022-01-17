@@ -41,16 +41,7 @@ export const SKILL_ID = {
 export const MAX_STAR = 5;
 
 //options
-//dropdown
-export const LandingDropdownOptions = [
-  '파이썬',
-  '리액트',
-  '자바',
-  '자바스크립트',
-  'NODEJS',
-  '엄청긴거테스트용ㅇㅇㅇㅇ',
-];
-// 지역 options
+// 지역 
 export const AreaOptions = [
   '서울특별시',
   '경기도',
@@ -86,9 +77,9 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_ERROR = 'UPDATE_USER_ERROR';
 
-export const TOGGLE_CHAT_MODAL = 'TOGGLE_CHAT_MODAL';
-export const TOGGLE_CHAT_MODAL_SUCCESS = 'TOGGLE_CHAT_MODAL_SUCCESS';
-export const TOGGLE_CHAT_MODAL_ERROR = 'TOGGLE_CHAT_MODAL_ERROR';
+export const TOGGLE_NOTE_MODAL = 'TOGGLE_NOTE_MODAL';
+export const TOGGLE_NOTE_MODAL_SUCCESS = 'TOGGLE_NOTE_MODAL_SUCCESS';
+export const TOGGLE_NOTE_MODAL_ERROR = 'TOGGLE_NOTE_MODAL_ERROR';
 
 export const CREATE_POST = 'CREATE_POST';
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
@@ -145,3 +136,15 @@ export const ADD_TEAM_USER_ERROR = 'ADD_TEAM_USER_ERROR';
 export const CHANGE_POST_STATUS = 'CHANGE_POST_STATUS';
 export const CHANGE_POST_STATUS_SUCCESS = 'CHANGE_POST_STATUS_SUCCESS';
 export const CHANGE_POST_STATUS_ERROR = 'CHANGE_POST_STATUS_ERROR';
+
+export const DELETE_TEAM_USER = 'DELETE_TEAM_USER';
+export const DELETE_TEAM_USER_SUCCESS = 'DELETE_TEAM_USER_SUCCESS';
+export const DELETE_TEAM_USER_ERROR = 'DELETE_TEAM_USER_ERROR';
+
+export const SEND_MAIL = 'SEND_MAIL';
+export const SEND_MAIL_SUCCESS = 'SEND_MAIL_SUCCESS';
+export const SEND_MAIL_ERROR = 'SEND_MAIL_ERROR';
+
+export const DELETE_MAIL = 'DELETE_MAIL';
+export const DELETE_MAIL_SUCCESS = 'DELETE_MAIL_SUCCESS';
+export const DELETE_MAIL_ERROR = 'DELETE_MAIL_ERROR';

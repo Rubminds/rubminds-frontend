@@ -18,12 +18,10 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { SKILL_ID } from '../../../constants';
 
 const WrittingInnerForm = () => {
-  const createPostDone = useSelector(state => state.post.createPostDone);
-
   const dispatch = useDispatch();
   const history = useHistory();
   const [title, setTitle] = useState(null);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState('');
   const [headCount, setHeadCount] = useState(null);
   const [kinds, setKinds] = useState('STUDY');
   const [meeting, setMeeting] = useState(null);
@@ -43,7 +41,6 @@ const WrittingInnerForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get('/skills');
-      console.log(result);
       setSkillName(result.data.skills.map(e => e.name));
     };
     fetchData();
@@ -64,14 +61,16 @@ const WrittingInnerForm = () => {
         skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         customSkillName: customOptions,
       };
+
       const formData = new FormData();
       if (file) {
         formData.append('files', file);
       }
+
       formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
       dispatch(createPost(formData));
-      history.push('/');
+      window.location.replace(`/`);
     },
     [title, content, headCount, kinds, meeting, region, dropDownOptions, customOptions],
   );

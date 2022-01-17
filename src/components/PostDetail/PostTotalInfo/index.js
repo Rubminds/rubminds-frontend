@@ -4,6 +4,7 @@ import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdPersonAdd } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { DetailInfo, UserListModal } from '../..';
 import { likePost, changePostStatus } from '../../../modules/post';
@@ -14,6 +15,8 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   const [members, setMembers] = useState([]);
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +29,10 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
     };
     fetchData();
   }, []);
+
+  const onEditPage = () => {
+    history.push(`/editpost`);
+  };
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
@@ -47,7 +54,8 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
         <S.DetailUserInfo>
-          <S.AuthorAvatar src={post.writer.avatar} /> &nbsp;{post.writer.nickname}
+          <S.AuthorAvatar src={post.writer.avatar} /> &nbsp;
+          {post.writer.nickname}
         </S.DetailUserInfo>
         <DetailInfo title="모집유형" info={post.kinds} />
         <DetailInfo title="기술스택" info={combinedSkills} />
@@ -84,7 +92,9 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                         모집 종료하기
                       </S.DetailInfoContent>
                       <S.DetailInfoContent>
-                        <AiOutlineEdit /> &nbsp;수정
+                        <div onClick={onEditPage}>
+                          <AiOutlineEdit /> &nbsp;수정
+                        </div>
                       </S.DetailInfoContent>
                     </>
                   ) : post.postsStatus === 'WORKING' ? (
@@ -97,6 +107,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                         평가 후 완료하기
                       </S.DetailInfoContent>
                       <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
+                        onClick={onChangeStatusClick('RECRUIT')}
                         모집중으로 변경
                       </S.DetailInfoContent>
 

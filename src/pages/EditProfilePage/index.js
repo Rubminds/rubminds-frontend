@@ -85,8 +85,8 @@ const EditProfilePage = () => {
           new Blob([JSON.stringify(data)], { type: 'application/json' })
         )
         console.log(data); 
-        dispatch(updateUser(formData))
-        window.location.replace(`/mypage/${me.id}`)
+        // dispatch(updateUser(formData))
+        // window.location.replace(`/mypage/${me.id}`)
       } else {
         alert('닉네임 중복체크를 해주세요')
       }

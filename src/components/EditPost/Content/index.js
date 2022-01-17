@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import * as S from '../WrittingInnerForm/style';
+import * as S from '../../../pages/EditPostPage/style';
 
 const Content = ({ content, setContent }) => {
   const onContentChange = useCallback(
@@ -17,6 +17,7 @@ const Content = ({ content, setContent }) => {
         name="content"
         placeholder="프로젝트에 대한 자세한 설명을 부탁드립니다."
         onChange={onContentChange}
+        value={content}
       ></S.MainTextArea>
     </>
   );

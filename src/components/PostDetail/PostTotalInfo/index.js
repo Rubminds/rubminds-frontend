@@ -12,23 +12,13 @@ import { likePost, changePostStatus, deletePost } from '../../../modules/post';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
-const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
-  const [members, setMembers] = useState([]);
+const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) => {
+  
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(`/team/${post.teamId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
-      setMembers(response.data.teamUsers);
-    };
-    fetchData();
-  }, []);
+  
 
   const onEditClick = () => {
     history.push(`/editpost`);

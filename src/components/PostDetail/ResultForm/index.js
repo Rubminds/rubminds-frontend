@@ -18,7 +18,7 @@ const ResultForm = ({ post }) => {
   const submitBtn = useRef();
 
   const onChangeFile = useCallback(e => {
-    console.log(e.target.files[0])
+    console.log(e.target.files[0]);
     setFile(e.target.files[0]);
   }, []);
 
@@ -39,13 +39,19 @@ const ResultForm = ({ post }) => {
         new Blob([JSON.stringify(dataObj)], { type: 'application/json' }),
       );
 
-      dispatch(submitResultPost({ postId: post.id, content: formData }));
+      const submitConfirm = window.confirm(
+        '결과물 업로드시 수정이 불가합니다.\n결과물을 업로드 하시겠습니까?',
+      );
+      if (submitConfirm) {
+        dispatch(submitResultPost({ postId: post.id, content: formData }));
+        window.location.replace(`/post/${post.id}`);
+      }
     },
     [completeContent, refLink, images, file, dispatch, post.id],
   );
 
   useEffect(() => {
-    const isDone = post.completeContent || post.refLink || (post.completeFile); //추후에 이미지리스트도 추가
+    const isDone = post.completeContent || post.refLink || post.completeFile; //추후에 이미지리스트도 추가
     if (isDone) {
       fileInput.current.disabled = true;
       submitBtn.current.disabled = true;
@@ -64,7 +70,7 @@ const ResultForm = ({ post }) => {
       <S.FormBigTitle>결과</S.FormBigTitle>
       <S.FileWrapper>
         <S.UploadFile htmlFor="input-file">파일 업로드</S.UploadFile>
-        <S.UploadFileName>{ file && file.name}</S.UploadFileName>
+        <S.UploadFileName>{file && file.name}</S.UploadFileName>
       </S.FileWrapper>
       <input
         type="file"
@@ -76,7 +82,7 @@ const ResultForm = ({ post }) => {
       <S.FormSmallTitle>첨부 이미지</S.FormSmallTitle>
       <Carousel size="30rem" Imgs={images} setImgs={setImages} />
       <S.FormSmallTitle>진행 방법 및 결과 설명</S.FormSmallTitle>
-      <S.TextArea  onChange={onChangeCompleteContent} ref={completeContentInput} />
+      <S.TextArea onChange={onChangeCompleteContent} ref={completeContentInput} />
       <S.FormSmallTitle>첨부 링크</S.FormSmallTitle>
       <S.Input
         placeholder="ex) github.com/Rubminds"

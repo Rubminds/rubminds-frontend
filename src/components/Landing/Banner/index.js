@@ -29,10 +29,11 @@ const Banner = () => {
         <br />
         <br />
         <S.BannerText fontSize="md">Rubminds에서 당신의 팀원을 찾으세요!</S.BannerText>
+        <Link to="/write">
         <S.RecruitBtn>
-          {' '}
-          <Link to="/write"> 모집하기 </Link>{' '}
+           모집하기 
         </S.RecruitBtn>
+        </Link>
       </S.BannerTextBox>
       {me && dibsPosts.length !== 0 ? (
         <S.BannerCarouselWrapper>

@@ -17,6 +17,7 @@ import ProjectStatusPage from './ProjectStatusPage';
 import EditProfilePage from './EditProfilePage';
 
 import { Header, MailButton } from '../components';
+import EditPostPage from './EditPostPage';
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Route exact path="/" component={LandingPage} />
           <AuthRoute exact path="/post/:id" Component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
+          <Route path="/editpost" component={EditPostPage} />
           <AuthRoute path="/write" Component={WrittingPage} />
           <AuthRoute path="/editprofile" Component={EditProfilePage} />
           <AuthRoute path="/userPage/:id" component={UserPage} />

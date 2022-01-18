@@ -28,11 +28,11 @@ const Banner = () => {
         <S.BannerText fontSize="bg">최고의 온라인 커뮤니티</S.BannerText>
         <br />
         <br />
-        <S.BannerText fontSize="md">Rubminds에서 당신의 팀원을 찾으세요!</S.BannerText>
+        <S.BannerText fontSize="md">
+          Rubminds에서 당신의 팀원을 찾으세요!
+        </S.BannerText>
         <Link to="/write">
-        <S.RecruitBtn>
-           모집하기 
-        </S.RecruitBtn>
+          <S.RecruitBtn>모집하기</S.RecruitBtn>
         </Link>
       </S.BannerTextBox>
       {me && dibsPosts.length !== 0 ? (

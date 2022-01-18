@@ -46,7 +46,6 @@ const WrittingInnerForm = () => {
     fetchData();
   }, []);
 
-  // useCallback ver
   const onSubmitHandler = useCallback(
     e => {
       e.preventDefault();
@@ -67,12 +66,24 @@ const WrittingInnerForm = () => {
         formData.append('files', file);
       }
 
-      formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+      formData.append(
+        'postInfo',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
 
       dispatch(createPost(formData));
       window.location.replace(`/`);
     },
-    [title, content, headCount, kinds, meeting, region, dropDownOptions, customOptions],
+    [
+      title,
+      content,
+      headCount,
+      kinds,
+      meeting,
+      region,
+      dropDownOptions,
+      customOptions,
+    ]
   );
 
   return (
@@ -131,7 +142,10 @@ const WrittingInnerForm = () => {
         <S.BtnLeft>
           <Link to="/">취소</Link>
         </S.BtnLeft>
-        <S.BtnRight onClick={onSubmitHandler}>등록하기</S.BtnRight>
+        <S.BtnRight type="submit">
+          {' '}
+          등록하기{' '}
+        </S.BtnRight>
       </S.BtnWrapper>
     </S.WrittingInnerForm>
   );

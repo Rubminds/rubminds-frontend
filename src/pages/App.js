@@ -41,7 +41,10 @@ const App = () => {
           <AuthRoute path="/editprofile" Component={EditProfilePage} />
           <AuthRoute path="/userPage/:id" component={UserPage} />
           <AuthRoute path="/dibs" component={DibsPage} />
-          <AuthRoute path="/projects/:status/:userId" component={ProjectStatusPage} />
+          <AuthRoute
+            path="/projects/:status/:userId"
+            component={ProjectStatusPage}
+          />
         </Switch>
       </Router>
     </ThemeProvider>

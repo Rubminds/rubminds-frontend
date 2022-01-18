@@ -179,7 +179,7 @@ function* likePost(action) {
 }
 
 function deletePostAPI(data) {
-  return axios.delete(`/post/${data}/like`, null, {
+  return axios.delete(`/post/${data}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

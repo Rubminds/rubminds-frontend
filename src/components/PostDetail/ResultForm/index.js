@@ -45,7 +45,7 @@ const ResultForm = ({ post }) => {
   );
 
   useEffect(() => {
-    const isDone = post.completeContent && post.refLink && post.completeFiles; //추후에 이미지리스트도 추가
+    const isDone = post.completeContent || post.refLink || (post.completeFile); //추후에 이미지리스트도 추가
     if (isDone) {
       fileInput.current.disabled = true;
       submitBtn.current.disabled = true;
@@ -76,7 +76,7 @@ const ResultForm = ({ post }) => {
       <S.FormSmallTitle>첨부 이미지</S.FormSmallTitle>
       <Carousel size="30rem" Imgs={images} setImgs={setImages} />
       <S.FormSmallTitle>진행 방법 및 결과 설명</S.FormSmallTitle>
-      <S.TextArea type="text-area" onChange={onChangeCompleteContent} ref={completeContentInput} />
+      <S.TextArea  onChange={onChangeCompleteContent} ref={completeContentInput} />
       <S.FormSmallTitle>첨부 링크</S.FormSmallTitle>
       <S.Input
         placeholder="ex) github.com/Rubminds"

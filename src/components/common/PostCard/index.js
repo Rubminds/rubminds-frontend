@@ -13,13 +13,13 @@ import { likePost } from '../../../modules/post';
 const PostCard = ({ post, ...props }) => {
   const combinedSkills = post.skill.concat(post.customSkills);
   const dispatch = useDispatch();
-  const onLikeClick = useCallback(
-    e => {
-      e.preventDefault();
-      dispatch(likePost(post.id));
-    },
-    [dispatch, post.id],
-  );
+  // const onLikeClick = useCallback(
+  //   e => {
+  //     e.preventDefault();
+  //     dispatch(likePost(post.id));
+  //   },
+  //   [dispatch, post.id],
+  // );
   return (
     <S.CardLinkWrapper to={`post/${post.id}`}>
       <S.CardWrapper status={post.status} {...props}>
@@ -46,11 +46,11 @@ const PostCard = ({ post, ...props }) => {
             })}
           </S.FooterTags>
           {post.isLike ? (
-            <S.DibBtn onClick={onLikeClick}>
+            <S.DibBtn>
               <AiFillStar color="#E4DC00" />찜 취소
             </S.DibBtn>
           ) : (
-            <S.DibBtn onClick={onLikeClick}>
+            <S.DibBtn>
               <BiStar color="#E4DC00" />
               찜하기
             </S.DibBtn>

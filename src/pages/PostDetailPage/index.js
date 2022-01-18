@@ -16,25 +16,28 @@ const PostDetailPage = () => {
   //const { singlePost } = useSelector(state => state.post);
   const { me } = useSelector(state => state.user);
 
-  useEffect(()=>{
-    const fetchData = async() =>{
-      const response = await axios.get(`/post/${params.id}`);
-      setPost(response.data)
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(`/post/${params.id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setPost(response.data);
+      console.log(response.data);
       const teamResponse = await axios.get(`/team/${response.data.teamId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
       setMembers(teamResponse.data.teamUsers);
-    }
+    };
     fetchData();
     //dispatch(loadPost(params.id));
-  },[])
+  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      
-    };
+    const fetchData = async () => {};
     fetchData();
   }, [post]);
 

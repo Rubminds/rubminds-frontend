@@ -13,12 +13,10 @@ import { likePost, changePostStatus, deletePost } from '../../../modules/post';
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
 const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) => {
-  
+  const [isLike, setIsLike] = useState(post.isLike)
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
   const history = useHistory();
-
-  
 
   const onEditClick = () => {
     history.push(`/editpost`);
@@ -33,12 +31,13 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
+    setIsLike(prev => !prev);
   }, [dispatch, post.id]);
 
   const onStatusCircleClick = useCallback(() => {
     console.log('open team members');
     me && openModal();
-  }, [openModal]);
+  }, [openModal, me]);
 
   const onChangeStatusClick = useCallback(
     status => () => {
@@ -128,7 +127,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
               )}
 
               <S.DetailInfoContent>
-                {post.isLike ? (
+                {isLike ? (
                   <S.LikeWrapper onClick={onLikeClick}>
                     <AiFillStar color="#E4DC00" /> &nbsp;찜 취소
                   </S.LikeWrapper>

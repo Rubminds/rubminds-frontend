@@ -68,7 +68,7 @@ export const DetailInfoContent = styled.div`
   ${props =>
     props.toBtn &&
     css`
-      background-color: #ffa586;
+      background-color: ${props => props.blue ? '#56ACEE' : '#ffa586'};
       padding: 1rem 1.5rem;
       border-radius: 20px;
       color: #fff;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexCenter, flexBetween} from '../../constants';
+import { flexCenter, flexBetween } from '../../constants';
 import mediaQuery from '../../hooks/mediaQuery';
 
 export const MainTitle = styled.div`
@@ -10,12 +10,12 @@ export const MainTitle = styled.div`
   font-weight: ${props => props.fontWeight && props.fontWeight};
 `;
 
-export const AllWrapper = styled.div` 
+export const AllWrapper = styled.div`
   background: #f9fbfc;
-  padding : 5rem 0px;
-  display : flex; 
-  justify-content : center; 
-`; 
+  padding: 5rem 0px;
+  display: flex;
+  justify-content: center;
+`;
 
 export const EditProfileWrapper = styled.div`
   width: 50%;
@@ -86,10 +86,11 @@ export const JobCheckBtn = styled.input`
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 3rem;
   border: none;
-  background-color: ${props => props.name === props.selected ? '#CDF6E8' : '#fff'};
+  background-color: ${props =>
+    props.name === props.selected ? '#CDF6E8' : '#fff'};
   padding: 2rem;
   font-size: 2rem;
-  cursor : pointer; 
+  cursor: pointer;
 `;
 
 export const Introduce = styled.textarea`

@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './style';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import { BannerCarousel } from '../..';
 
-const Banner = ({posts}) => {
-  const {me} = useSelector(state => state.user)
+const Banner = () => {
+  const [dibsPosts, setDibsPosts] = useState([]);
+  const { me } = useSelector(state => state.user);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get('/posts/like?page=1&size=10', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setDibsPosts(response.data.content);
+    };
+    me && fetchData();
+  }, []);
   return (
     <S.LandingBanner>
       <S.BannerTextBox>
@@ -15,9 +29,18 @@ const Banner = ({posts}) => {
         <br />
         <br />
         <S.BannerText fontSize="md">Rubminds에서 당신의 팀원을 찾으세요!</S.BannerText>
-        <S.RecruitBtn> <Link to='/write'> 모집하기 </Link> </S.RecruitBtn>
+        <S.RecruitBtn>
+          {' '}
+          <Link to="/write"> 모집하기 </Link>{' '}
+        </S.RecruitBtn>
       </S.BannerTextBox>
-      {me && posts.length !== 0 ? <S.BannerCarouselWrapper><BannerCarousel posts={posts}/></S.BannerCarouselWrapper> : <S.IphoneImg />}
+      {me && dibsPosts.length !== 0 ? (
+        <S.BannerCarouselWrapper>
+          <BannerCarousel posts={dibsPosts} />
+        </S.BannerCarouselWrapper>
+      ) : (
+        <S.IphoneImg />
+      )}
     </S.LandingBanner>
   );
 };

@@ -8,6 +8,9 @@ import {
   ADD_TEAM_USER,
   ADD_TEAM_USER_SUCCESS,
   ADD_TEAM_USER_ERROR,
+  DELETE_TEAM_USER,
+  DELETE_TEAM_USER_SUCCESS,
+  DELETE_TEAM_USER_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
@@ -22,6 +25,10 @@ export const initialState = {
   addTeamUserLoading: false,
   addTeamUserDone: false,
   addTeamUserError: null,
+
+  deleteTeamUserLoading: false,
+  deleteTeamUserDone: false,
+  deleteTeamUserError: null,
 };
 
 //액션 생성함수
@@ -37,6 +44,11 @@ export const evaluateTeamMembers = data => ({
 
 export const addTeamUser = data => ({
   type: ADD_TEAM_USER,
+  data,
+});
+
+export const deleteTeamUser = data => ({
+  type: DELETE_TEAM_USER,
   data,
 });
 
@@ -80,6 +92,20 @@ const team = (state = initialState, action) => {
       case ADD_TEAM_USER_ERROR:
         draft.addTeamUserLoading = false;
         draft.addTeamUserError = action.error;
+        break;
+      case DELETE_TEAM_USER:
+        draft.deleteTeamUserLoading = true;
+        draft.deleteTeamUserDone = false;
+        draft.deleteTeamUserError = null;
+        break;
+      case DELETE_TEAM_USER_SUCCESS: //액션 처리
+        draft.deleteTeamUserLoading = false;
+        draft.deleteTeamUserDone = true;
+        draft.deleteTeamUserError = null;
+        break;
+      case DELETE_TEAM_USER_ERROR:
+        draft.deleteTeamUserLoading = false;
+        draft.deleteTeamUserError = action.error;
         break;
       default:
         break;

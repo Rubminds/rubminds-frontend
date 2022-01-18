@@ -1,59 +1,59 @@
-import axios from 'axios'
-import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { CustomDropDown } from '../../components'
-import File from '../../components/EditPost/File'
-import MiddleArea from '../../components/EditPost/MiddleArea'
-import Region from '../../components/EditPost/Region'
-import Title from '../../components/EditPost/Title'
-import Content from '../../components/EditPost/Content'
-import * as S from './style'
-import { Link } from 'react-router-dom'
-import { AreaOptions, SKILL_ID } from '../../constants'
-import { editPost } from '../../modules/post'
+import axios from 'axios';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CustomDropDown } from '../../components';
+import File from '../../components/EditPost/File';
+import MiddleArea from '../../components/EditPost/MiddleArea';
+import Region from '../../components/EditPost/Region';
+import Title from '../../components/EditPost/Title';
+import Content from '../../components/EditPost/Content';
+import * as S from './style';
+import { Link } from 'react-router-dom';
+import { AreaOptions, SKILL_ID } from '../../constants';
+import { editPost } from '../../modules/post';
 
 const EditPostPage = () => {
-  const { singlePost } = useSelector(state => state.post)
-  const dispatch = useDispatch()
-  const [title, setTitle] = useState(null)
-  const [content, setContent] = useState(null)
-  const [headCount, setHeadCount] = useState(null)
-  const [meeting, setMeeting] = useState(null)
-  const [region, setRegion] = useState(null)
-  const [file, setFile] = useState(null)
-  const [skillName, setSkillName] = useState([])
-  const [dropDownOptions, setDropDownOptions] = useState([])
-  const [customOptions, setCustomOptions] = useState([])
-  const [isScout, setIsScout] = useState(false)
+  const { singlePost } = useSelector(state => state.post);
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState(null);
+  const [content, setContent] = useState(null);
+  const [headCount, setHeadCount] = useState(null);
+  const [meeting, setMeeting] = useState(null);
+  const [region, setRegion] = useState(null);
+  const [file, setFile] = useState(null);
+  const [skillName, setSkillName] = useState([]);
+  const [dropDownOptions, setDropDownOptions] = useState([]);
+  const [customOptions, setCustomOptions] = useState([]);
+  const [isScout, setIsScout] = useState(false);
 
   // 이미지 서버 전송용 데이터
-  const [fileInfo, setFileInfo] = useState(null)
+  const [fileInfo, setFileInfo] = useState(null);
   // 이미지 미리보기 데이터
-  const [attachment, setAttachment] = useState(null)
+  const [attachment, setAttachment] = useState(null);
 
   useEffect(() => {
-    console.log(singlePost.meeting); 
-    setTitle(singlePost.title)
-    setMeeting(singlePost.meeting)
-    setHeadCount(singlePost.headcount)
-    setRegion(singlePost.region)
-    setContent(singlePost.content)
+    console.log(singlePost.meeting);
+    setTitle(singlePost.title);
+    setMeeting(singlePost.meeting);
+    setHeadCount(singlePost.headcount);
+    setRegion(singlePost.region);
+    setContent(singlePost.content);
     const array = singlePost.postSkills.map(v => {
-      return v
-    })
-    setDropDownOptions(array)
+      return v;
+    });
+    setDropDownOptions(array);
 
     const fetchData = async () => {
-      const result = await axios.get('/skills')
-      setSkillName(result.data.skills.map(e => e.name))
-    }
-    fetchData()
-  }, [])
+      const result = await axios.get('/skills');
+      setSkillName(result.data.skills.map(e => e.name));
+    };
+    fetchData();
+  }, []);
 
   // useCallback ver
   const onSubmitHandler = useCallback(
     e => {
-      e.preventDefault()
+      e.preventDefault();
       const data = {
         title: title,
         content: content,
@@ -63,21 +63,20 @@ const EditPostPage = () => {
         region: region,
         skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         customSkillName: customOptions,
-      }
-      console.log(data); 
-      const formData = new FormData()
+      };
+      const formData = new FormData();
       if (file) {
-        formData.append('files', file)
+        formData.append('files', file);
       }
       formData.append(
         'postInfo',
         new Blob([JSON.stringify(data)], { type: 'application/json' })
-      )
-      dispatch(editPost({ id : singlePost.id, formData}))
+      );
+      dispatch(editPost({ id: singlePost.id, formData }));
       window.location.replace(`/post/${singlePost.id}`);
     },
     [title, content, headCount, meeting, region, dropDownOptions, customOptions]
-  )
+  );
 
   return (
     <>
@@ -100,18 +99,16 @@ const EditPostPage = () => {
             options={skillName}
           />
 
-
           {/* 회의환경 및 모집인원 */}
-          {
-            meeting && <MiddleArea
-            meeting={meeting}
-            setMeeting={setMeeting}
-            headCount={headCount}
-            setHeadCount={setHeadCount}
-            isScout={isScout}
-          /> 
-          }
-          
+          {meeting && (
+            <MiddleArea
+              meeting={meeting}
+              setMeeting={setMeeting}
+              headCount={headCount}
+              setHeadCount={setHeadCount}
+              isScout={isScout}
+            />
+          )}
 
           {/* 지역 */}
           <Region
@@ -141,7 +138,7 @@ const EditPostPage = () => {
         </S.WrittingInnerForm>
       </S.AllWrapper>
     </>
-  )
-}
+  );
+};
 
-export default EditPostPage
+export default EditPostPage;

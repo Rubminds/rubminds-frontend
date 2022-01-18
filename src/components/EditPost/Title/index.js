@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react'
-import * as S from '../../../pages/EditPostPage/style'
+import React, { useCallback } from 'react';
+import * as S from '../../../pages/EditPostPage/style';
 
 const Title = ({ title, setTitle }) => {
   const onTitleChange = useCallback(
     e => {
-      setTitle(e.target.value)
+      setTitle(e.target.value);
     },
     [title]
-  )
+  );
 
   return (
     <>
@@ -21,7 +21,7 @@ const Title = ({ title, setTitle }) => {
         value={title}
       />
     </>
-  )
-}
+  );
+};
 
-export default Title
+export default Title;

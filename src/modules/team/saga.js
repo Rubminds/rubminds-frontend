@@ -10,6 +10,9 @@ import {
   ADD_TEAM_USER,
   ADD_TEAM_USER_ERROR,
   ADD_TEAM_USER_SUCCESS,
+  DELETE_TEAM_USER,
+  DELETE_TEAM_USER_ERROR,
+  DELETE_TEAM_USER_SUCCESS,
 } from '../../constants';
 
 function loadTeamMembersAPI(data) {
@@ -43,8 +46,8 @@ function evaluateTeamMembersAPI(data) {
   });
 }
 function* evaluateTeamMembers(action) {
-  console.log(action.data);
   const result = yield call(evaluateTeamMembersAPI, action.data);
+  console.log(result);
   try {
     yield put({
       type: EVALUATE_TEAM_MEMBERS_SUCCESS,
@@ -81,6 +84,29 @@ function* addTeamUser(action) {
   }
 }
 
+function deleteTeamUserAPI(data) {
+  return axios.delete(`/team/${data.teamId}/user/${data.userId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  });
+}
+function* deleteTeamUser(action) {
+  console.log(action.data);
+  const result = yield call(deleteTeamUserAPI, action.data);
+  try {
+    yield put({
+      type: DELETE_TEAM_USER_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    yield put({
+      type: DELETE_TEAM_USER_ERROR,
+      error: err,
+    });
+  }
+}
+
 function* watchLoadTeamMembers() {
   yield takeLatest(LOAD_TEAM_MEMBERS, loadTeamMembers);
 }
@@ -90,7 +116,15 @@ function* watchEvaluateTeamMembers() {
 function* watchAddTeamUser() {
   yield takeLatest(ADD_TEAM_USER, addTeamUser);
 }
+function* watchDeleteTeamUser() {
+  yield takeLatest(DELETE_TEAM_USER, deleteTeamUser);
+}
 
 export default function* teamSaga() {
-  yield all([fork(watchLoadTeamMembers), fork(watchEvaluateTeamMembers),fork(watchAddTeamUser)]);
+  yield all([
+    fork(watchLoadTeamMembers),
+    fork(watchEvaluateTeamMembers),
+    fork(watchAddTeamUser),
+    fork(watchDeleteTeamUser),
+  ]);
 }

@@ -39,11 +39,11 @@ const App = () => {
           <Route path="/editpost" component={EditPostPage} />
           <AuthRoute path="/write" Component={WrittingPage} />
           <AuthRoute path="/editprofile" Component={EditProfilePage} />
-          <AuthRoute path="/userPage/:id" component={UserPage} />
-          <AuthRoute path="/dibs" component={DibsPage} />
+          <AuthRoute path="/userPage/:id" Component={UserPage} />
+          <AuthRoute path="/dibs" Component={DibsPage} />
           <AuthRoute
             path="/projects/:status/:userId"
-            component={ProjectStatusPage}
+            Component={ProjectStatusPage}
           />
         </Switch>
       </Router>

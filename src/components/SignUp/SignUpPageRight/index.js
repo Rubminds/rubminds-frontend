@@ -4,7 +4,6 @@ import * as S from './style';
 import useInput from '../../../hooks/useInput';
 import { useDispatch } from 'react-redux';
 import { signupUser } from '../../../modules/user';
-import { useHistory } from 'react-router-dom';
 import { SKILL_ID } from '../../../constants';
 import Nickname from '../NickName';
 import Job from '../Job';
@@ -13,12 +12,11 @@ import Introduce from '../Introduce';
 import DropDown from '../../common/DropDown';
 
 const SignUpPageRight = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const [nicknameCheck, setnicknameCheck] = useState(false);
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [nickname, setNickname] = useState(null);
-  const [job, onChangeJob, setJob] = useInput('');
+  const [job, onChangeJob, setJob] = useInput('학생');
   const [introduce, onChangeIntroduce] = useInput(null);
   const [fileInfo, setFileInfo] = useState(null);
   const [skillName, setSkillName] = useState([]);
@@ -37,11 +35,17 @@ const SignUpPageRight = () => {
       if (nicknameCheck) {
         const data = {
           nickname,
-          job,
+          job:
+            job === null
+              ? () => {
+                  alert('직업 선택해라');
+                  return;
+                }
+              : job,
           introduce,
           skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         };
-        console.log(data);
+        console.log(job);
         const formData = new FormData();
         if (fileInfo) {
           formData.append('avatar', fileInfo);
@@ -51,7 +55,7 @@ const SignUpPageRight = () => {
           new Blob([JSON.stringify(data)], { type: 'application/json' })
         );
         dispatch(signupUser(formData));
-        history.push('/');
+        window.location.replace(`/`);
       } else {
         alert('닉네임 중복체크를 해주세요');
       }
@@ -75,7 +79,7 @@ const SignUpPageRight = () => {
         />
         <Job job={job} setJob={setJob} />
         <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
-          기술스택 ( 선택 )
+          기술스택 (선택)
         </S.MainTitle>
         <DropDown
           dropDownOptions={dropDownOptions}
@@ -85,7 +89,7 @@ const SignUpPageRight = () => {
         ></DropDown>
 
         <Introduce onChangeIntroduce={onChangeIntroduce} />
-        <S.SubmitBtn onClick={onSubmitHandler}> 회원가입 </S.SubmitBtn>
+        <S.SubmitBtn type="submit"> 회원가입 </S.SubmitBtn>
         <S.Clear></S.Clear>
       </S.SignUpPageInnerForm>
     </S.SignUpPageRightWrapper>

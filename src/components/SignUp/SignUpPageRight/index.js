@@ -35,13 +35,7 @@ const SignUpPageRight = () => {
       if (nicknameCheck) {
         const data = {
           nickname,
-          job:
-            job === null
-              ? () => {
-                  alert('직업 선택해라');
-                  return;
-                }
-              : job,
+          job,
           introduce,
           skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         };

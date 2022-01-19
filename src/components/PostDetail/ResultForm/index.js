@@ -10,7 +10,7 @@ const ResultForm = ({ post }) => {
   const [file, setFile] = useState(null);
   const [refLink, onChangeRefLink] = useInput('');
   const [completeContent, onChangeCompleteContent] = useInput('');
-  const [images, onChangeImages, setImages] = useInput([]);
+  const [images, setImages] = useState([]);
   const dispatch = useDispatch();
   const fileInput = useRef();
   const completeContentInput = useRef();
@@ -22,6 +22,11 @@ const ResultForm = ({ post }) => {
     setFile(e.target.files[0]);
   }, []);
 
+  const onChangeImages = useCallback(e => {
+    console.log(e.target.files);
+    setImages(e.target.files)
+  },[])
+
   const onSubmitResultClick = useCallback(
     e => {
       e.preventDefault();
@@ -29,11 +34,12 @@ const ResultForm = ({ post }) => {
         refLink,
         completeContent,
       };
+      const fileList = [...images]
       const formData = new FormData();
-      file && formData.append('completeFiles', file);
-      console.log(file);
-      images.length > 0 && formData.append('images', images);
-
+      file && fileList.push(file);
+      
+      console.log(fileList)
+      formData.append('files', fileList);
       formData.append(
         'completeInfo',
         new Blob([JSON.stringify(dataObj)], { type: 'application/json' }),
@@ -77,10 +83,12 @@ const ResultForm = ({ post }) => {
         id="input-file"
         style={{ display: 'none' }}
         onChange={onChangeFile}
+        accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf"
+        multiple={false}
         ref={fileInput}
       />
       <S.FormSmallTitle>첨부 이미지</S.FormSmallTitle>
-      <Carousel size="30rem" Imgs={images} setImgs={setImages} />
+      <Carousel size="30rem" onChangeImages={onChangeImages}/>
       <S.FormSmallTitle>진행 방법 및 결과 설명</S.FormSmallTitle>
       <S.TextArea onChange={onChangeCompleteContent} ref={completeContentInput} />
       <S.FormSmallTitle>첨부 링크</S.FormSmallTitle>

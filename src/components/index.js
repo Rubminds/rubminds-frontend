@@ -9,7 +9,6 @@ export { default as DropDown } from './common/DropDown';
 export { default as CustomDropDown } from './common/CustomDropDown';
 export { default as Input } from './common/Input';
 export { default as TextArea } from './common/TextArea';
-export { default as Carousel } from './common/Carousel';
 export { default as Paper } from './common/Paper';
 export { default as BackButton } from './common/BackButton';
 export { default as Avatar } from './common/Avatar';
@@ -21,6 +20,8 @@ export { default as BannerCarousel } from './Landing/BannerCarousel';
 export { default as CategoryArea } from './Landing/CategoryArea';
 export { default as FilterArea } from './Landing/FilterArea';
 
+export { default as UploadCarousel } from './PostDetail/UploadCarousel';
+export { default as ResultCarousel } from './PostDetail/ResultCarousel';
 export { default as DetailInfo } from './PostDetail/DetailInfo';
 export { default as UserListModal } from './PostDetail/UserListModal';
 export { default as ProcessEndModal } from './PostDetail/ProcessEndModal';

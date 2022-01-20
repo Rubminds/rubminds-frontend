@@ -59,7 +59,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
         <DetailInfo title="지역" info={post.region} />
         <S.FileContainer>
           {post.files.map((v, i) => (
-            <S.UploadedFile download href={v.url} key={i}>
+            <S.UploadedFile href={v.url} key={i} download>
               첨부파일
             </S.UploadedFile>
           ))}

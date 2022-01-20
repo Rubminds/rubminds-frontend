@@ -12,11 +12,10 @@ const Region = ({ region, setRegion, AreaOptions }) => {
     <>
       <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
         지역
-      </S.MainTitle>
-      <S.AreaSelect name="region" onChange={onRegionChange}>
-        {/* <option value="" selected disabled hidden> */}
-        <option value="" selected>
-          선택
+        </S.MainTitle>
+        <S.AreaSelect name="region" onChange={onRegionChange} required>
+        <option value="" selected disabled hidden>
+            == 선택 ==
         </option>
         {AreaOptions.map((value, index) => {
           return <option key={index}>{value}</option>;

@@ -15,7 +15,7 @@ import UserPage from './UserPage';
 import DibsPage from './DibsPage';
 import ProjectStatusPage from './ProjectStatusPage';
 import EditProfilePage from './EditProfilePage';
-
+import EditPostPage from './EditPostPage';
 import { Header, MailButton } from '../components';
 
 const App = () => {
@@ -35,11 +35,15 @@ const App = () => {
           <Route exact path="/" component={LandingPage} />
           <AuthRoute exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
+          <Route path="/editpost" component={EditPostPage} />
           <AuthRoute path="/write" component={WrittingPage} />
           <AuthRoute path="/editprofile" component={EditProfilePage} />
           <AuthRoute path="/userPage/:id" component={UserPage} />
           <AuthRoute path="/dibs" component={DibsPage} />
-          <AuthRoute path="/projects/:status/:userId" component={ProjectStatusPage} />
+          <AuthRoute
+            path="/projects/:status/:userId"
+            component={ProjectStatusPage}
+          />
         </Switch>
       </Router>
     </ThemeProvider>

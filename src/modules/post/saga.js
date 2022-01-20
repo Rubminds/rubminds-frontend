@@ -34,6 +34,7 @@ function createPostAPI(data) {
   return axios.post('/post', data, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      'Content-Type':'multipart/form-data'
     },
   });
 }

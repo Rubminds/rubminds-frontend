@@ -8,12 +8,13 @@ import Region from '../../components/EditPost/Region';
 import Title from '../../components/EditPost/Title';
 import Content from '../../components/EditPost/Content';
 import * as S from './style';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AreaOptions, SKILL_ID } from '../../constants';
-import { editPost } from '../../modules/post';
+import { editPost, loadPost } from '../../modules/post';
 
 const EditPostPage = () => {
   const { singlePost } = useSelector(state => state.post);
+  const { id } = useParams();
   const dispatch = useDispatch();
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
@@ -32,7 +33,7 @@ const EditPostPage = () => {
   const [attachment, setAttachment] = useState(null);
 
   useEffect(() => {
-    console.log(singlePost.meeting);
+    dispatch(loadPost(id));
     setTitle(singlePost.title);
     setMeeting(singlePost.meeting);
     setHeadCount(singlePost.headcount);

@@ -31,7 +31,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
   }, []);
 
   const onEditPage = () => {
-    history.push(`/editpost`);
+    history.push(`/editpost/${id}`);
   };
 
   const onLikeClick = useCallback(() => {

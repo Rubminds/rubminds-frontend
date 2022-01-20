@@ -36,7 +36,7 @@ const App = () => {
           <Route exact path="/" component={LandingPage} />
           <AuthRoute exact path="/post/:id" Component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
-          <Route path="/editpost" component={EditPostPage} />
+          <AuthRoute path="/editpost/:id" Component={EditPostPage} />
           <AuthRoute path="/write" Component={WrittingPage} />
           <AuthRoute path="/editprofile" Component={EditProfilePage} />
           <AuthRoute path="/userPage/:id" Component={UserPage} />

@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import * as S from './style';
 
-import { PostTotalInfo, ResultForm, BackButton, TeamEvaluation } from '../../components';
+import {
+  PostTotalInfo,
+  ResultForm,
+  BackButton,
+  TeamEvaluation,
+} from '../../components';
 import { loadPost } from '../../modules/post';
 
 const PostDetailPage = () => {
@@ -59,7 +64,9 @@ const PostDetailPage = () => {
                 />
                 <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
 
-                {singlePost.postsStatus === 'FINISHED' && <ResultForm post={singlePost} />}
+                {singlePost.postsStatus === 'FINISHED' && (
+                  <ResultForm post={singlePost} />
+                )}
               </>
             ))}
         </>

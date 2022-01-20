@@ -1,23 +1,22 @@
 import React, { useCallback, useRef } from 'react';
+import { useState } from 'react';
 import * as S from '../WrittingInnerForm/style';
 
-const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
+const Kinds = ({ kinds, setKinds, setIsScout }) => {
+
+  const [click, setClick] = useState(['click','','']); 
   const onKindsChange = useCallback(
     e => {
       setKinds(e.currentTarget.getAttribute('value'));
-      switch (e.currentTarget.getAttribute('value')) {
-        case 'STUDY':
-          setIsScout(false);
-          setBtnColor(['#FBEAFF', 'white', 'white']);
-          break;
-        case 'SCOUT':
-          setIsScout(true);
-          setBtnColor(['white', '#FBEAFF', 'white']);
-          break;
-        case 'PROJECT':
-          setIsScout(false);
-          setBtnColor(['white', 'white', '#FBEAFF']);
-          break;
+      if(e.currentTarget.getAttribute('value') === 'STUDY'){
+        setIsScout(false);
+        setClick(['click','','']); 
+      }else if(e.currentTarget.getAttribute('value') === 'SCOUT'){
+        setIsScout(true);
+        setClick(['','click','']);
+      }else{
+        setIsScout(false);
+        setClick(['','','click']);
       }
     },
     [kinds]
@@ -31,7 +30,7 @@ const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
         <S.CategoryCard
           name="kinds"
           value="STUDY"
-          backgroundColor={btnColor[0]}
+          backgroundColor={click[0]}
           onClick={onKindsChange}
         >
           <S.Book fontSize="3rem" />
@@ -41,7 +40,7 @@ const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
         <S.CategoryCard
           name="kinds"
           value="SCOUT"
-          backgroundColor={btnColor[1]}
+          backgroundColor={click[1]}
           onClick={onKindsChange}
         >
           <S.PersonAdd fontSize="3rem" />
@@ -51,7 +50,7 @@ const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
         <S.CategoryCard
           name="kinds"
           value="PROJECT"
-          backgroundColor={btnColor[2]}
+          backgroundColor={click[2]}
           onClick={onKindsChange}
         >
           <S.UserGroup fontSize="3rem" />

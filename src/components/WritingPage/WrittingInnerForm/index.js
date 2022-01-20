@@ -30,7 +30,7 @@ const WrittingInnerForm = () => {
   const [skillName, setSkillName] = useState([]);
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [customOptions, setCustomOptions] = useState([]);
-  const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white']);
+  // const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white']);
   const [isScout, setIsScout] = useState(false);
 
   // 이미지 서버 전송용 데이터
@@ -93,8 +93,8 @@ const WrittingInnerForm = () => {
         kinds={kinds}
         setKinds={setKinds}
         setIsScout={setIsScout}
-        btnColor={btnColor}
-        setBtnColor={setBtnColor}
+        // btnColor={btnColor}
+        // setBtnColor={setBtnColor}
       />
 
       {/* 제목 */}

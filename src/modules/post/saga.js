@@ -209,6 +209,7 @@ function submitResultPostAPI(data) {
   return axios.post(`/post/${data.postId}/complete`, data.content, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      'Content-Type':'multipart/form-data'
     },
   });
 }

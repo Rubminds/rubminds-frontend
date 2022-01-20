@@ -34,12 +34,11 @@ const ResultForm = ({ post }) => {
         refLink,
         completeContent,
       };
-      const fileList = [...images]
-      const formData = new FormData();
-      file && fileList.push(file);
       
-      console.log(fileList)
-      formData.append('files', fileList);
+      const formData = new FormData();
+      Object.values(images).forEach(f => formData.append('files', f));
+      file && formData.append('files', file);
+      
       formData.append(
         'completeInfo',
         new Blob([JSON.stringify(dataObj)], { type: 'application/json' }),

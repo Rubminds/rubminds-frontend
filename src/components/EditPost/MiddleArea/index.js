@@ -99,6 +99,7 @@ const MiddleArea = ({
                   onInput={blockText}
                   onChange={onHeadCountChange}
                   value={headCount}
+                  required
                 />
                 <S.InputBoxPeople>명</S.InputBoxPeople>
               </S.InputWrapper>

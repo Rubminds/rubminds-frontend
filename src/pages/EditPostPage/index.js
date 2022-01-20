@@ -134,7 +134,7 @@ const EditPostPage = () => {
             <S.BtnLeft>
               <Link to="/">취소</Link>
             </S.BtnLeft>
-            <S.BtnRight onClick={onSubmitHandler}>수정하기</S.BtnRight>
+            <S.BtnRight type='submit'>수정하기</S.BtnRight>
           </S.BtnWrapper>
         </S.WrittingInnerForm>
       </S.AllWrapper>

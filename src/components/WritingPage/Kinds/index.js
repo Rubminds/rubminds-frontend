@@ -1,28 +1,27 @@
-import React, { useCallback, useRef } from 'react'
-import * as S from '../WrittingInnerForm/style'
+import React, { useCallback, useRef } from 'react';
+import * as S from '../WrittingInnerForm/style';
 
 const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
-  
   const onKindsChange = useCallback(
-    e => {  
-      setKinds(e.currentTarget.getAttribute('value'))
+    e => {
+      setKinds(e.currentTarget.getAttribute('value'));
       switch (e.currentTarget.getAttribute('value')) {
         case 'STUDY':
-          setIsScout(false)
-          setBtnColor(['#FBEAFF', 'white', 'white'])
-          break
+          setIsScout(false);
+          setBtnColor(['#FBEAFF', 'white', 'white']);
+          break;
         case 'SCOUT':
-          setIsScout(true)
-          setBtnColor(['white', '#FBEAFF', 'white'])
-          break
+          setIsScout(true);
+          setBtnColor(['white', '#FBEAFF', 'white']);
+          break;
         case 'PROJECT':
-          setIsScout(false)
-          setBtnColor(['white', 'white', '#FBEAFF'])
-          break
+          setIsScout(false);
+          setBtnColor(['white', 'white', '#FBEAFF']);
+          break;
       }
     },
     [kinds]
-  )
+  );
   return (
     <>
       <S.MainTitle fontSize="3rem" marginBottom="3%">
@@ -48,7 +47,7 @@ const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
           <S.PersonAdd fontSize="3rem" />
           <S.MainTitle fontSize="1.3rem">스카웃</S.MainTitle>
         </S.CategoryCard>
-        
+
         <S.CategoryCard
           name="kinds"
           value="PROJECT"
@@ -60,7 +59,7 @@ const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
         </S.CategoryCard>
       </S.CategoryWrapper>
     </>
-  )
-}
+  );
+};
 
-export default Kinds
+export default Kinds;

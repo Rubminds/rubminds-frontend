@@ -6,7 +6,15 @@ import { useDispatch } from 'react-redux';
 import { ExitBtn } from '../../../assets/imgs';
 import { addTeamUser, deleteTeamUser } from '../../../modules/team';
 
-const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId, postStatus }) => {
+const UserListModal = ({
+  headcount,
+  closeModal,
+  writerId,
+  teamId,
+  members,
+  meId,
+  postStatus,
+}) => {
   const dispatch = useDispatch();
 
   const onAddUserKeypress = useCallback(
@@ -15,7 +23,7 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId,
       e.target.value = '';
       closeModal();
     },
-    [dispatch, teamId],
+    [dispatch, teamId]
   );
 
   const rendering = () => {
@@ -32,7 +40,7 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId,
             onKeyPress={e => e.key === 'Enter' && onAddUserKeypress(e)}
             placeholder="ID로 팀원 추가"
           />
-        </S.AddMember>,
+        </S.AddMember>
       );
     }
     return empty;
@@ -41,12 +49,14 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId,
   const onDeleteUserClick = useCallback(
     (e, user) => {
       e.preventDefault();
-      const deleteConfirm = window.confirm(`정말 ${user.userNickname}님을 추방하시겠습니까?`);
+      const deleteConfirm = window.confirm(
+        `정말 ${user.userNickname}님을 추방하시겠습니까?`
+      );
       if (deleteConfirm) {
         dispatch(deleteTeamUser({ teamId, userId: user.userId }));
       }
     },
-    [dispatch, teamId],
+    [dispatch, teamId]
   );
 
   return (
@@ -70,7 +80,9 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId,
                 postStatus !== 'RANKING' &&
                 postStatus !== 'FINISHED' && (
                   <>
-                    <S.DeleteUserButton onClick={e => onDeleteUserClick(e, v)} />
+                    <S.DeleteUserButton
+                      onClick={e => onDeleteUserClick(e, v)}
+                    />
                   </>
                 )
               )}

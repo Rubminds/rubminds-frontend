@@ -13,10 +13,6 @@ const LogInProcess = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(JSON.parse(signupCheck));
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('accessToken', accessToken);
     if (JSON.parse(signupCheck)) {
       const data = {

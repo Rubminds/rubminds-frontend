@@ -72,4 +72,5 @@ export const SearchBtn = styled(AiOutlineSearch)`
 
 export const MyCustomDropDown = styled(CustomDropDown)`
   margin-top: 0;
+  cursor:pointer;
 `;

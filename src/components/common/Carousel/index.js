@@ -2,8 +2,8 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import * as S from './style';
 import { BsPlusCircleDotted } from 'react-icons/bs';
 
-const Carousel = ({ size, Imgs, setImgs }) => {
-  //const [Imgs, setImgs] = useState([]); //캐루셀에 담긴 이미지들
+const Carousel = ({ size, onChangeImages }) => {
+  const [Imgs, setImgs] = useState([]); //캐루셀에 담긴 이미지들
   const [totalImgsNum, setTotalImgsNum] = useState(0); //캐루셀에 담은 이미지 수 -1
   const CarouselWrapper = useRef(null);
   const [currentImg, setCurrentImg] = useState(0); //현재 보여지는 이미지 인덱스
@@ -63,8 +63,9 @@ const Carousel = ({ size, Imgs, setImgs }) => {
               type="file"
               multiple="multiple"
               id="input-img"
-              accept=".jpg, .jpeg, .png"
+              accept="image/*"
               style={{ display: 'none' }}
+              onChange={onChangeImages}
             />
             <BsPlusCircleDotted />
             이미지 추가

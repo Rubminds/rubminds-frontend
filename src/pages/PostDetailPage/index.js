@@ -1,29 +1,45 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as S from './style';
+import axios from 'axios';
 
 import { PostTotalInfo, ResultForm, BackButton, TeamEvaluation } from '../../components';
 import { loadPost } from '../../modules/post';
 
 const PostDetailPage = () => {
-  const history = useHistory();
+  const [post, setPost] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
   const params = useParams();
-  const { singlePost } = useSelector(state => state.post);
+  //const { singlePost } = useSelector(state => state.post);
   const { me } = useSelector(state => state.user);
 
   useEffect(() => {
-    if (!me) {
-      alert('로그인이 필요한 페이지입니다.');
-      history.push('/login');
-    }
+    const fetchData = async () => {
+      const response = await axios.get(`/post/${params.id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setPost(response.data);
+      console.log(response.data);
+      const teamResponse = await axios.get(`/team/${response.data.teamId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setMembers(teamResponse.data.teamUsers);
+    };
+    fetchData();
+    //dispatch(loadPost(params.id));
   }, []);
 
   useEffect(() => {
-    dispatch(loadPost(params.id));
-  }, []);
+    const fetchData = async () => {};
+    fetchData();
+  }, [post]);
 
   const openModal = useCallback(() => {
     setModalOpen(true);
@@ -37,29 +53,30 @@ const PostDetailPage = () => {
       {me && (
         <>
           <BackButton />
-          {singlePost &&
-            (singlePost.postsStatus === 'RANKING' ? (
+          {post &&
+            (post.postsStatus === 'RANKING' ? (
               <TeamEvaluation
-                teamId={singlePost.teamId}
-                writerId={singlePost.writer.id}
-                kinds={singlePost.kinds}
-                postId={singlePost.id}
+                teamId={post.teamId}
+                writerId={post.writer.id}
+                kinds={post.kinds}
+                postId={post.id}
                 me={me}
               />
             ) : (
               <>
-                <S.PostDetailTitle>{singlePost.title}</S.PostDetailTitle>
-                <S.PostDetailDate>{singlePost.createAt}</S.PostDetailDate>
+                <S.PostDetailTitle>{post.title}</S.PostDetailTitle>
+                <S.PostDetailDate>{post.createAt}</S.PostDetailDate>
                 <PostTotalInfo
-                  post={singlePost}
+                  post={post}
                   modalOpen={modalOpen}
                   closeModal={closeModal}
                   openModal={openModal}
                   me={me}
+                  members={members}
                 />
-                <S.PostDetailContent>{singlePost.content}</S.PostDetailContent>
+                <S.PostDetailContent>{post.content}</S.PostDetailContent>
 
-                {singlePost.postsStatus === 'FINISHED' && <ResultForm post={singlePost} />}
+                {post.postsStatus === 'FINISHED' && <ResultForm post={post} />}
               </>
             ))}
         </>

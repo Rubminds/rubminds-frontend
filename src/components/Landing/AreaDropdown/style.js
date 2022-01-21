@@ -12,11 +12,12 @@ export const DropDownContainer = styled.div`
   border-radius: 50px;
   border-bottom-left-radius: ${(props) => props.isOpen && "0"};
   border-bottom-right-radius: ${(props) => props.isOpen && "0"};
-  z-index: 10;
+  z-index: 2;
   padding: 0.4rem 2rem;
   margin-top: ${(props) => (props.marginTop ? props.marginTop : '0')};
   display: flex;
   align-items: center;
+  cursor:pointer;
 `;
 export const DropDownHeader = styled.div`
   width: 100%;

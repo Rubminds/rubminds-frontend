@@ -57,7 +57,7 @@ export const UploadFileName = styled.label`
   margin-left: 1rem;
   font-weight: bold;
 `;
-export const TextArea = styled.input`
+export const TextArea = styled.textarea`
   width: ${props => (props.width ? props.width : '100%')};
   background-color: #fff;
   font-size: 1.6rem;

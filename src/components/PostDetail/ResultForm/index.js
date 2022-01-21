@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import * as S from './style';
 import { useDispatch } from 'react-redux';
+import { GrDocumentDownload } from 'react-icons/gr';
 
 import { UploadCarousel, ResultCarousel } from '../..';
 import useInput from '../../../hooks/useInput';
@@ -73,9 +74,23 @@ const ResultForm = ({ post }) => {
   return (
     <S.ResultFormWrapper onSubmit={onSubmitHandler}>
       <S.FormBigTitle>결과</S.FormBigTitle>
+      <S.FormSmallTitle>첨부파일</S.FormSmallTitle>
       <S.FileWrapper>
-        <S.UploadFile htmlFor="input-file">파일 업로드</S.UploadFile>
-        <S.UploadFileName>{file && file.name}</S.UploadFileName>
+        {post.completeContent ? (
+          <S.CompleteFile>
+            {post.completeFile && (
+              <>
+                <GrDocumentDownload fontSize="1.8rem" />
+                &nbsp;{post.completeFile.url}
+              </>
+            )}
+          </S.CompleteFile>
+        ) : (
+          <>
+            <S.UploadFile htmlFor="input-file">파일 업로드</S.UploadFile>
+            <S.UploadFileName>{file && file.name}</S.UploadFileName>
+          </>
+        )}
       </S.FileWrapper>
       <input
         type="file"

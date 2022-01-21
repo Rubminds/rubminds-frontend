@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import * as S from './style.js';
 import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import {GrDocumentDownload} from 'react-icons/gr'
 import { MdPersonAdd } from 'react-icons/md';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
@@ -68,7 +69,7 @@ const PostTotalInfo = ({
         <S.FileContainer>
           {post.files.map((v, i) => (
             <S.UploadedFile href={v.url} key={i} download>
-              첨부파일
+              <GrDocumentDownload fontSize="1.8rem"/>&nbsp;{v.url}
             </S.UploadedFile>
           ))}
         </S.FileContainer>

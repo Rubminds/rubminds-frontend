@@ -4,7 +4,7 @@ import mediaQuery from '../../../hooks/mediaQuery';
 
 export const PostDetailInfo = styled.div`
   ${flexBetween};
-  position:relative;
+  position: relative;
   align-items: flex-start;
   margin-top: 5rem;
   ${mediaQuery({
@@ -34,7 +34,7 @@ export const DetailUserInfo = styled.div`
   font-size: 1.6rem;
   margin-bottom: 5%;
   font-weight: bold;
-  ${mediaQuery({'justify-content':'center', 'font-size':'2rem'})}
+  ${mediaQuery({ 'justify-content': 'center', 'font-size': '2rem' })}
 `;
 
 export const AuthorAvatar = styled.img`
@@ -53,7 +53,7 @@ export const DetailInfoContent = styled.div`
   ${props =>
     props.toBtn &&
     css`
-      background-color: ${props => props.blue ? '#56ACEE' : '#ffa586'};
+      background-color: ${props => (props.blue ? '#56ACEE' : '#ffa586')};
       padding: 1rem 1.5rem;
       border-radius: 20px;
       color: #fff;
@@ -92,22 +92,17 @@ export const GroupBox = styled.div`
 
 export const LikeWrapper = styled.div``;
 export const UploadedFile = styled.a`
-  ${flexCenter};
+  width: 90%;
   cursor: pointer;
-  font-size: 1.6rem;
-  background-color: #ffa586;
-  padding: 1rem 1.5rem;
-  border-radius: 20px;
-  color: #fff;
+  font-size: 1.4rem;
   font-weight: bold;
-  width: fit-content;
-  height: fit-content;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 1rem 0;
-  & + & {
-    margin-left: 1rem;
-  }
+  text-align:center;
 `;
 
 export const FileContainer = styled.div`
-  display: flex;
+  ${flexColumn};
 `;

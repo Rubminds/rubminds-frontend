@@ -34,7 +34,6 @@ const PostDetailPage = () => {
   }, []);
 
   const openModal = useCallback(target => () =>{
-    console.log(target);
     target === 'userlist' ? setUserListModalOpen(true) : setProcessEndModalOpen(true);
   }, []);
   const closeModal = useCallback(target => () =>{

@@ -4,6 +4,7 @@ import mediaQuery from '../../../hooks/mediaQuery';
 
 export const PostDetailInfo = styled.div`
   ${flexBetween};
+  position:relative;
   align-items: flex-start;
   margin-top: 5rem;
   ${mediaQuery({
@@ -35,22 +36,6 @@ export const DetailUserInfo = styled.div`
   font-weight: bold;
   ${mediaQuery({'justify-content':'center', 'font-size':'2rem'})}
 `;
-// export const DetailInfoLeft = styled.div`
-//   display: flex;
-//   align-items: center;
-//   flex: 1;
-//   position: relative;
-//   font-weight: ${props => props.bold && 'bold'};
-//   ${mediaQuery({ 'justify-content': 'center' })};
-// `;
-// export const DetailInfoRight = styled.div`
-//   ${flexCenter}
-//   flex: 2.5;
-//   flex-wrap: wrap;
-//   padding: 0 1%;
-//   color: #707070;
-//   ${mediaQuery({ flex: '1' })};
-// `;
 
 export const AuthorAvatar = styled.img`
   width: 2.5rem;

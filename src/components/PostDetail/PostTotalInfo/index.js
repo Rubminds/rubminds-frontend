@@ -4,16 +4,23 @@ import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdPersonAdd } from 'react-icons/md';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-import { DetailInfo, UserListModal } from '../..';
+import { DetailInfo, UserListModal, ProcessEndModal } from '../..';
 import { likePost, changePostStatus, deletePost } from '../../../modules/post';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
-const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) => {
-  const [isLike, setIsLike] = useState(post.isLike)
+const PostTotalInfo = ({
+  post,
+  userListModalOpen,
+  processEndModalOpen,
+  closeModal,
+  openModal,
+  me,
+  members,
+}) => {
+  const [isLike, setIsLike] = useState(post.isLike);
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -36,7 +43,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
 
   const onStatusCircleClick = useCallback(() => {
     console.log('open team members');
-    me && openModal();
+    me && openModal('userlist');
   }, [openModal, me]);
 
   const onChangeStatusClick = useCallback(
@@ -46,6 +53,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
     },
     [post.id, dispatch],
   );
+
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
@@ -67,7 +75,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
       </S.DetailInfoWrapper>
 
       <S.DetailInfoWrapper width="30%" Group>
-        {modalOpen ? (
+        {userListModalOpen ? (
           <UserListModal
             headcount={post.headcount}
             closeModal={closeModal}
@@ -102,7 +110,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
                     <>
                       <S.DetailInfoContent
                         toBtn
-                        onClick={onChangeStatusClick('RANKING')}
+                        onClick={openModal('processend')}
                         blue="true"
                       >
                         평가 후 완료하기
@@ -122,7 +130,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
                 </>
               ) : (
                 <S.DetailInfoContent>
-                  <MdPersonAdd /> &nbsp;모집자와 채팅하기
+                  <MdPersonAdd /> &nbsp;모집자와 대화하기
                 </S.DetailInfoContent>
               )}
 
@@ -152,6 +160,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
           </>
         )}
       </S.DetailInfoWrapper>
+      {processEndModalOpen ? <ProcessEndModal closeModal={closeModal} onChangeStatusClick={onChangeStatusClick}/>:<></>}
     </S.PostDetailInfo>
   );
 };

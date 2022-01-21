@@ -20,6 +20,7 @@ export const ModalWrapper = styled.div`
 export const ModalLabel = styled.label`
   font-size: 2rem;
   line-height: 4rem;
+  font-weight:bold;
   ${flexCenter};
 `;
 

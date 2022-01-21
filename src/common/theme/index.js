@@ -14,7 +14,8 @@ const colors = {
   gradientLeft: '#998CF8',
   gradientRight: '#F383DF',
   status1Color: '#BB94EE',
-  status2Color: '#9D76E8',
+  // status2Color: '#9D76E8',
+  status2Color:'#7a95E0',
   status3Color: '#7E58CA',
 };
 

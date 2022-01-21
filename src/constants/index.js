@@ -18,6 +18,13 @@ export const flexBetween = css`
   align-items: center;
 `;
 
+export const POST_STATUS = {
+  RECRUIT:'모집중',
+  WORKING:'진행중',
+  RANKING:'평가중',
+  FINISHED:'진행 완료',
+}
+
 //skills name-id
 export const SKILL_ID = {
   Java: 1,

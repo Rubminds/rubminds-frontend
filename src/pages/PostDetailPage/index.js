@@ -8,7 +8,8 @@ import { PostTotalInfo, ResultForm, BackButton, TeamEvaluation } from '../../com
 
 const PostDetailPage = () => {
   const [post, setPost] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [userListModalOpen, setUserListModalOpen] = useState(false);
+  const [processEndModalOpen, setProcessEndModalOpen] = useState(false);
   const [members, setMembers] = useState([]);
   const params = useParams();
   const { me } = useSelector(state => state.user);
@@ -32,11 +33,12 @@ const PostDetailPage = () => {
     fetchData();
   }, []);
 
-  const openModal = useCallback(() => {
-    setModalOpen(true);
+  const openModal = useCallback(target => () =>{
+    console.log(target);
+    target === 'userlist' ? setUserListModalOpen(true) : setProcessEndModalOpen(true);
   }, []);
-  const closeModal = useCallback(() => {
-    setModalOpen(false);
+  const closeModal = useCallback(target => () =>{
+    target === 'userlist' ? setUserListModalOpen(false) : setProcessEndModalOpen(false);
   }, []);
 
   return (
@@ -57,7 +59,8 @@ const PostDetailPage = () => {
             <S.PostDetailDate>{post.createAt}</S.PostDetailDate>
             <PostTotalInfo
               post={post}
-              modalOpen={modalOpen}
+              userListModalOpen={userListModalOpen}
+              processEndModalOpen={processEndModalOpen}
               closeModal={closeModal}
               openModal={openModal}
               me={me}

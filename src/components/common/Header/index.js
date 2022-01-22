@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { logoutUser, toggleHeaderModal } from '../../../modules/user';
+import {HeaderModal} from '../../'
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Header = () => {
     localStorage.removeItem('accessToken');
   }, []);
 
-  const OpenMenu = useCallback(()=>{
+  const toggleMenu = useCallback(()=>{
     dispatch(toggleHeaderModal());
   },[])
 
@@ -32,7 +33,7 @@ const Header = () => {
         <S.UserInfoWrapper>
           <S.UserAvatar src={`https:/${me.avatar}`} />
           <S.UserText>{me.nickname}</S.UserText>
-          <S.DownArrow onClick={OpenMenu}/>
+          {isHeaderModalOpen ? <S.UpArrow onClick={toggleMenu}/> : <S.DownArrow onClick={toggleMenu}/>}
         </S.UserInfoWrapper>
       ) : (
         <Link to="/login">로그인</Link>

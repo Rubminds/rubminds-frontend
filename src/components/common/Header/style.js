@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BsCaretDownFill } from 'react-icons/bs';
+import { BsCaretDownFill,BsCaretUpFill } from 'react-icons/bs';
 
 import { flexBetween } from '../../../constants';
 import theme from '../../../common/theme';
@@ -56,3 +56,7 @@ export const UserText = styled.label`
 export const DownArrow = styled(BsCaretDownFill)`
   font-size: 2rem;
 `;
+
+export const UpArrow = styled(BsCaretUpFill)`
+  font-size:2rem;
+`

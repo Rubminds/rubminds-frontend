@@ -1,4 +1,5 @@
 export { default as Avatar } from './common/Avatar';
+export { default as HeaderModal } from './common/HeaderModal';
 export { default as Header } from './common/Header';
 export { default as MailButton } from './common/Mail/MailButton';
 export { default as MailUserList } from './common/Mail/MailUserList';

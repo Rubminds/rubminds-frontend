@@ -1,3 +1,4 @@
+export { default as Avatar } from './common/Avatar';
 export { default as Header } from './common/Header';
 export { default as MailButton } from './common/Mail/MailButton';
 export { default as MailUserList } from './common/Mail/MailUserList';
@@ -11,7 +12,6 @@ export { default as Input } from './common/Input';
 export { default as TextArea } from './common/TextArea';
 export { default as Paper } from './common/Paper';
 export { default as BackButton } from './common/BackButton';
-export { default as Avatar } from './common/Avatar';
 export { default as MailModal } from './common/Mail/MailModal';
 
 export { default as AreaDropdown } from './Landing/AreaDropdown';

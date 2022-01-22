@@ -8,22 +8,26 @@ import {
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
-  TOGGLE_NOTE_MODAL,
-  TOGGLE_NOTE_MODAL_SUCCESS,
-  TOGGLE_NOTE_MODAL_ERROR,
+  TOGGLE_MAIL_MODAL,
+  TOGGLE_MAIL_MODAL_SUCCESS,
+  TOGGLE_MAIL_MODAL_ERROR,
   LOAD_USER_INFO,
   LOAD_USER_INFO_SUCCESS,
   LOAD_USER_INFO_ERROR,
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_ERROR,
+  TOGGLE_HEADER_MODAL,
+  TOGGLE_HEADER_MODAL_SUCCESS,
+  TOGGLE_HEADER_MODAL_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
 //초기 상태 초기화
 export const initialState = {
   me: null,
-  isMailOpen: false,
+  isMailModalOpen: false,
+  isHeaderModalOpen: false,
 
   isSigninLoading: false,
   isSigninDone: false,
@@ -63,7 +67,7 @@ export const updateUser = data => ({
 });
 
 export const toggleMailModal = () => ({
-  type: TOGGLE_NOTE_MODAL,
+  type: TOGGLE_MAIL_MODAL,
 });
 
 export const loadUserInfo = id => ({
@@ -73,6 +77,10 @@ export const loadUserInfo = id => ({
 
 export const logoutUser = () => ({
   type: LOGOUT_USER,
+});
+
+export const toggleHeaderModal = () => ({
+  type: TOGGLE_HEADER_MODAL,
 });
 
 //리듀서
@@ -131,14 +139,14 @@ const user = (state = initialState, action) => {
         draft.isUserUpdateLoading = false;
         draft.isUserUpdateError = action.error;
         break;
-      case TOGGLE_NOTE_MODAL:
+      case TOGGLE_MAIL_MODAL:
         console.log('toggle chat reducer');
         break;
-      case TOGGLE_NOTE_MODAL_SUCCESS:
-        draft.isMailOpen = !draft.isMailOpen;
+      case TOGGLE_MAIL_MODAL_SUCCESS:
+        draft.isMailModalOpen = !draft.isMailModalOpen;
         break;
-      case TOGGLE_NOTE_MODAL_ERROR:
-        draft.isMailOpen = false;
+      case TOGGLE_MAIL_MODAL_ERROR:
+        draft.isMailModalOpen = false;
         break;
       case LOAD_USER_INFO:
         draft.loadUserInfoLoading = true;
@@ -172,6 +180,15 @@ const user = (state = initialState, action) => {
       case LOGOUT_USER_ERROR:
         draft.logoutUserLoading = false;
         draft.logoutUserError = action.error;
+        break;
+      case TOGGLE_HEADER_MODAL:
+        break;
+      case TOGGLE_HEADER_MODAL_SUCCESS:
+        console.log('header modal open');
+        draft.isHeaderModalOpen = !draft.isHeaderModalOpen;
+        break;
+      case TOGGLE_HEADER_MODAL_ERROR:
+        draft.isHeaderModalOpen = false;
         break;
       default:
         break;

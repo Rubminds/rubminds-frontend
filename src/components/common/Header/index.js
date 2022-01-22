@@ -4,13 +4,12 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { logoutUser } from '../../../modules/user';
+import { logoutUser, toggleHeaderModal } from '../../../modules/user';
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { me } = useSelector(state => state.user);
+  const { me, isHeaderModalOpen } = useSelector(state => state.user);
 
   const onLogoutClick = useCallback(() => {
     console.log('로그아웃 클릭');
@@ -21,7 +20,7 @@ const Header = () => {
   }, []);
 
   const OpenMenu = useCallback(()=>{
-    dispatch();
+    dispatch(toggleHeaderModal());
   },[])
 
   return (
@@ -32,8 +31,8 @@ const Header = () => {
       {me ? (
         <S.UserInfoWrapper>
           <S.UserAvatar src={`https:/${me.avatar}`} />
-          <S.UserText onClick={onLogoutClick}>{me.nickname}</S.UserText>
-          <S.DownArrow />
+          <S.UserText>{me.nickname}</S.UserText>
+          <S.DownArrow onClick={OpenMenu}/>
         </S.UserInfoWrapper>
       ) : (
         <Link to="/login">로그인</Link>

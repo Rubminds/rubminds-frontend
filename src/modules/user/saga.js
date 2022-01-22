@@ -10,15 +10,18 @@ import {
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
-  TOGGLE_NOTE_MODAL,
-  TOGGLE_NOTE_MODAL_ERROR,
-  TOGGLE_NOTE_MODAL_SUCCESS,
+  TOGGLE_MAIL_MODAL,
+  TOGGLE_MAIL_MODAL_ERROR,
+  TOGGLE_MAIL_MODAL_SUCCESS,
   LOAD_USER_INFO,
   LOAD_USER_INFO_SUCCESS,
   LOAD_USER_INFO_ERROR,
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_ERROR,
+  TOGGLE_HEADER_MODAL,
+  TOGGLE_HEADER_MODAL_SUCCESS,
+  TOGGLE_HEADER_MODAL_ERROR,
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 // 액션에서 axios 요청 필요할 때
@@ -88,15 +91,15 @@ function* updateUser(action) {
 }
 
 function* toggleMailModal() {
-  console.log('togglechat saga');
+  console.log('toggle mail saga');
   try {
     yield put({
-      type: TOGGLE_NOTE_MODAL_SUCCESS,
+      type: TOGGLE_MAIL_MODAL_SUCCESS,
     });
   } catch (err) {
     //에러 발생시 이벤트
     yield put({
-      type: TOGGLE_NOTE_MODAL_ERROR,
+      type: TOGGLE_MAIL_MODAL_ERROR,
       error: err,
     });
   }
@@ -141,6 +144,21 @@ function* logoutUser() {
   }
 }
 
+function* toggleHeaderModal() {
+  console.log('toggle header modal saga');
+  try {
+    yield put({
+      type: TOGGLE_HEADER_MODAL_SUCCESS,
+    });
+  } catch (err) {
+    //에러 발생시 이벤트
+    yield put({
+      type: TOGGLE_HEADER_MODAL_ERROR,
+      error: err,
+    });
+  }
+}
+
 //액션 감지 함수
 //takeLatest안의 액션을 감지.
 
@@ -157,7 +175,7 @@ function* watchUpdateUser() {
 }
 
 function* watchToggleMailModal() {
-  yield takeLatest(TOGGLE_NOTE_MODAL, toggleMailModal);
+  yield takeLatest(TOGGLE_MAIL_MODAL, toggleMailModal);
 }
 
 function* watchLoadUserInfo() {
@@ -168,6 +186,10 @@ function* watchLogoutUser() {
   yield takeLatest(LOGOUT_USER, logoutUser);
 }
 
+function* watchToggleHeaderModal() {
+  yield takeLatest(TOGGLE_HEADER_MODAL, toggleHeaderModal);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchSigninUser),
@@ -176,5 +198,7 @@ export default function* userSaga() {
     fork(watchToggleMailModal),
     fork(watchLoadUserInfo),
     fork(watchLogoutUser),
+    fork(watchToggleHeaderModal),
   ]);
+  ;
 }

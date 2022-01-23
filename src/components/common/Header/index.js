@@ -3,7 +3,6 @@ import * as S from './style';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
 import { logoutUser } from '../../../modules/user';
 
 const Header = () => {

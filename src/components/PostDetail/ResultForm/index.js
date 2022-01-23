@@ -10,7 +10,7 @@ const ResultForm = ({ post }) => {
   const [file, setFile] = useState(null);
   const [refLink, onChangeRefLink] = useInput('');
   const [completeContent, onChangeCompleteContent] = useInput('');
-  const [images, onChangeImages, setImages] = useInput([]);
+  const [images, setImages] = useState([]);
   const dispatch = useDispatch();
   const fileInput = useRef();
   const completeContentInput = useRef();
@@ -18,9 +18,14 @@ const ResultForm = ({ post }) => {
   const submitBtn = useRef();
 
   const onChangeFile = useCallback(e => {
-    console.log(e.target.files[0])
+    console.log(e.target.files[0]);
     setFile(e.target.files[0]);
   }, []);
+
+  const onChangeImages = useCallback(e => {
+    console.log(e.target.files);
+    setImages(e.target.files)
+  },[])
 
   const onSubmitResultClick = useCallback(
     e => {
@@ -29,23 +34,29 @@ const ResultForm = ({ post }) => {
         refLink,
         completeContent,
       };
+      
       const formData = new FormData();
-      file && formData.append('completeFiles', file);
-      console.log(file);
-      images.length > 0 && formData.append('images', images);
-
+      Object.values(images).forEach(f => formData.append('files', f));
+      file && formData.append('files', file);
+      
       formData.append(
         'completeInfo',
         new Blob([JSON.stringify(dataObj)], { type: 'application/json' }),
       );
 
-      dispatch(submitResultPost({ postId: post.id, content: formData }));
+      const submitConfirm = window.confirm(
+        '결과물 업로드시 수정이 불가합니다.\n결과물을 업로드 하시겠습니까?',
+      );
+      if (submitConfirm) {
+        dispatch(submitResultPost({ postId: post.id, content: formData }));
+        window.location.replace(`/post/${post.id}`);
+      }
     },
     [completeContent, refLink, images, file, dispatch, post.id],
   );
 
   useEffect(() => {
-    const isDone = post.completeContent && post.refLink && post.completeFiles; //추후에 이미지리스트도 추가
+    const isDone = post.completeContent || post.refLink || post.completeFile; //추후에 이미지리스트도 추가
     if (isDone) {
       fileInput.current.disabled = true;
       submitBtn.current.disabled = true;
@@ -64,19 +75,21 @@ const ResultForm = ({ post }) => {
       <S.FormBigTitle>결과</S.FormBigTitle>
       <S.FileWrapper>
         <S.UploadFile htmlFor="input-file">파일 업로드</S.UploadFile>
-        <S.UploadFileName>{ file && file.name}</S.UploadFileName>
+        <S.UploadFileName>{file && file.name}</S.UploadFileName>
       </S.FileWrapper>
       <input
         type="file"
         id="input-file"
         style={{ display: 'none' }}
         onChange={onChangeFile}
+        accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf"
+        multiple={false}
         ref={fileInput}
       />
       <S.FormSmallTitle>첨부 이미지</S.FormSmallTitle>
-      <Carousel size="30rem" Imgs={images} setImgs={setImages} />
+      <Carousel size="30rem" onChangeImages={onChangeImages}/>
       <S.FormSmallTitle>진행 방법 및 결과 설명</S.FormSmallTitle>
-      <S.TextArea type="text-area" onChange={onChangeCompleteContent} ref={completeContentInput} />
+      <S.TextArea onChange={onChangeCompleteContent} ref={completeContentInput} />
       <S.FormSmallTitle>첨부 링크</S.FormSmallTitle>
       <S.Input
         placeholder="ex) github.com/Rubminds"

@@ -24,7 +24,7 @@ const LogInProcess = () => {
       dispatch(signinUser(data));
       history.push('/');
       setTimeout(() => {
-        localStorage.setItem('accessToken', null);
+        localStorage.removeItem('accessToken'); 
         dispatch(logoutUser());
         window.location.replace(`/login`);
       }, 3600000);

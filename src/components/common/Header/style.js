@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { flexBetween } from '../../../constants'
 import theme from '../../../common/theme'
 
+
 export const HeaderWrapper = styled.nav`
   background: linear-gradient(
     to right,
@@ -30,4 +31,5 @@ export const HeaderContent = styled.label`
 export const LogoutText = styled.label`
   cursor: pointer;
 `
+
 

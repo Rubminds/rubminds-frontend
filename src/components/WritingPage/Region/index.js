@@ -1,16 +1,16 @@
-import React, {useCallback} from 'react'
-import * as S from '../WrittingInnerForm/style'
+import React, { useCallback } from 'react';
+import * as S from '../WrittingInnerForm/style';
 
-const Region = ({region, setRegion, AreaOptions}) => {
+const Region = ({ region, setRegion, AreaOptions }) => {
   const onRegionChange = useCallback(
     e => {
-      setRegion(e.target.value)
+      setRegion(e.target.value);
     },
-    [region]
-  )
-    return (
+    [region],
+  );
+  return (
     <>
-        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
         지역
         </S.MainTitle>
         <S.AreaSelect name="region" onChange={onRegionChange} required>
@@ -18,11 +18,11 @@ const Region = ({region, setRegion, AreaOptions}) => {
             == 선택 ==
         </option>
         {AreaOptions.map((value, index) => {
-            return <option key={index}>{value}</option>
+          return <option key={index}>{value}</option>;
         })}
-        </S.AreaSelect>
+      </S.AreaSelect>
     </>
-    )
-}
+  );
+};
 
-export default Region
+export default Region;

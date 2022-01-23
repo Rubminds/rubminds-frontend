@@ -19,6 +19,7 @@ const ProjectStatusPage = () => {
         },
       );
       console.log(response.data);
+      response.data.content.forEach(v => v.skill = v.postSkills)
       setPosts(response.data.content);
     };
     fetchData();

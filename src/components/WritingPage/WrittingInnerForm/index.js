@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import * as S from './style';
+import { Link } from 'react-router-dom';
 
 import Kinds from '../Kinds';
 import Title from '../Title';
@@ -11,15 +12,11 @@ import File from '../File';
 import Content from '../Content';
 
 import { CustomDropDown } from '../../../components';
-import { AreaOptions } from '../../../constants';
-import { Link } from 'react-router-dom';
+import { AreaOptions, SKILL_ID } from '../../../constants';
 import { createPost } from '../../../modules/post';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { SKILL_ID } from '../../../constants';
 
 const WrittingInnerForm = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState('');
   const [headCount, setHeadCount] = useState(null);
@@ -32,11 +29,6 @@ const WrittingInnerForm = () => {
   const [customOptions, setCustomOptions] = useState([]);
   const [btnColor, setBtnColor] = useState(['#FBEAFF', 'white', 'white']);
   const [isScout, setIsScout] = useState(false);
-
-  // 이미지 서버 전송용 데이터
-  const [fileInfo, setFileInfo] = useState(null);
-  // 이미지 미리보기 데이터
-  const [attachment, setAttachment] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,14 +54,13 @@ const WrittingInnerForm = () => {
       };
 
       const formData = new FormData();
+
       if (file) {
+        console.log(file);
         formData.append('files', file);
       }
 
-      formData.append(
-        'postInfo',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      );
+      formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
       dispatch(createPost(formData));
       window.location.replace(`/`);
@@ -83,7 +74,9 @@ const WrittingInnerForm = () => {
       region,
       dropDownOptions,
       customOptions,
-    ]
+      file,
+      dispatch,
+    ],
   );
 
   return (
@@ -127,14 +120,7 @@ const WrittingInnerForm = () => {
       <Region region={region} setRegion={setRegion} AreaOptions={AreaOptions} />
 
       {/* 참고자료 */}
-      <File
-        attachment={attachment}
-        setAttachment={setAttachment}
-        file={file}
-        setFile={setFile}
-        fileInfo={fileInfo}
-        setFileInfo={setFileInfo}
-      />
+      <File file={file} setFile={setFile} />
 
       <Content content={content} setContent={setContent} />
 
@@ -142,10 +128,7 @@ const WrittingInnerForm = () => {
         <S.BtnLeft>
           <Link to="/">취소</Link>
         </S.BtnLeft>
-        <S.BtnRight type="submit">
-          {' '}
-          등록하기{' '}
-        </S.BtnRight>
+        <S.BtnRight type="submit"> 등록하기 </S.BtnRight>
       </S.BtnWrapper>
     </S.WrittingInnerForm>
   );

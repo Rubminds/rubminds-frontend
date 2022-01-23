@@ -2,46 +2,42 @@ import React, { useCallback, useState, useEffect } from 'react';
 import * as S from './style.js';
 import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdPersonAdd } from 'react-icons/md';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { DetailInfo, UserListModal } from '../..';
-import { likePost, changePostStatus } from '../../../modules/post';
+import { likePost, changePostStatus, deletePost } from '../../../modules/post';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
-const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
-  const [members, setMembers] = useState([]);
+const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) => {
+  const [isLike, setIsLike] = useState(post.isLike)
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
-  const { id } = useParams();
   const history = useHistory();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(`/team/${post.teamId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
-      setMembers(response.data.teamUsers);
-    };
-    fetchData();
-  }, []);
-
-  const onEditPage = () => {
-    history.push(`/editpost/${id}`);
+  const onEditClick = () => {
+    history.push(`/editpost`);
   };
+
+  const onDeleteClick = useCallback(() => {
+    const deleteConfirm = window.confirm(`정말 게시글을 삭제하시겠습니까?`);
+    if (deleteConfirm) {
+      dispatch(deletePost(post.id));
+    }
+  }, []);
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));
+    setIsLike(prev => !prev);
   }, [dispatch, post.id]);
 
   const onStatusCircleClick = useCallback(() => {
     console.log('open team members');
     me && openModal();
-  }, [openModal]);
+  }, [openModal, me]);
 
   const onChangeStatusClick = useCallback(
     status => () => {
@@ -92,8 +88,13 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                         모집 종료하기
                       </S.DetailInfoContent>
                       <S.DetailInfoContent>
-                        <div onClick={onEditPage}>
+                        <div onClick={onEditClick}>
                           <AiOutlineEdit /> &nbsp;수정
+                        </div>
+                      </S.DetailInfoContent>
+                      <S.DetailInfoContent>
+                        <div onClick={onDeleteClick}>
+                          <RiDeleteBin5Fill /> &nbsp;삭제
                         </div>
                       </S.DetailInfoContent>
                     </>
@@ -107,12 +108,12 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
                         평가 후 완료하기
                       </S.DetailInfoContent>
                       <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
-                        onClick={onChangeStatusClick('RECRUIT')}
                         모집중으로 변경
                       </S.DetailInfoContent>
-
                       <S.DetailInfoContent>
-                        <AiOutlineEdit /> &nbsp;수정
+                        <div onClick={onEditClick}>
+                          <AiOutlineEdit /> &nbsp;수정
+                        </div>
                       </S.DetailInfoContent>
                     </>
                   ) : (
@@ -126,7 +127,7 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me }) => {
               )}
 
               <S.DetailInfoContent>
-                {post.isLike ? (
+                {isLike ? (
                   <S.LikeWrapper onClick={onLikeClick}>
                     <AiFillStar color="#E4DC00" /> &nbsp;찜 취소
                   </S.LikeWrapper>

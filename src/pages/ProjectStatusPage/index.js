@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { BackButton, PostCard } from '../../components';
+import {POST_STATUS} from '../../constants'
 
 const ProjectStatusPage = () => {
   const params = useParams();
   const [posts, setPosts] = useState([]);
+  const [nickname, setNickname] = useState('')
   
   useEffect(() => {
     const fetchData = async () => {
@@ -20,8 +22,8 @@ const ProjectStatusPage = () => {
         },
       );
       console.log(response.data);
-      response.data.content.forEach(v => (v.skill = v.postSkills));
-      setPosts(response.data.content);
+      setNickname(response.data.nickname)
+      setPosts(response.data.posts.content);
     };
     fetchData();
   }, []);
@@ -31,12 +33,8 @@ const ProjectStatusPage = () => {
       <BackButton />
       <S.ContentsWrapper>
         <S.Title>
-          {}님의&nbsp;
-          {params.status === 'RECRUIT'
-            ? '모집중인'
-            : params.status === 'WORKING'
-            ? '진행중인'
-            : '진행종료된'}
+          {nickname}님의&nbsp;
+          {POST_STATUS[params.status]}
           &nbsp;프로젝트 현황
         </S.Title>
         <S.PostsWrapper>

@@ -61,7 +61,7 @@ const UploadCarousel = ({ size, setImages }) => {
               type="file"
               multiple="multiple"
               id="input-img"
-              accept="image/*"
+              accept=".png, .jpg, .jpeg, .svg"
               style={{ display: 'none' }}
             />
             <BsPlusCircleDotted />

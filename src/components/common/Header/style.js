@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { BsCaretDownFill,BsCaretUpFill } from 'react-icons/bs';
+import { BsCaretDownFill, BsCaretUpFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 import { flexBetween } from '../../../constants';
 import theme from '../../../common/theme';
@@ -21,6 +22,13 @@ export const HeaderWrapper = styled.nav`
   @media all and (max-width: 768px) {
     padding: 0 5%;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  font-size: 2.6rem;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
 `;
 
 export const HeaderContent = styled.label`
@@ -49,14 +57,18 @@ export const UserText = styled.label`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding:0 1rem;
-  flex:7;
+  padding: 0 1rem;
+  flex: 7;
+  cursor: pointer;
 `;
 
 export const DownArrow = styled(BsCaretDownFill)`
   font-size: 2rem;
 `;
 
+export const UpArrowWrapper = styled.div`
+  position: relative;
+`;
 export const UpArrow = styled(BsCaretUpFill)`
-  font-size:2rem;
-`
+  font-size: 2rem;
+`;

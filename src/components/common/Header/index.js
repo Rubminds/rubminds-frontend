@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import * as S from './style';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import { logoutUser, toggleHeaderModal } from '../../../modules/user';
-import {HeaderModal} from '../../'
+import { HeaderModal } from '../../';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -20,23 +19,28 @@ const Header = () => {
     localStorage.removeItem('accessToken');
   }, []);
 
-  const toggleMenu = useCallback(()=>{
+  const toggleMenu = useCallback(() => {
     dispatch(toggleHeaderModal());
-  },[])
+  }, []);
 
   return (
     <S.HeaderWrapper>
-      <S.HeaderContent>
-        <Link to="/">Rubminds</Link>
-      </S.HeaderContent>
+      <S.StyledLink to="/">Rubminds</S.StyledLink>
       {me ? (
         <S.UserInfoWrapper>
-          <S.UserAvatar src={`https:/${me.avatar}`} />
+          <S.UserAvatar src={`https:/${me.avatar}`} onClick={onLogoutClick} />
           <S.UserText>{me.nickname}</S.UserText>
-          {isHeaderModalOpen ? <S.UpArrow onClick={toggleMenu}/> : <S.DownArrow onClick={toggleMenu}/>}
+          {isHeaderModalOpen ? (
+            <S.UpArrowWrapper>
+              <S.UpArrow onClick={toggleMenu} />
+              <HeaderModal />
+            </S.UpArrowWrapper>
+          ) : (
+            <S.DownArrow onClick={toggleMenu} />
+          )}
         </S.UserInfoWrapper>
       ) : (
-        <Link to="/login">로그인</Link>
+        <S.StyledLink to="/login">로그인</S.StyledLink>
       )}
     </S.HeaderWrapper>
   );

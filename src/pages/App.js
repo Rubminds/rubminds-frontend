@@ -19,6 +19,7 @@ import EditPostPage from './EditPostPage';
 import { Header, MailButton } from '../components';
 
 const App = () => {
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -35,7 +36,7 @@ const App = () => {
           <Route exact path="/" component={LandingPage} />
           <AuthRoute exact path="/post/:id" component={PostDetailPage} />
           <Route path="/login" component={LogInPage} />
-          <Route path="/editpost" component={EditPostPage} />
+          <AuthRoute path="/editpost/:id" component={EditPostPage} />
           <AuthRoute path="/write" component={WrittingPage} />
           <AuthRoute path="/editprofile" component={EditProfilePage} />
           <AuthRoute path="/userPage/:id" component={UserPage} />

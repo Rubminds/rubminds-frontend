@@ -10,10 +10,9 @@ import Content from '../../components/EditPost/Content';
 import * as S from './style';
 import { Link, useParams } from 'react-router-dom';
 import { AreaOptions, SKILL_ID } from '../../constants';
-import { editPost, loadPost } from '../../modules/post';
+import { editPost } from '../../modules/post';
 
 const EditPostPage = () => {
-  const { singlePost } = useSelector(state => state.post);
   const { id } = useParams();
   const dispatch = useDispatch();
   const [title, setTitle] = useState(null);
@@ -26,27 +25,39 @@ const EditPostPage = () => {
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [customOptions, setCustomOptions] = useState([]);
   const [isScout, setIsScout] = useState(false);
-
-  // 이미지 서버 전송용 데이터
-  const [fileInfo, setFileInfo] = useState(null);
-  // 이미지 미리보기 데이터
-  const [attachment, setAttachment] = useState(null);
+  const [kinds, setKinds] = useState();
+  const [teamId, setTeamId] = useState();
+  const [teamHead, setTeamHead] = useState(); 
 
   useEffect(() => {
-    dispatch(loadPost(id));
-    setTitle(singlePost.title);
-    setMeeting(singlePost.meeting);
-    setHeadCount(singlePost.headcount);
-    setRegion(singlePost.region);
-    setContent(singlePost.content);
-    const array = singlePost.postSkills.map(v => {
-      return v;
-    });
-    setDropDownOptions(array);
-
     const fetchData = async () => {
-      const result = await axios.get('/skills');
-      setSkillName(result.data.skills.map(e => e.name));
+      const responsePost = await axios.get(`post/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setTitle(responsePost.data.title);
+      setMeeting(responsePost.data.meeting);
+      setHeadCount(responsePost.data.headcount);
+      setRegion(responsePost.data.region);
+      setContent(responsePost.data.content);
+      setFile(responsePost.data.files[0]);
+      const array = responsePost.data.postSkills.map(v => {
+        return v;
+      });
+      setDropDownOptions(array);
+      setKinds(responsePost.data.kinds);
+      setTeamId(responsePost.data.teamId);
+
+      const responseSkill = await axios.get('/skills');
+      setSkillName(responseSkill.data.skills.map(e => e.name));
+
+      const teamAPI = await axios.get(`/team/${responsePost.data.teamId}/teamUsers`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setTeamHead(teamAPI.data.length);
     };
     fetchData();
   }, []);
@@ -55,11 +66,15 @@ const EditPostPage = () => {
   const onSubmitHandler = useCallback(
     e => {
       e.preventDefault();
+      if(teamHead > parseInt(headCount)){
+        alert('모집된 인원보다 적게 설정할 수 없습니다.');
+        return; 
+      }
       const data = {
         title: title,
         content: content,
         headcount: headCount != null ? parseInt(headCount) : null,
-        kinds: singlePost.kinds,
+        kinds: kinds,
         meeting: meeting,
         region: region,
         skillIds: dropDownOptions.map(option => SKILL_ID[option]),
@@ -73,8 +88,8 @@ const EditPostPage = () => {
         'postInfo',
         new Blob([JSON.stringify(data)], { type: 'application/json' })
       );
-      dispatch(editPost({ id: singlePost.id, formData }));
-      window.location.replace(`/post/${singlePost.id}`);
+      dispatch(editPost({ id, formData }));
+      window.location.replace(`/post/${id}`);
     },
     [title, content, headCount, meeting, region, dropDownOptions, customOptions]
   );
@@ -108,6 +123,7 @@ const EditPostPage = () => {
               headCount={headCount}
               setHeadCount={setHeadCount}
               isScout={isScout}
+              teamId={teamId}
             />
           )}
 
@@ -120,12 +136,12 @@ const EditPostPage = () => {
 
           {/* 참고자료 */}
           <File
-            attachment={attachment}
-            setAttachment={setAttachment}
+            // attachment={attachment}
+            // setAttachment={setAttachment}
             file={file}
             setFile={setFile}
-            fileInfo={fileInfo}
-            setFileInfo={setFileInfo}
+            // fileInfo={fileInfo}
+            // setFileInfo={setFileInfo}
           />
 
           <Content content={content} setContent={setContent} />
@@ -134,7 +150,7 @@ const EditPostPage = () => {
             <S.BtnLeft>
               <Link to="/">취소</Link>
             </S.BtnLeft>
-            <S.BtnRight type='submit'>수정하기</S.BtnRight>
+            <S.BtnRight type="submit">수정하기</S.BtnRight>
           </S.BtnWrapper>
         </S.WrittingInnerForm>
       </S.AllWrapper>

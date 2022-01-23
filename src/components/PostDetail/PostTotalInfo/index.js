@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import * as S from './style.js';
 import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
-import {GrDocumentDownload} from 'react-icons/gr'
+import { GrDocumentDownload } from 'react-icons/gr';
 import { MdPersonAdd } from 'react-icons/md';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
@@ -69,7 +69,8 @@ const PostTotalInfo = ({
         <S.FileContainer>
           {post.files.map((v, i) => (
             <S.UploadedFile href={v.url} key={i} download>
-              <GrDocumentDownload fontSize="1.8rem"/>&nbsp;{v.url}
+              <GrDocumentDownload fontSize="1.8rem" />
+              &nbsp;{v.url}
             </S.UploadedFile>
           ))}
         </S.FileContainer>
@@ -88,66 +89,105 @@ const PostTotalInfo = ({
           />
         ) : (
           <>
-            <S.GroupBox>
-              {me && me.id === post.writer.id ? (
-                <>
-                  {post.postsStatus === 'RECRUIT' ? (
-                    <>
-                      <S.DetailInfoContent toBtn onClick={onChangeStatusClick('WORKING')}>
-                        모집 종료하기
-                      </S.DetailInfoContent>
-                      <S.DetailInfoContent>
-                        <div onClick={onEditClick}>
-                          <AiOutlineEdit /> &nbsp;수정
-                        </div>
-                      </S.DetailInfoContent>
-                      <S.DetailInfoContent>
-                        <div onClick={onDeleteClick}>
-                          <RiDeleteBin5Fill /> &nbsp;삭제
-                        </div>
-                      </S.DetailInfoContent>
-                    </>
-                  ) : post.postsStatus === 'WORKING' ? (
-                    <>
-                      <S.DetailInfoContent
-                        toBtn
-                        onClick={openModal('processend')}
-                        blue="true"
-                      >
-                        평가 후 완료하기
-                      </S.DetailInfoContent>
-                      <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
-                        모집중으로 변경
-                      </S.DetailInfoContent>
-                      <S.DetailInfoContent>
-                        <div onClick={onEditClick}>
-                          <AiOutlineEdit /> &nbsp;수정
-                        </div>
-                      </S.DetailInfoContent>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </>
-              ) : (
-                <S.DetailInfoContent>
-                  <MdPersonAdd /> &nbsp;모집자와 대화하기
-                </S.DetailInfoContent>
-              )}
-
-              <S.DetailInfoContent>
-                {isLike ? (
-                  <S.LikeWrapper onClick={onLikeClick}>
-                    <AiFillStar color="#E4DC00" /> &nbsp;찜 취소
-                  </S.LikeWrapper>
+            {post.kinds === 'SCOUT' ? (
+              <S.GroupBox>
+                {me && me.id === post.writer.id ? (
+                  <>
+                    {post.postsStatus === 'RECRUIT' && (
+                      <>
+                        <S.DetailInfoContent toBtn onClick={onChangeStatusClick('FINISHED')}>
+                          모집 종료하기
+                        </S.DetailInfoContent>
+                        <S.DetailInfoContent>
+                          <div onClick={onEditClick}>
+                            <AiOutlineEdit /> &nbsp;수정
+                          </div>
+                        </S.DetailInfoContent>
+                        <S.DetailInfoContent>
+                          <div onClick={onDeleteClick}>
+                            <RiDeleteBin5Fill /> &nbsp;삭제
+                          </div>
+                        </S.DetailInfoContent>
+                      </>
+                    )}
+                  </>
                 ) : (
-                  <S.LikeWrapper onClick={onLikeClick}>
-                    <AiOutlineStar color="#E4DC00" />
-                    &nbsp;찜 하기
-                  </S.LikeWrapper>
+                  <S.DetailInfoContent>
+                    <MdPersonAdd /> &nbsp;모집자와 대화하기
+                  </S.DetailInfoContent>
                 )}
-              </S.DetailInfoContent>
-            </S.GroupBox>
+
+                <S.DetailInfoContent>
+                  {isLike ? (
+                    <S.LikeWrapper onClick={onLikeClick}>
+                      <AiFillStar color="#E4DC00" /> &nbsp;찜 취소
+                    </S.LikeWrapper>
+                  ) : (
+                    <S.LikeWrapper onClick={onLikeClick}>
+                      <AiOutlineStar color="#E4DC00" />
+                      &nbsp;찜 하기
+                    </S.LikeWrapper>
+                  )}
+                </S.DetailInfoContent>
+              </S.GroupBox>
+            ) : (
+              <S.GroupBox>
+                {me && me.id === post.writer.id ? (
+                  <>
+                    {post.postsStatus === 'RECRUIT' ? (
+                      <>
+                        <S.DetailInfoContent toBtn onClick={onChangeStatusClick('WORKING')}>
+                          모집 종료하기
+                        </S.DetailInfoContent>
+                        <S.DetailInfoContent>
+                          <div onClick={onEditClick}>
+                            <AiOutlineEdit /> &nbsp;수정
+                          </div>
+                        </S.DetailInfoContent>
+                        <S.DetailInfoContent>
+                          <div onClick={onDeleteClick}>
+                            <RiDeleteBin5Fill /> &nbsp;삭제
+                          </div>
+                        </S.DetailInfoContent>
+                      </>
+                    ) : post.postsStatus === 'WORKING' ? (
+                      <>
+                        <S.DetailInfoContent toBtn onClick={openModal('processend')} blue="true">
+                          평가 후 완료하기
+                        </S.DetailInfoContent>
+                        <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
+                          모집중으로 변경
+                        </S.DetailInfoContent>
+                        <S.DetailInfoContent>
+                          <div onClick={onEditClick}>
+                            <AiOutlineEdit /> &nbsp;수정
+                          </div>
+                        </S.DetailInfoContent>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                ) : (
+                  <S.DetailInfoContent>
+                    <MdPersonAdd /> &nbsp;모집자와 대화하기
+                  </S.DetailInfoContent>
+                )}
+
+                <S.DetailInfoContent>
+                  {isLike ? (
+                    <S.LikeWrapper onClick={onLikeClick}>
+                      <AiFillStar color="#E4DC00" /> &nbsp;찜 취소
+                    </S.LikeWrapper>
+                  ) : (
+                    <S.LikeWrapper onClick={onLikeClick}>
+                      <AiOutlineStar color="#E4DC00" />
+                      &nbsp;찜 하기
+                    </S.LikeWrapper>
+                  )}
+                </S.DetailInfoContent>
+              </S.GroupBox>
+            )}
             <S.DetailInfoContent>
               <S.PostStatusCircle status={post.postsStatus} onClick={onStatusCircleClick}>
                 <label>{post.postsStatus}</label>
@@ -161,7 +201,11 @@ const PostTotalInfo = ({
           </>
         )}
       </S.DetailInfoWrapper>
-      {processEndModalOpen ? <ProcessEndModal closeModal={closeModal} onChangeStatusClick={onChangeStatusClick}/>:<></>}
+      {processEndModalOpen ? (
+        <ProcessEndModal closeModal={closeModal} onChangeStatusClick={onChangeStatusClick} />
+      ) : (
+        <></>
+      )}
     </S.PostDetailInfo>
   );
 };

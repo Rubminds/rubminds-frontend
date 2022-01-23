@@ -2,7 +2,7 @@ export { default as Avatar } from './common/Avatar';
 export { default as HeaderModal } from './common/HeaderModal';
 export { default as Header } from './common/Header';
 export { default as MailButton } from './common/Mail/MailButton';
-export { default as MailUserList } from './common/Mail/MailUserList';
+export { default as MailPostList } from './common/Mail/MailPostList';
 export { default as MailWrite } from './common/Mail/MailWrite';
 export { default as MailRead } from './common/Mail/MailRead';
 export { default as Footer } from './common/Footer';

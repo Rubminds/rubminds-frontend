@@ -49,6 +49,10 @@ export const UserInfoWrapper = styled.div`
   cursor: pointer;
 `;
 
+export const LinkWrapper = styled(Link)`
+
+`
+
 export const UserAvatar = styled(Avatar)`
   width: 2.6rem;
   height: 2.6rem;
@@ -57,6 +61,7 @@ export const UserText = styled.label`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size:2.4rem;
   padding: 0 1rem;
   flex: 7;
   cursor: pointer;

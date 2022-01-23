@@ -55,7 +55,7 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
       dispatch(evaluateTeamMembers({ teamId, content: obj }));
       //window.location.replace(`/post/${postId}`);
     },
-    [evaluationArray],
+    [evaluationArray, dispatch, kinds, teamId],
   );
 
   return (

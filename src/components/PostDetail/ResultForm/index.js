@@ -69,7 +69,7 @@ const ResultForm = ({ post }) => {
       completeContentInput.current.value = post.completeContent;
       post.completeImages && setCompleteImages(post.completeImages.map(img => img.url));
     }
-  }, []);
+  }, [post.completeContent, post.completeFile, post.completeImages, post.refLink]);
 
   return (
     <S.ResultFormWrapper onSubmit={onSubmitHandler}>

@@ -8,6 +8,7 @@ import { BackButton, PostCard } from '../../components';
 const ProjectStatusPage = () => {
   const params = useParams();
   const [posts, setPosts] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
@@ -19,11 +20,12 @@ const ProjectStatusPage = () => {
         },
       );
       console.log(response.data);
-      response.data.content.forEach(v => v.skill = v.postSkills)
+      response.data.content.forEach(v => (v.skill = v.postSkills));
       setPosts(response.data.content);
     };
     fetchData();
   }, []);
+
   return (
     <S.ProjectStatusPageWrapper>
       <BackButton />
@@ -39,7 +41,7 @@ const ProjectStatusPage = () => {
         </S.Title>
         <S.PostsWrapper>
           {posts.map(v => {
-            return  <PostCard post={v} key={v.id} />;
+            return <PostCard post={v} key={v.id} />;
           })}
         </S.PostsWrapper>
       </S.ContentsWrapper>

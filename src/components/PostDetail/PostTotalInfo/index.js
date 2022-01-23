@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import * as S from './style.js';
 import { AiOutlineEdit, AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { GrDocumentDownload } from 'react-icons/gr';
@@ -35,7 +35,7 @@ const PostTotalInfo = ({
     if (deleteConfirm) {
       dispatch(deletePost(post.id));
     }
-  }, []);
+  }, [dispatch, post.id]);
 
   const onLikeClick = useCallback(() => {
     dispatch(likePost(post.id));

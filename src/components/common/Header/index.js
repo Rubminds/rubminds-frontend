@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import * as S from './style';
 import { useSelector, useDispatch } from 'react-redux';
-import {  Link } from 'react-router-dom';
 
 import {  toggleHeaderModal } from '../../../modules/user';
 import { HeaderModal } from '../../';
@@ -19,7 +18,7 @@ const Header = () => {
       <S.StyledLink to="/">Rubminds</S.StyledLink>
       {me ? (
         <S.UserInfoWrapper>
-          <Link to={`/userpage/${me.id}`}><S.UserAvatar src={`https:/${me.avatar}`}/></Link>
+          <S.LinkWrapper to={`/userpage/${me.id}`}><S.UserAvatar src={`https:/${me.avatar}`}/></S.LinkWrapper>
           <S.UserText>{me.nickname}</S.UserText>
           {isHeaderModalOpen ? (
             <S.UpArrowWrapper>

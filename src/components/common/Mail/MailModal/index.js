@@ -11,14 +11,8 @@ const MailModal = () => {
   const { me } = useSelector(state => state.user);
   const [step, setStep] = useState('PROJECT');
   const [chatroomNum, setChatroomNum] = useState(null);
-  //const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [apiQuery, setApiQuery] = useState('/chat?kinds=PROJECT');
-  const posts = [
-    { postId: 1, postTitle: '제목' },
-    { postId: 2, postTitle: '제목' },
-    { postId: 3, postTitle: '제목' },
-    { postId: 4, postTitle: '제목' },
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +22,7 @@ const MailModal = () => {
         },
       });
       console.log(`posts ${apiQuery}: `, response.data);
+      setPosts(response.data);
     };
     !me && fetchData();
     //me && fetchData();
@@ -48,9 +43,12 @@ const MailModal = () => {
     [apiQuery, step],
   );
 
-  const onPostClick = useCallback(postId => {
-    setChatroomNum(postId);
-  }, []);
+  const onPostClick = useCallback(
+    postId => () => {
+      setChatroomNum(postId);
+    },
+    [],
+  );
 
   return (
     <S.MailModalWrapper>
@@ -59,25 +57,30 @@ const MailModal = () => {
         <S.CloseButton onClick={onCloseClick} />
       </S.ModalHeader>
       {!me ? (
-        !chatroomNum ? 
-        <>
-          <S.ModalStatusWrapper>
-            <S.ModalStatus current={step} value={'PROJECT'} onClick={onModalStatusClick('PROJECT')}>
-              프로젝트
-            </S.ModalStatus>
-            <S.ModalStatus current={step} value={'STUDY'} onClick={onModalStatusClick('STUDY')}>
-              스터디
-            </S.ModalStatus>
-            <S.ModalStatus current={step} value={'SCOUT'} onClick={onModalStatusClick('SCOUT')}>
-              스카웃
-            </S.ModalStatus>
-          </S.ModalStatusWrapper>
-          <S.UserListWrapper>
-            <MailPostList posts={posts} onPostClick={onPostClick}/>
-          </S.UserListWrapper>
-        </> 
-        :
-        <MailPost postId={chatroomNum} setChatroomNum={setChatroomNum}/>
+        !chatroomNum ? (
+          <>
+            <S.ModalStatusWrapper>
+              <S.ModalStatus
+                current={step}
+                value={'PROJECT'}
+                onClick={onModalStatusClick('PROJECT')}
+              >
+                프로젝트
+              </S.ModalStatus>
+              <S.ModalStatus current={step} value={'STUDY'} onClick={onModalStatusClick('STUDY')}>
+                스터디
+              </S.ModalStatus>
+              <S.ModalStatus current={step} value={'SCOUT'} onClick={onModalStatusClick('SCOUT')}>
+                스카웃
+              </S.ModalStatus>
+            </S.ModalStatusWrapper>
+            <S.UserListWrapper>
+              {posts.length > 0 && <MailPostList posts={posts} onPostClick={onPostClick} />}
+            </S.UserListWrapper>
+          </>
+        ) : (
+          <MailPost postId={chatroomNum} setChatroomNum={setChatroomNum} />
+        )
       ) : (
         <S.DisabledForm>
           <S.DisabledIcon />

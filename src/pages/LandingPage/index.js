@@ -28,6 +28,7 @@ const LandingPage = () => {
               },
             })
           : await axios.get(`/posts${apiQuery}`);
+      console.log(response.data.content);
       setPosts(response.data.content);
     };
     fetchData();

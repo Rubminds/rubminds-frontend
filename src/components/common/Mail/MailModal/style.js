@@ -39,6 +39,9 @@ export const CloseButton = styled(GrClose)`
 
 export const ModalStatusWrapper = styled.div`
   margin-top: 2rem;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
 `;
 
 export const ModalStatus = styled.button`
@@ -49,6 +52,7 @@ export const ModalStatus = styled.button`
   font-weight: bold;
   padding: 1rem 1rem;
   box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.1);
+  width:100%;
   ${props =>
     props.current === props.value
       ? css`

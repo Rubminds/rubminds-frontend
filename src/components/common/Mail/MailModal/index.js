@@ -4,15 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { toggleMailModal } from '../../../../modules/user';
-import { MailPostList } from '../../..';
+import { MailPostList, MailPost } from '../../..';
 
 const MailModal = () => {
   const dispatch = useDispatch();
   const { me } = useSelector(state => state.user);
-  const [step, setStep] = useState(1);
-  const [target, setTarget] = useState(null);
-  const [posts, setPosts] = useState([]);
+  const [step, setStep] = useState('PROJECT');
+  const [chatroomNum, setChatroomNum] = useState(null);
+  //const [posts, setPosts] = useState([]);
   const [apiQuery, setApiQuery] = useState('/chat?kinds=PROJECT');
+  const posts = [
+    { postId: 1, postTitle: '제목' },
+    { postId: 2, postTitle: '제목' },
+    { postId: 3, postTitle: '제목' },
+    { postId: 4, postTitle: '제목' },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,51 +27,57 @@ const MailModal = () => {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
-      console.log(response.data);
+      console.log(`posts ${apiQuery}: `, response.data);
     };
-
-    me && fetchData();
-  }, []);
+    !me && fetchData();
+    //me && fetchData();
+  }, [apiQuery, me]);
 
   const onCloseClick = useCallback(() => {
     dispatch(toggleMailModal());
-  }, []);
+  }, [dispatch]);
 
   const onModalStatusClick = useCallback(
     status => () => {
+      const prevStatus = step;
+      const currentApiQuery = apiQuery;
+      const changedQuery = currentApiQuery.replace(prevStatus, status);
       setStep(status);
+      setApiQuery(changedQuery);
     },
-    [],
+    [apiQuery, step],
   );
 
-  const onUserClick = useCallback(
-    user => () => {
-      setStep(3);
-      setTarget(user);
-    },
-    [],
-  );
+  const onPostClick = useCallback(postId => {
+    setChatroomNum(postId);
+  }, []);
+
   return (
     <S.MailModalWrapper>
       <S.ModalHeader>
         <S.HeaderTitle>쪽지함</S.HeaderTitle>
         <S.CloseButton onClick={onCloseClick} />
       </S.ModalHeader>
-      {me ? (
-        step === 1 ? (
-          <>
-            <S.ModalStatusWrapper>
-              <S.ModalStatus current={step} value={1} onClick={onModalStatusClick(1)}>
-                게시글 목록
-              </S.ModalStatus>
-            </S.ModalStatusWrapper>
-            <S.UserListWrapper>
-              <MailPostList posts={posts} />
-            </S.UserListWrapper>
-          </>
-        ) : (
-          <></>
-        )
+      {!me ? (
+        !chatroomNum ? 
+        <>
+          <S.ModalStatusWrapper>
+            <S.ModalStatus current={step} value={'PROJECT'} onClick={onModalStatusClick('PROJECT')}>
+              프로젝트
+            </S.ModalStatus>
+            <S.ModalStatus current={step} value={'STUDY'} onClick={onModalStatusClick('STUDY')}>
+              스터디
+            </S.ModalStatus>
+            <S.ModalStatus current={step} value={'SCOUT'} onClick={onModalStatusClick('SCOUT')}>
+              스카웃
+            </S.ModalStatus>
+          </S.ModalStatusWrapper>
+          <S.UserListWrapper>
+            <MailPostList posts={posts} onPostClick={onPostClick}/>
+          </S.UserListWrapper>
+        </> 
+        :
+        <MailPost postId={chatroomNum} setChatroomNum={setChatroomNum}/>
       ) : (
         <S.DisabledForm>
           <S.DisabledIcon />

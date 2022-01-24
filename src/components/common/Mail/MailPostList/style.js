@@ -5,6 +5,7 @@ export const UserRow = styled.div`
   position: relative;
   ${flexColumn}
   width: 100%;
+  color:initial;
   padding: 1rem 1.5rem;
   cursor: pointer;
   &:after {

@@ -11,7 +11,13 @@ const MailModal = () => {
   const { me } = useSelector(state => state.user);
   const [step, setStep] = useState('PROJECT');
   const [chatroomNum, setChatroomNum] = useState(null);
-  const [posts, setPosts] = useState([]);
+  //const [posts, setPosts] = useState([]);
+  const posts = [
+    { id: 1, title: '제목' },
+    { id: 2, title: '제목' },
+    { id: 3, title: '제목' },
+    { id: 4, title: '제목' },
+  ];
   const [apiQuery, setApiQuery] = useState('/chat?kinds=PROJECT');
 
   useEffect(() => {
@@ -22,7 +28,7 @@ const MailModal = () => {
         },
       });
       console.log(`posts ${apiQuery}: `, response.data);
-      setPosts(response.data);
+      //setPosts(response.data);
     };
     !me && fetchData();
     //me && fetchData();

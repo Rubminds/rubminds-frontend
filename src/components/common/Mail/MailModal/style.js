@@ -24,7 +24,6 @@ export const MailModalWrapper = styled(Paper)`
 
 export const ModalHeader = styled.div`
   ${flexBetween};
-  padding: 0 1rem;
 `;
 
 export const HeaderTitle = styled.label`

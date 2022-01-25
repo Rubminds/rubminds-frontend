@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { flexCenter } from '../../../../constants';
-
+import { flexCenter, flexColumn } from '../../../../constants';
+import { Avatar } from '../../../';
 
 export const ContentWrapper = styled.div`
   display: flex;
@@ -21,6 +21,11 @@ export const PostTitle = styled.label`
   margin-top: 1rem;
 `;
 
+export const Header = styled.div`
+  display:flex;
+  align-items:center;
+`
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,8 +39,41 @@ export const Messages = styled.div`
   padding: 1rem;
   border: 1px solid rgba(128, 128, 128, 0.199);
   border-radius: 10px;
-  height: 100%;
   overflow-y: auto;
+  height:80%;
+`;
+
+export const MessageRow = styled.div`
+  ${flexColumn}
+  width:100%;
+  & + & {
+    border-top: 1px solid rgba(128, 128, 128, 0.199);
+  }
+  padding: 1rem 0;
+`;
+
+export const UserAvatar = styled(Avatar)`
+  width: 4rem;
+  height: 4rem;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+`;
+
+export const InfoWrapper = styled.div`
+  ${flexColumn}
+  flex:1;
+`;
+
+export const Nickname = styled.label`
+  font-weight: bold;
+`;
+
+export const Msg = styled.label``;
+
+export const SendTime = styled.label`
+  font-size: 1.2rem;
 `;
 
 export const BtnWrapper = styled.div`
@@ -85,12 +123,12 @@ export const SendBtn = styled.button`
   ${flexCenter}
   font-size: 3rem;
   height: 4rem;
-  width:4rem;
-  padding:0.5rem 0.5rem;
+  width: 4rem;
+  padding: 0.5rem 0.5rem;
   background-color: #fff;
-  border:none;
+  border: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  border-left:1px solid rgba(128,128,128,0.199);
-  cursor:pointer;
+  border-left: 1px solid rgba(128, 128, 128, 0.199);
+  cursor: pointer;
 `;

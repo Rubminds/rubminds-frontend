@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { flexCenter, flexColumn } from '../../../../constants';
 import { Avatar } from '../../../';
+import mediaQuery from '../../../../hooks/mediaQuery';
 
 export const ContentWrapper = styled.div`
   display: flex;
@@ -19,17 +20,22 @@ export const PostTitle = styled.label`
   font-size: 1.6rem;
   font-weight: bold;
   margin-top: 1rem;
+  cursor: pointer;
 `;
 
 export const Header = styled.div`
-  display:flex;
-  align-items:center;
-`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+`;
 
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 46rem;
+  position: relative;
+  ${mediaQuery({ height: '60rem' })}
 `;
 
 export const Messages = styled.div`
@@ -40,7 +46,7 @@ export const Messages = styled.div`
   border: 1px solid rgba(128, 128, 128, 0.199);
   border-radius: 10px;
   overflow-y: auto;
-  height:80%;
+  height: 100%;
 `;
 
 export const MessageRow = styled.div`
@@ -55,6 +61,7 @@ export const MessageRow = styled.div`
 export const UserAvatar = styled(Avatar)`
   width: 4rem;
   height: 4rem;
+  cursor: pointer;
 `;
 
 export const UserInfo = styled.div`
@@ -68,6 +75,7 @@ export const InfoWrapper = styled.div`
 
 export const Nickname = styled.label`
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export const Msg = styled.label``;

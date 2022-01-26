@@ -30,8 +30,7 @@ const MailModal = () => {
       console.log(`posts ${apiQuery}: `, response.data);
       //setPosts(response.data);
     };
-    !me && fetchData();
-    //me && fetchData();
+    me && fetchData();
   }, [apiQuery, me]);
 
   const onCloseClick = useCallback(() => {
@@ -62,7 +61,7 @@ const MailModal = () => {
         <S.HeaderTitle>쪽지함</S.HeaderTitle>
         <S.CloseButton onClick={onCloseClick} />
       </S.ModalHeader>
-      {!me ? (
+      {me ? (
         !chatroomNum ? (
           <>
             <S.ModalStatusWrapper>

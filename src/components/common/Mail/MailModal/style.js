@@ -16,10 +16,10 @@ export const MailModalWrapper = styled(Paper)`
   z-index: 9999;
   background-color: #fff7d1;
   width: 40rem;
-  height: 60rem;
+  height: 60%;
   padding: 2rem 2rem;
   ${flexColumn}
-  ${mediaQuery({ width: '100%', height: '60%', bottom: 0, right: 0 })}
+  ${mediaQuery({ width: '100%', bottom: 0, right: 0 })}
 `;
 
 export const ModalHeader = styled.div`
@@ -38,9 +38,9 @@ export const CloseButton = styled(GrClose)`
 
 export const ModalStatusWrapper = styled.div`
   margin-top: 2rem;
-  width:100%;
-  display:flex;
-  justify-content:space-around;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 `;
 
 export const ModalStatus = styled.button`
@@ -51,7 +51,7 @@ export const ModalStatus = styled.button`
   font-weight: bold;
   padding: 1rem 1rem;
   box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.1);
-  width:100%;
+  width: 100%;
   ${props =>
     props.current === props.value
       ? css`

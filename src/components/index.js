@@ -1,6 +1,7 @@
 export { default as Avatar } from './common/Avatar';
 export { default as HeaderModal } from './common/HeaderModal';
 export { default as Header } from './common/Header';
+export { default as MailUserModal } from './common/Mail/MailUserModal';
 export { default as MailButton } from './common/Mail/MailButton';
 export { default as MailPostList } from './common/Mail/MailPostList';
 export { default as MailPost } from './common/Mail/MailPost';
@@ -37,8 +38,8 @@ export { default as UserDibs } from './UserPage/UserDibs';
 export { default as DibsInfo } from './Dibs/DibsInfo';
 export { default as DibsPosts } from './Dibs/DibsPosts';
 
-export { default as Title } from './EditPost/Title'; 
-export { default as File } from './EditPost/File'; 
-export { default as MiddleArea } from './EditPost/MiddleArea'; 
-export { default as Region } from './EditPost/Region'; 
-export { default as Content } from './EditPost/Content'; 
+export { default as Title } from './EditPost/Title';
+export { default as File } from './EditPost/File';
+export { default as MiddleArea } from './EditPost/MiddleArea';
+export { default as Region } from './EditPost/Region';
+export { default as Content } from './EditPost/Content';

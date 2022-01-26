@@ -19,6 +19,9 @@ export const UserRow = styled.div`
     -webkit-box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
     box-shadow: 0 -1px 0 0 rgb(34 36 38 / 15%);
   }
+  &:hover{
+    background-color: rgb(34 36 38 / 15%);
+  }
 `;
 
 export const UserName = styled.label`
@@ -33,4 +36,5 @@ export const LastMessage = styled.label`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor:pointer;
 `;

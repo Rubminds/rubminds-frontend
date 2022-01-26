@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import * as S from '../../../pages/EditPostPage/style';
 
 const MiddleArea = ({
@@ -8,6 +9,7 @@ const MiddleArea = ({
   setHeadCount,
   isScout,
 }) => {
+
   const ref = useRef([]);
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const MiddleArea = ({
     },
     [headCount]
   );
+
   const blockText = useCallback(e => {
     e.target.value = e.target.value
       .replace(/[^0-9.]/g, '')
@@ -99,6 +102,7 @@ const MiddleArea = ({
                   onInput={blockText}
                   onChange={onHeadCountChange}
                   value={headCount}
+                  required
                 />
                 <S.InputBoxPeople>명</S.InputBoxPeople>
               </S.InputWrapper>

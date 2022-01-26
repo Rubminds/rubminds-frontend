@@ -18,6 +18,7 @@ const Content = ({ content, setContent }) => {
         placeholder="프로젝트에 대한 자세한 설명을 부탁드립니다."
         onChange={onContentChange}
         value={content}
+        required
       ></S.MainTextArea>
     </>
   );

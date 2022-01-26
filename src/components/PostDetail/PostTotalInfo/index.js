@@ -5,21 +5,28 @@ import { MdPersonAdd } from 'react-icons/md';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { DetailInfo, UserListModal } from '../..';
 import { likePost, changePostStatus, deletePost } from '../../../modules/post';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
-const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) => {
-  const [isLike, setIsLike] = useState(post.isLike)
+const PostTotalInfo = ({
+  post,
+  modalOpen,
+  closeModal,
+  openModal,
+  me,
+  members,
+}) => {
+  const [isLike, setIsLike] = useState(post.isLike);
   const combinedSkills = post.postSkills.concat(post.customSkills);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const onEditClick = () => {
-    history.push(`/editpost`);
+    history.push(`/editpost/${post.id}`);
   };
 
   const onDeleteClick = useCallback(() => {
@@ -41,10 +48,12 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
 
   const onChangeStatusClick = useCallback(
     status => () => {
-      dispatch(changePostStatus({ postId: post.id, content: { postStatus: status } }));
+      dispatch(
+        changePostStatus({ postId: post.id, content: { postStatus: status } })
+      );
       window.location.replace(`/post/${post.id}`);
     },
-    [post.id, dispatch],
+    [post.id, dispatch]
   );
   return (
     <S.PostDetailInfo>
@@ -84,7 +93,10 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
                 <>
                   {post.postsStatus === 'RECRUIT' ? (
                     <>
-                      <S.DetailInfoContent toBtn onClick={onChangeStatusClick('WORKING')}>
+                      <S.DetailInfoContent
+                        toBtn
+                        onClick={onChangeStatusClick('WORKING')}
+                      >
                         모집 종료하기
                       </S.DetailInfoContent>
                       <S.DetailInfoContent>
@@ -107,7 +119,10 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
                       >
                         평가 후 완료하기
                       </S.DetailInfoContent>
-                      <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
+                      <S.DetailInfoContent
+                        toBtn
+                        onClick={onChangeStatusClick('RECRUIT')}
+                      >
                         모집중으로 변경
                       </S.DetailInfoContent>
                       <S.DetailInfoContent>
@@ -140,7 +155,10 @@ const PostTotalInfo = ({ post, modalOpen, closeModal, openModal, me, members }) 
               </S.DetailInfoContent>
             </S.GroupBox>
             <S.DetailInfoContent>
-              <S.PostStatusCircle status={post.postsStatus} onClick={onStatusCircleClick}>
+              <S.PostStatusCircle
+                status={post.postsStatus}
+                onClick={onStatusCircleClick}
+              >
                 <label>{post.postsStatus}</label>
                 {post.kinds !== 'SCOUT' && (
                   <label>

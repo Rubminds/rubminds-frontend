@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { logoutUser, signinUser } from '../../modules/user';
@@ -24,7 +24,7 @@ const LogInProcess = () => {
       dispatch(signinUser(data));
       history.push('/');
       setTimeout(() => {
-        localStorage.setItem('accessToken', null);
+        localStorage.removeItem('accessToken'); 
         dispatch(logoutUser());
         window.location.replace(`/login`);
       }, 3600000);

@@ -13,7 +13,6 @@ const PostDetailPage = () => {
   const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
   const params = useParams();
-  //const { singlePost } = useSelector(state => state.post);
   const { me } = useSelector(state => state.user);
 
   useEffect(() => {

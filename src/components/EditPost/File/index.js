@@ -1,17 +1,16 @@
 import React, { useCallback } from 'react';
 import * as S from '../../../pages/EditPostPage/style';
 
-const File = ({ file, setFile}) => {
-
-  const onDeleteFile = () =>{
+const File = ({ file, setFile }) => {
+  const onDeleteFile = () => {
     setFile(null);
-  }
+  };
 
   const onFileChange = useCallback(
     e => {
       setFile(e.target.files[0]);
     },
-    [setFile],
+    [setFile]
   );
 
   return (

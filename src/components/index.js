@@ -35,3 +35,9 @@ export { default as UserDibs } from './UserPage/UserDibs';
 
 export { default as DibsInfo } from './Dibs/DibsInfo';
 export { default as DibsPosts } from './Dibs/DibsPosts';
+
+export { default as Title } from './EditPost/Title'; 
+export { default as File } from './EditPost/File'; 
+export { default as MiddleArea } from './EditPost/MiddleArea'; 
+export { default as Region } from './EditPost/Region'; 
+export { default as Content } from './EditPost/Content'; 

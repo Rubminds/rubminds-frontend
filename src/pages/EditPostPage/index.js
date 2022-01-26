@@ -1,12 +1,8 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CustomDropDown } from '../../components';
-import File from '../../components/EditPost/File';
-import MiddleArea from '../../components/EditPost/MiddleArea';
-import Region from '../../components/EditPost/Region';
-import Title from '../../components/EditPost/Title';
-import Content from '../../components/EditPost/Content';
+import { File, MiddleArea, Region, Title, Content } from '../../components';
 import * as S from './style';
 import { Link, useParams } from 'react-router-dom';
 import { AreaOptions, SKILL_ID } from '../../constants';
@@ -27,7 +23,7 @@ const EditPostPage = () => {
   const [isScout, setIsScout] = useState(false);
   const [kinds, setKinds] = useState();
   const [teamId, setTeamId] = useState();
-  const [teamHead, setTeamHead] = useState(); 
+  const [teamHead, setTeamHead] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,11 +48,14 @@ const EditPostPage = () => {
       const responseSkill = await axios.get('/skills');
       setSkillName(responseSkill.data.skills.map(e => e.name));
 
-      const teamAPI = await axios.get(`/team/${responsePost.data.teamId}/teamUsers`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
+      const teamAPI = await axios.get(
+        `/team/${responsePost.data.teamId}/teamUsers`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
       setTeamHead(teamAPI.data.length);
     };
     fetchData();
@@ -66,9 +65,9 @@ const EditPostPage = () => {
   const onSubmitHandler = useCallback(
     e => {
       e.preventDefault();
-      if(teamHead > parseInt(headCount)){
+      if (teamHead > parseInt(headCount)) {
         alert('모집된 인원보다 적게 설정할 수 없습니다.');
-        return; 
+        return;
       }
       const data = {
         title: title,

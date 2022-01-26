@@ -1,11 +1,10 @@
 import React, { useCallback, useRef, useState } from 'react';
 import * as S from '../../SignUp/SignUpPageRight/style';
 import { CgProfile } from 'react-icons/cg';
-import { useEffect } from 'react';
 
 const Avatar = ({ setAvatarChanged, fileInfo, setFileInfo }) => {
   const imgInput = useRef();
-  const [attachMent, setAttachment] = useState(fileInfo);
+  const [attachMent, setAttachment] = useState(`${fileInfo}`);
 
   const onProfileUpload = useCallback(() => {
     imgInput.current.click();
@@ -39,7 +38,8 @@ const Avatar = ({ setAvatarChanged, fileInfo, setFileInfo }) => {
             <img
               src={attachMent}
               width="150px"
-              style={{ display: 'block', borderRadius: '5000px' }}
+              height="150px"
+              style={{ display: 'block', borderRadius: '10px' }}
               onClick={onDeleteURL}
               alt=""
             />

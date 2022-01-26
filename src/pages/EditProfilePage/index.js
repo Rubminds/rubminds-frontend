@@ -14,7 +14,6 @@ import Introduce from '../../components/EditPage/Introduce';
 
 const EditProfilePage = () => {
   const { me } = useSelector(state => state.user);
-
   const dispatch = useDispatch();
   const [nicknameCheck, setnicknameCheck] = useState(false);
   const [dropDownOptions, setDropDownOptions] = useState([]);
@@ -71,6 +70,7 @@ const EditProfilePage = () => {
           nicknameChanged: me.nickname === nickname ? false : true,
           avatarChanged: avatarChanged,
         };
+
         console.log('제출시 fileInfo', fileInfo);
         const formData = new FormData();
         if (fileInfo) {
@@ -80,6 +80,7 @@ const EditProfilePage = () => {
           'userInfo',
           new Blob([JSON.stringify(data)], { type: 'application/json' })
         );
+
         const submitConfirm = window.confirm('수정된 정보를 저장하시겠습니까?');
         if (submitConfirm) {
           dispatch(updateUser(formData));

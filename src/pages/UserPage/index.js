@@ -5,8 +5,8 @@ import axios from 'axios';
 
 import { BackButton, UserProfile, UserProjects, UserRating, UserDibs } from '../../components';
 
-  const UserPage = () => {
-  const history = useHistory(); 
+const UserPage = () => {
+  const history = useHistory();
   const params = useParams();
   const [user, setUser] = useState('');
 
@@ -20,10 +20,10 @@ import { BackButton, UserProfile, UserProjects, UserRating, UserDibs } from '../
     };
     fetchData();
   }, []);
- 
+
   const onEditProfile = () => {
-    history.push('/editprofile'); 
-  }
+    history.push('/editprofile');
+  };
 
   return (
     <>

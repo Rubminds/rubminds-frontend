@@ -18,6 +18,13 @@ export const flexBetween = css`
   align-items: center;
 `;
 
+export const POST_STATUS = {
+  RECRUIT: '모집중',
+  WORKING: '진행중',
+  RANKING: '평가중',
+  FINISHED: '진행 완료',
+};
+
 //skills name-id
 export const SKILL_ID = {
   Java: 1,
@@ -41,7 +48,7 @@ export const SKILL_ID = {
 export const MAX_STAR = 5;
 
 //options
-// 지역 
+// 지역
 export const AreaOptions = [
   '서울특별시',
   '경기도',
@@ -77,9 +84,9 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_ERROR = 'UPDATE_USER_ERROR';
 
-export const TOGGLE_NOTE_MODAL = 'TOGGLE_NOTE_MODAL';
-export const TOGGLE_NOTE_MODAL_SUCCESS = 'TOGGLE_NOTE_MODAL_SUCCESS';
-export const TOGGLE_NOTE_MODAL_ERROR = 'TOGGLE_NOTE_MODAL_ERROR';
+export const TOGGLE_MAIL_MODAL = 'TOGGLE_MAIL_MODAL';
+export const TOGGLE_MAIL_MODAL_SUCCESS = 'TOGGLE_MAIL_MODAL_SUCCESS';
+export const TOGGLE_MAIL_MODAL_ERROR = 'TOGGLE_MAIL_MODAL_ERROR';
 
 export const CREATE_POST = 'CREATE_POST';
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
@@ -152,3 +159,7 @@ export const SEND_MAIL_ERROR = 'SEND_MAIL_ERROR';
 export const DELETE_MAIL = 'DELETE_MAIL';
 export const DELETE_MAIL_SUCCESS = 'DELETE_MAIL_SUCCESS';
 export const DELETE_MAIL_ERROR = 'DELETE_MAIL_ERROR';
+
+export const TOGGLE_HEADER_MODAL = 'TOGGLE_HEADER_MODAL';
+export const TOGGLE_HEADER_MODAL_SUCCESS = 'TOGGLE_HEADER_MODAL_SUCCESS';
+export const TOGGLE_HEADER_MODAL_ERROR = 'TOGGLE_HEADER_MODAL_ERROR';

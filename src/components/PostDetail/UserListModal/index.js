@@ -16,14 +16,13 @@ const UserListModal = ({
   postStatus,
 }) => {
   const dispatch = useDispatch();
-
   const onAddUserKeypress = useCallback(
     e => {
       dispatch(addTeamUser({ teamId, userId: e.target.value }));
       e.target.value = '';
-      closeModal();
+      closeModal('userlist');
     },
-    [dispatch, teamId]
+    [dispatch, teamId, closeModal]
   );
 
   const rendering = () => {
@@ -61,7 +60,7 @@ const UserListModal = ({
 
   return (
     <S.UserListWrapper>
-      <S.CloseBtn onClick={closeModal}>
+      <S.CloseBtn onClick={closeModal('userlist')}>
         <ExitBtn width="1.2rem" height="1.2rem" />
       </S.CloseBtn>
       <S.UserList>

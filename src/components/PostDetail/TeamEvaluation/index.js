@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import { evaluateTeamMembers } from '../../../modules/team';
-import { Test } from '../../../assets/imgs';
 
 const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
   const [evaluationArray, setEvaluationArray] = useState([]);
@@ -56,7 +55,7 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
       dispatch(evaluateTeamMembers({ teamId, content: obj }));
       //window.location.replace(`/post/${postId}`);
     },
-    [evaluationArray],
+    [evaluationArray, dispatch, kinds, teamId],
   );
 
   return (
@@ -74,7 +73,7 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
             v.userId !== me.id && (
               <S.UserWrapper key={i}>
                 <S.UserLeftWrapper>
-                  <S.UserAvatar src={Test} />
+                  <S.UserAvatar src={v.avatar} />
                   &nbsp;{v.userNickname}
                   {v.userId === writerId && <S.WriterMark />}
                 </S.UserLeftWrapper>

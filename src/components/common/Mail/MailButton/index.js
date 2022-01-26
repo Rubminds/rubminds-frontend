@@ -8,7 +8,7 @@ import { toggleMailModal } from '../../../../modules/user';
 
 const MailButton = () => {
   const dispatch = useDispatch();
-  const isMailOpen = useSelector(state => state.user.isMailOpen);
+  const isMailModalOpen = useSelector(state => state.user.isMailModalOpen);
   const onClick = useCallback(() => {
     dispatch(toggleMailModal());
   }, []);
@@ -18,7 +18,7 @@ const MailButton = () => {
       <S.StyledMailButton onClick={onClick}>
         <FaRegPaperPlane fontSize="40px" color="#ffffff" />
       </S.StyledMailButton>
-      {isMailOpen && <MailModal />}
+      {isMailModalOpen && <MailModal />}
     </>
   );
 };

@@ -57,6 +57,17 @@ export const UploadFileName = styled.label`
   margin-left: 1rem;
   font-weight: bold;
 `;
+
+export  const CompleteFile = styled.a`
+  width: 50%;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
 export const TextArea = styled.textarea`
   width: ${props => (props.width ? props.width : '100%')};
   background-color: #fff;

@@ -20,6 +20,7 @@ axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist:["submitResultPostDone"]
 };
 // 새로운 리듀서 장착시 이쪽에 추가
 const rootReducer = combineReducers({

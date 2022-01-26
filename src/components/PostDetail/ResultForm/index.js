@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import * as S from './style';
 import { useDispatch } from 'react-redux';
+import { GrDocumentDownload } from 'react-icons/gr';
 
-import { Carousel } from '../..';
+import { UploadCarousel, ResultCarousel } from '../..';
 import useInput from '../../../hooks/useInput';
 import { submitResultPost } from '../../../modules/post';
 
@@ -11,7 +12,9 @@ const ResultForm = ({ post }) => {
   const [refLink, onChangeRefLink] = useInput('');
   const [completeContent, onChangeCompleteContent] = useInput('');
   const [images, setImages] = useState([]);
+  const [completeImages, setCompleteImages] = useState([]);
   const dispatch = useDispatch();
+
   const fileInput = useRef();
   const completeContentInput = useRef();
   const refLinkInput = useRef();
@@ -22,23 +25,18 @@ const ResultForm = ({ post }) => {
     setFile(e.target.files[0]);
   }, []);
 
-  const onChangeImages = useCallback(e => {
-    console.log(e.target.files);
-    setImages(e.target.files)
-  },[])
-
-  const onSubmitResultClick = useCallback(
+  const onSubmitHandler = useCallback(
     e => {
       e.preventDefault();
       const dataObj = {
         refLink,
         completeContent,
       };
-      
+
       const formData = new FormData();
       Object.values(images).forEach(f => formData.append('files', f));
       file && formData.append('files', file);
-      
+
       formData.append(
         'completeInfo',
         new Blob([JSON.stringify(dataObj)], { type: 'application/json' }),
@@ -49,6 +47,7 @@ const ResultForm = ({ post }) => {
       );
       if (submitConfirm) {
         dispatch(submitResultPost({ postId: post.id, content: formData }));
+        alert('결과물이 업로드 되었습니다.');
         window.location.replace(`/post/${post.id}`);
       }
     },
@@ -56,7 +55,8 @@ const ResultForm = ({ post }) => {
   );
 
   useEffect(() => {
-    const isDone = post.completeContent || post.refLink || post.completeFile; //추후에 이미지리스트도 추가
+    const isDone =
+      post.completeContent || post.refLink || post.completeFile || post.completeImages.length > 0; //추후에 이미지리스트도 추가
     if (isDone) {
       fileInput.current.disabled = true;
       submitBtn.current.disabled = true;
@@ -67,15 +67,30 @@ const ResultForm = ({ post }) => {
       submitBtn.current.style.backgroundColor = '#EAEEF2';
       refLinkInput.current.value = post.refLink;
       completeContentInput.current.value = post.completeContent;
+      post.completeImages && setCompleteImages(post.completeImages.map(img => img.url));
     }
-  }, []);
+  }, [post.completeContent, post.completeFile, post.completeImages, post.refLink]);
 
   return (
-    <S.ResultFormWrapper>
+    <S.ResultFormWrapper onSubmit={onSubmitHandler}>
       <S.FormBigTitle>결과</S.FormBigTitle>
+      <S.FormSmallTitle>첨부파일</S.FormSmallTitle>
       <S.FileWrapper>
-        <S.UploadFile htmlFor="input-file">파일 업로드</S.UploadFile>
-        <S.UploadFileName>{file && file.name}</S.UploadFileName>
+        {post.completeContent ? (
+          <S.CompleteFile>
+            {post.completeFile && (
+              <>
+                <GrDocumentDownload fontSize="1.8rem" />
+                &nbsp;{post.completeFile.url}
+              </>
+            )}
+          </S.CompleteFile>
+        ) : (
+          <>
+            <S.UploadFile htmlFor="input-file">파일 업로드</S.UploadFile>
+            <S.UploadFileName>{file && file.name}</S.UploadFileName>
+          </>
+        )}
       </S.FileWrapper>
       <input
         type="file"
@@ -87,16 +102,20 @@ const ResultForm = ({ post }) => {
         ref={fileInput}
       />
       <S.FormSmallTitle>첨부 이미지</S.FormSmallTitle>
-      <Carousel size="30rem" onChangeImages={onChangeImages}/>
+      {post.completeContent ? (
+        <ResultCarousel size="30rem" completeImages={completeImages} />
+      ) : (
+        <UploadCarousel size="30rem" setImages={setImages} />
+      )}
       <S.FormSmallTitle>진행 방법 및 결과 설명</S.FormSmallTitle>
-      <S.TextArea onChange={onChangeCompleteContent} ref={completeContentInput} />
+      <S.TextArea onChange={onChangeCompleteContent} ref={completeContentInput} required />
       <S.FormSmallTitle>첨부 링크</S.FormSmallTitle>
       <S.Input
         placeholder="ex) github.com/Rubminds"
         onChange={onChangeRefLink}
         ref={refLinkInput}
       />
-      <S.Submit onClick={onSubmitResultClick} ref={submitBtn}>
+      <S.Submit type="submit" ref={submitBtn}>
         결과물 업로드
       </S.Submit>
     </S.ResultFormWrapper>

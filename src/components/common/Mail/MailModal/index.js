@@ -4,91 +4,88 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { toggleMailModal } from '../../../../modules/user';
-import { MailWrite, MailRead, MailUserList } from '../../..';
+import { MailPostList, MailPost } from '../../..';
 
 const MailModal = () => {
   const dispatch = useDispatch();
   const { me } = useSelector(state => state.user);
-  const [step, setStep] = useState(1);
-  const [target, setTarget] = useState(null);
-  const [sendMailList, setSendMailList] = useState([]);
-  const [receiveMailList, setReceiveMailList] = useState([]);
-  const userList = [
-    { id: 1, name: '한놈', content: '나랑 같이 프젝 하던가' },
-    { id: 2, name: '두식이', content: '쟤랑 하지마' },
-    { id: 3, name: '석삼', content: '내용엄청길게 ㅁㄴ어 ㅁㄴ알넘ㅇ람너라ㅣㅁㄴ어라럼닐ㄴㅁ' },
-    { id: 4, name: '너구리', content: '프 던가' },
-    { id: 5, name: '한놈', content: '나랑 같이 프젝 하던가' },
-    { id: 6, name: '두식이', content: '쟤랑 하지마' },
-    { id: 7, name: '석삼', content: '내용엄청길게 ㅁㄴ어 ㅁㄴ알넘ㅇ람너라ㅣㅁㄴ어라럼닐ㄴㅁ' },
-    { id: 8, name: '너구리', content: '프 던가' },
+  const [step, setStep] = useState('PROJECT');
+  const [chatroomNum, setChatroomNum] = useState(null);
+  //const [posts, setPosts] = useState([]);
+  const posts = [
+    { id: 1, title: '제목' },
+    { id: 2, title: '제목' },
+    { id: 3, title: '제목' },
+    { id: 4, title: '제목' },
   ];
-  const userList2 = [
-    { id: 1, name: '한놈', content: 'step 2' },
-    { id: 2, name: '두식이', content: '쟤랑 하지마' },
-    { id: 3, name: '석삼', content: '내용엄청길게 ㅁㄴ어 ㅁㄴ알넘ㅇ람너라ㅣㅁㄴ어라럼닐ㄴㅁ' },
-    { id: 4, name: '너구리', content: '프 던가' },
-    { id: 5, name: '한놈', content: '나랑 같이 프젝 하던가' },
-    { id: 6, name: '두식이', content: '쟤랑 하지마' },
-    { id: 7, name: '석삼', content: '내용엄청길게 ㅁㄴ어 ㅁㄴ알넘ㅇ람너라ㅣㅁㄴ어라럼닐ㄴㅁ' },
-    { id: 8, name: '너구리', content: '프 던가' },
-  ];
+  const [apiQuery, setApiQuery] = useState('/chat?kinds=PROJECT');
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(``);
+      const response = await axios.get(`${apiQuery}&page=1&size=10`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      console.log(`posts ${apiQuery}: `, response.data);
+      //setPosts(response.data);
     };
-
-    //fetchData();
-  }, []);
+    !me && fetchData();
+    //me && fetchData();
+  }, [apiQuery, me]);
 
   const onCloseClick = useCallback(() => {
     dispatch(toggleMailModal());
-  }, []);
+  }, [dispatch]);
 
   const onModalStatusClick = useCallback(
     status => () => {
+      const prevStatus = step;
+      const currentApiQuery = apiQuery;
+      const changedQuery = currentApiQuery.replace(prevStatus, status);
       setStep(status);
+      setApiQuery(changedQuery);
+    },
+    [apiQuery, step],
+  );
+
+  const onPostClick = useCallback(
+    postId => () => {
+      setChatroomNum(postId);
     },
     [],
   );
 
-  const onUserClick = useCallback(
-    user => () => {
-      setStep(3);
-      setTarget(user);
-    },
-    [],
-  );
   return (
     <S.MailModalWrapper>
       <S.ModalHeader>
         <S.HeaderTitle>쪽지함</S.HeaderTitle>
         <S.CloseButton onClick={onCloseClick} />
       </S.ModalHeader>
-      {me ? (
-        step <= 2 ? (
+      {!me ? (
+        !chatroomNum ? (
           <>
             <S.ModalStatusWrapper>
-              <S.ModalStatus current={step} value={1} onClick={onModalStatusClick(1)}>
-                받은 쪽지함
+              <S.ModalStatus
+                current={step}
+                value={'PROJECT'}
+                onClick={onModalStatusClick('PROJECT')}
+              >
+                프로젝트
               </S.ModalStatus>
-              <S.ModalStatus current={step} value={2} onClick={onModalStatusClick(2)}>
-                보낸 쪽지함
+              <S.ModalStatus current={step} value={'STUDY'} onClick={onModalStatusClick('STUDY')}>
+                스터디
+              </S.ModalStatus>
+              <S.ModalStatus current={step} value={'SCOUT'} onClick={onModalStatusClick('SCOUT')}>
+                스카웃
               </S.ModalStatus>
             </S.ModalStatusWrapper>
             <S.UserListWrapper>
-              {step === 1 ? (
-                <MailUserList userList={userList} onUserClick={onUserClick} />
-              ) : (
-                <MailUserList userList={userList2} onUserClick={onUserClick} />
-              )}
+              {posts.length > 0 && <MailPostList posts={posts} onPostClick={onPostClick} />}
             </S.UserListWrapper>
           </>
-        ) : step === 3 ? (
-          <MailRead user={target} setStep={setStep} />
         ) : (
-          <MailWrite user={target} setStep={setStep} />
+          <MailPost postId={chatroomNum} setChatroomNum={setChatroomNum} />
         )
       ) : (
         <S.DisabledForm>

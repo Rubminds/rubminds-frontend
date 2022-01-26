@@ -21,7 +21,7 @@ export const CardWrapper = styled.div`
       : props.status === 'FINISHED'
       ? `${theme.colors.status3Color}`
       : `${theme.colors.status2Color}`};
-  opacity: ${props => (props.status === 'RECRUIT' ? '1' : '0.75')};
+  opacity: ${props => (props.status === 'FINISHED' ? '0.75' : '1')};
   position: relative;
   ${mediaQuery({ width: '280px', 'min-height': '220px', padding: '2rem 2rem', margin: '2rem 0' })};
 `;

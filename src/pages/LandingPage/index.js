@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { Banner, PostCard, Footer, FilterArea, CategoryArea } from '../../components';
-import { loadPosts, authLoadPosts } from '../../modules/post';
 
 const LandingPage = () => {
   const [dropDownOptions, setDropDownOptions] = useState([]);
@@ -14,13 +13,25 @@ const LandingPage = () => {
   const [postStatus, setPostStatus] = useState('');
   const [region, setRegion] = useState('');
   const [skills, setSkills] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-  const posts = useSelector(state => state.post.posts);
   const { me } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (me && localStorage.getItem('accessToken')) ? dispatch(authLoadPosts(apiQuery)) : dispatch(loadPosts(apiQuery));
+    const fetchData = async () => {
+      const response =
+        me && localStorage.getItem('accessToken')
+          ? await axios.get(`/posts${apiQuery}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+              },
+            })
+          : await axios.get(`/posts${apiQuery}`);
+      console.log(response.data.content);
+      setPosts(response.data.content);
+    };
+    fetchData();
   }, [apiQuery, me, dispatch]);
 
   useEffect(() => {

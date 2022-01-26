@@ -19,6 +19,7 @@ const Title = ({ title, setTitle }) => {
         placeholder="제목을 입력하세요."
         onChange={onTitleChange}
         value={title}
+        required
       />
     </>
   );

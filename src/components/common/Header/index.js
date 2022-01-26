@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import * as S from './style';
 import { useSelector, useDispatch } from 'react-redux';
-
 import {  toggleHeaderModal } from '../../../modules/user';
 import { HeaderModal } from '../../';
 

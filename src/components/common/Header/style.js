@@ -6,6 +6,7 @@ import { flexBetween } from '../../../constants';
 import theme from '../../../common/theme';
 import { Avatar } from '../../';
 
+
 export const HeaderWrapper = styled.nav`
   background: linear-gradient(
     to right,

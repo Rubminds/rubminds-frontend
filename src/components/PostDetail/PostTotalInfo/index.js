@@ -27,7 +27,7 @@ const PostTotalInfo = ({
   const history = useHistory();
 
   const onEditClick = () => {
-    history.push(`/editpost`);
+    history.push(`/editpost/${post.id}`);
   };
 
   const onDeleteClick = useCallback(() => {

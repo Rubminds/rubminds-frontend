@@ -1,31 +1,16 @@
 import React, { useCallback } from 'react';
 import * as S from '../../../pages/EditPostPage/style';
 
-const File = ({
-  attachment,
-  setAttachment,
-  file,
-  setFile,
-  fileInfo,
-  setFileInfo,
-}) => {
-  const deleteImg = useCallback(() => {
-    setFileInfo('');
-    setAttachment('');
-  }, []);
+const File = ({ file, setFile }) => {
+  const onDeleteFile = () => {
+    setFile(null);
+  };
 
   const onFileChange = useCallback(
     e => {
-      let reader = new FileReader();
-      setFileInfo(e.target.files[0]);
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onloadend = finished => {
-        setAttachment(finished.target.result);
-        e.target.value = '';
-      };
-      setFile(fileInfo);
+      setFile(e.target.files[0]);
     },
-    [file]
+    [setFile]
   );
 
   return (
@@ -43,12 +28,8 @@ const File = ({
           style={{ display: 'none' }}
           onChange={onFileChange}
         />
+        <label onClick={onDeleteFile}>{file && file.name}</label>
       </S.FileLeft>
-      <S.FileRight>
-        {attachment && (
-          <img src={attachment} width="100%" onClick={deleteImg} />
-        )}
-      </S.FileRight>
     </S.FileWrapper>
   );
 };

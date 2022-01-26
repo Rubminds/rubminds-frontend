@@ -29,6 +29,7 @@ function signupUserAPI(data) {
   return axios.post('/user/signup', data, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      'Content-Type': 'multipart/form-data',
     },
   });
 }
@@ -71,6 +72,7 @@ function updateUserAPI(data) {
   return axios.post('/user/update', data, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      'Content-Type': 'multipart/form-data',
     },
   });
 }
@@ -200,5 +202,4 @@ export default function* userSaga() {
     fork(watchLogoutUser),
     fork(watchToggleHeaderModal),
   ]);
-  ;
 }

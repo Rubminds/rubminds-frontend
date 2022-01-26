@@ -23,7 +23,6 @@ const EditProfilePage = () => {
   const [introduce, onChangeIntroduce, setInroduce] = useInput('');
   const [fileInfo, setFileInfo] = useState(null);
   const [skillName, setSkillName] = useState([]);
-
   const [avatarChanged, setAvatarChanged] = useState(false);
 
   //   유저 정보 조회 API
@@ -72,7 +71,7 @@ const EditProfilePage = () => {
           nicknameChanged: me.nickname === nickname ? false : true,
           avatarChanged: avatarChanged,
         };
-        console.log('제출시 fileInfo',fileInfo);
+        console.log('제출시 fileInfo', fileInfo);
         const formData = new FormData();
         if (fileInfo) {
           formData.append('avatar', fileInfo);
@@ -81,9 +80,11 @@ const EditProfilePage = () => {
           'userInfo',
           new Blob([JSON.stringify(data)], { type: 'application/json' })
         );
-        console.log(data);
-        dispatch(updateUser(formData));
-        window.location.replace(`/userpage/${me.id}`);
+        const submitConfirm = window.confirm('수정된 정보를 저장하시겠습니까?');
+        if (submitConfirm) {
+          dispatch(updateUser(formData));
+          window.location.replace(`/userpage/${me.id}`);
+        }
       } else {
         alert('닉네임 중복체크를 해주세요');
       }
@@ -127,7 +128,7 @@ const EditProfilePage = () => {
             onChangeIntroduce={onChangeIntroduce}
             required
           />
-          <S.SubmitBtn type='submit'> 수정 완료 </S.SubmitBtn>
+          <S.SubmitBtn type="submit"> 수정 완료 </S.SubmitBtn>
           <S.Clear></S.Clear>
         </S.EditProfileInnerForm>
       </S.EditProfileWrapper>

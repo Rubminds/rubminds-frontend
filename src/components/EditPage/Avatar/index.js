@@ -4,7 +4,7 @@ import { CgProfile } from 'react-icons/cg';
 
 const Avatar = ({ setAvatarChanged, fileInfo, setFileInfo }) => {
   const imgInput = useRef();
-  const [attachMent, setAttachment] = useState(`${fileInfo}`);
+  const [attachMent, setAttachment] = useState(fileInfo);
 
   const onProfileUpload = useCallback(() => {
     imgInput.current.click();

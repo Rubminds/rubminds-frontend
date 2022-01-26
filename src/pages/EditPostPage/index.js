@@ -7,6 +7,7 @@ import * as S from './style';
 import { Link, useParams } from 'react-router-dom';
 import { AreaOptions, SKILL_ID } from '../../constants';
 import { editPost } from '../../modules/post';
+import { configure } from '@testing-library/react';
 
 const EditPostPage = () => {
   const { id } = useParams();
@@ -87,8 +88,11 @@ const EditPostPage = () => {
         'postInfo',
         new Blob([JSON.stringify(data)], { type: 'application/json' })
       );
-      dispatch(editPost({ id, formData }));
-      window.location.replace(`/post/${id}`);
+      const confirm = window.confirm('게시글 수정을 완료하시겠습니까?');
+      if (confirm) {
+        dispatch(editPost({ id, formData }));
+        window.location.replace(`/post/${id}`);
+      }
     },
     [title, content, headCount, meeting, region, dropDownOptions, customOptions]
   );
@@ -134,14 +138,7 @@ const EditPostPage = () => {
           />
 
           {/* 참고자료 */}
-          <File
-            // attachment={attachment}
-            // setAttachment={setAttachment}
-            file={file}
-            setFile={setFile}
-            // fileInfo={fileInfo}
-            // setFileInfo={setFileInfo}
-          />
+          <File file={file} setFile={setFile} />
 
           <Content content={content} setContent={setContent} />
 

@@ -83,6 +83,7 @@ function editPostAPI(data) {
   return axios.post(`/post/${data.id}/update`, data.formData, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      'Content-Type':'multipart/form-data'
     },
   });
 }

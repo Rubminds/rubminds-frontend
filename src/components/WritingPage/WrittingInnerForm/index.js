@@ -22,7 +22,7 @@ const WrittingInnerForm = () => {
   const [headCount, setHeadCount] = useState(null);
   const [kinds, setKinds] = useState('STUDY');
   const [meeting, setMeeting] = useState(null);
-  const [region, setRegion] = useState(null);
+  const [region, setRegion] = useState('서울특별시');
   const [file, setFile] = useState(null);
   const [skillName, setSkillName] = useState([]);
   const [dropDownOptions, setDropDownOptions] = useState([]);

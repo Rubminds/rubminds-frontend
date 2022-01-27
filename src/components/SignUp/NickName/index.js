@@ -45,7 +45,7 @@ const Nickname = ({ nickname, setNickname, nicknameCheck,  setnicknameCheck }) =
               <S.NickNameBox
                 name="nickname"
                 onChange={onNicknameChange}
-                value={nickname}
+                value={nickname||''}
                 required
               />
               <S.CheckBox

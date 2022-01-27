@@ -6,10 +6,10 @@ const Job = ({ job, setJob }) => {
     <>
       <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
         직업
-      </S.MainTitle>
+    </S.MainTitle>
       <S.JobWrapper>
         <S.JobCheckBtn
-          value="학생"
+          value={"학생"||''}
           name="학생"
           type="button"
           onClick={e => {
@@ -18,7 +18,7 @@ const Job = ({ job, setJob }) => {
           selected={job}
         />
         <S.JobCheckBtn
-          value="직장인"
+          value={"직장인"||''}
           name="직장인"
           type="button"
           onClick={e => {

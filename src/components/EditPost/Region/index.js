@@ -14,9 +14,6 @@ const Region = ({ region, setRegion, AreaOptions }) => {
         지역
       </S.MainTitle>
       <S.AreaSelect name="region" onChange={onRegionChange} required>
-        <option selected disabled hidden>
-          {region}
-        </option>
         {AreaOptions.map((value, index) => {
           return <option key={index}>{value}</option>;
         })}

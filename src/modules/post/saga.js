@@ -34,7 +34,7 @@ function createPostAPI(data) {
   return axios.post('/post', data, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      'Content-Type':'multipart/form-data'
+      'Content-Type': 'multipart/form-data',
     },
   });
 }
@@ -83,7 +83,7 @@ function editPostAPI(data) {
   return axios.post(`/post/${data.id}/update`, data.formData, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      'Content-Type':'multipart/form-data'
+      'Content-Type': 'multipart/form-data',
     },
   });
 }
@@ -211,7 +211,7 @@ function submitResultPostAPI(data) {
   return axios.post(`/post/${data.postId}/complete`, data.content, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      'Content-Type':'multipart/form-data'
+      'Content-Type': 'multipart/form-data',
     },
   });
 }

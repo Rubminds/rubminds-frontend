@@ -1,12 +1,16 @@
 import React, { useCallback } from 'react';
 import * as S from '../WrittingInnerForm/style';
 
-const File = ({ file, setFile}) => {
+const File = ({ file, setFile }) => {
+  const onDeleteFile = () => {
+    setFile(null);
+  };
+
   const onFileChange = useCallback(
     e => {
       setFile(e.target.files[0]);
     },
-    [setFile],
+    [setFile]
   );
 
   return (
@@ -24,7 +28,7 @@ const File = ({ file, setFile}) => {
           style={{ display: 'none' }}
           onChange={onFileChange}
         />
-        <label>{file && file.name}</label>
+        <label onClick={onDeleteFile}>{file && file.name}</label>
       </S.FileLeft>
     </S.FileWrapper>
   );

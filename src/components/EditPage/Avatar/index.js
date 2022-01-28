@@ -1,10 +1,14 @@
 import React, { useCallback, useRef, useState } from 'react';
 import * as S from '../../SignUp/SignUpPageRight/style';
 import { CgProfile } from 'react-icons/cg';
+import { useSelector } from 'react-redux';
 
 const Avatar = ({ setAvatarChanged, fileInfo, setFileInfo }) => {
   const imgInput = useRef();
-  const [attachMent, setAttachment] = useState(fileInfo);
+  const { me } = useSelector(state => state.user);
+  const [attachMent, setAttachment] = useState(
+    me.avatar === 'DefaultImg' ? null : me.avatar
+  );
 
   const onProfileUpload = useCallback(() => {
     imgInput.current.click();
@@ -37,9 +41,9 @@ const Avatar = ({ setAvatarChanged, fileInfo, setFileInfo }) => {
           <>
             <img
               src={attachMent}
-              width="150px"
-              height="150px"
-              style={{ display: 'block', borderRadius: '10px' }}
+              width="200rem"
+              height="200rem"
+              style={{ display: 'block', borderRadius: '5000px' }}
               onClick={onDeleteURL}
               alt=""
             />

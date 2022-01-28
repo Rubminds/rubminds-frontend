@@ -83,8 +83,9 @@ const EditProfilePage = () => {
 
         const submitConfirm = window.confirm('수정된 정보를 저장하시겠습니까?');
         if (submitConfirm) {
+          console.log(fileInfo, data);
           dispatch(updateUser(formData));
-          window.location.replace(`/userpage/${me.id}`);
+          // window.location.replace(`/userpage/${me.id}`);
         }
       } else {
         alert('닉네임 중복체크를 해주세요');

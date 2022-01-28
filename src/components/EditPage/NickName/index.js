@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import axios from 'axios'
 import * as S from '../../SignUp/SignUpPageRight/style'
 import { useSelector } from 'react-redux'
@@ -56,7 +56,7 @@ const Nickname = ({ nickname, setNickname, nicknameCheck,  setnicknameCheck }) =
               <S.NickNameBox
                 name="nickname"
                 onChange={onNicknameChange}
-                value={nickname}
+                value={nickname || ''}
                 required
               />
               <S.CheckBox

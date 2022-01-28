@@ -101,7 +101,7 @@ const MiddleArea = ({
                   type="number"
                   onInput={blockText}
                   onChange={onHeadCountChange}
-                  value={headCount}
+                  value={headCount || ''}
                   required
                 />
                 <S.InputBoxPeople>명</S.InputBoxPeople>

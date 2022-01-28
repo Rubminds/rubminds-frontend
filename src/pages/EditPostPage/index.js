@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CustomDropDown } from '../../components';
-import { File, MiddleArea, Region, Title, Content } from '../../components';
+import { EditPostFile, EditPostMiddleArea, EditPostRegion, EditPostTitle, EditPostContent } from '../../components';
 import * as S from './style';
 import { Link, useParams } from 'react-router-dom';
 import { AreaOptions, SKILL_ID } from '../../constants';
@@ -102,7 +102,7 @@ const EditPostPage = () => {
       <S.AllWrapper>
         <S.WrittingInnerForm onSubmit={onSubmitHandler}>
           {/* 제목 */}
-          <Title title={title} setTitle={setTitle} />
+          <EditPostTitle title={title} setTitle={setTitle} />
 
           {/* 기술 스택 */}
           <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
@@ -120,7 +120,7 @@ const EditPostPage = () => {
 
           {/* 회의환경 및 모집인원 */}
           {meeting && (
-            <MiddleArea
+            <EditPostMiddleArea
               meeting={meeting}
               setMeeting={setMeeting}
               headCount={headCount}
@@ -131,16 +131,16 @@ const EditPostPage = () => {
           )}
 
           {/* 지역 */}
-          <Region
+          <EditPostRegion
             region={region}
             setRegion={setRegion}
             AreaOptions={AreaOptions}
           />
 
           {/* 참고자료 */}
-          <File file={file} setFile={setFile} />
+          <EditPostFile file={file} setFile={setFile} />
 
-          <Content content={content} setContent={setContent} />
+          <EditPostContent content={content} setContent={setContent} />
 
           <S.BtnWrapper>
             <S.BtnLeft>

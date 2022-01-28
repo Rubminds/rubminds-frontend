@@ -4,12 +4,14 @@ import axios from 'axios';
 import * as S from './style';
 import { Link } from 'react-router-dom';
 
-import Kinds from '../Kinds';
-import Title from '../Title';
-import MiddleArea from '../MiddleArea';
-import Region from '../Region';
-import File from '../File';
-import Content from '../Content';
+import {
+  WriteKinds,
+  WriteTitle,
+  WriteMiddleArea,
+  WriteRegion,
+  WriteFile,
+  WriteContent,
+} from '../../../components';
 
 import { CustomDropDown } from '../../../components';
 import { AreaOptions, SKILL_ID } from '../../../constants';
@@ -60,7 +62,10 @@ const WrittingInnerForm = () => {
         formData.append('files', file);
       }
 
-      formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+      formData.append(
+        'postInfo',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
 
       dispatch(createPost(formData));
       window.location.replace(`/`);
@@ -76,13 +81,13 @@ const WrittingInnerForm = () => {
       customOptions,
       file,
       dispatch,
-    ],
+    ]
   );
 
   return (
     <S.WrittingInnerForm onSubmit={onSubmitHandler}>
       {/* 모집 유형 */}
-      <Kinds
+      <WriteKinds
         kinds={kinds}
         setKinds={setKinds}
         setIsScout={setIsScout}
@@ -91,7 +96,7 @@ const WrittingInnerForm = () => {
       />
 
       {/* 제목 */}
-      <Title title={title} setTitle={setTitle} />
+      <WriteTitle title={title} setTitle={setTitle} />
 
       {/* 기술 스택 */}
       <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
@@ -108,7 +113,7 @@ const WrittingInnerForm = () => {
       />
 
       {/* 회의환경 및 모집인원 */}
-      <MiddleArea
+      <WriteMiddleArea
         meeting={meeting}
         setMeeting={setMeeting}
         headCount={headCount}
@@ -117,12 +122,16 @@ const WrittingInnerForm = () => {
       />
 
       {/* 지역 */}
-      <Region region={region} setRegion={setRegion} AreaOptions={AreaOptions} />
+      <WriteRegion
+        region={region}
+        setRegion={setRegion}
+        AreaOptions={AreaOptions}
+      />
 
       {/* 참고자료 */}
-      <File file={file} setFile={setFile} />
+      <WriteFile file={file} setFile={setFile} />
 
-      <Content content={content} setContent={setContent} />
+      <WriteContent content={content} setContent={setContent} />
 
       <S.BtnWrapper>
         <S.BtnLeft>

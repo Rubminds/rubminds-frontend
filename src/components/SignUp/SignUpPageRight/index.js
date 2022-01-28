@@ -2,13 +2,12 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import * as S from './style';
 import useInput from '../../../hooks/useInput';
+
+import { SignUpNickname, SignUpJob, SignUpAvatar, SignUpIntroduce } from '../..';
+
 import { useDispatch } from 'react-redux';
 import { signupUser } from '../../../modules/user';
 import { SKILL_ID } from '../../../constants';
-import Nickname from '../NickName';
-import Job from '../Job';
-import Avatar from '../Avatar';
-import Introduce from '../Introduce';
 import DropDown from '../../common/DropDown';
 
 const SignUpPageRight = () => {
@@ -64,14 +63,14 @@ const SignUpPageRight = () => {
       </S.MainTitle>
 
       <S.SignUpPageInnerForm onSubmit={onSubmitHandler}>
-        <Avatar fileInfo={fileInfo} setFileInfo={setFileInfo} />
-        <Nickname
+        <SignUpAvatar fileInfo={fileInfo} setFileInfo={setFileInfo} />
+        <SignUpNickname
           nickname={nickname}
           setNickname={setNickname}
           nicknameCheck={nicknameCheck}
           setnicknameCheck={setnicknameCheck}
         />
-        <Job job={job} setJob={setJob} />
+        <SignUpJob job={job} setJob={setJob} />
         <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
           기술스택 (선택)
         </S.MainTitle>
@@ -82,7 +81,7 @@ const SignUpPageRight = () => {
           options={skillName}
         ></DropDown>
 
-        <Introduce onChangeIntroduce={onChangeIntroduce} />
+        <SignUpIntroduce onChangeIntroduce={onChangeIntroduce} />
         <S.SubmitBtn type="submit"> 회원가입 </S.SubmitBtn>
         <S.Clear></S.Clear>
       </S.SignUpPageInnerForm>

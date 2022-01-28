@@ -7,10 +7,12 @@ import axios from 'axios';
 import { SKILL_ID } from '../../constants';
 import { updateUser } from '../../modules/user';
 import { DropDown } from '../../components';
-import Avatar from '../../components/EditPage/Avatar';
-import Nickname from '../../components/EditPage/NickName';
-import Job from '../../components/SignUp/Job';
-import Introduce from '../../components/EditPage/Introduce';
+import {
+  EditPageAvatar,
+  EditPageNickname,
+  EditPageIntroduce,
+} from '../../components';
+import { SignUpJob } from '../../components';
 
 const EditProfilePage = () => {
   const { me } = useSelector(state => state.user);
@@ -102,19 +104,19 @@ const EditProfilePage = () => {
         </S.MainTitle>
 
         <S.EditProfileInnerForm onSubmit={onSubmitHandler}>
-          <Avatar
+          <EditPageAvatar
             setAvatarChanged={setAvatarChanged}
             fileInfo={fileInfo}
             setFileInfo={setFileInfo}
           />
-          <Nickname
+          <EditPageNickname
             nickname={nickname}
             setNickname={setNickname}
             nicknameCheck={nicknameCheck}
             setnicknameCheck={setnicknameCheck}
             required
           />
-          <Job job={job} setJob={setJob} />
+          <SignUpJob job={job} setJob={setJob} />
           <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
             기술스택 ( 선택 )
           </S.MainTitle>
@@ -125,7 +127,7 @@ const EditProfilePage = () => {
             options={skillName}
           ></DropDown>
 
-          <Introduce
+          <EditPageIntroduce
             introduce={introduce}
             onChangeIntroduce={onChangeIntroduce}
             required

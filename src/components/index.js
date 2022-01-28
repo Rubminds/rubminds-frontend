@@ -37,8 +37,24 @@ export { default as UserDibs } from './UserPage/UserDibs';
 export { default as DibsInfo } from './Dibs/DibsInfo';
 export { default as DibsPosts } from './Dibs/DibsPosts';
 
-export { default as Title } from './EditPost/Title'; 
-export { default as File } from './EditPost/File'; 
-export { default as MiddleArea } from './EditPost/MiddleArea'; 
-export { default as Region } from './EditPost/Region'; 
-export { default as Content } from './EditPost/Content'; 
+export { default as EditPostTitle } from './EditPost/Title';
+export { default as EditPostFile } from './EditPost/File';
+export { default as EditPostMiddleArea } from './EditPost/MiddleArea';
+export { default as EditPostRegion } from './EditPost/Region';
+export { default as EditPostContent } from './EditPost/Content';
+
+export { default as WriteKinds } from './WritingPage/Kinds';
+export { default as WriteTitle } from './WritingPage/Title';
+export { default as WriteMiddleArea } from './WritingPage/MiddleArea';
+export { default as WriteRegion } from './WritingPage/Region';
+export { default as WriteFile } from './WritingPage/File';
+export { default as WriteContent } from './WritingPage/Content';
+
+export { default as SignUpNickname } from './SignUp/NickName';
+export { default as SignUpJob } from './SignUp/Job';
+export { default as SignUpIntroduce } from './SignUp/Introduce';
+export { default as SignUpAvatar } from './SignUp/Avatar';
+
+export { default as EditPageAvatar } from './EditPage/Avatar';
+export { default as EditPageNickname } from './EditPage/NickName';
+export { default as EditPageIntroduce } from './EditPage/Introduce';

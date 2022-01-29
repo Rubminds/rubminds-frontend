@@ -127,10 +127,10 @@ const user = (state = initialState, action) => {
         draft.isUserUpdateError = null;
         break;
       case UPDATE_USER_SUCCESS: //액션 처리
-        console.log('success', action.data);
         draft.isUserUpdateLoading = false;
         draft.isUserUpdateDone = true;
         draft.isUserUpdateError = null;
+        console.log(action.data.data);
         draft.me = action.data.data;
         break;
       case UPDATE_USER_ERROR:

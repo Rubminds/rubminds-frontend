@@ -78,6 +78,7 @@ function updateUserAPI(data) {
 }
 
 function* updateUser(action) {
+  console.log('saga 요청 이전 데이터: ', action.data);
   const result = yield call(updateUserAPI, action.data);
   try {
     yield put({

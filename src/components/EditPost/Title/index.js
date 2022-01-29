@@ -18,7 +18,7 @@ const Title = ({ title, setTitle }) => {
         name="title"
         placeholder="제목을 입력하세요."
         onChange={onTitleChange}
-        value={title}
+        value={title || ''}
         required
       />
     </>

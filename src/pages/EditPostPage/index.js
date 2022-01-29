@@ -2,11 +2,12 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CustomDropDown } from '../../components';
-import { File, MiddleArea, Region, Title, Content } from '../../components';
+import { EditPostFile, EditPostMiddleArea, EditPostRegion, EditPostTitle, EditPostContent } from '../../components';
 import * as S from './style';
 import { Link, useParams } from 'react-router-dom';
 import { AreaOptions, SKILL_ID } from '../../constants';
 import { editPost } from '../../modules/post';
+import { configure } from '@testing-library/react';
 
 const EditPostPage = () => {
   const { id } = useParams();
@@ -87,8 +88,11 @@ const EditPostPage = () => {
         'postInfo',
         new Blob([JSON.stringify(data)], { type: 'application/json' })
       );
-      dispatch(editPost({ id, formData }));
-      window.location.replace(`/post/${id}`);
+      const confirm = window.confirm('게시글 수정을 완료하시겠습니까?');
+      if (confirm) {
+        dispatch(editPost({ id, formData }));
+        window.location.replace(`/post/${id}`);
+      }
     },
     [title, content, headCount, meeting, region, dropDownOptions, customOptions]
   );
@@ -98,7 +102,7 @@ const EditPostPage = () => {
       <S.AllWrapper>
         <S.WrittingInnerForm onSubmit={onSubmitHandler}>
           {/* 제목 */}
-          <Title title={title} setTitle={setTitle} />
+          <EditPostTitle title={title} setTitle={setTitle} />
 
           {/* 기술 스택 */}
           <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
@@ -116,7 +120,7 @@ const EditPostPage = () => {
 
           {/* 회의환경 및 모집인원 */}
           {meeting && (
-            <MiddleArea
+            <EditPostMiddleArea
               meeting={meeting}
               setMeeting={setMeeting}
               headCount={headCount}
@@ -127,23 +131,16 @@ const EditPostPage = () => {
           )}
 
           {/* 지역 */}
-          <Region
+          <EditPostRegion
             region={region}
             setRegion={setRegion}
             AreaOptions={AreaOptions}
           />
 
           {/* 참고자료 */}
-          <File
-            // attachment={attachment}
-            // setAttachment={setAttachment}
-            file={file}
-            setFile={setFile}
-            // fileInfo={fileInfo}
-            // setFileInfo={setFileInfo}
-          />
+          <EditPostFile file={file} setFile={setFile} />
 
-          <Content content={content} setContent={setContent} />
+          <EditPostContent content={content} setContent={setContent} />
 
           <S.BtnWrapper>
             <S.BtnLeft>

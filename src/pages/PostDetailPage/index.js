@@ -33,12 +33,17 @@ const PostDetailPage = () => {
     fetchData();
   }, []);
 
-  const openModal = useCallback(target => () =>{
-    console.log(target);
-    target === 'userlist' ? setUserListModalOpen(true) : setProcessEndModalOpen(true);
+  const openUserListModal = useCallback(() => {
+    setUserListModalOpen(true);
   }, []);
-  const closeModal = useCallback(target => () =>{
-    target === 'userlist' ? setUserListModalOpen(false) : setProcessEndModalOpen(false);
+  const closeUserListModal = useCallback(() => {
+    setUserListModalOpen(false);
+  }, []);
+  const openProcessEndModal = useCallback(() => {
+    setProcessEndModalOpen(true);
+  }, []);
+  const closeProcessEndModal = useCallback(() => {
+    setProcessEndModalOpen(false);
   }, []);
 
   return (
@@ -61,8 +66,10 @@ const PostDetailPage = () => {
               post={post}
               userListModalOpen={userListModalOpen}
               processEndModalOpen={processEndModalOpen}
-              closeModal={closeModal}
-              openModal={openModal}
+              closeUserListModal={closeUserListModal}
+              openUserListModal={openUserListModal}
+              closeProcessEndModal={closeProcessEndModal}
+              openProcessEndModal={openProcessEndModal}
               me={me}
               members={members}
             />

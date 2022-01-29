@@ -20,7 +20,7 @@ const UserListModal = ({
     e => {
       dispatch(addTeamUser({ teamId, userId: e.target.value }));
       e.target.value = '';
-      closeModal('userlist');
+      closeModal();
     },
     [dispatch, teamId, closeModal]
   );
@@ -60,7 +60,7 @@ const UserListModal = ({
 
   return (
     <S.UserListWrapper>
-      <S.CloseBtn onClick={closeModal('userlist')}>
+      <S.CloseBtn onClick={closeModal}>
         <ExitBtn width="1.2rem" height="1.2rem" />
       </S.CloseBtn>
       <S.UserList>

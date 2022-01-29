@@ -16,8 +16,10 @@ const PostTotalInfo = ({
   post,
   userListModalOpen,
   processEndModalOpen,
-  closeModal,
-  openModal,
+  closeUserListModal,
+  openUserListModal,
+  closeProcessEndModal,
+  openProcessEndModal,
   me,
   members,
 }) => {
@@ -42,11 +44,6 @@ const PostTotalInfo = ({
     dispatch(likePost(post.id));
     setIsLike(prev => !prev);
   }, [dispatch, post.id]);
-
-  const onStatusCircleClick = useCallback(() => {
-    console.log('open team members');
-    me && openModal('userlist');
-  }, [openModal, me]);
 
   const onChangeStatusClick = useCallback(
     status => () => {
@@ -81,7 +78,7 @@ const PostTotalInfo = ({
         {userListModalOpen ? (
           <UserListModal
             headcount={post.headcount}
-            closeModal={closeModal}
+            closeModal={closeUserListModal}
             writerId={post.writer.id}
             teamId={post.teamId}
             members={members}
@@ -153,7 +150,7 @@ const PostTotalInfo = ({
                       </>
                     ) : post.postsStatus === 'WORKING' ? (
                       <>
-                        <S.DetailInfoContent toBtn onClick={openModal('processend')} blue="true">
+                        <S.DetailInfoContent toBtn onClick={openProcessEndModal} blue="true">
                           평가 후 완료하기
                         </S.DetailInfoContent>
                         <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
@@ -190,7 +187,7 @@ const PostTotalInfo = ({
               </S.GroupBox>
             )}
             <S.DetailInfoContent>
-              <S.PostStatusCircle status={post.postsStatus} onClick={onStatusCircleClick}>
+              <S.PostStatusCircle status={post.postsStatus} onClick={openUserListModal}>
                 <label>{post.postsStatus}</label>
                 {post.kinds !== 'SCOUT' && (
                   <label>
@@ -203,7 +200,7 @@ const PostTotalInfo = ({
         )}
       </S.DetailInfoWrapper>
       {processEndModalOpen ? (
-        <ProcessEndModal closeModal={closeModal} onChangeStatusClick={onChangeStatusClick} />
+        <ProcessEndModal closeModal={closeProcessEndModal} onChangeStatusClick={onChangeStatusClick} />
       ) : (
         <></>
       )}

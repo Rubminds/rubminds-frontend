@@ -16,10 +16,10 @@ export const MailModalWrapper = styled(Paper)`
   z-index: 9999;
   background-color: #fff7d1;
   width: 40rem;
-  height: 60%;
+  height: 52rem;
   padding: 2rem 2rem;
   ${flexColumn}
-  ${mediaQuery({ width: '100%', bottom: 0, right: 0 })}
+  ${mediaQuery({ width: '100%',height:'60%', bottom: 0, right: 0 })}
 `;
 
 export const ModalHeader = styled.div`

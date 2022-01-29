@@ -139,6 +139,20 @@ const LandingPage = () => {
             </S.PostsWrapper>
           </S.LandingDetailWrapper>
           <Footer />
+          <S.testwrapper>
+            {/* <S.testtitle>asdasd</S.testtitle> */}
+            <S.wrapper3>
+              <S.wrapper1>
+                <S.dummy>1</S.dummy>
+                <S.dummy>1</S.dummy>
+                <S.dummy>1</S.dummy>
+                <S.dummy>1</S.dummy>
+                <S.dummy>1</S.dummy>
+                <S.dummy>1</S.dummy>
+              </S.wrapper1>
+              <S.wrapper2>saasd</S.wrapper2>
+            </S.wrapper3>
+          </S.testwrapper>
         </>
       )}
     </S.LandingWrapper>

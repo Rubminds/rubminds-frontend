@@ -51,7 +51,7 @@ export const UserInfoWrapper = styled.div`
 `;
 
 export const LinkWrapper = styled(Link)`
-
+  height:2.6rem;
 `
 
 export const UserAvatar = styled(Avatar)`

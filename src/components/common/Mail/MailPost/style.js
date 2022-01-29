@@ -5,8 +5,8 @@ import { Avatar } from '../../../';
 import mediaQuery from '../../../../hooks/mediaQuery';
 
 export const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   height: 100%;
 `;
 
@@ -33,13 +33,11 @@ export const Header = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  height: 46rem;
-  position: relative;
-  ${mediaQuery({ height: '60rem' })}
+  height: 100%;
+  margin-top: 1rem;
 `;
 
 export const Messages = styled.div`
-  margin-top: 1rem;
   background-color: #fff8;
   font-size: 1.6rem;
   padding: 1rem;
@@ -47,6 +45,7 @@ export const Messages = styled.div`
   border-radius: 10px;
   overflow-y: auto;
   height: 100%;
+  ${flexColumn}
 `;
 
 export const MessageRow = styled.div`
@@ -71,6 +70,7 @@ export const UserInfo = styled.div`
 export const InfoWrapper = styled.div`
   ${flexColumn}
   flex:1;
+  margin-left: 1rem;
 `;
 
 export const Nickname = styled.label`
@@ -116,6 +116,8 @@ export const InputWrapper = styled.form`
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
+  height: 4rem;
+  flex-shrink: 0;
 `;
 
 export const Input = styled.input`

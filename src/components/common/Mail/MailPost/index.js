@@ -8,72 +8,16 @@ import useInput from '../../../../hooks/useInput';
 import { Python } from '../../../../assets/imgs';
 import { MailUserModal } from '../../..';
 
-const MailPost = ({ postId, setChatroomNum }) => {
+const MailPost = ({ postId, setChatroomNum, me }) => {
   const [chats, setChats] = useState([]); //전체 채팅내용
-  const [postTitle, setPostTitle] = useState('게시글제목');
-  const [modalOpenId, setModalOpenId] = useState(-1);
-  const [userInput, onChangeUserInput, setUserInput] = useInput('');
+  const [postTitle, setPostTitle] = useState('게시글제목'); //게시글 제목
+  const [writerId, setWriterId] = useState(null);
+  const [effectSwitch, setEffectSwitch] = useState(false);
+  const [modalOpenId, setModalOpenId] = useState(-1); //유저 클릭시 모달에 전달할 유저 아이디
+  const [userInput, onChangeUserInput, setUserInput] = useInput(''); //유저가 입력한 내용
   const dispatch = useDispatch();
-  const chattemp = [
-    {
-      id: 1,
-      senderId: 1,
-      senderNickname: '동그라미',
-      avatar: 'profile url',
-      content: '채팅내용',
-      createAt: '2021-01-25',
-    },
-    {
-      id: 2,
-      senderId: 1,
-      senderNickname: '동그라미',
-      avatar: 'profile url',
-      content: '채팅내용',
-      createAt: '2021-01-25',
-    },
-    {
-      id: 3,
-      senderId: 1,
-      senderNickname: '동그라미',
-      avatar: 'profile url',
-      content: '채팅내용',
-      createAt: '2021-01-25',
-    },
-    {
-      id: 4,
-      senderId: 1,
-      senderNickname: '동그라미',
-      avatar: 'profile url',
-      content: '채팅내용',
-      createAt: '2021-01-25',
-    },
-    {
-      id: 5,
-      senderId: 1,
-      senderNickname: '동그라미',
-      avatar: 'profile url',
-      content: '채팅내용',
-      createAt: '2021-01-25',
-    },
-    {
-      id: 6,
-      senderId: 1,
-      senderNickname: '동그라미',
-      avatar: 'profile url',
-      content: '채팅내용',
-      createAt: '2021-01-25',
-    },
-    {
-      id: 7,
-      senderId: 1,
-      senderNickname: '동그라미',
-      avatar: 'profile url',
-      content: '채팅내용',
-      createAt: '2021-01-25',
-    },
-  ];
 
-  const onDeleteClick = useCallback(() => {
+  const onBackClick = useCallback(() => {
     setChatroomNum(null);
   }, [setChatroomNum]);
 
@@ -85,26 +29,32 @@ const MailPost = ({ postId, setChatroomNum }) => {
         },
       });
       console.log(response.data);
-      setChats(response.data);
+      setChats(response.data.chats);
+      setPostTitle(response.data.postTitle);
+      setWriterId(response.data.writerId);
     };
-    fetchData();
-  }, []);
+    me && fetchData();
+  }, [me, effectSwitch]);
 
   const sendMsg = useCallback(
     async e => {
       e.preventDefault();
-      console.log(userInput);
-      const response = await axios.post(
-        '/chat',
-        { postId, content: userInput },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      const trimedInput = userInput.replace(/ /g, '');
+      if (trimedInput !== null && trimedInput !== '') {
+        const response = await axios.post(
+          '/chat',
+          { postId, content: userInput },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
           },
-        },
-      );
-      console.log(response.data);
+        );
+        console.log(response.data);
+      }
       setUserInput('');
+      setEffectSwitch(prev => !prev);
+      e.target.children[0].value='';
     },
     [postId, userInput, setUserInput],
   );
@@ -120,17 +70,17 @@ const MailPost = ({ postId, setChatroomNum }) => {
 
   return (
     <S.ContentWrapper onClick={closeUserModal}>
-      <S.Header onClick={onDeleteClick}>
+      <S.Header onClick={onBackClick}>
         <S.BackBtn />
         <S.PostTitle>{postTitle}</S.PostTitle>
       </S.Header>
 
       <S.Content>
         <S.Messages>
-          {chattemp.map(v => (
+          {chats.map(v => (
             <S.MessageRow key={v.id}>
               <S.UserInfo>
-                <S.UserAvatar src={Python} onClick={e => openUserModal(e, v.senderId)} />
+                <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
                 <S.InfoWrapper>
                   <S.Nickname>{v.senderNickname}</S.Nickname>
                   <S.SendTime>{v.createAt}</S.SendTime>

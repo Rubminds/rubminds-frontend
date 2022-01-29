@@ -71,3 +71,33 @@ export const PostsWrapper = styled.ul`
     align-items:center;
   }
 `;
+
+export const testwrapper = styled.div`
+  height:300px;
+  width:200px;
+  //${flexColumn}
+  margin-bottom:50px;
+`
+
+export const testtitle = styled.label`
+  height:50px;
+`
+export const wrapper3=  styled.div`
+  height:100%;
+  ${flexColumn};
+`
+export const wrapper1 = styled.div`
+  height:100%;
+  width:100%;
+  background-color:black;
+  overflow-y:scroll;
+`
+export const dummy = styled.div`
+  height:100px;
+`
+
+export const wrapper2 = styled.div`
+  height:50px;
+  color:#fff;
+  background-color:red;
+`

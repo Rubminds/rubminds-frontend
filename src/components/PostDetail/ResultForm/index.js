@@ -77,11 +77,11 @@ const ResultForm = ({ post }) => {
       <S.FormSmallTitle>첨부파일</S.FormSmallTitle>
       <S.FileWrapper>
         {post.completeContent ? (
-          <S.CompleteFile>
+          <S.CompleteFile download href={post.completeFile.url}>
             {post.completeFile && (
               <>
                 <GrDocumentDownload fontSize="1.8rem" />
-                &nbsp;{post.completeFile.url}
+                &nbsp;{post.completeFile.fileName}
               </>
             )}
           </S.CompleteFile>

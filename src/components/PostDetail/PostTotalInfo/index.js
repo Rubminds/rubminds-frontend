@@ -34,6 +34,7 @@ const PostTotalInfo = ({
     const deleteConfirm = window.confirm(`정말 게시글을 삭제하시겠습니까?`);
     if (deleteConfirm) {
       dispatch(deletePost(post.id));
+      window.location.replace('/');
     }
   }, [dispatch, post.id]);
 
@@ -70,7 +71,7 @@ const PostTotalInfo = ({
           {post.files.map((v, i) => (
             <S.UploadedFile href={v.url} key={i} download>
               <GrDocumentDownload fontSize="1.8rem" />
-              &nbsp;{v.url}
+              &nbsp;{v.fileName}
             </S.UploadedFile>
           ))}
         </S.FileContainer>

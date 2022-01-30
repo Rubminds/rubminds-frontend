@@ -12,12 +12,7 @@ const MailModal = () => {
   const [step, setStep] = useState('PROJECT');
   const [chatroomNum, setChatroomNum] = useState(null);
   const [posts, setPosts] = useState([]);
-  // const posts = [
-  //   { id: 1, title: '제목' },
-  //   { id: 2, title: '제목' },
-  //   { id: 3, title: '제목' },
-  //   { id: 4, title: '제목' },
-  // ];
+  const [modalOpenId, setModalOpenId] = useState(-1); //유저 클릭시 모달에 전달할 유저 아이디
   const [apiQuery, setApiQuery] = useState('/chat?kinds=PROJECT');
 
   useEffect(() => {
@@ -55,8 +50,17 @@ const MailModal = () => {
     [],
   );
 
+  const openUserModal = useCallback((e, senderId) => {
+    e.stopPropagation();
+    setModalOpenId(senderId);
+  }, []);
+
+  const closeUserModal = useCallback(() => {
+    setModalOpenId(-1);
+  }, []);
+
   return (
-    <S.MailModalWrapper>
+    <S.MailModalWrapper onClick={closeUserModal}>
       <S.ModalHeader>
         <S.HeaderTitle>쪽지함</S.HeaderTitle>
         <S.CloseButton onClick={onCloseClick} />
@@ -84,7 +88,14 @@ const MailModal = () => {
             </S.UserListWrapper>
           </>
         ) : (
-          <MailPost postId={chatroomNum} setChatroomNum={setChatroomNum} me={me}/>
+          <MailPost
+            postId={chatroomNum}
+            setChatroomNum={setChatroomNum}
+            me={me}
+            modalOpenId={modalOpenId}
+            openUserModal={openUserModal}
+            step={step}
+          />
         )
       ) : (
         <S.DisabledForm>

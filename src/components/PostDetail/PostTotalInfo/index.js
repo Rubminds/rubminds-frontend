@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom';
 
 import { DetailInfo, UserListModal, ProcessEndModal } from '../..';
 import { likePost, changePostStatus, deletePost } from '../../../modules/post';
+import { toggleMailModal } from '../../../modules/user/index.js';
+import { startMail } from '../../../modules/mail';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
@@ -52,6 +54,12 @@ const PostTotalInfo = ({
     },
     [post.id, dispatch],
   );
+
+  const onStartChatClick = useCallback(() => {
+    console.log(post.id)
+    dispatch(startMail(post.id));
+    //dispatch(toggleMailModal());
+  }, [dispatch, post.id]);
 
   return (
     <S.PostDetailInfo>
@@ -110,7 +118,7 @@ const PostTotalInfo = ({
                     )}
                   </>
                 ) : (
-                  <S.DetailInfoContent>
+                  <S.DetailInfoContent onClick={onStartChatClick}>
                     <MdPersonAdd /> &nbsp;모집자와 대화하기
                   </S.DetailInfoContent>
                 )}
@@ -167,7 +175,7 @@ const PostTotalInfo = ({
                     )}
                   </>
                 ) : (
-                  <S.DetailInfoContent>
+                  <S.DetailInfoContent onClick={onStartChatClick}>
                     <MdPersonAdd /> &nbsp;모집자와 대화하기
                   </S.DetailInfoContent>
                 )}
@@ -200,7 +208,10 @@ const PostTotalInfo = ({
         )}
       </S.DetailInfoWrapper>
       {processEndModalOpen ? (
-        <ProcessEndModal closeModal={closeProcessEndModal} onChangeStatusClick={onChangeStatusClick} />
+        <ProcessEndModal
+          closeModal={closeProcessEndModal}
+          onChangeStatusClick={onChangeStatusClick}
+        />
       ) : (
         <></>
       )}

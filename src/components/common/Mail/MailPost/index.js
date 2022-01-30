@@ -8,12 +8,12 @@ import useInput from '../../../../hooks/useInput';
 import { Python } from '../../../../assets/imgs';
 import { MailUserModal } from '../../..';
 
-const MailPost = ({ postId, setChatroomNum, me }) => {
+const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step }) => {
   const [chats, setChats] = useState([]); //전체 채팅내용
   const [postTitle, setPostTitle] = useState('게시글제목'); //게시글 제목
-  const [writerId, setWriterId] = useState(null);
+  const [writerId, setWriterId] = useState(null); //게시글 작성자
   const [effectSwitch, setEffectSwitch] = useState(false);
-  const [modalOpenId, setModalOpenId] = useState(-1); //유저 클릭시 모달에 전달할 유저 아이디
+
   const [userInput, onChangeUserInput, setUserInput] = useInput(''); //유저가 입력한 내용
   const dispatch = useDispatch();
 
@@ -59,15 +59,6 @@ const MailPost = ({ postId, setChatroomNum, me }) => {
     [postId, userInput, setUserInput],
   );
 
-  const openUserModal = useCallback((e, senderId) => {
-    e.stopPropagation();
-    setModalOpenId(senderId);
-  }, []);
-
-  const closeUserModal = useCallback(() => {
-    setModalOpenId(-1);
-  }, []);
-
   return (
     <>
       <S.Header onClick={onBackClick}>
@@ -80,7 +71,9 @@ const MailPost = ({ postId, setChatroomNum, me }) => {
             <S.UserInfo>
               <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
               <S.InfoWrapper>
-                <S.Nickname>{v.senderNickname}</S.Nickname>
+                <S.Nickname onClick={e => openUserModal(e, v.senderId)}>
+                  {v.senderNickname}
+                </S.Nickname>
                 <S.SendTime>
                   {v.createAt.split('T')[0]}&nbsp;{v.createAt.split('T')[1]}
                 </S.SendTime>
@@ -96,7 +89,9 @@ const MailPost = ({ postId, setChatroomNum, me }) => {
           <FaRegPaperPlane />
         </S.SendBtn>
       </S.InputWrapper>
-      {modalOpenId > 0 && <MailUserModal />}
+      {modalOpenId > 0 && (
+        <MailUserModal userId={modalOpenId} postId={postId} me={me} step={step} writerId={writerId}/>
+      )}
     </>
   );
 };

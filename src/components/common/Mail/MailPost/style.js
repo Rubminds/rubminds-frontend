@@ -64,6 +64,7 @@ export const InfoWrapper = styled.div`
 export const Nickname = styled.label`
   font-weight: bold;
   cursor: pointer;
+  width:fit-content;
 `;
 
 export const Msg = styled.label``;

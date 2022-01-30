@@ -2,9 +2,9 @@ import {
   SEND_MAIL,
   SEND_MAIL_SUCCESS,
   SEND_MAIL_ERROR,
-  DELETE_MAIL,
-  DELETE_MAIL_SUCCESS,
-  DELETE_MAIL_ERROR,
+  START_MAIL,
+  START_MAIL_SUCCESS,
+  START_MAIL_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
@@ -14,9 +14,9 @@ export const initialState = {
   sendMailDone: false,
   sendMailError: null,
 
-  deleteMailLoading: false,
-  deleteMailDone: false,
-  deleteMailError: null,
+  startMailLoading: false,
+  startMailDone: false,
+  startMailError: null,
 };
 
 export const sendMail = data => ({
@@ -24,8 +24,8 @@ export const sendMail = data => ({
   data,
 });
 
-export const deleteMail = data => ({
-  type: DELETE_MAIL,
+export const startMail = data => ({
+  type: START_MAIL,
   data,
 });
 
@@ -47,19 +47,19 @@ const mail = (state = initialState, action) => {
         draft.sendMailLoading = false;
         draft.sendMailError = action.error;
         break;
-      case DELETE_MAIL:
-        draft.deleteMailLoading = true;
-        draft.deleteMailDone = false;
-        draft.deleteMailError = null;
+      case START_MAIL:
+        draft.startMailLoading = true;
+        draft.startMailDone = false;
+        draft.startMailError = null;
         break;
-      case DELETE_MAIL_SUCCESS:
-        draft.deleteMailLoading = false;
-        draft.deleteMailDone = true;
-        draft.deleteMailError = null;
+      case START_MAIL_SUCCESS:
+        draft.startMailLoading = false;
+        draft.startMailDone = true;
+        draft.startMailError = null;
         break;
-      case DELETE_MAIL_ERROR:
-        draft.deleteMailLoading = false;
-        draft.deleteMailError = action.error;
+      case START_MAIL_ERROR:
+        draft.startMailLoading = false;
+        draft.startMailError = action.error;
         break;
       default:
         break;

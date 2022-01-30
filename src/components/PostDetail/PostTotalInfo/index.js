@@ -49,14 +49,19 @@ const PostTotalInfo = ({
 
   const onChangeStatusClick = useCallback(
     status => () => {
+      if (status === 'RANKING' && members.length === 1) {
+        alert('sadfsdaf');
+        dispatch(changePostStatus({ postId: post.id, content: { postStatus: 'FINISHED' } }));
+      }
       dispatch(changePostStatus({ postId: post.id, content: { postStatus: status } }));
+      alert('변경되었습니다');
       window.location.replace(`/post/${post.id}`);
     },
-    [post.id, dispatch],
+    [post.id, dispatch, members.length],
   );
 
   const onStartChatClick = useCallback(() => {
-    console.log(post.id)
+    console.log(post.id);
     dispatch(startMail(post.id));
     //dispatch(toggleMailModal());
   }, [dispatch, post.id]);

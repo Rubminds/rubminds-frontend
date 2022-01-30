@@ -64,10 +64,20 @@ export const InfoWrapper = styled.div`
 export const Nickname = styled.label`
   font-weight: bold;
   cursor: pointer;
-  width:fit-content;
+  width: fit-content;
 `;
 
 export const Msg = styled.label``;
+
+export const OkButton = styled.button`
+  background-color: #cdf6e8;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  width: 10rem;
+  height: 3rem;
+`;
 
 export const SendTime = styled.label`
   font-size: 1.2rem;

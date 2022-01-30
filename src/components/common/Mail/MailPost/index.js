@@ -59,6 +59,17 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
     [postId, userInput, setUserInput],
   );
 
+  const checkReserveMsg = msg => {
+    return msg.includes('sdnimbur@');
+  };
+
+  const onOKButtonClick = useCallback(()=>{
+    const okConfirm = window.confirm("정말로 수락하시겠습니까?");
+    if(okConfirm){
+      console.log("수락")
+    }
+  },[])
+
   return (
     <>
       <S.Header onClick={onBackClick}>
@@ -79,7 +90,10 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
                 </S.SendTime>
               </S.InfoWrapper>
             </S.UserInfo>
-            <S.Msg>{v.content}</S.Msg>
+            <S.Msg>
+              {checkReserveMsg(v.content) ? `${v.content.split('@')[3]}을 초대했습니다` : v.content}
+              {parseInt(v.content.split('@')[3]) === me.id && <><br/><S.OkButton onClick={onOKButtonClick}>수락하기</S.OkButton></>}
+            </S.Msg>
           </S.MessageRow>
         ))}
       </S.Content>
@@ -90,7 +104,14 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
         </S.SendBtn>
       </S.InputWrapper>
       {modalOpenId > 0 && (
-        <MailUserModal userId={modalOpenId} postId={postId} me={me} step={step} writerId={writerId}/>
+        <MailUserModal
+          userId={modalOpenId}
+          postId={postId}
+          me={me}
+          step={step}
+          writerId={writerId}
+          setEffectSwitch={setEffectSwitch}
+        />
       )}
     </>
   );

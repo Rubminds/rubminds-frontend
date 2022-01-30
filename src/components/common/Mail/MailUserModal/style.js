@@ -7,7 +7,6 @@ export const ModalWrapper = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 10rem;
   background-color: #fff;
   ${flexColumn};
   border-top-left-radius: 10px;
@@ -19,8 +18,13 @@ export const ModalLabel = styled.label`
   padding: 1rem 1rem;
   font-weight: bold;
   font-size: 2rem;
+  height: 6rem;
+  cursor: pointer;
   ${flexCenter};
   & + & {
     border-top: 1px solid rgb(34 36 38 / 15%);
+  }
+  &:hover {
+    background-color: rgb(34 36 38 / 15%);
   }
 `;

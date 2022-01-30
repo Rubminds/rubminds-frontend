@@ -54,7 +54,7 @@ const MailPost = ({ postId, setChatroomNum, me }) => {
       }
       setUserInput('');
       setEffectSwitch(prev => !prev);
-      e.target.children[0].value='';
+      e.target.children[0].value = '';
     },
     [postId, userInput, setUserInput],
   );
@@ -69,36 +69,35 @@ const MailPost = ({ postId, setChatroomNum, me }) => {
   }, []);
 
   return (
-    <S.ContentWrapper onClick={closeUserModal}>
+    <>
       <S.Header onClick={onBackClick}>
         <S.BackBtn />
         <S.PostTitle>{postTitle}</S.PostTitle>
       </S.Header>
-
       <S.Content>
-        <S.Messages>
-          {chats.map(v => (
-            <S.MessageRow key={v.id}>
-              <S.UserInfo>
-                <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
-                <S.InfoWrapper>
-                  <S.Nickname>{v.senderNickname}</S.Nickname>
-                  <S.SendTime>{v.createAt}</S.SendTime>
-                </S.InfoWrapper>
-              </S.UserInfo>
-              <S.Msg>{v.content}</S.Msg>
-            </S.MessageRow>
-          ))}
-        </S.Messages>
-        <S.InputWrapper onSubmit={sendMsg}>
-          <S.Input type="text" onChange={onChangeUserInput} />
-          <S.SendBtn type="submit">
-            <FaRegPaperPlane />
-          </S.SendBtn>
-        </S.InputWrapper>
-        {modalOpenId > 0 && <MailUserModal />}
+        {chats.map(v => (
+          <S.MessageRow key={v.id}>
+            <S.UserInfo>
+              <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
+              <S.InfoWrapper>
+                <S.Nickname>{v.senderNickname}</S.Nickname>
+                <S.SendTime>
+                  {v.createAt.split('T')[0]}&nbsp;{v.createAt.split('T')[1]}
+                </S.SendTime>
+              </S.InfoWrapper>
+            </S.UserInfo>
+            <S.Msg>{v.content}</S.Msg>
+          </S.MessageRow>
+        ))}
       </S.Content>
-    </S.ContentWrapper>
+      <S.InputWrapper onSubmit={sendMsg}>
+        <S.Input type="text" onChange={onChangeUserInput} />
+        <S.SendBtn type="submit">
+          <FaRegPaperPlane />
+        </S.SendBtn>
+      </S.InputWrapper>
+      {modalOpenId > 0 && <MailUserModal />}
+    </>
   );
 };
 

@@ -1,9 +1,15 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import * as S from './style';
 import useInput from '../../../hooks/useInput';
 
-import { SignUpNickname, SignUpJob, SignUpAvatar, SignUpIntroduce } from '../..';
+import {
+  SignUpNickname,
+  SignUpJob,
+  SignUpAvatar,
+  SignUpIntroduce,
+} from '../..';
 
 import { useDispatch } from 'react-redux';
 import { signupUser } from '../../../modules/user';
@@ -12,6 +18,7 @@ import DropDown from '../../common/DropDown';
 
 const SignUpPageRight = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [nicknameCheck, setnicknameCheck] = useState(false);
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [nickname, setNickname] = useState(null);
@@ -38,7 +45,7 @@ const SignUpPageRight = () => {
           introduce,
           skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         };
-        console.log(job);
+        console.log(data);
         const formData = new FormData();
         if (fileInfo) {
           formData.append('avatar', fileInfo);
@@ -47,8 +54,11 @@ const SignUpPageRight = () => {
           'userInfo',
           new Blob([JSON.stringify(data)], { type: 'application/json' })
         );
-        dispatch(signupUser(formData));
-        window.location.replace(`/`);
+        const confirm = window.confirm('회원가입을 진행 하시겠습니까?');
+        if (confirm) {
+          dispatch(signupUser(formData));
+          history.push('/');
+        }
       } else {
         alert('닉네임 중복체크를 해주세요');
       }

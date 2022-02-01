@@ -87,7 +87,7 @@ const EditProfilePage = () => {
         if (submitConfirm) {
           console.log(fileInfo, data);
           dispatch(updateUser(formData));
-          // window.location.replace(`/userpage/${me.id}`);
+          window.location.replace(`/userpage/${me.id}`);
         }
       } else {
         alert('닉네임 중복체크를 해주세요');

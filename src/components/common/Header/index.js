@@ -17,7 +17,7 @@ const Header = () => {
       <S.StyledLink to="/">Rubminds</S.StyledLink>
       {me ? (
         <S.UserInfoWrapper>
-          <S.LinkWrapper to={`/userpage/${me.id}`}><S.UserAvatar src={`https://${me.avatar}`}/></S.LinkWrapper>
+          <S.LinkWrapper to={`/userpage/${me.id}`}><S.UserAvatar src={`${me.avatar}`}/></S.LinkWrapper>
           <S.UserText>{me.nickname}</S.UserText>
           {isHeaderModalOpen ? (
             <S.UpArrowWrapper>

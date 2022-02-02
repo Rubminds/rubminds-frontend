@@ -67,7 +67,7 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
     const okConfirm = window.confirm('정말로 수락하시겠습니까?');
     if (okConfirm) {
       dispatch(addTeamUser({ teamId: postId, userId: me.id }));
-      alert('수락되었습니다');
+      
     }
   }, []);
 

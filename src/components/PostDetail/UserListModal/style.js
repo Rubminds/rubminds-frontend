@@ -8,7 +8,7 @@ import mediaQuery from '../../../hooks/mediaQuery';
 
 export const UserListWrapper = styled.div`
   position: relative;
-  padding: 1.5rem 1rem 1rem 1rem;
+  padding: 3rem 1rem 1rem 1rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   border-radius: 5px;

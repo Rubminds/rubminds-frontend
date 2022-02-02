@@ -5,8 +5,8 @@ import axios from 'axios';
 import { FaRegPaperPlane } from 'react-icons/fa';
 
 import useInput from '../../../../hooks/useInput';
-import { Python } from '../../../../assets/imgs';
 import { MailUserModal } from '../../..';
+import { addTeamUser } from '../../../../modules/team';
 
 const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step }) => {
   const [chats, setChats] = useState([]); //전체 채팅내용
@@ -63,12 +63,13 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
     return msg.includes('sdnimbur@');
   };
 
-  const onOKButtonClick = useCallback(()=>{
-    const okConfirm = window.confirm("정말로 수락하시겠습니까?");
-    if(okConfirm){
-      console.log("수락")
+  const onOKButtonClick = useCallback(() => {
+    const okConfirm = window.confirm('정말로 수락하시겠습니까?');
+    if (okConfirm) {
+      dispatch(addTeamUser({ teamId: postId, userId: me.id }));
+      alert('수락되었습니다');
     }
-  },[])
+  }, []);
 
   return (
     <>
@@ -92,7 +93,12 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
             </S.UserInfo>
             <S.Msg>
               {checkReserveMsg(v.content) ? `${v.content.split('@')[3]}을 초대했습니다` : v.content}
-              {parseInt(v.content.split('@')[3]) === me.id && <><br/><S.OkButton onClick={onOKButtonClick}>수락하기</S.OkButton></>}
+              {parseInt(v.content.split('@')[3]) === me.id && (
+                <>
+                  <br />
+                  <S.OkButton onClick={onOKButtonClick}>수락하기</S.OkButton>
+                </>
+              )}
             </S.Msg>
           </S.MessageRow>
         ))}

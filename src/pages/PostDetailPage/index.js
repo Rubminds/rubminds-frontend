@@ -28,6 +28,7 @@ const PostDetailPage = () => {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
+      console.log(teamResponse.data);
       setMembers(teamResponse.data.teamUsers);
     };
     fetchData();
@@ -75,7 +76,7 @@ const PostDetailPage = () => {
             />
             <S.PostDetailContent>{post.content}</S.PostDetailContent>
 
-            {post.postsStatus === 'FINISHED' && <ResultForm post={post} />}
+            {post.postsStatus === 'FINISHED' && <ResultForm post={post} meId={me.id} adminId={post.writer.id}/>}
           </>
         ))}
     </S.PostDetailWrapper>

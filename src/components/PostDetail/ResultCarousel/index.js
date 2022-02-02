@@ -56,7 +56,7 @@ const ResultCarousel = ({ size, completeImages }) => {
               disabled
             />
             <BsPlusCircleDotted />
-            이미지 추가
+            이미지 추가r
           </S.AddImgCard>
         ) : (
           completeImages.map((v, i) => {

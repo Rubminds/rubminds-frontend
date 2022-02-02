@@ -7,12 +7,13 @@ import { UploadCarousel, ResultCarousel } from '../..';
 import useInput from '../../../hooks/useInput';
 import { submitResultPost } from '../../../modules/post';
 
-const ResultForm = ({ post }) => {
+const ResultForm = ({ post, meId, adminId }) => {
   const [file, setFile] = useState(null);
   const [refLink, onChangeRefLink] = useInput('');
   const [completeContent, onChangeCompleteContent] = useInput('');
   const [images, setImages] = useState([]);
   const [completeImages, setCompleteImages] = useState([]);
+  const isAdmin = meId === adminId;
   const dispatch = useDispatch();
 
   const fileInput = useRef();
@@ -56,7 +57,7 @@ const ResultForm = ({ post }) => {
 
   useEffect(() => {
     const isDone =
-      post.completeContent || post.refLink || post.completeFile || post.completeImages.length > 0; //추후에 이미지리스트도 추가
+      post.completeContent || post.refLink || post.completeFile || !isAdmin || post.completeImages.length > 0 ;
     if (isDone) {
       fileInput.current.disabled = true;
       submitBtn.current.disabled = true;
@@ -69,7 +70,7 @@ const ResultForm = ({ post }) => {
       completeContentInput.current.value = post.completeContent;
       post.completeImages && setCompleteImages(post.completeImages.map(img => img.url));
     }
-  }, [post.completeContent, post.completeFile, post.completeImages, post.refLink]);
+  }, [post.completeContent, post.completeFile, post.completeImages, post.refLink, isAdmin]);
 
   return (
     <S.ResultFormWrapper onSubmit={onSubmitHandler}>
@@ -102,7 +103,7 @@ const ResultForm = ({ post }) => {
         ref={fileInput}
       />
       <S.FormSmallTitle>첨부 이미지</S.FormSmallTitle>
-      {post.completeContent ? (
+      {post.completeContent || !isAdmin ? (
         <ResultCarousel size="30rem" completeImages={completeImages} />
       ) : (
         <UploadCarousel size="30rem" setImages={setImages} />

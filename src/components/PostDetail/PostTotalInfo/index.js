@@ -50,7 +50,6 @@ const PostTotalInfo = ({
   const onChangeStatusClick = useCallback(
     status => () => {
       if (status === 'RANKING' && members.length === 1) {
-        alert('sadfsdaf');
         dispatch(changePostStatus({ postId: post.id, content: { postStatus: 'FINISHED' } }));
       }
       dispatch(changePostStatus({ postId: post.id, content: { postStatus: status } }));

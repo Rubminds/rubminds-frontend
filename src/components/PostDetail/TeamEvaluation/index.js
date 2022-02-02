@@ -9,6 +9,7 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
   const [evaluationArray, setEvaluationArray] = useState([]);
   const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
+  const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +19,9 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
         },
       });
       setMembers(response.data.teamUsers);
+      console.log(response.data)
       const copyArray = response.data.teamUsers.map(v => {
+        me.id === v.userId && v.finish && setIsFinished(true);
         return { userId: v.userId, attendLevel: 0, workLevel: 0 };
       });
       setEvaluationArray(copyArray);
@@ -63,8 +66,18 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
       <S.TitleWrapper>
         <S.MainTitle>팀원 평가</S.MainTitle>
         <S.SubTitle>
-          팀원 평가는 팀원의 마이페이지에 반영됩니다. <br />
-          신중하고 솔직한 평가 부탁드려요!
+          {isFinished ? (
+            <>
+              모든 팀원이 평가를 완료할 때 까지 <br />
+              기다려주세요!
+            </>
+          ) : (
+            <>
+              팀원 평가는 팀원의 마이페이지에 반영됩니다.
+              <br />
+              신중하고 솔직한 평가 부탁드려요!
+            </>
+          )}
         </S.SubTitle>
       </S.TitleWrapper>
       <S.ContentsWrapper>
@@ -77,29 +90,14 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
                   &nbsp;{v.userNickname}
                   {v.userId === writerId && <S.WriterMark />}
                 </S.UserLeftWrapper>
-                <S.UserRightWrapper>
-                  <S.EvaluationContent>
-                    <S.EvaluationTitle>참여도</S.EvaluationTitle>
-                    <S.EvaluationLevel
-                      onInput={checkInput}
-                      maxLength="1"
-                      onChange={e => onAttendChange(e, i, 'attend')}
-                    />
-                    <S.EvaluationStars>
-                      <S.Star />
-                      <S.Star />
-                      <S.Star />
-                      <S.Star />
-                      <S.Star />
-                    </S.EvaluationStars>
-                  </S.EvaluationContent>
-                  {kinds !== 'STUDY' && (
+                {!isFinished && (
+                  <S.UserRightWrapper>
                     <S.EvaluationContent>
-                      <S.EvaluationTitle>숙련도</S.EvaluationTitle>
+                      <S.EvaluationTitle>참여도</S.EvaluationTitle>
                       <S.EvaluationLevel
                         onInput={checkInput}
                         maxLength="1"
-                        onChange={e => onAttendChange(e, i, 'work')}
+                        onChange={e => onAttendChange(e, i, 'attend')}
                       />
                       <S.EvaluationStars>
                         <S.Star />
@@ -109,12 +107,31 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
                         <S.Star />
                       </S.EvaluationStars>
                     </S.EvaluationContent>
-                  )}
-                </S.UserRightWrapper>
+                    {kinds !== 'STUDY' && (
+                      <S.EvaluationContent>
+                        <S.EvaluationTitle>숙련도</S.EvaluationTitle>
+                        <S.EvaluationLevel
+                          onInput={checkInput}
+                          maxLength="1"
+                          onChange={e => onAttendChange(e, i, 'work')}
+                        />
+                        <S.EvaluationStars>
+                          <S.Star />
+                          <S.Star />
+                          <S.Star />
+                          <S.Star />
+                          <S.Star />
+                        </S.EvaluationStars>
+                      </S.EvaluationContent>
+                    )}
+                  </S.UserRightWrapper>
+                )}
               </S.UserWrapper>
             ),
         )}
-        <S.SubmitBtn onClick={onSubmitClick}>평가 완료</S.SubmitBtn>
+        <S.SubmitBtn onClick={onSubmitClick} isFinished={isFinished} disabled={isFinished}>
+          평가 완료
+        </S.SubmitBtn>
       </S.ContentsWrapper>
     </S.TeamEvaluationWrapper>
   );

@@ -52,13 +52,13 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
       e.preventDefault();
       const obj = {
         kinds,
-        evaluation: evaluationArray,
+        evaluation: evaluationArray.length === 1 ? [] :evaluationArray,
       };
       console.log(evaluationArray);
       dispatch(evaluateTeamMembers({ teamId, content: obj }));
       window.location.replace(`/post/${postId}`);
     },
-    [evaluationArray, dispatch, kinds, teamId],
+    [evaluationArray, dispatch, kinds, teamId, postId],
   );
 
   return (

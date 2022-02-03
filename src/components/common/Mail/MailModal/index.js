@@ -83,9 +83,9 @@ const MailModal = () => {
                 스카웃
               </S.ModalStatus>
             </S.ModalStatusWrapper>
-            <S.UserListWrapper>
+            <S.PostListWrapper>
               {posts.length > 0 && <MailPostList posts={posts} onPostClick={onPostClick} />}
-            </S.UserListWrapper>
+            </S.PostListWrapper>
           </>
         ) : (
           <MailPost

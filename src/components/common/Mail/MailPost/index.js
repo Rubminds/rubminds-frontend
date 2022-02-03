@@ -12,7 +12,7 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
   const [chats, setChats] = useState([]); //전체 채팅내용
   const [postTitle, setPostTitle] = useState('게시글제목'); //게시글 제목
   const [writerId, setWriterId] = useState(null); //게시글 작성자
-  const [effectSwitch, setEffectSwitch] = useState(false);
+  const [effectSwitch, setEffectSwitch] = useState(false); //유저가 메시지 보낸 후 새로고침 트리거
 
   const [userInput, onChangeUserInput, setUserInput] = useInput(''); //유저가 입력한 내용
   const dispatch = useDispatch();
@@ -67,7 +67,6 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
     const okConfirm = window.confirm('정말로 수락하시겠습니까?');
     if (okConfirm) {
       dispatch(addTeamUser({ teamId: postId, userId: me.id }));
-      
     }
   }, []);
 
@@ -78,30 +77,35 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
         <S.PostTitle>{postTitle}</S.PostTitle>
       </S.Header>
       <S.Content>
-        {chats.map(v => (
-          <S.MessageRow key={v.id}>
-            <S.UserInfo>
-              <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
-              <S.InfoWrapper>
-                <S.Nickname onClick={e => openUserModal(e, v.senderId)}>
-                  {v.senderNickname}
-                </S.Nickname>
-                <S.SendTime>
-                  {v.createAt.split('T')[0]}&nbsp;{v.createAt.split('T')[1]}
-                </S.SendTime>
-              </S.InfoWrapper>
-            </S.UserInfo>
-            <S.Msg>
-              {checkReserveMsg(v.content) ? `${v.content.split('@')[3]}을 초대했습니다` : v.content}
-              {parseInt(v.content.split('@')[3]) === me.id && (
-                <>
-                  <br />
-                  <S.OkButton onClick={onOKButtonClick}>수락하기</S.OkButton>
-                </>
-              )}
-            </S.Msg>
-          </S.MessageRow>
-        ))}
+        {chats.map(
+          v =>
+            v.content !== '@startmail' && (
+              <S.MessageRow key={v.id}>
+                <S.UserInfo>
+                  <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
+                  <S.InfoWrapper>
+                    <S.Nickname onClick={e => openUserModal(e, v.senderId)}>
+                      {v.senderNickname}
+                    </S.Nickname>
+                    <S.SendTime>
+                      {v.createAt.split('T')[0]}&nbsp;{v.createAt.split('T')[1]}
+                    </S.SendTime>
+                  </S.InfoWrapper>
+                </S.UserInfo>
+                <S.Msg>
+                  {checkReserveMsg(v.content)
+                    ? `${v.content.split('@')[3]}을 초대했습니다`
+                    : v.content}
+                  {parseInt(v.content.split('@')[3]) === me.id && (
+                    <>
+                      <br />
+                      <S.OkButton onClick={onOKButtonClick}>수락하기</S.OkButton>
+                    </>
+                  )}
+                </S.Msg>
+              </S.MessageRow>
+            ),
+        )}
       </S.Content>
       <S.InputWrapper onSubmit={sendMsg}>
         <S.Input type="text" onChange={onChangeUserInput} />

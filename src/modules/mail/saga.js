@@ -34,27 +34,32 @@ function* sendMail(action) {
 }
 
 function startMailAPI(data) {
-  return axios.get(`/chat/${data}?page=1&size=10`, {
+  return axios.post('/chat',data, {
+    //axios.get(`/chat/${data}?page=1&size=10`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },
   });
 }
 function* startMail(action) {
-  const result = yield call(startMailAPI, action.data);
+  let result;
   try {
-    yield put({
-      type: START_MAIL_SUCCESS,
-      data: result,
-    });
+    result = yield call(startMailAPI, action.data);
+    try {
+      yield put({
+        type: START_MAIL_SUCCESS,
+        data: result,
+      });
+    } catch (err) {
+      //에러 발생시 이벤트
+      yield put({
+        type: START_MAIL_ERROR,
+        error: err,
+      });
+    }
   } catch (err) {
-    //에러 발생시 이벤트
-    yield put({
-      type: START_MAIL_ERROR,
-      error: err,
-    });
+    console.log(err.response);
   }
-  console.log('finished delete mail saga');
 }
 
 function* watchSendMail() {

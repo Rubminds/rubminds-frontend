@@ -11,6 +11,7 @@ import { DetailInfo, UserListModal, ProcessEndModal } from '../..';
 import { likePost, changePostStatus, deletePost } from '../../../modules/post';
 import { toggleMailModal } from '../../../modules/user/index.js';
 import { startMail } from '../../../modules/mail';
+import axios from 'axios';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
@@ -49,21 +50,32 @@ const PostTotalInfo = ({
 
   const onChangeStatusClick = useCallback(
     status => () => {
-      if (status === 'RANKING' && members.length === 1) {
-        dispatch(changePostStatus({ postId: post.id, content: { postStatus: 'FINISHED' } }));
-      }
       dispatch(changePostStatus({ postId: post.id, content: { postStatus: status } }));
       alert('변경되었습니다');
       window.location.replace(`/post/${post.id}`);
     },
-    [post.id, dispatch, members.length],
+    [post.id, dispatch],
   );
 
-  const onStartChatClick = useCallback(() => {
+  const onStartChatClick = useCallback(async() => {
     console.log(post.id);
-    dispatch(startMail(post.id));
-    //dispatch(toggleMailModal());
+    const response = await axios.get(`/chat/${post.id}?page=1&size=10`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
+    console.log(response.data)
+    //dispatch(startMail({ postId: post.id, content: '@startmail' }));
+    
+    dispatch(toggleMailModal());
   }, [dispatch, post.id]);
+
+  // const onStartChatClick = useCallback(() => {
+  //   console.log(post.id);
+  //   dispatch(startMail({ postId: post.id, content: '@startmail' }));
+  //   //dispatch(startMail(post.id));
+  //   dispatch(toggleMailModal());
+  // }, [dispatch, post.id]);
 
   return (
     <S.PostDetailInfo>

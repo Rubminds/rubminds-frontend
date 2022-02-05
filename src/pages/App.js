@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
@@ -17,8 +17,21 @@ import ProjectStatusPage from './ProjectStatusPage';
 import EditProfilePage from './EditProfilePage';
 import EditPostPage from './EditPostPage';
 import { Header, MailButton } from '../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../modules/user';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const { me } = useSelector(state => state.user);
+
+  useEffect(() => {
+    if (me !== null) {
+      setTimeout(() => {
+        localStorage.removeItem('accessToken');
+        dispatch(logoutUser());
+      }, 3600000);
+    }
+  }, [me]);
 
   return (
     <ThemeProvider theme={theme}>

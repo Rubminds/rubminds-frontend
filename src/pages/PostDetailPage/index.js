@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import * as S from './style';
 import axios from 'axios';
 
@@ -12,31 +12,40 @@ const PostDetailPage = () => {
   const [processEndModalOpen, setProcessEndModalOpen] = useState(false);
   const [members, setMembers] = useState([]);
   const params = useParams();
+  const history = useHistory();
   const { me } = useSelector(state => state.user);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`/post/${params.id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
-      setPost(response.data);
-      console.log(response.data);
-      const teamResponse = await axios.get(`/team/${response.data.teamId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
-      console.log(teamResponse.data);
-      setMembers(teamResponse.data.teamUsers);
+      try{
+        const response = await axios.get(`/post/${params.id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
+        setPost(response.data);
+        console.log(response.data);
+        if (response.data.kinds !== 'SCOUT') {
+          const teamResponse = await axios.get(`/team/${response.data.teamId}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          });
+          console.log(teamResponse.data);
+          setMembers(teamResponse.data.teamUsers);
+        }
+      }catch(err){
+        alert(err.response.data.error.info);
+        history.go(-1);
+      }
+      
     };
     fetchData();
   }, []);
 
   const openUserListModal = useCallback(() => {
-    setUserListModalOpen(true);
-  }, []);
+    post && post.kinds !== 'SCOUT' && setUserListModalOpen(true);
+  }, [post]);
   const closeUserListModal = useCallback(() => {
     setUserListModalOpen(false);
   }, []);
@@ -76,7 +85,9 @@ const PostDetailPage = () => {
             />
             <S.PostDetailContent>{post.content}</S.PostDetailContent>
 
-            {post.postsStatus === 'FINISHED' && <ResultForm post={post} meId={me.id} adminId={post.writer.id}/>}
+            {post.postsStatus === 'FINISHED' && (
+              <ResultForm post={post} meId={me.id} adminId={post.writer.id} />
+            )}
           </>
         ))}
     </S.PostDetailWrapper>

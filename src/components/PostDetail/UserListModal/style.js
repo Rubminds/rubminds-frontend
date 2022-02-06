@@ -17,8 +17,8 @@ export const UserListWrapper = styled.div`
 
 export const CloseBtn = styled.button`
   position: absolute;
-  top: 5%;
-  right: 2%;
+  top: 1rem;
+  right: 1rem;
   border: none;
   background-color: inherit;
 `;

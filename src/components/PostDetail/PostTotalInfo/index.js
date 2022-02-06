@@ -59,9 +59,9 @@ const PostTotalInfo = ({
   const onStartChatClick = useCallback(() => {
     dispatch(setStep(post.kinds));
     dispatch(setChatroom(post.id));
-    //dispatch(startMail({ postId: post.id, content: '@startmail' }));
     dispatch(toggleMailModal());
-  }, [dispatch, post.id]);
+    //dispatch(startMail({ postId: post.id, content: '@startmail' }));
+  }, [dispatch, post.id, post.kinds]);
 
   return (
     <S.PostDetailInfo>

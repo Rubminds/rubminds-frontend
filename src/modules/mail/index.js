@@ -5,11 +5,20 @@ import {
   START_MAIL,
   START_MAIL_SUCCESS,
   START_MAIL_ERROR,
+  SET_STEP,
+  SET_STEP_SUCCESS,
+  SET_STEP_ERROR,
+  SET_CHATROOM,
+  SET_CHATROOM_SUCCESS,
+  SET_CHATROOM_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
 //초기 상태 초기화
 export const initialState = {
+  chatroomNum: null,
+  step: 'PROJECT',
+
   sendMailLoading: false,
   sendMailDone: false,
   sendMailError: null,
@@ -28,6 +37,16 @@ export const startMail = data => ({
   type: START_MAIL,
   data,
 });
+
+export const setStep = data =>({
+  type:SET_STEP,
+  data,
+})
+
+export const setChatroom = data =>({
+  type:SET_CHATROOM,
+  data,
+})
 
 //리듀서
 const mail = (state = initialState, action) => {
@@ -60,6 +79,12 @@ const mail = (state = initialState, action) => {
       case START_MAIL_ERROR:
         draft.startMailLoading = false;
         draft.startMailError = action.error;
+        break;
+      case SET_STEP_SUCCESS:
+        draft.step = action.data;
+        break;
+      case SET_CHATROOM_SUCCESS:
+        draft.chatroomNum = action.data;
         break;
       default:
         break;

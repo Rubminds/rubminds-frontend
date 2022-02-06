@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { toggleMailModal } from '../../../../modules/user';
+import { setChatroom, setStep } from '../../../../modules/mail';
 import { MailPostList, MailPost } from '../../..';
 
 const MailModal = () => {
   const dispatch = useDispatch();
   const { me } = useSelector(state => state.user);
-  const [step, setStep] = useState('PROJECT');
-  const [chatroomNum, setChatroomNum] = useState(null);
+  const { chatroomNum, step } = useSelector(state => state.mail);
   const [posts, setPosts] = useState([]);
   const [modalOpenId, setModalOpenId] = useState(-1); //유저 클릭시 모달에 전달할 유저 아이디
-  const [apiQuery, setApiQuery] = useState('/chat?kinds=PROJECT');
+  const [apiQuery, setApiQuery] = useState(`/chat?kinds=${step}`);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +37,7 @@ const MailModal = () => {
       const prevStatus = step;
       const currentApiQuery = apiQuery;
       const changedQuery = currentApiQuery.replace(prevStatus, status);
-      setStep(status);
+      dispatch(setStep(status));
       setApiQuery(changedQuery);
     },
     [apiQuery, step],
@@ -45,7 +45,7 @@ const MailModal = () => {
 
   const onPostClick = useCallback(
     postId => () => {
-      setChatroomNum(postId);
+      dispatch(setChatroom(postId));
     },
     [],
   );
@@ -90,7 +90,6 @@ const MailModal = () => {
         ) : (
           <MailPost
             postId={chatroomNum}
-            setChatroomNum={setChatroomNum}
             me={me}
             modalOpenId={modalOpenId}
             openUserModal={openUserModal}

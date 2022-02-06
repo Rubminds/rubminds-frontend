@@ -63,6 +63,7 @@ export const CheckboxWrapper = styled.label`
 export const PostsWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  justify-content:center;
   margin-top: 3rem;
   width: 100%;
   min-height: 30rem;

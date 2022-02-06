@@ -7,8 +7,9 @@ import { FaRegPaperPlane } from 'react-icons/fa';
 import useInput from '../../../../hooks/useInput';
 import { MailUserModal } from '../../..';
 import { addTeamUser } from '../../../../modules/team';
+import { setChatroom } from '../../../../modules/mail';
 
-const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step }) => {
+const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
   const [chats, setChats] = useState([]); //전체 채팅내용
   const [postTitle, setPostTitle] = useState('게시글제목'); //게시글 제목
   const [writerId, setWriterId] = useState(null); //게시글 작성자
@@ -16,10 +17,6 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
 
   const [userInput, onChangeUserInput, setUserInput] = useInput(''); //유저가 입력한 내용
   const dispatch = useDispatch();
-
-  const onBackClick = useCallback(() => {
-    setChatroomNum(null);
-  }, [setChatroomNum]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +31,11 @@ const MailPost = ({ postId, setChatroomNum, me, modalOpenId, openUserModal, step
       setWriterId(response.data.writerId);
     };
     me && fetchData();
-  }, [me, effectSwitch]);
+  }, [me, effectSwitch, postId]);
+
+  const onBackClick = useCallback(() => {
+    dispatch(setChatroom(null));
+  }, []);
 
   const sendMsg = useCallback(
     async e => {

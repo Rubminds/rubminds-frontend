@@ -101,6 +101,7 @@ export const UploadedFile = styled.a`
   text-overflow: ellipsis;
   margin: 1rem 0;
   text-align:center;
+  display:flex;
 `;
 
 export const FileContainer = styled.div`

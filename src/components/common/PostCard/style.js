@@ -85,3 +85,9 @@ export const DibBtn = styled.button`
   align-items: center;
   cursor: pointer;
 `;
+
+export const SkillImg = styled.img`
+  width:45px;
+  height:45px;
+  border-radius:500px;
+`

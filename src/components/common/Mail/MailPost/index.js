@@ -20,15 +20,20 @@ const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`/chat/${postId}?page=1&size=10`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
-      console.log(response.data);
-      setChats(response.data.chats);
-      setPostTitle(response.data.postTitle);
-      setWriterId(response.data.writerId);
+      try {
+        const response = await axios.get(`/chat/${postId}?page=1&size=10`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
+        console.log(response.data);
+        setChats(response.data.chats);
+        setPostTitle(response.data.postTitle);
+        setWriterId(response.data.writerId);
+      } catch (err) {
+        dispatch(setChatroom(null));
+        alert(err.response.data.error.info);
+      }
     };
     me && fetchData();
   }, [me, effectSwitch, postId]);

@@ -11,7 +11,8 @@ import { Python } from '../../../assets/imgs';
 import { likePost } from '../../../modules/post';
 
 const PostCard = ({ post, ...props }) => {
-  const combinedSkills = post.skill.concat(post.customSkills);
+  const skillArray = post.skill.map(v => v.name);
+  const combinedSkills = skillArray.concat(post.customSkills.map(v=>v.name));
   const dispatch = useDispatch();
   // const onLikeClick = useCallback(
   //   e => {
@@ -35,8 +36,8 @@ const PostCard = ({ post, ...props }) => {
         </S.CardCategory>
         <S.CardTitle>{post.title}</S.CardTitle>
         <S.CardSkills>
-          {post.skill?.map((v, i) => {
-            return <Python width="45px" height="45px" key={`postskills${i}`} />;
+          {post.skill?.map(v => {
+            return <S.SkillImg key={v.id} src={v.url}/>
           })}
         </S.CardSkills>
         <S.CardFooter status={post.status}>

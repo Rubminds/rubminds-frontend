@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './style';
 import { FaBook } from 'react-icons/fa';
-import { MdPersonAdd } from 'react-icons/md';
 import { HiUserGroup } from 'react-icons/hi';
+import { MdPersonAdd } from 'react-icons/md';
 
 const CategoryArea = ({onKindsClick, kinds}) => {
   return (

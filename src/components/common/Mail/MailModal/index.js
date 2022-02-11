@@ -14,6 +14,7 @@ const MailModal = () => {
   const [posts, setPosts] = useState([]);
   const [modalOpenId, setModalOpenId] = useState(-1); //유저 클릭시 모달에 전달할 유저 아이디
   const [apiQuery, setApiQuery] = useState(`/chat?kinds=${step}`);
+  const [postListModalOpen, setPostListModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,6 +95,8 @@ const MailModal = () => {
             modalOpenId={modalOpenId}
             openUserModal={openUserModal}
             step={step}
+            postListModalOpen={postListModalOpen}
+            setPostListModalOpen={setPostListModalOpen}
           />
         )
       ) : (

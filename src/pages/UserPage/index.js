@@ -13,7 +13,7 @@ const UserPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${params.id}`, {
+        const response = await axios.get(`/user/${params.id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
         });
         setUser(response.data);

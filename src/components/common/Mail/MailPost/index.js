@@ -5,11 +5,19 @@ import axios from 'axios';
 import { FaRegPaperPlane } from 'react-icons/fa';
 
 import useInput from '../../../../hooks/useInput';
-import { MailUserModal } from '../../..';
+import { MailUserModal, PostListByScout } from '../../..';
 import { addTeamUser } from '../../../../modules/team';
 import { setChatroom } from '../../../../modules/mail';
 
-const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
+const MailPost = ({
+  postId,
+  me,
+  modalOpenId,
+  openUserModal,
+  step,
+  postListModalOpen,
+  setPostListModalOpen,
+}) => {
   const [chats, setChats] = useState([]); //전체 채팅내용
   const [postTitle, setPostTitle] = useState('게시글제목'); //게시글 제목
   const [writerId, setWriterId] = useState(null); //게시글 작성자
@@ -39,8 +47,8 @@ const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
   }, [me, effectSwitch, postId]);
 
   const onBackClick = useCallback(() => {
-    dispatch(setChatroom(null));
-  }, []);
+    postListModalOpen ? setPostListModalOpen(false) : dispatch(setChatroom(null));
+  }, [dispatch, setPostListModalOpen, postListModalOpen]);
 
   const sendMsg = useCallback(
     async e => {
@@ -82,43 +90,50 @@ const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
         <S.BackBtn />
         <S.PostTitle>{postTitle}</S.PostTitle>
       </S.Header>
-      <S.Content>
-        {chats.map(
-          v =>
-            v.content !== '@startmail' && (
-              <S.MessageRow key={v.id}>
-                <S.UserInfo>
-                  <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
-                  <S.InfoWrapper>
-                    <S.Nickname onClick={e => openUserModal(e, v.senderId)}>
-                      {v.senderNickname}
-                    </S.Nickname>
-                    <S.SendTime>
-                      {v.createAt.split('T')[0]}&nbsp;{v.createAt.split('T')[1]}
-                    </S.SendTime>
-                  </S.InfoWrapper>
-                </S.UserInfo>
-                <S.Msg>
-                  {checkReserveMsg(v.content)
-                    ? `${v.content.split('@')[3]}을 초대했습니다`
-                    : v.content}
-                  {parseInt(v.content.split('@')[3]) === me.id && (
-                    <>
-                      <br />
-                      <S.OkButton onClick={onOKButtonClick}>수락하기</S.OkButton>
-                    </>
-                  )}
-                </S.Msg>
-              </S.MessageRow>
-            ),
-        )}
-      </S.Content>
-      <S.InputWrapper onSubmit={sendMsg}>
-        <S.Input type="text" onChange={onChangeUserInput} />
-        <S.SendBtn type="submit">
-          <FaRegPaperPlane />
-        </S.SendBtn>
-      </S.InputWrapper>
+      {postListModalOpen ? (
+        <PostListByScout me={me}/>
+      ) : (
+        <>
+          <S.Content>
+            {chats.map(
+              v =>
+                v.content !== '@startmail' && (
+                  <S.MessageRow key={v.id}>
+                    <S.UserInfo>
+                      <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
+                      <S.InfoWrapper>
+                        <S.Nickname onClick={e => openUserModal(e, v.senderId)}>
+                          {v.senderNickname}
+                        </S.Nickname>
+                        <S.SendTime>
+                          {v.createAt.split('T')[0]}&nbsp;{v.createAt.split('T')[1]}
+                        </S.SendTime>
+                      </S.InfoWrapper>
+                    </S.UserInfo>
+                    <S.Msg>
+                      {checkReserveMsg(v.content)
+                        ? `${v.content.split('@')[3]}을 초대했습니다`
+                        : v.content}
+                      {parseInt(v.content.split('@')[3]) === me.id && (
+                        <>
+                          <br />
+                          <S.OkButton onClick={onOKButtonClick}>수락하기</S.OkButton>
+                        </>
+                      )}
+                    </S.Msg>
+                  </S.MessageRow>
+                ),
+            )}
+          </S.Content>
+          <S.InputWrapper onSubmit={sendMsg}>
+            <S.Input type="text" onChange={onChangeUserInput} />
+            <S.SendBtn type="submit">
+              <FaRegPaperPlane />
+            </S.SendBtn>
+          </S.InputWrapper>
+        </>
+      )}
+
       {modalOpenId > 0 && (
         <MailUserModal
           userId={modalOpenId}
@@ -127,6 +142,7 @@ const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
           step={step}
           writerId={writerId}
           setEffectSwitch={setEffectSwitch}
+          setPostListModalOpen={setPostListModalOpen}
         />
       )}
     </>

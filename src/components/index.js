@@ -1,6 +1,7 @@
 export { default as Avatar } from './common/Avatar';
 export { default as HeaderModal } from './common/HeaderModal';
 export { default as Header } from './common/Header';
+export { default as PostListByScout } from './common/Mail/PostListByScout';
 export { default as MailUserModal } from './common/Mail/MailUserModal';
 export { default as MailButton } from './common/Mail/MailButton';
 export { default as MailPostList } from './common/Mail/MailPostList';

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {FcInvite} from 'react-icons/fc'
 
 export const PostListWrapper = styled.div`
   height: 100%;
@@ -23,12 +24,18 @@ export const Post = styled.div`
 
 export const PostTitle = styled.h3`
   font-weight: 2rem;
-  width:80%;
+  width: 80%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
-export const InviteBtn = styled.button`
-
-`
+export const InviteBtn = styled(FcInvite)`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  transform: translate(-50%, -50%);
+  cursor:pointer;
+`;

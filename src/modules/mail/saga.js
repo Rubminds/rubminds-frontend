@@ -16,7 +16,7 @@ import {
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 function sendMailAPI(data) {
-  return axios.post('/', data, {
+  return axios.post('/chat', data, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
     },
@@ -41,7 +41,6 @@ function* sendMail(action) {
 
 function startMailAPI(data) {
   return axios.post('/chat', data, {
-    //axios.get(`/chat/${data}?page=1&size=10`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },

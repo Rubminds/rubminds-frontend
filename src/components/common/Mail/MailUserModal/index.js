@@ -14,6 +14,7 @@ const MailUserModal = ({ userId, postId, me, step, writerId, setEffectSwitch,set
   const history = useHistory();
   const onInviteClick = useCallback(
     async e => {
+      e.stopPropagation();
       e.preventDefault();
       if (step === 'SCOUT') {
         setPostListModalOpen(true);

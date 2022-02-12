@@ -91,7 +91,7 @@ const MailPost = ({
         <S.PostTitle>{postTitle}</S.PostTitle>
       </S.Header>
       {postListModalOpen ? (
-        <PostListByScout me={me}/>
+        <PostListByScout me={me} setPostListModalOpen={setPostListModalOpen} modalOpenId={modalOpenId} postId={postId} setEffectSwitch={setEffectSwitch}/>
       ) : (
         <>
           <S.Content>

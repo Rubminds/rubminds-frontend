@@ -1,16 +1,26 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { flexCenter, flexColumn } from '../../../../constants';
 
 export const ModalWrapper = styled.div`
   position: absolute;
-  bottom: 0;
   left: 0;
   width: 100%;
   background-color: #fff;
   ${flexColumn};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  ${props =>
+    props.postlist
+      ? css`
+          top:0;
+          height:100%;
+          padding:2rem 2rem;
+          background-color:#fff7d1;
+        `
+      : css`
+            bottom: 0;
+        `}
 `;
 
 export const ModalLabel = styled.label`

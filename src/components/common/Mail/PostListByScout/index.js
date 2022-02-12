@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 import { sendMail } from '../../../../modules/mail';
 
-const PostListByScout = ({ me, setPostListModalOpen, modalOpenId, postId, setEffectSwitch }) => {
+const PostListByScout = ({ me, setPostListOpen, userId, postId, setEffectSwitch }) => {
   const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
 
@@ -26,13 +26,19 @@ const PostListByScout = ({ me, setPostListModalOpen, modalOpenId, postId, setEff
   }, []);
 
   const onPostSelectClick = useCallback(async () => {
-    dispatch(sendMail({ postId, content: `sdnimbur@${postId}@${me.id}@${modalOpenId}` }));
-    setPostListModalOpen(false);
+    dispatch(sendMail({ postId, content: `sdnimbur@${postId}@${me.id}@${userId}` }));
+    setPostListOpen(false);
     setEffectSwitch(prev => !prev);
-  }, [dispatch, setPostListModalOpen, me.id, modalOpenId]);
+  }, [dispatch, setPostListOpen, me.id, userId]);
+
+  const onBackBtnClick = useCallback(()=>{
+    setPostListOpen(false);
+  },[])
 
   return (
-    <S.PostListWrapper>
+    <>
+      <S.PostTitle>게시글 목록</S.PostTitle>
+      <S.BackBtn onClick={onBackBtnClick}/>
       {posts.map((v, i) => {
         return (
           <S.Post key={v.id}>
@@ -43,7 +49,7 @@ const PostListByScout = ({ me, setPostListModalOpen, modalOpenId, postId, setEff
           </S.Post>
         );
       })}
-    </S.PostListWrapper>
+    </>
   );
 };
 

@@ -1,34 +1,31 @@
 import styled from 'styled-components';
 import {FcInvite} from 'react-icons/fc'
-
-export const PostListWrapper = styled.div`
-  height: 100%;
-  margin-top: 1rem;
-  background-color: #fff8;
-  font-size: 1.6rem;
-  padding: 1rem;
-  border: 1px solid rgba(128, 128, 128, 0.199);
-  border-radius: 10px;
-  overflow-y: auto;
-  flex: 1 1 auto;
-`;
+import { MdOutlineArrowBackIos } from 'react-icons/md';
 
 export const Post = styled.div`
   height: 5rem;
   display: flex;
   align-items: center;
   font-weight: bold;
+  font-size:1.6rem;
   border-bottom: 1px solid rgba(128, 128, 128, 0.199);
   position: relative;
 `;
 
 export const PostTitle = styled.h3`
   font-weight: 2rem;
+  font-size:2rem;
   width: 80%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+
+export const BackBtn = styled(MdOutlineArrowBackIos)`
+  font-size:2rem;
+  cursor:pointer;
+  margin-bottom:1rem;
+`
 
 export const InviteBtn = styled(FcInvite)`
   position: absolute;

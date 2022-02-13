@@ -14,6 +14,7 @@ export const HeaderModalWrapper = styled.ul`
   margin-top: 2px;
   z-index: 100;
   border-radius: 8px;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
   ${flexColumn};
 `;
 

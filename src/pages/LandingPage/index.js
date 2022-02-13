@@ -28,7 +28,7 @@ const LandingPage = () => {
               },
             })
           : await axios.get(`/posts${apiQuery}`);
-      console.log(response.data.content);
+          console.log(response.data.content)
       setPosts(response.data.content);
     };
     fetchData();
@@ -104,7 +104,7 @@ const LandingPage = () => {
     if (dropDownOptions.length === 0 && customOptions.length === 0) {
       return true;
     }
-    const allPostSkills = post.skill.concat(post.customSkills);
+    const allPostSkills = post.skill.map(v=>v.name).concat(post.customSkills.map(v => v.name));
     const allFilteredSkills = dropDownOptions.concat(customOptions);
     const combinedSkills = allPostSkills.concat(allFilteredSkills);
     const allSkillSet = new Set([...combinedSkills]);

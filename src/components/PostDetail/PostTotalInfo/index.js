@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom';
 
 import { DetailInfo, UserListModal, ProcessEndModal } from '../..';
 import { likePost, changePostStatus, deletePost } from '../../../modules/post';
+import { toggleMailModal } from '../../../modules/user/index.js';
+import { setChatroom, setStep, startMail } from '../../../modules/mail';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
@@ -16,8 +18,10 @@ const PostTotalInfo = ({
   post,
   userListModalOpen,
   processEndModalOpen,
-  closeModal,
-  openModal,
+  closeUserListModal,
+  openUserListModal,
+  closeProcessEndModal,
+  openProcessEndModal,
   me,
   members,
 }) => {
@@ -34,6 +38,7 @@ const PostTotalInfo = ({
     const deleteConfirm = window.confirm(`정말 게시글을 삭제하시겠습니까?`);
     if (deleteConfirm) {
       dispatch(deletePost(post.id));
+      window.location.replace('/');
     }
   }, [dispatch, post.id]);
 
@@ -42,18 +47,21 @@ const PostTotalInfo = ({
     setIsLike(prev => !prev);
   }, [dispatch, post.id]);
 
-  const onStatusCircleClick = useCallback(() => {
-    console.log('open team members');
-    me && openModal('userlist');
-  }, [openModal, me]);
-
   const onChangeStatusClick = useCallback(
     status => () => {
       dispatch(changePostStatus({ postId: post.id, content: { postStatus: status } }));
+      alert('변경되었습니다');
       window.location.replace(`/post/${post.id}`);
     },
     [post.id, dispatch],
   );
+
+  const onStartChatClick = useCallback(() => {
+    dispatch(setStep(post.kinds));
+    dispatch(setChatroom(post.id));
+    dispatch(toggleMailModal());
+    //dispatch(startMail({ postId: post.id, content: '@startmail' }));
+  }, [dispatch, post.id, post.kinds]);
 
   return (
     <S.PostDetailInfo>
@@ -70,7 +78,7 @@ const PostTotalInfo = ({
           {post.files.map((v, i) => (
             <S.UploadedFile href={v.url} key={i} download>
               <GrDocumentDownload fontSize="1.8rem" />
-              &nbsp;{v.url}
+              &nbsp;{v.fileName}
             </S.UploadedFile>
           ))}
         </S.FileContainer>
@@ -80,7 +88,7 @@ const PostTotalInfo = ({
         {userListModalOpen ? (
           <UserListModal
             headcount={post.headcount}
-            closeModal={closeModal}
+            closeModal={closeUserListModal}
             writerId={post.writer.id}
             teamId={post.teamId}
             members={members}
@@ -112,7 +120,7 @@ const PostTotalInfo = ({
                     )}
                   </>
                 ) : (
-                  <S.DetailInfoContent>
+                  <S.DetailInfoContent onClick={onStartChatClick}>
                     <MdPersonAdd /> &nbsp;모집자와 대화하기
                   </S.DetailInfoContent>
                 )}
@@ -152,7 +160,7 @@ const PostTotalInfo = ({
                       </>
                     ) : post.postsStatus === 'WORKING' ? (
                       <>
-                        <S.DetailInfoContent toBtn onClick={openModal('processend')} blue="true">
+                        <S.DetailInfoContent toBtn onClick={openProcessEndModal} blue="true">
                           평가 후 완료하기
                         </S.DetailInfoContent>
                         <S.DetailInfoContent toBtn onClick={onChangeStatusClick('RECRUIT')}>
@@ -169,7 +177,7 @@ const PostTotalInfo = ({
                     )}
                   </>
                 ) : (
-                  <S.DetailInfoContent>
+                  <S.DetailInfoContent onClick={onStartChatClick}>
                     <MdPersonAdd /> &nbsp;모집자와 대화하기
                   </S.DetailInfoContent>
                 )}
@@ -189,7 +197,7 @@ const PostTotalInfo = ({
               </S.GroupBox>
             )}
             <S.DetailInfoContent>
-              <S.PostStatusCircle status={post.postsStatus} onClick={onStatusCircleClick}>
+              <S.PostStatusCircle status={post.postsStatus} onClick={openUserListModal}>
                 <label>{post.postsStatus}</label>
                 {post.kinds !== 'SCOUT' && (
                   <label>
@@ -202,7 +210,10 @@ const PostTotalInfo = ({
         )}
       </S.DetailInfoWrapper>
       {processEndModalOpen ? (
-        <ProcessEndModal closeModal={closeModal} onChangeStatusClick={onChangeStatusClick} />
+        <ProcessEndModal
+          closeModal={closeProcessEndModal}
+          onChangeStatusClick={onChangeStatusClick}
+        />
       ) : (
         <></>
       )}

@@ -2,15 +2,9 @@ import styled from 'styled-components';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { flexCenter, flexColumn } from '../../../../constants';
 import { Avatar } from '../../../';
-
-export const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
+import mediaQuery from '../../../../hooks/mediaQuery';
 
 export const BackBtn = styled(MdOutlineArrowBackIos)`
-  margin-top: 1rem;
   font-size: 2rem;
   cursor: pointer;
 `;
@@ -18,21 +12,20 @@ export const BackBtn = styled(MdOutlineArrowBackIos)`
 export const PostTitle = styled.label`
   font-size: 1.6rem;
   font-weight: bold;
-  margin-top: 1rem;
+  cursor: pointer;
 `;
 
 export const Header = styled.div`
-  display:flex;
-  align-items:center;
-`
-
-export const Content = styled.div`
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+  flex-shrink: 0;
+  margin-top: 1rem;
 `;
 
-export const Messages = styled.div`
+export const Content = styled.div`
+  height: 100%;
   margin-top: 1rem;
   background-color: #fff8;
   font-size: 1.6rem;
@@ -40,7 +33,7 @@ export const Messages = styled.div`
   border: 1px solid rgba(128, 128, 128, 0.199);
   border-radius: 10px;
   overflow-y: auto;
-  height:80%;
+  flex: 1 1 auto;
 `;
 
 export const MessageRow = styled.div`
@@ -55,6 +48,7 @@ export const MessageRow = styled.div`
 export const UserAvatar = styled(Avatar)`
   width: 4rem;
   height: 4rem;
+  cursor: pointer;
 `;
 
 export const UserInfo = styled.div`
@@ -64,43 +58,29 @@ export const UserInfo = styled.div`
 export const InfoWrapper = styled.div`
   ${flexColumn}
   flex:1;
+  margin-left: 1rem;
 `;
 
 export const Nickname = styled.label`
   font-weight: bold;
+  cursor: pointer;
+  width: fit-content;
 `;
 
 export const Msg = styled.label``;
 
+export const OkButton = styled.button`
+  background-color: #cdf6e8;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  width: 10rem;
+  height: 3rem;
+`;
+
 export const SendTime = styled.label`
   font-size: 1.2rem;
-`;
-
-export const BtnWrapper = styled.div`
-  margin-top: 1rem;
-  display: flex;
-`;
-
-export const ResendBtn = styled.button`
-  width: 10rem;
-  height: 4rem;
-  border: none;
-  background-color: #fff8;
-  border-radius: 30px;
-  font-weight: bold;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
-`;
-
-export const DeleteBtn = styled.button`
-  width: 10rem;
-  height: 4rem;
-  border: none;
-  background-color: #ffa586;
-  border-radius: 30px;
-  color: #fff;
-  font-weight: bold;
-  margin-left: 1rem;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
 `;
 
 export const InputWrapper = styled.form`
@@ -108,6 +88,8 @@ export const InputWrapper = styled.form`
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
+  height: 4rem;
+  flex-shrink: 0;
 `;
 
 export const Input = styled.input`

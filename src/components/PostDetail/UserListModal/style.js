@@ -8,7 +8,7 @@ import mediaQuery from '../../../hooks/mediaQuery';
 
 export const UserListWrapper = styled.div`
   position: relative;
-  padding: 1.5rem 1rem 1rem 1rem;
+  padding: 3rem 1rem 1rem 1rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   border-radius: 5px;
@@ -17,8 +17,8 @@ export const UserListWrapper = styled.div`
 
 export const CloseBtn = styled.button`
   position: absolute;
-  top: 5%;
-  right: 2%;
+  top: 1rem;
+  right: 1rem;
   border: none;
   background-color: inherit;
 `;

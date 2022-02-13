@@ -70,17 +70,23 @@ function addTeamUserAPI(data) {
 }
 function* addTeamUser(action) {
   console.log(action.data);
-  const result = yield call(addTeamUserAPI, action.data);
+  let result;
   try {
-    yield put({
-      type: ADD_TEAM_USER_SUCCESS,
-      data: result,
-    });
+    result = yield call(addTeamUserAPI, action.data);
+    try {
+      yield put({
+        type: ADD_TEAM_USER_SUCCESS,
+        data: result,
+      });
+      alert('수락되었습니다');
+    } catch (err) {
+      yield put({
+        type: ADD_TEAM_USER_ERROR,
+        error: err,
+      });
+    }
   } catch (err) {
-    yield put({
-      type: ADD_TEAM_USER_ERROR,
-      error: err,
-    });
+    alert(err.response.data.error.info);
   }
 }
 

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AiFillStar, AiFillCrown } from 'react-icons/ai';
 
-import { flexColumn, flexCenter } from '../../../constants/';
+import { flexColumn, flexCenter,flexBetween } from '../../../constants/';
 import { Avatar, Input } from '../..';
 import mediaQuery from '../../../hooks/mediaQuery';
 
@@ -18,9 +18,9 @@ export const TitleWrapper = styled.div`
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   background-color: #fff;
+  padding:0 4rem 0 2rem;
   margin-top: 2.8rem;
-  ${flexCenter}
-  justify-content:space-around;
+  ${flexBetween}
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   ${mediaQuery({ width: '100%' })}
 `;
@@ -110,11 +110,11 @@ export const SubmitBtn = styled.button`
   height: 6rem;
   font-size: 1.5rem;
   ${flexCenter};
-  background-color: #cdf6e8;
+  background-color: ${props => (props.isFinished ? '#EAEEF2' : '#cdf6e8')};
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
   margin-top: 5rem;
-  font-weight:bold;
+  font-weight: bold;
 `;
 export const WriterMark = styled(AiFillCrown)`
   color: red;

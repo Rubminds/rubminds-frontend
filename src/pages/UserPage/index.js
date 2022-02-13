@@ -12,11 +12,16 @@ const UserPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${params.id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
-      });
-      setUser(response.data);
-      console.log(response.data);
+      try {
+        const response = await axios.get(`/user/${params.id}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+        });
+        setUser(response.data);
+        console.log(response.data);
+      } catch (err) {
+        alert(err.response.data.error.info);
+        history.go(-1);
+      }
     };
     fetchData();
   }, []);

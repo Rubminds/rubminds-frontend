@@ -2,7 +2,13 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CustomDropDown } from '../../components';
-import { EditPostFile, EditPostMiddleArea, EditPostRegion, EditPostTitle, EditPostContent } from '../../components';
+import {
+  EditPostFile,
+  EditPostMiddleArea,
+  EditPostRegion,
+  EditPostTitle,
+  EditPostContent,
+} from '../../components';
 import * as S from './style';
 import { Link, useParams } from 'react-router-dom';
 import { AreaOptions, SKILL_ID } from '../../constants';
@@ -49,14 +55,11 @@ const EditPostPage = () => {
       const responseSkill = await axios.get('/skills');
       setSkillName(responseSkill.data.skills.map(e => e.name));
 
-      const teamAPI = await axios.get(
-        `/team/${responsePost.data.teamId}/teamUsers`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        }
-      );
+      const teamAPI = await axios.get(`/team/${responsePost.data.teamId}/teamUsers`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
       setTeamHead(teamAPI.data.length);
     };
     fetchData();
@@ -84,17 +87,15 @@ const EditPostPage = () => {
       if (file) {
         formData.append('files', file);
       }
-      formData.append(
-        'postInfo',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      );
+      formData.append('postInfo', new Blob([JSON.stringify(data)], { type: 'application/json' }));
       const confirm = window.confirm('게시글 수정을 완료하시겠습니까?');
       if (confirm) {
         dispatch(editPost({ id, formData }));
+        alert('수정이 완료되었습니다');
         window.location.replace(`/post/${id}`);
       }
     },
-    [title, content, headCount, meeting, region, dropDownOptions, customOptions]
+    [title, content, headCount, meeting, region, dropDownOptions, customOptions],
   );
 
   return (
@@ -131,11 +132,7 @@ const EditPostPage = () => {
           )}
 
           {/* 지역 */}
-          <EditPostRegion
-            region={region}
-            setRegion={setRegion}
-            AreaOptions={AreaOptions}
-          />
+          <EditPostRegion region={region} setRegion={setRegion} AreaOptions={AreaOptions} />
 
           {/* 참고자료 */}
           <EditPostFile file={file} setFile={setFile} />

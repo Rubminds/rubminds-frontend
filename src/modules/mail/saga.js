@@ -4,13 +4,19 @@ import {
   SEND_MAIL,
   SEND_MAIL_SUCCESS,
   SEND_MAIL_ERROR,
-  DELETE_MAIL,
-  DELETE_MAIL_SUCCESS,
-  DELETE_MAIL_ERROR,
+  START_MAIL,
+  START_MAIL_SUCCESS,
+  START_MAIL_ERROR,
+  SET_STEP,
+  SET_STEP_SUCCESS,
+  SET_STEP_ERROR,
+  SET_CHATROOM,
+  SET_CHATROOM_SUCCESS,
+  SET_CHATROOM_ERROR,
 } from '../../constants'; //액션명 constants에서 선언하여 사용
 
 function sendMailAPI(data) {
-  return axios.post('/', data, {
+  return axios.post('/chat', data, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
     },
@@ -33,37 +39,82 @@ function* sendMail(action) {
   console.log('finished send mail saga');
 }
 
-function deleteMailAPI(data) {
-  return axios.post('/', data, {
+function startMailAPI(data) {
+  return axios.post('/chat', data, {
     headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },
   });
 }
-function* deleteMail(action) {
-  const result = yield call(deleteMailAPI, action.data);
+function* startMail(action) {
+  let result;
+  try {
+    result = yield call(startMailAPI, action.data);
+    try {
+      yield put({
+        type: START_MAIL_SUCCESS,
+        data: result,
+      });
+    } catch (err) {
+      //에러 발생시 이벤트
+      yield put({
+        type: START_MAIL_ERROR,
+        error: err,
+      });
+    }
+  } catch (err) {
+    console.log(err.response);
+  }
+}
+
+function* setStep(action) {
   try {
     yield put({
-      type: DELETE_MAIL_SUCCESS,
-      data: result,
+      type: SET_STEP_SUCCESS,
+      data: action.data,
     });
   } catch (err) {
     //에러 발생시 이벤트
     yield put({
-      type: DELETE_MAIL_ERROR,
+      type: SET_STEP_ERROR,
       error: err,
     });
   }
-  console.log('finished delete mail saga');
+}
+
+function* setChatroom(action) {
+  try {
+    yield put({
+      type: SET_CHATROOM_SUCCESS,
+      data: action.data,
+    });
+  } catch (err) {
+    //에러 발생시 이벤트
+    yield put({
+      type: SET_CHATROOM_ERROR,
+      error: err,
+    });
+  }
 }
 
 function* watchSendMail() {
   yield takeLatest(SEND_MAIL, sendMail);
 }
-function* watchDeleteMail() {
-  yield takeLatest(DELETE_MAIL, deleteMail);
+function* watchStartMail() {
+  yield takeLatest(START_MAIL, startMail);
+}
+function* watchSetStep() {
+  yield takeLatest(SET_STEP, setStep);
+}
+function* watchSetChatroom() {
+  yield takeLatest(SET_CHATROOM, setChatroom);
 }
 
 export default function* mailSaga() {
-  yield all([fork(watchSendMail), fork(watchDeleteMail)]);
+  yield all([
+    fork(watchSendMail),
+    fork(watchStartMail),
+    fork(watchSetStep),
+    fork(watchSetChatroom),
+  ]);
 }

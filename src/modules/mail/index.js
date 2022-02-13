@@ -2,21 +2,30 @@ import {
   SEND_MAIL,
   SEND_MAIL_SUCCESS,
   SEND_MAIL_ERROR,
-  DELETE_MAIL,
-  DELETE_MAIL_SUCCESS,
-  DELETE_MAIL_ERROR,
+  START_MAIL,
+  START_MAIL_SUCCESS,
+  START_MAIL_ERROR,
+  SET_STEP,
+  SET_STEP_SUCCESS,
+  SET_STEP_ERROR,
+  SET_CHATROOM,
+  SET_CHATROOM_SUCCESS,
+  SET_CHATROOM_ERROR,
 } from '../../constants';
 import produce from 'immer';
 
 //초기 상태 초기화
 export const initialState = {
+  chatroomNum: null,
+  step: 'PROJECT',
+
   sendMailLoading: false,
   sendMailDone: false,
   sendMailError: null,
 
-  deleteMailLoading: false,
-  deleteMailDone: false,
-  deleteMailError: null,
+  startMailLoading: false,
+  startMailDone: false,
+  startMailError: null,
 };
 
 export const sendMail = data => ({
@@ -24,10 +33,20 @@ export const sendMail = data => ({
   data,
 });
 
-export const deleteMail = data => ({
-  type: DELETE_MAIL,
+export const startMail = data => ({
+  type: START_MAIL,
   data,
 });
+
+export const setStep = data =>({
+  type:SET_STEP,
+  data,
+})
+
+export const setChatroom = data =>({
+  type:SET_CHATROOM,
+  data,
+})
 
 //리듀서
 const mail = (state = initialState, action) => {
@@ -47,19 +66,25 @@ const mail = (state = initialState, action) => {
         draft.sendMailLoading = false;
         draft.sendMailError = action.error;
         break;
-      case DELETE_MAIL:
-        draft.deleteMailLoading = true;
-        draft.deleteMailDone = false;
-        draft.deleteMailError = null;
+      case START_MAIL:
+        draft.startMailLoading = true;
+        draft.startMailDone = false;
+        draft.startMailError = null;
         break;
-      case DELETE_MAIL_SUCCESS:
-        draft.deleteMailLoading = false;
-        draft.deleteMailDone = true;
-        draft.deleteMailError = null;
+      case START_MAIL_SUCCESS:
+        draft.startMailLoading = false;
+        draft.startMailDone = true;
+        draft.startMailError = null;
         break;
-      case DELETE_MAIL_ERROR:
-        draft.deleteMailLoading = false;
-        draft.deleteMailError = action.error;
+      case START_MAIL_ERROR:
+        draft.startMailLoading = false;
+        draft.startMailError = action.error;
+        break;
+      case SET_STEP_SUCCESS:
+        draft.step = action.data;
+        break;
+      case SET_CHATROOM_SUCCESS:
+        draft.chatroomNum = action.data;
         break;
       default:
         break;

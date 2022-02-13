@@ -4,21 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { toggleMailModal } from '../../../../modules/user';
+import { setChatroom, setStep } from '../../../../modules/mail';
 import { MailPostList, MailPost } from '../../..';
 
 const MailModal = () => {
   const dispatch = useDispatch();
   const { me } = useSelector(state => state.user);
-  const [step, setStep] = useState('PROJECT');
-  const [chatroomNum, setChatroomNum] = useState(null);
-  //const [posts, setPosts] = useState([]);
-  const posts = [
-    { id: 1, title: '제목' },
-    { id: 2, title: '제목' },
-    { id: 3, title: '제목' },
-    { id: 4, title: '제목' },
-  ];
-  const [apiQuery, setApiQuery] = useState('/chat?kinds=PROJECT');
+  const { chatroomNum, step } = useSelector(state => state.mail);
+  const [posts, setPosts] = useState([]);
+  const [modalOpenId, setModalOpenId] = useState(-1); //유저 클릭시 모달에 전달할 유저 아이디
+  const [apiQuery, setApiQuery] = useState(`/chat?kinds=${step}`);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,10 +23,9 @@ const MailModal = () => {
         },
       });
       console.log(`posts ${apiQuery}: `, response.data);
-      //setPosts(response.data);
+      setPosts(response.data.content);
     };
-    !me && fetchData();
-    //me && fetchData();
+    me && fetchData();
   }, [apiQuery, me]);
 
   const onCloseClick = useCallback(() => {
@@ -43,26 +37,35 @@ const MailModal = () => {
       const prevStatus = step;
       const currentApiQuery = apiQuery;
       const changedQuery = currentApiQuery.replace(prevStatus, status);
-      setStep(status);
+      dispatch(setStep(status));
       setApiQuery(changedQuery);
     },
-    [apiQuery, step],
+    [apiQuery, step, dispatch],
   );
 
   const onPostClick = useCallback(
     postId => () => {
-      setChatroomNum(postId);
+      dispatch(setChatroom(postId));
     },
     [],
   );
 
+  const openUserModal = useCallback((e, senderId) => {
+    e.stopPropagation();
+    setModalOpenId(senderId);
+  }, []);
+
+  const closeUserModal = useCallback(() => {
+    setModalOpenId(-1);
+  }, []);
+
   return (
-    <S.MailModalWrapper>
+    <S.MailModalWrapper onClick={closeUserModal}>
       <S.ModalHeader>
         <S.HeaderTitle>쪽지함</S.HeaderTitle>
         <S.CloseButton onClick={onCloseClick} />
       </S.ModalHeader>
-      {!me ? (
+      {me ? (
         !chatroomNum ? (
           <>
             <S.ModalStatusWrapper>
@@ -80,12 +83,18 @@ const MailModal = () => {
                 스카웃
               </S.ModalStatus>
             </S.ModalStatusWrapper>
-            <S.UserListWrapper>
+            <S.PostListWrapper>
               {posts.length > 0 && <MailPostList posts={posts} onPostClick={onPostClick} />}
-            </S.UserListWrapper>
+            </S.PostListWrapper>
           </>
         ) : (
-          <MailPost postId={chatroomNum} setChatroomNum={setChatroomNum} />
+          <MailPost
+            postId={chatroomNum}
+            me={me}
+            modalOpenId={modalOpenId}
+            openUserModal={openUserModal}
+            step={step}
+          />
         )
       ) : (
         <S.DisabledForm>

@@ -4,26 +4,10 @@ import { BsPlusCircleDotted } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 
 import { ExitBtn } from '../../../assets/imgs';
-import { addTeamUser, deleteTeamUser } from '../../../modules/team';
+import { deleteTeamUser } from '../../../modules/team';
 
-const UserListModal = ({
-  headcount,
-  closeModal,
-  writerId,
-  teamId,
-  members,
-  meId,
-  postStatus,
-}) => {
+const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId, postStatus }) => {
   const dispatch = useDispatch();
-  const onAddUserKeypress = useCallback(
-    e => {
-      dispatch(addTeamUser({ teamId, userId: e.target.value }));
-      e.target.value = '';
-      closeModal('userlist');
-    },
-    [dispatch, teamId, closeModal]
-  );
 
   const rendering = () => {
     //모집되지 않은 인원자리에 팀원추가 버튼 생성
@@ -33,13 +17,8 @@ const UserListModal = ({
       empty.push(
         <S.AddMember key={i}>
           <BsPlusCircleDotted fontSize="3rem" />
-          &nbsp;&nbsp;
-          <S.AddUserInput
-            type="text"
-            onKeyPress={e => e.key === 'Enter' && onAddUserKeypress(e)}
-            placeholder="ID로 팀원 추가"
-          />
-        </S.AddMember>
+          &nbsp;
+        </S.AddMember>,
       );
     }
     return empty;
@@ -48,19 +27,17 @@ const UserListModal = ({
   const onDeleteUserClick = useCallback(
     (e, user) => {
       e.preventDefault();
-      const deleteConfirm = window.confirm(
-        `정말 ${user.userNickname}님을 추방하시겠습니까?`
-      );
+      const deleteConfirm = window.confirm(`정말 ${user.userNickname}님을 추방하시겠습니까?`);
       if (deleteConfirm) {
         dispatch(deleteTeamUser({ teamId, userId: user.userId }));
       }
     },
-    [dispatch, teamId]
+    [dispatch, teamId],
   );
 
   return (
     <S.UserListWrapper>
-      <S.CloseBtn onClick={closeModal('userlist')}>
+      <S.CloseBtn onClick={closeModal}>
         <ExitBtn width="1.2rem" height="1.2rem" />
       </S.CloseBtn>
       <S.UserList>
@@ -72,16 +49,14 @@ const UserListModal = ({
               {v.userId === writerId ? (
                 <>
                   &nbsp;
-                  <S.WriterMark />
+                  <S.WriterMark /> 
                 </>
               ) : (
                 meId === writerId &&
                 postStatus !== 'RANKING' &&
                 postStatus !== 'FINISHED' && (
                   <>
-                    <S.DeleteUserButton
-                      onClick={e => onDeleteUserClick(e, v)}
-                    />
+                    <S.DeleteUserButton onClick={e => onDeleteUserClick(e, v)} />
                   </>
                 )
               )}

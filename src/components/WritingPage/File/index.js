@@ -10,7 +10,7 @@ const File = ({ file, setFile }) => {
     e => {
       setFile(e.target.files[0]);
     },
-    [setFile]
+    [setFile],
   );
 
   return (
@@ -20,15 +20,17 @@ const File = ({ file, setFile }) => {
           참고 자료
         </S.MainTitle>
 
-        <S.FileInput htmlFor="input-file">업로드</S.FileInput>
-        <input
-          name="file"
-          type="file"
-          id="input-file"
-          style={{ display: 'none' }}
-          onChange={onFileChange}
-        />
-        <label onClick={onDeleteFile}>{file && file.name}</label>
+        <S.FileWrapper>
+          <S.FileInput htmlFor="input-file">업로드</S.FileInput>
+          <input
+            name="file"
+            type="file"
+            id="input-file"
+            style={{ display: 'none' }}
+            onChange={onFileChange}
+          />
+          <S.FileName onClick={onDeleteFile}>&nbsp;{file && file.name}</S.FileName>
+        </S.FileWrapper>
       </S.FileLeft>
     </S.FileWrapper>
   );

@@ -14,7 +14,7 @@ const UserProfile = ({ user }) => {
       <S.Content flex="2">
         <S.SkillsWrapper>
           {user.userSkills.map((v) => {
-            return <S.SkillImg src={v.name} key={v.id}/>;
+            return <S.SkillImg src={v.url} key={v.id}/>;
           })}
         </S.SkillsWrapper>
       </S.Content>

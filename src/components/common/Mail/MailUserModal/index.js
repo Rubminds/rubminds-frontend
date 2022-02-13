@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import * as S from './style';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { PostListByScout } from '../../..';
+import { sendMail } from '../../../../modules/mail';
 
 /*
 @params 
@@ -12,9 +13,10 @@ postId: 게시글 아이디
 step: 게시글 유형
 writerId: 게시글 작성자
 */
-const MailUserModal = ({ userId, postId, me, step, writerId, setEffectSwitch }) => {
+const MailUserModal = ({ userId, postId,userNickname, me, step, writerId, setEffectSwitch,setModalOpenId }) => {
   const [postListOpen, setPostListOpen] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const onInviteClick = useCallback(
     async e => {
@@ -23,19 +25,12 @@ const MailUserModal = ({ userId, postId, me, step, writerId, setEffectSwitch }) 
       if (step === 'SCOUT') {
         setPostListOpen(true);
       } else {
-        const response = await axios.post(
-          '/chat',
-          { postId, content: `sdnimbur@${postId}@${me.id}@${userId}` },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-            },
-          },
-        );
-        console.log(response.data);
+        dispatch(sendMail({ postId, content: `sdnimbur@${postId}@${me.id}@${userId}@${userNickname}` }))
+        setEffectSwitch(prev => !prev)
+        setModalOpenId(false);
       }
     },
-    [me.id, postId, userId, step],
+    [me.id, postId, userId, step, userNickname, setEffectSwitch, setModalOpenId],
   );
 
   const onUserPageClick = useCallback(() => {
@@ -49,6 +44,7 @@ const MailUserModal = ({ userId, postId, me, step, writerId, setEffectSwitch }) 
           me={me}
           setPostListOpen={setPostListOpen}
           userId={userId}
+          userNickname={userNickname}
           setEffectSwitch={setEffectSwitch}
         />
       ) : (

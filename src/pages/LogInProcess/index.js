@@ -19,7 +19,7 @@ const LogInProcess = () => {
         id: parseInt(id),
         nickname: nickname,
         avatar:
-          avatar1 === '0' ? 'DefaultImg' : `/${avatar1}/${avatar2}/${avatar3}`,
+          avatar1 === '0' ? 'DefaultImg' : `https://${avatar1}/${avatar2}/${avatar3}`,
       };
       dispatch(signinUser(data));
       history.push('/');

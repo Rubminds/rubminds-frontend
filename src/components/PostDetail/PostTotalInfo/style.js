@@ -47,6 +47,7 @@ export const DetailInfoContent = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-weight:bold;
   font-size: 1.6rem;
   margin-bottom: 2rem;
 

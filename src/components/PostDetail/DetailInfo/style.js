@@ -13,6 +13,7 @@ export const DetailInfoBetween = styled.div`
 export const DetailInfoLeft = styled.div`
   display: flex;
   align-items: center;
+  font-weight:bold;
   flex: 1;
   position: relative;
   color: #707070;

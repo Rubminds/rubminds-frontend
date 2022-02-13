@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 import { sendMail } from '../../../../modules/mail';
 
-const PostListByScout = ({ me, setPostListOpen, userId, setEffectSwitch }) => {
+const PostListByScout = ({ me, setPostListOpen, userId, userNickname, setEffectSwitch }) => {
   const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
 
@@ -27,11 +27,11 @@ const PostListByScout = ({ me, setPostListOpen, userId, setEffectSwitch }) => {
 
   const onPostSelectClick = useCallback(
      postId => () =>{
-      dispatch(sendMail({ postId, content: `sdnimbur@${postId}@${me.id}@${userId}` }));
-      setPostListOpen(false);
+      dispatch(sendMail({ postId, content: `sdnimbur@${postId}@${me.id}@${userId}@${userNickname}` }));
       setEffectSwitch(prev => !prev);
+      setPostListOpen(false);
     },
-    [dispatch, setPostListOpen, me.id, userId, setEffectSwitch],
+    [dispatch, setPostListOpen, me.id, userId, setEffectSwitch, userNickname],
   );
 
   const onBackBtnClick = useCallback(() => {

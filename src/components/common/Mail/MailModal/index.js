@@ -13,6 +13,7 @@ const MailModal = () => {
   const { chatroomNum, step } = useSelector(state => state.mail);
   const [posts, setPosts] = useState([]);
   const [modalOpenId, setModalOpenId] = useState(-1); //유저 클릭시 모달에 전달할 유저 아이디
+  const [modalOpenNickname, setModalOpenNickname] = useState('');
   const [apiQuery, setApiQuery] = useState(`/chat?kinds=${step}`);
 
   useEffect(() => {
@@ -50,13 +51,15 @@ const MailModal = () => {
     [],
   );
 
-  const openUserModal = useCallback((e, senderId) => {
+  const openUserModal = useCallback((e, senderId, senderNickname) => {
     e.stopPropagation();
     setModalOpenId(senderId);
+    setModalOpenNickname(senderNickname)
   }, []);
 
   const closeUserModal = useCallback(() => {
     setModalOpenId(-1);
+    setModalOpenNickname('');
   }, []);
 
   return (
@@ -92,6 +95,8 @@ const MailModal = () => {
             postId={chatroomNum}
             me={me}
             modalOpenId={modalOpenId}
+            modalOpenNickname={modalOpenNickname}
+            setModalOpenId={setModalOpenId}
             openUserModal={openUserModal}
             step={step}
           />

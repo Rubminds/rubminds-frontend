@@ -7,9 +7,9 @@ import { FaRegPaperPlane } from 'react-icons/fa';
 import useInput from '../../../../hooks/useInput';
 import { MailUserModal } from '../../..';
 import { addTeamUser } from '../../../../modules/team';
-import { setChatroom } from '../../../../modules/mail';
+import { sendMail, setChatroom } from '../../../../modules/mail';
 
-const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
+const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, openUserModal, step }) => {
   const [chats, setChats] = useState([]); //전체 채팅내용
   const [postTitle, setPostTitle] = useState('게시글제목'); //게시글 제목
   const [writerId, setWriterId] = useState(null); //게시글 작성자
@@ -46,16 +46,7 @@ const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
       e.preventDefault();
       const trimedInput = userInput.replace(/ /g, '');
       if (trimedInput !== null && trimedInput !== '') {
-        const response = await axios.post(
-          '/chat',
-          { postId, content: userInput },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-            },
-          },
-        );
-        console.log(response.data);
+        dispatch(sendMail({ postId, content: userInput }))
       }
       setUserInput('');
       setEffectSwitch(prev => !prev);
@@ -86,9 +77,9 @@ const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
           {chats.map(v => (
             <S.MessageRow key={v.id}>
               <S.UserInfo>
-                <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId)} />
+                <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId, v.senderNickname)} />
                 <S.InfoWrapper>
-                  <S.Nickname onClick={e => openUserModal(e, v.senderId)}>
+                  <S.Nickname onClick={e => openUserModal(e, v.senderId, v.senderNickname)}>
                     {v.senderNickname}
                   </S.Nickname>
                   <S.SendTime>
@@ -98,7 +89,7 @@ const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
               </S.UserInfo>
               <S.Msg>
                 {checkReserveMsg(v.content)
-                  ? `${v.content.split('@')[3]}을 초대했습니다`
+                  ? `${v.content.split('@')[4]}을 초대했습니다`
                   : v.content}
                 {parseInt(v.content.split('@')[3]) === me.id && (
                   <>
@@ -122,10 +113,12 @@ const MailPost = ({ postId, me, modalOpenId, openUserModal, step }) => {
         <MailUserModal
           userId={modalOpenId}
           postId={postId}
+          userNickname={modalOpenNickname}
           me={me}
           step={step}
           writerId={writerId}
           setEffectSwitch={setEffectSwitch}
+          setModalOpenId={setModalOpenId}
         />
       )}
     </>

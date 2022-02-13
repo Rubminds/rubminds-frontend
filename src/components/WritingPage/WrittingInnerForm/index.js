@@ -68,6 +68,7 @@ const WrittingInnerForm = () => {
       );
 
       dispatch(createPost(formData));
+      alert("게시글이 등록되었습니다.")
       window.location.replace(`/`);
     },
     [

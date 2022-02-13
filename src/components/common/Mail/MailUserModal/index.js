@@ -49,7 +49,6 @@ const MailUserModal = ({ userId, postId, me, step, writerId, setEffectSwitch }) 
           me={me}
           setPostListOpen={setPostListOpen}
           userId={userId}
-          postId={postId}
           setEffectSwitch={setEffectSwitch}
         />
       ) : (

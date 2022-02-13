@@ -116,7 +116,7 @@
 - 게시글 파일 핸들링
 - 팀원 평가도를 별로 시각화
 
-####김경원 (팀장, Front-Sub, Product Design)
+#### 김경원 (팀장, Front-Sub, Product Design)
 
 `Product Design`
 - Adobe XD를 활용한 모바일 및 PC View Product Design </br> (진행기간 2주)

@@ -53,7 +53,7 @@ const Avatar = ({ setAvatarChanged, fileInfo, setFileInfo }) => {
         )}
         <input
           type="file"
-          accept="image/*"
+          accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif, image/svg"
           onChange={onProfileURL}
           hidden
           ref={imgInput}

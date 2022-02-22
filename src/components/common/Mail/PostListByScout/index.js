@@ -3,6 +3,7 @@ import * as S from './style';
 import axios from 'axios';
 import { FaBook } from 'react-icons/fa';
 import { HiUserGroup } from 'react-icons/hi';
+import { MdPersonAdd } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 
 import { sendMail } from '../../../../modules/mail';
@@ -13,23 +14,27 @@ const PostListByScout = ({ me, setPostListOpen, userId, userNickname, setEffectS
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`/user/${me.id}/posts?status=RECRUIT&page=1&size=5`, {
+      //const response = await axios.get(`/user/${me.id}/posts?status=RECRUIT&page=1&size=5`, {
+      const response = await axios.get('/post/user', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
-      const invitePosts = response.data.posts.content.filter(v => v.kinds !== 'SCOUT');
-
-      setPosts(invitePosts);
+      setPosts(response.data);
     };
     me && fetchData();
   }, []);
 
   const onPostSelectClick = useCallback(
-     postId => () =>{
-      dispatch(sendMail({ postId, content: `sdnimbur@${postId}@${me.id}@${userId}@${userNickname}` }));
-      setEffectSwitch(prev => !prev);
-      setPostListOpen(false);
+    (postId, kinds) => () => {
+      if (kinds !== 'SCOUT') {
+        dispatch(
+          sendMail({ postId, content: `sdnimbur@${postId}@${me.id}@${userId}@${userNickname}` }),
+        );
+        setEffectSwitch(prev => !prev);
+        setPostListOpen(false);
+        alert(`${userNickname}을 초대했습니다.`)
+      }
     },
     [dispatch, setPostListOpen, me.id, userId, setEffectSwitch, userNickname],
   );
@@ -42,13 +47,20 @@ const PostListByScout = ({ me, setPostListOpen, userId, userNickname, setEffectS
     <>
       <S.PostTitle>게시글 목록</S.PostTitle>
       <S.BackBtn onClick={onBackBtnClick} />
-      {posts.map((v, i) => {
+      {posts.map(v => {
         return (
-          <S.Post key={v.id}>
+          <S.Post key={v.id} kinds={v.kinds}>
             <S.PostTitle>
-              {v.kinds === 'STUDY' ? <FaBook /> : <HiUserGroup />}&nbsp;{v.title}
+              {v.kinds === 'STUDY' ? (
+                <FaBook />
+              ) : v.kinds === 'SCOUT' ? (
+                <MdPersonAdd />
+              ) : (
+                <HiUserGroup />
+              )}
+              &nbsp;{v.title}
             </S.PostTitle>
-            <S.InviteBtn onClick={onPostSelectClick(v.id)} />
+            <S.InviteBtn onClick={onPostSelectClick(v.id, v.kinds)} />
           </S.Post>
         );
       })}

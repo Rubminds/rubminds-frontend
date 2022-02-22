@@ -57,7 +57,8 @@ const MailModal = () => {
     setModalOpenNickname(senderNickname)
   }, []);
 
-  const closeUserModal = useCallback(() => {
+  const closeUserModal = useCallback(e => {
+    e.stopPropagation();
     setModalOpenId(-1);
     setModalOpenNickname('');
   }, []);

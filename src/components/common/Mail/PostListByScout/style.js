@@ -10,6 +10,7 @@ export const Post = styled.div`
   font-size:1.6rem;
   border-bottom: 1px solid rgba(128, 128, 128, 0.199);
   position: relative;
+  color:${props => props.kinds === 'SCOUT' && "rgba(128, 128, 128, 0.199)"}
 `;
 
 export const PostTitle = styled.h3`

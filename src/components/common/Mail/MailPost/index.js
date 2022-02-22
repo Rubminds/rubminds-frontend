@@ -25,7 +25,7 @@ const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, 
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         });
-        console.log(response.data);
+        
         setChats(response.data.chats);
         setPostTitle(response.data.postTitle);
         setWriterId(response.data.writerId);

@@ -77,6 +77,7 @@ export const OkButton = styled.button`
   padding: 0.5rem 1rem;
   width: 10rem;
   height: 3rem;
+  font-size: 1.6rem;
 `;
 
 export const SendTime = styled.label`

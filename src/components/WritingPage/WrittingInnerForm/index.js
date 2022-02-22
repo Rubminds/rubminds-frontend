@@ -100,9 +100,9 @@ const WrittingInnerForm = () => {
       <WriteTitle title={title} setTitle={setTitle} />
 
       {/* 기술 스택 */}
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+      <S.SectionTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
         기술 스택
-      </S.MainTitle>
+      </S.SectionTitle>
 
       <CustomDropDown
         dropDownOptions={dropDownOptions}

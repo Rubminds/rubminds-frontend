@@ -35,7 +35,7 @@ const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, 
       }
     };
     me && fetchData();
-  }, [me, effectSwitch, postId]);
+  }, [me, effectSwitch, postId, dispatch]);
 
   const onBackClick = useCallback(() => {
     dispatch(setChatroom(null));
@@ -52,7 +52,7 @@ const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, 
       setEffectSwitch(prev => !prev);
       e.target.children[0].value = '';
     },
-    [postId, userInput, setUserInput],
+    [postId, userInput, setUserInput, dispatch],
   );
 
   const checkReserveMsg = msg => {
@@ -64,7 +64,7 @@ const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, 
     if (okConfirm) {
       dispatch(addTeamUser({ teamId: postId, userId: me.id }));
     }
-  }, []);
+  }, [me.id, postId, dispatch]);
 
   return (
     <>

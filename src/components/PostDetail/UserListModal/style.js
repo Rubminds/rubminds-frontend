@@ -31,6 +31,7 @@ export const User = styled(Link)`
   position: relative;
   padding: 5%;
   display: flex;
+  width:fit-content;
   align-items: center;
   & + & {
     border-top: 1px solid rgba(128, 128, 128, 0.199);
@@ -45,7 +46,6 @@ export const AddMember = styled.label`
   align-items: center;
   border-top: 1px solid rgba(128, 128, 128, 0.199);
   font-size: 14px;
-  cursor: pointer;
 `;
 
 export const UserAvatar = styled.img`

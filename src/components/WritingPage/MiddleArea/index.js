@@ -17,7 +17,6 @@ const MiddleArea = ({
 
   const onHeadCountChange = useCallback(
     e => {
-      console.log(e.target.value);
       const { value } = e.currentTarget;
       const onlyNumber = value
         .replace(/[^0-9.]/g, '')

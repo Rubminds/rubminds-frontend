@@ -9,7 +9,6 @@ const UserRating = ({ user }) => {
     const empty = [];
     let decimal = Number((ratio % 1).toFixed(2)); // 소수점자리
     let integer = parseInt(ratio - decimal); // 정수자리
-    console.log(decimal, integer);
     // 꽉찬 별 추가
     for (let i = 0; i < integer; i++) {
       empty.push(<S.Star filled="true" key={idx++}/>);

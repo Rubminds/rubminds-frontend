@@ -17,7 +17,6 @@ const UserPage = () => {
           headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
         });
         setUser(response.data);
-        console.log(response.data);
       } catch (err) {
         alert(err.response.data.error.info);
         history.go(-1);

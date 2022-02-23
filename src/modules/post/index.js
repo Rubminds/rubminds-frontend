@@ -134,7 +134,6 @@ const post = (state = initialState, action) => {
       case CREATE_POST_ERROR:
         draft.createPostLoading = false;
         draft.createPostError = action.error;
-        console.log(action.data);
         break;
       case EDIT_POST:
         draft.editPostLoading = true;
@@ -142,16 +141,13 @@ const post = (state = initialState, action) => {
         draft.editPostError = null;
         break;
       case EDIT_POST_SUCCESS:
-        console.log('edit success', action.data);
         draft.editPostLoading = false;
         draft.editPostDone = true;
         draft.editPostError = null;
         break;
       case EDIT_POST_ERROR:
-        console.log('edit error');
         draft.createPostLoading = false;
         draft.createPostError = action.error;
-        console.log(action.data);
         break;
       case LOAD_POSTS:
         draft.loadPostsLoading = true;
@@ -163,7 +159,6 @@ const post = (state = initialState, action) => {
         draft.loadPostsLoading = false;
         draft.loadPostsDone = true;
         draft.posts = draft.posts.concat(action.data.data.content);
-        console.log(draft.posts);
         break;
       case LOAD_POSTS_ERROR:
         draft.loadPostsLoading = false;
@@ -179,7 +174,6 @@ const post = (state = initialState, action) => {
         draft.authLoadPostsLoading = false;
         draft.authLoadPostsDone = true;
         draft.posts = draft.posts.concat(action.data.data.content);
-        console.log(draft.posts);
         break;
       case AUTH_LOAD_POSTS_ERROR:
         draft.authLoadPostsLoading = false;
@@ -192,7 +186,6 @@ const post = (state = initialState, action) => {
         draft.singlePost = null;
         break;
       case LOAD_POST_SUCCESS: //액션 처리
-        console.log(action.data.data);
         draft.loadPostLoading = false;
         draft.loadPostDone = true;
         draft.singlePost = action.data.data;
@@ -207,12 +200,10 @@ const post = (state = initialState, action) => {
         draft.likePostError = null;
         break;
       case LIKE_POST_SUCCESS: //액션 처리
-        console.log('like success');
         draft.likePostLoading = false;
         draft.likePostDone = true;
         break;
       case LIKE_POST_ERROR:
-        console.log('like error');
         draft.likePostLoading = false;
         draft.likePostError = action.error;
         break;
@@ -222,12 +213,10 @@ const post = (state = initialState, action) => {
         draft.deletePostError = null;
         break;
       case DELETE_POST_SUCCESS: //액션 처리
-        console.log('delete success');
         draft.deletePostLoading = false;
         draft.deletePostDone = true;
         break;
       case DELETE_POST_ERROR:
-        console.log('delete error');
         draft.deletePostLoading = false;
         draft.deletePostError = action.error;
         break;
@@ -237,12 +226,10 @@ const post = (state = initialState, action) => {
         draft.submitResultPostError = null;
         break;
       case SUBMIT_RESULT_POST_SUCCESS: //액션 처리
-        console.log('submit result success');
         draft.submitResultPostLoading = false;
         draft.submitResultPostDone = true;
         break;
       case SUBMIT_RESULT_POST_ERROR:
-        console.log('submit result error');
         draft.submitResultPostLoading = false;
         draft.submitResultPostError = action.error;
         break;
@@ -252,12 +239,10 @@ const post = (state = initialState, action) => {
         draft.changePostStatusError = null;
         break;
       case CHANGE_POST_STATUS_SUCCESS: //액션 처리
-        console.log('change status success');
         draft.changePostStatusLoading = false;
         draft.changePostStatusDone = true;
         break;
       case CHANGE_POST_STATUS_ERROR:
-        console.log('change status error');
         draft.changePostStatusLoading = false;
         draft.changePostStatusError = action.error;
         break;

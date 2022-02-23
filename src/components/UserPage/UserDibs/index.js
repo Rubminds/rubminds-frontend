@@ -4,9 +4,8 @@ import * as S from './style';
 const UserDibs = ({ user }) => {
   const getProjectNumByKinds = useCallback(kinds => {
     const kindsProject = user.likeInfo.find(e => e.kinds === kinds);
-    console.log(kindsProject);
     return kindsProject ? kindsProject.count : 0;
-  }, []);
+  }, [user.likeInfo]);
   return (
     <S.CardWrapper>
       <S.TitleWrapper>

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { flexBetween, flexColumn, flexCenter } from '../../../constants';
+import { flexBetween, flexColumn} from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
 
 export const PostDetailInfo = styled.div`
@@ -34,6 +34,8 @@ export const DetailUserInfo = styled.div`
   font-size: 1.6rem;
   margin-bottom: 5%;
   font-weight: bold;
+  width:fit-content;
+  cursor:${props => props.cursor && "pointer"};
   ${mediaQuery({ 'justify-content': 'center', 'font-size': '2rem' })}
 `;
 

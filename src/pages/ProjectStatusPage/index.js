@@ -21,7 +21,6 @@ const ProjectStatusPage = () => {
           },
         },
       );
-      console.log(response.data);
       setNickname(response.data.nickname)
       setPosts(response.data.posts.content);
     };

@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { flexCenter } from '../../../constants';
 import { FiChevronDown } from 'react-icons/fi';
-import { IoMdCloseCircle } from 'react-icons/io';
 
 export const DropDownContainer = styled.div`
   width: ${props => (props.width ? props.width : '90%')};
   height: ${props => (props.height ? props.height : '6rem')};
   position: relative;
   background: #ffffff;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
   border-bottom-left-radius: ${props => props.isOpen && '0'};
   border-bottom-right-radius: ${props => props.isOpen && '0'};
@@ -71,7 +71,7 @@ export const DropDownList = styled.ul`
   align-items: center;
   margin: 0;
   background: #ffffff;
-  box-shadow: 5px 8px 10px rgb(0 0 0 / 10%)
+  box-shadow: 5px 8px 10px rgb(0 0 0 / 10%);
 `;
 
 export const ListItem = styled.li`

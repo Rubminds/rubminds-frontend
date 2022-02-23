@@ -57,10 +57,8 @@ const WrittingInnerForm = () => {
 
       const formData = new FormData();
 
-      if (file) {
-        console.log(file);
-        formData.append('files', file);
-      }
+      if (file) formData.append('files', file);
+      
 
       formData.append(
         'postInfo',

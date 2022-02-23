@@ -24,14 +24,12 @@ const PostDetailPage = () => {
           },
         });
         setPost(response.data);
-        console.log(response.data);
         if (response.data.kinds !== 'SCOUT') {
           const teamResponse = await axios.get(`/team/${response.data.teamId}`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             },
           });
-          console.log(teamResponse.data);
           setMembers(teamResponse.data.teamUsers);
         }
       }catch(err){

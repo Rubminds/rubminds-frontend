@@ -72,14 +72,14 @@ export const SectionTitle = styled.h1`
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
-  margin-bottom:3%;
+  margin-top:5rem;
 `;
 
 export const InputBox = styled.input`
   width: ${props => props.width || '100%'};
   height: 7rem;
   border: none;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
   border-radius: 30px;
   padding: 0rem 3rem;
   font-size: 2rem;
@@ -179,7 +179,7 @@ export const MainTextArea = styled.textarea`
   height: 54rem;
   border-radius: 30px;
   padding: 3rem;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
   border: none;
   font-size: 2rem;
 `;
@@ -211,8 +211,8 @@ export const BtnRight = styled.button`
 
 export const FileWrapper = styled.div`
   display: flex;
-  margin-top: 5%;
-  margin-bottom: 3%;
+  margin-top: 1rem
+  margin-bottom: 1rem;
   align-items: center;
 `;
 

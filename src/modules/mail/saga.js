@@ -36,7 +36,6 @@ function* sendMail(action) {
       error: err,
     });
   }
-  console.log('finished send mail saga');
 }
 
 function startMailAPI(data) {

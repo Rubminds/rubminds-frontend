@@ -19,7 +19,6 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
         },
       });
       setMembers(response.data.teamUsers);
-      console.log(response.data)
       const copyArray = response.data.teamUsers.map(v => {
         me.id === v.userId && v.finish && setIsFinished(true);
         return { userId: v.userId, attendLevel: 0, workLevel: 0 };
@@ -52,9 +51,8 @@ const TeamEvaluation = ({ teamId, writerId, kinds, postId, me }) => {
       e.preventDefault();
       const obj = {
         kinds,
-        evaluation: evaluationArray.length === 1 ? [] :evaluationArray,
+        evaluation: evaluationArray.length === 1 ? [] : evaluationArray,
       };
-      console.log(evaluationArray);
       dispatch(evaluateTeamMembers({ teamId, content: obj }));
       window.location.replace(`/post/${postId}`);
     },

@@ -23,7 +23,6 @@ const MailModal = () => {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
-      console.log(`posts ${apiQuery}: `, response.data);
       setPosts(response.data.content);
     };
     me && fetchData();
@@ -48,13 +47,13 @@ const MailModal = () => {
     postId => () => {
       dispatch(setChatroom(postId));
     },
-    [],
+    [dispatch],
   );
 
   const openUserModal = useCallback((e, senderId, senderNickname) => {
     e.stopPropagation();
     setModalOpenId(senderId);
-    setModalOpenNickname(senderNickname)
+    setModalOpenNickname(senderNickname);
   }, []);
 
   const closeUserModal = useCallback(e => {

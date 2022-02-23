@@ -93,19 +93,16 @@ const user = (state = initialState, action) => {
         draft.isSigninError = null;
         break;
       case SIGNIN_USER_SUCCESS:
-        console.log('로그인 성공', action.data.data);
         draft.isSigninLoading = false;
         draft.isSigninDone = true;
         draft.isSigninError = null;
         draft.me = action.data.data;
         break;
       case SIGNIN_USER_ERROR:
-        console.log('로그인 실패', action.error);
         draft.isSigninLoading = false;
         draft.isSigninError = action.error;
         break;
       case SIGNUP_USER:
-        console.log('signup user');
         draft.isSignupLoading = true;
         draft.isSignupDone = false;
         draft.isSignupError = null;
@@ -121,7 +118,6 @@ const user = (state = initialState, action) => {
         draft.isSignupError = action.error;
         break;
       case UPDATE_USER:
-        console.log('update user');
         draft.isUserUpdateLoading = true;
         draft.isUserUpdateDone = false;
         draft.isUserUpdateError = null;
@@ -130,16 +126,13 @@ const user = (state = initialState, action) => {
         draft.isUserUpdateLoading = false;
         draft.isUserUpdateDone = true;
         draft.isUserUpdateError = null;
-        console.log(action.data.data);
         draft.me = action.data.data;
         break;
       case UPDATE_USER_ERROR:
-        console.log('update error');
         draft.isUserUpdateLoading = false;
         draft.isUserUpdateError = action.error;
         break;
       case TOGGLE_MAIL_MODAL:
-        console.log('toggle chat reducer');
         break;
       case TOGGLE_MAIL_MODAL_SUCCESS:
         draft.isMailModalOpen = !draft.isMailModalOpen;
@@ -161,14 +154,12 @@ const user = (state = initialState, action) => {
         draft.loadUserInfoError = action.error;
         break;
       case LOGOUT_USER:
-        console.log('go');
         draft.logoutUserLoading = true;
         draft.logoutUserDone = false;
         draft.logoutUserError = null;
         draft.me = null;
         break;
       case LOGOUT_USER_SUCCESS:
-        console.log('logout user reducer');
         draft.isSigninLoading = true;
         draft.isSigninDone = false;
         draft.isSigninError = null;
@@ -183,7 +174,6 @@ const user = (state = initialState, action) => {
       case TOGGLE_HEADER_MODAL:
         break;
       case TOGGLE_HEADER_MODAL_SUCCESS:
-        console.log('header modal open');
         draft.isHeaderModalOpen = !draft.isHeaderModalOpen;
         break;
       case TOGGLE_HEADER_MODAL_ERROR:

@@ -22,7 +22,6 @@ const ResultForm = ({ post, meId, adminId }) => {
   const submitBtn = useRef();
 
   const onChangeFile = useCallback(e => {
-    console.log(e.target.files[0]);
     setFile(e.target.files[0]);
   }, []);
 

@@ -53,7 +53,6 @@ function* signupUser(action) {
 }
 
 function* signinUser(action) {
-  console.log('SignIn user saga');
   try {
     yield put({
       type: SIGNIN_USER_SUCCESS,
@@ -78,7 +77,6 @@ function updateUserAPI(data) {
 }
 
 function* updateUser(action) {
-  console.log('saga 요청 이전 데이터: ', action.data);
   const result = yield call(updateUserAPI, action.data);
   try {
     yield put({
@@ -94,7 +92,6 @@ function* updateUser(action) {
 }
 
 function* toggleMailModal() {
-  console.log('toggle mail saga');
   try {
     yield put({
       type: TOGGLE_MAIL_MODAL_SUCCESS,
@@ -133,7 +130,6 @@ function* loadUserInfo(action) {
 }
 
 function* logoutUser() {
-  console.log('logout user saga');
   try {
     yield put({
       type: LOGOUT_USER_SUCCESS,
@@ -148,7 +144,6 @@ function* logoutUser() {
 }
 
 function* toggleHeaderModal() {
-  console.log('toggle header modal saga');
   try {
     yield put({
       type: TOGGLE_HEADER_MODAL_SUCCESS,

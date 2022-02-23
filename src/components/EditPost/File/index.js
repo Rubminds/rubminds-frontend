@@ -1,20 +1,15 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import * as S from '../../../pages/EditPostPage/style';
 
 const File = ({ file, setFile }) => {
   const onDeleteFile = () => {
     setFile(null);
   };
-
-  useEffect(()=>{
-    console.log(file); 
-  },[]); 
-
   const onFileChange = useCallback(
     e => {
       setFile(e.target.files[0]);
     },
-    [setFile]
+    [setFile],
   );
 
   return (

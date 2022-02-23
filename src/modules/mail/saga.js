@@ -23,18 +23,23 @@ function sendMailAPI(data) {
   });
 }
 function* sendMail(action) {
-  const result = yield call(sendMailAPI, action.data);
+  let result;
   try {
-    yield put({
-      type: SEND_MAIL_SUCCESS,
-      data: result,
-    });
+    result = yield call(sendMailAPI, action.data);
+    try {
+      yield put({
+        type: SEND_MAIL_SUCCESS,
+        data: result,
+      });
+    } catch (err) {
+      //에러 발생시 이벤트
+      yield put({
+        type: SEND_MAIL_ERROR,
+        error: err,
+      });
+    }
   } catch (err) {
-    //에러 발생시 이벤트
-    yield put({
-      type: SEND_MAIL_ERROR,
-      error: err,
-    });
+    alert(err.response.data.error.info);
   }
 }
 

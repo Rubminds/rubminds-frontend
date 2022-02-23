@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { flexBetween, flexColumn} from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
+import { lighten } from 'polished';
 
 export const PostDetailInfo = styled.div`
   ${flexBetween};
@@ -84,6 +85,9 @@ export const PostStatusCircle = styled.button`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   & label {
     cursor: pointer;
+  }
+  &:hover{
+    transform:scale(1.02);
   }
 `;
 

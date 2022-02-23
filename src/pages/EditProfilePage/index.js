@@ -115,9 +115,9 @@ const EditProfilePage = () => {
             required
           />
           <SignUpJob job={job} setJob={setJob} />
-          <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
+          <S.SectionTitle>
             기술스택 ( 선택 )
-          </S.MainTitle>
+          </S.SectionTitle>
           <DropDown
             dropDownOptions={dropDownOptions}
             setDropDownOptions={setDropDownOptions}

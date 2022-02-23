@@ -50,7 +50,7 @@ const PostListByScout = ({ me, setPostListOpen, userId, userNickname, setEffectS
       {posts.map(v => {
         return (
           <S.Post key={v.id} kinds={v.kinds}>
-            <S.PostTitle>
+            <S.PostTitle onClick={onPostSelectClick(v.id, v.kinds)}>
               {v.kinds === 'STUDY' ? (
                 <FaBook />
               ) : v.kinds === 'SCOUT' ? (
@@ -60,7 +60,6 @@ const PostListByScout = ({ me, setPostListOpen, userId, userNickname, setEffectS
               )}
               &nbsp;{v.title}
             </S.PostTitle>
-            <S.InviteBtn onClick={onPostSelectClick(v.id, v.kinds)} />
           </S.Post>
         );
       })}

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lighten, darken } from 'polished';
 
 import { flexCenter } from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
@@ -42,12 +43,18 @@ export const BannerText = styled.label`
 export const RecruitBtn = styled.button`
   margin-top: 3rem;
   border-radius: 50px;
-  background-color: #cdf6e8;
+  background: #cdf6e8;
   border: none;
   width: 20rem;
   height: 8rem;
   font-size: 1.75rem;
   font-weight: bold;
+  &:hover{
+    background:#cde1e9;
+  }
+  &:active{
+    background:${darken(0.1, '#cdf6e8')}
+  }
 `;
 
 export const ImgWrapper = styled.div`

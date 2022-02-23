@@ -11,6 +11,15 @@ export const MainTitle = styled.div`
   font-weight:bold;
 `;
 
+export const SectionTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  margin-top:5rem;
+`;
+
 export const SignUpPageRightWrapper = styled.div`
   position: absolute;
   top: 0;

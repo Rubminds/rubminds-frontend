@@ -4,9 +4,9 @@ import * as S from '../../SignUp/SignUpPageRight/style'
 const Introduce = ({ introduce, onChangeIntroduce }) => {
   return (
     <>
-      <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem" aquired>
+      <S.SectionTitle aquired>
         자기소개
-      </S.MainTitle>
+      </S.SectionTitle>
       <S.Introduce onChange={onChangeIntroduce} value={introduce} />
     </>
   )

@@ -11,7 +11,6 @@ const UserListModal = ({ headcount, closeModal, writerId, teamId, members, meId,
 
   const rendering = () => {
     //모집되지 않은 인원자리에 팀원추가 버튼 생성
-    console.log(members);
     const empty = [];
     for (let i = 0; i < headcount - members.length; i++) {
       empty.push(

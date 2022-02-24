@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { BannerCarousel } from '../..';
+import { Iphone } from '../../../assets/imgs';
 
 const Banner = () => {
   const [dibsPosts, setDibsPosts] = useState([]);
@@ -38,7 +39,10 @@ const Banner = () => {
           <BannerCarousel posts={dibsPosts} />
         </S.BannerCarouselWrapper>
       ) : (
-        <S.IphoneImg />
+        <S.ImgWrapper>
+          <S.IphoneImg src={Iphone}/>
+
+        </S.ImgWrapper>
       )}
     </S.LandingBanner>
   );

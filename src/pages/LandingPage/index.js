@@ -28,7 +28,6 @@ const LandingPage = () => {
               },
             })
           : await axios.get(`/posts${apiQuery}`);
-          console.log(response.data.content)
       setPosts(response.data.content);
     };
     fetchData();
@@ -88,7 +87,6 @@ const LandingPage = () => {
 
   const onRegionClick = useCallback(
     option => () => {
-      console.log(option);
       const currentQuery = apiQuery;
       let changedQuery = currentQuery.replace(region, '');
       changedQuery = changedQuery.replace('&region=', '');

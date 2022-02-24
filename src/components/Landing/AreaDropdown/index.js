@@ -11,11 +11,6 @@ const AreaDropdown = ({ region, onRegionClick }) => {
     setIsOpen(prev => !prev);
   }, []);
 
-  const onItemClick = option => () => {
-    console.log(option);
-    //toggle();
-  };
-
   return (
     <S.DropDownContainer isOpen={isOpen} onClick={toggle}>
       <S.DropDownHeader>

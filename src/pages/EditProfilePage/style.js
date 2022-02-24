@@ -10,6 +10,15 @@ export const MainTitle = styled.div`
   font-weight: ${props => props.fontWeight && props.fontWeight};
 `;
 
+export const SectionTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  margin-top:5rem;
+`;
+
 export const AllWrapper = styled.div`
   background: #f9fbfc;
   padding: 5rem 0px;
@@ -113,6 +122,7 @@ export const SubmitBtn = styled.button`
   border-radius: 3rem;
   background-color: #cdf6e8;
   white-space: nowrap;
+  font-weight:bold;
   @media all and (max-width: 768px) {
     width: 30%;
   }

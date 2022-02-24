@@ -15,7 +15,6 @@ const DibsPage = () => {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
-      console.log(response.data.content);
       apiQuery === '/posts/like?page=1&size=10' && getKindsNum(response.data.content);
       setDibsPosts(response.data.content);
     };
@@ -30,7 +29,6 @@ const DibsPage = () => {
       oldDibNum[kinds]=kindPostLen
       setDibsNum(oldDibNum);
     })
-    console.log(dibsNum)
   }, [dibsNum]);
 
   const setQueryByKinds = useCallback(

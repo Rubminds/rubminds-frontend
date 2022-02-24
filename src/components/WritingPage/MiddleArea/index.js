@@ -17,7 +17,6 @@ const MiddleArea = ({
 
   const onHeadCountChange = useCallback(
     e => {
-      console.log(e.target.value);
       const { value } = e.currentTarget;
       const onlyNumber = value
         .replace(/[^0-9.]/g, '')
@@ -36,9 +35,9 @@ const MiddleArea = ({
     <>
       <S.MiddleWrapper>
         <S.MeetEnviromentWrapper>
-          <S.MainTitle fontSize="3rem" marginBottom="11%">
+          <S.SectionTitle>
             회의 환경
-          </S.MainTitle>
+          </S.SectionTitle>
           <S.RadioWrapper>
             <S.CheckBoxWrapper>
               <input
@@ -77,9 +76,9 @@ const MiddleArea = ({
         <S.RecruitPeopleWrapper>
           {!isScout && (
             <>
-              <S.MainTitle fontSize="3rem" marginBottom="13%">
+              <S.SectionTitle fontSize="3rem" marginBottom="13%">
                 모집 인원
-              </S.MainTitle>
+              </S.SectionTitle>
               <S.InputWrapper>
                 <S.InputBox
                   width="15rem"

@@ -11,9 +11,9 @@ const Title = ({ title, setTitle }) => {
 
   return (
     <>
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+      <S.SectionTitle>
         제목
-      </S.MainTitle>
+      </S.SectionTitle>
       <S.InputBox
         type="text"
         name="title"

@@ -16,9 +16,9 @@ const File = ({ file, setFile }) => {
   return (
     <S.FileWrapper>
       <S.FileLeft>
-        <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="6%">
+        <S.SectionTitle>
           참고 자료
-        </S.MainTitle>
+        </S.SectionTitle>
 
         <S.FileWrapper>
           <S.FileInput htmlFor="input-file">업로드</S.FileInput>

@@ -40,7 +40,6 @@ function createPostAPI(data) {
 }
 
 function* createPost(action) {
-  console.log('요청 전 데이터', action.data);
   const result = yield call(createPostAPI, action.data);
   try {
     yield put({
@@ -54,7 +53,6 @@ function* createPost(action) {
       error: err,
     });
   }
-  console.log('finished createPosts saga');
 }
 
 function loadPostsAPI(query) {
@@ -62,7 +60,6 @@ function loadPostsAPI(query) {
 }
 
 function* loadPosts(action) {
-  console.log('access loadPosts saga');
   const result = yield call(loadPostsAPI, action.data);
   try {
     yield put({
@@ -76,7 +73,6 @@ function* loadPosts(action) {
       error: err,
     });
   }
-  console.log('finished loadPosts saga');
 }
 
 function editPostAPI(data) {
@@ -89,7 +85,6 @@ function editPostAPI(data) {
 }
 
 function* editPost(action) {
-  console.log('access editPosts saga');
   const result = yield call(editPostAPI, action.data);
   try {
     yield put({
@@ -103,7 +98,6 @@ function* editPost(action) {
       error: err,
     });
   }
-  console.log('finished editPost saga');
 }
 
 function authLoadPostsAPI(query) {
@@ -115,7 +109,6 @@ function authLoadPostsAPI(query) {
 }
 
 function* authLoadPosts(action) {
-  console.log('access authLoadPosts saga');
   const result = yield call(authLoadPostsAPI, action.data);
   try {
     yield put({
@@ -129,14 +122,12 @@ function* authLoadPosts(action) {
       error: err,
     });
   }
-  console.log('finished authLoadPosts saga');
 }
 
 function loadPostAPI(data) {
   return axios.get(`/post/${data}`);
 }
 function* loadPost(action) {
-  console.log('access loadPost saga');
   const result = yield call(loadPostAPI, action.data);
   try {
     yield put({
@@ -150,7 +141,6 @@ function* loadPost(action) {
       error: err,
     });
   }
-  console.log('finished loadPost saga');
 }
 
 function likePostAPI(data) {
@@ -161,10 +151,7 @@ function likePostAPI(data) {
   });
 }
 function* likePost(action) {
-  console.log(action.data);
-  console.log('access likePost saga');
   const result = yield call(likePostAPI, action.data);
-  console.log(result);
   try {
     yield put({
       type: LIKE_POST_SUCCESS,
@@ -177,7 +164,6 @@ function* likePost(action) {
       error: err,
     });
   }
-  console.log('finished likePost saga');
 }
 
 function deletePostAPI(data) {
@@ -188,10 +174,7 @@ function deletePostAPI(data) {
   });
 }
 function* deletePost(action) {
-  console.log(action.data);
-  console.log('access deletePost saga');
   const result = yield call(deletePostAPI, action.data);
-  console.log(result);
   try {
     yield put({
       type: DELETE_POST_SUCCESS,
@@ -204,7 +187,6 @@ function* deletePost(action) {
       error: err,
     });
   }
-  console.log('finished deletePost saga');
 }
 
 function submitResultPostAPI(data) {
@@ -216,10 +198,7 @@ function submitResultPostAPI(data) {
   });
 }
 function* submitResultPost(action) {
-  console.log(action.data);
-  console.log('access submitResultPost saga');
   const result = yield call(submitResultPostAPI, action.data);
-  console.log(result);
   try {
     yield put({
       type: SUBMIT_RESULT_POST_SUCCESS,
@@ -231,7 +210,6 @@ function* submitResultPost(action) {
       error: err,
     });
   }
-  console.log('finished likePost saga');
 }
 
 function changePostStatusAPI(data) {
@@ -242,10 +220,7 @@ function changePostStatusAPI(data) {
   });
 }
 function* changePostStatus(action) {
-  console.log(action.data);
-  console.log('access changePostStatus saga');
   const result = yield call(changePostStatusAPI, action.data);
-  console.log(result);
   try {
     yield put({
       type: CHANGE_POST_STATUS_SUCCESS,
@@ -257,7 +232,6 @@ function* changePostStatus(action) {
       error: err,
     });
   }
-  console.log('finished change post status saga');
 }
 
 //액션 감지 함수

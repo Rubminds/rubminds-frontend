@@ -45,7 +45,6 @@ const SignUpPageRight = () => {
           introduce,
           skillIds: dropDownOptions.map(option => SKILL_ID[option]),
         };
-        console.log(data);
         const formData = new FormData();
         if (fileInfo) {
           formData.append('avatar', fileInfo);

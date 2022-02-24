@@ -24,9 +24,9 @@ const Kinds = ({ kinds, setKinds, setIsScout, btnColor, setBtnColor }) => {
   );
   return (
     <>
-      <S.MainTitle fontSize="3rem" marginBottom="3%">
+      <S.SectionTitle fontSize="3rem" marginBottom="3%">
         모집 유형
-      </S.MainTitle>
+      </S.SectionTitle>
       <S.CategoryWrapper>
         <S.CategoryCard
           name="kinds"

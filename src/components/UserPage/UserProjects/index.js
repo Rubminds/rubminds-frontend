@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 const UserProjects = ({ user }) => {
   const getProjectInfoLength = useCallback(name => {
     const projectInfo = user.projectInfo.find(e => e.kinds === name);
-    console.log(projectInfo, name);
     return projectInfo ? projectInfo.count : 0;
-  }, []);
+  }, [user.projectInfo]);
   return (
     <S.CardWrapper>
       <S.Title>{user.nickname}님의 프로젝트 현황</S.Title>

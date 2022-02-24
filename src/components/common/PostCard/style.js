@@ -24,6 +24,9 @@ export const CardWrapper = styled.div`
   opacity: ${props => (props.status === 'FINISHED' ? '0.75' : '1')};
   position: relative;
   ${mediaQuery({ width: '280px', 'min-height': '220px', padding: '2rem 2rem', margin: '2rem 0' })};
+  &:hover{
+    transform:scale(1.02);
+  }
 `;
 
 export const CardStatusWrapper = styled.div`

@@ -73,7 +73,6 @@ const EditProfilePage = () => {
           avatarChanged: avatarChanged,
         };
 
-        console.log('제출시 fileInfo', fileInfo);
         const formData = new FormData();
         if (fileInfo) {
           formData.append('avatar', fileInfo);
@@ -85,7 +84,6 @@ const EditProfilePage = () => {
 
         const submitConfirm = window.confirm('수정된 정보를 저장하시겠습니까?');
         if (submitConfirm) {
-          console.log(fileInfo, data);
           dispatch(updateUser(formData));
           window.location.replace(`/userpage/${me.id}`);
         }
@@ -117,9 +115,9 @@ const EditProfilePage = () => {
             required
           />
           <SignUpJob job={job} setJob={setJob} />
-          <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem">
+          <S.SectionTitle>
             기술스택 ( 선택 )
-          </S.MainTitle>
+          </S.SectionTitle>
           <DropDown
             dropDownOptions={dropDownOptions}
             setDropDownOptions={setDropDownOptions}

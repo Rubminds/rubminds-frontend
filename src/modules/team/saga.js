@@ -16,7 +16,6 @@ import {
 } from '../../constants';
 
 function loadTeamMembersAPI(data) {
-  console.log(data);
   return axios.get(`/team/${data}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
@@ -47,7 +46,6 @@ function evaluateTeamMembersAPI(data) {
 }
 function* evaluateTeamMembers(action) {
   const result = yield call(evaluateTeamMembersAPI, action.data);
-  console.log(result);
   try {
     yield put({
       type: EVALUATE_TEAM_MEMBERS_SUCCESS,
@@ -69,7 +67,6 @@ function addTeamUserAPI(data) {
   });
 }
 function* addTeamUser(action) {
-  console.log(action.data);
   let result;
   try {
     result = yield call(addTeamUserAPI, action.data);
@@ -98,7 +95,6 @@ function deleteTeamUserAPI(data) {
   });
 }
 function* deleteTeamUser(action) {
-  console.log(action.data);
   const result = yield call(deleteTeamUserAPI, action.data);
   try {
     yield put({

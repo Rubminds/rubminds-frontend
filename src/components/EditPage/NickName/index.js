@@ -45,9 +45,9 @@ const Nickname = ({ nickname, setNickname, nicknameCheck,  setnicknameCheck }) =
 
   return (
     <>
-      <S.MainTitle marginTop="7.5%" marginBottom="7.5%" fontSize="2rem" aquired>
+      <S.SectionTitle aquired>
         닉네임
-      </S.MainTitle>
+      </S.SectionTitle>
       <S.NickNameWrapper>
         {
           nicknameCheck === false

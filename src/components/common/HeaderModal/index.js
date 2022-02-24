@@ -10,7 +10,6 @@ const HeaderModal = ({ me, toggleMenu }) => {
   const dispatch = useDispatch();
 
   const onLogoutClick = useCallback(() => {
-    console.log('로그아웃 클릭');
     history.push('/');
     toggleMenu();
     dispatch(logoutUser());

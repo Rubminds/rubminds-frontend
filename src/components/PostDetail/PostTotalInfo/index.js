@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { DetailInfo, UserListModal, ProcessEndModal } from '../..';
 import { likePost, changePostStatus, deletePost } from '../../../modules/post';
 import { toggleMailModal } from '../../../modules/user/index.js';
-import { setChatroom, setStep, startMail } from '../../../modules/mail';
+import { setChatroom, setStep } from '../../../modules/mail';
 
 //게시글 상세정보.
 //진행 원, 모집유형 등의 정보 담은 컴포넌트
@@ -33,6 +33,10 @@ const PostTotalInfo = ({
   const onEditClick = () => {
     history.push(`/editpost/${post.id}`);
   };
+
+  const onUserClick = useCallback(()=>{
+    history.push(`/userpage/${post.writer.id}`)
+  },[history, post.writer.id])
 
   const onDeleteClick = useCallback(() => {
     const deleteConfirm = window.confirm(`정말 게시글을 삭제하시겠습니까?`);
@@ -60,13 +64,12 @@ const PostTotalInfo = ({
     dispatch(setStep(post.kinds));
     dispatch(setChatroom(post.id));
     dispatch(toggleMailModal());
-    //dispatch(startMail({ postId: post.id, content: '@startmail' }));
   }, [dispatch, post.id, post.kinds]);
 
   return (
     <S.PostDetailInfo>
       <S.DetailInfoWrapper>
-        <S.DetailUserInfo>
+        <S.DetailUserInfo onClick={onUserClick} cursor="true">
           <S.AuthorAvatar src={post.writer.avatar} /> &nbsp;
           {post.writer.nickname}
         </S.DetailUserInfo>

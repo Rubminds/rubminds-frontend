@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
-import { flexBetween, flexColumn, flexCenter } from '../../../constants';
+import { flexBetween, flexColumn} from '../../../constants';
 import mediaQuery from '../../../hooks/mediaQuery';
+import { lighten } from 'polished';
 
 export const PostDetailInfo = styled.div`
   ${flexBetween};
@@ -34,6 +35,8 @@ export const DetailUserInfo = styled.div`
   font-size: 1.6rem;
   margin-bottom: 5%;
   font-weight: bold;
+  width:fit-content;
+  cursor:${props => props.cursor && "pointer"};
   ${mediaQuery({ 'justify-content': 'center', 'font-size': '2rem' })}
 `;
 
@@ -47,6 +50,7 @@ export const DetailInfoContent = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-weight:bold;
   font-size: 1.6rem;
   margin-bottom: 2rem;
 
@@ -81,6 +85,9 @@ export const PostStatusCircle = styled.button`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   & label {
     cursor: pointer;
+  }
+  &:hover{
+    transform:scale(1.02);
   }
 `;
 

@@ -10,9 +10,9 @@ const Region = ({ region, setRegion, AreaOptions }) => {
   );
   return (
     <>
-      <S.MainTitle fontSize="3rem" marginTop="5%" marginBottom="3%">
+      <S.SectionTitle>
         지역
-      </S.MainTitle>
+      </S.SectionTitle>
       <S.AreaSelect
         name="region"
         onChange={onRegionChange}

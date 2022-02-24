@@ -71,7 +71,7 @@ export const DropDownList = styled.ul`
   align-items:center;
   margin: 0;
   background: #ffffff;
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 5px 8px 10px rgb(0 0 0 / 10%);
 `;
 
 export const ListItem = styled.li`

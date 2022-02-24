@@ -6,15 +6,16 @@ import { HiUserGroup } from 'react-icons/hi';
 
 export const WrittingInnerForm = styled.form`
   background-color: white;
-  border-radius: 30px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.16);
   width: 76.8rem;
   padding: 5% 10% 5% 10%;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
 `;
 
 export const CategoryWrapper = styled.div`
   ${flexBetween};
-  margin-top: 5rem;
+  //margin-top: 5rem;
   @media all and (max-width: 768px) {
     ${flexColumn};
     align-items: center;
@@ -42,10 +43,11 @@ export const CategoryCard = styled.div`
   background-color: ${props => props.backgroundColor};
   border: 1px solid black;
   border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  cursor:pointer;
   & + & {
-    margin-left: 150px;
+    margin-left: 5rem;
   }
-  cursor: pointer;
 
   @media all and (max-width: 768px) {
     width: 100%;
@@ -63,11 +65,21 @@ export const MainTitle = styled.div`
   color: ${props => props.color && props.color};
   font-weight: ${props => props.fontWeight && props.fontWeight};
 `;
+
+export const SectionTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  margin-top:5rem;
+`;
+
 export const InputBox = styled.input`
   width: ${props => props.width || '100%'};
   height: 7rem;
   border: none;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
   border-radius: 30px;
   padding: 0rem 3rem;
   font-size: 2rem;
@@ -167,7 +179,7 @@ export const MainTextArea = styled.textarea`
   height: 54rem;
   border-radius: 30px;
   padding: 3rem;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
   border: none;
   font-size: 2rem;
 `;
@@ -199,8 +211,8 @@ export const BtnRight = styled.button`
 
 export const FileWrapper = styled.div`
   display: flex;
-  margin-top: 5%;
-  margin-bottom: 3%;
+  margin-top: 1rem
+  margin-bottom: 1rem;
   align-items: center;
 `;
 

@@ -43,13 +43,13 @@ const Avatar = ({ setAvatarChanged, fileInfo, setFileInfo }) => {
               src={attachMent}
               width="200rem"
               height="200rem"
-              style={{ display: 'block', borderRadius: '5000px' }}
+              style={{ display: 'block', borderRadius: '5000px',cursor:"pointer" }}
               onClick={onDeleteURL}
               alt=""
             />
           </>
         ) : (
-          <CgProfile size="100" onClick={onProfileUpload} />
+          <CgProfile size="100" onClick={onProfileUpload} cursor="pointer"/>
         )}
         <input
           type="file"

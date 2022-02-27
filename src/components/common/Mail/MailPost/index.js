@@ -9,7 +9,15 @@ import { MailUserModal } from '../../..';
 import { addTeamUser } from '../../../../modules/team';
 import { sendMail, setChatroom } from '../../../../modules/mail';
 
-const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, openUserModal, step }) => {
+const MailPost = ({
+  postId,
+  me,
+  modalOpenId,
+  modalOpenNickname,
+  setModalOpenId,
+  openUserModal,
+  step,
+}) => {
   const [chats, setChats] = useState([]); //전체 채팅내용
   const [postTitle, setPostTitle] = useState('게시글제목'); //게시글 제목
   const [writerId, setWriterId] = useState(null); //게시글 작성자
@@ -25,7 +33,7 @@ const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, 
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         });
-        
+
         setChats(response.data.chats);
         setPostTitle(response.data.postTitle);
         setWriterId(response.data.writerId);
@@ -46,7 +54,7 @@ const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, 
       e.preventDefault();
       const trimedInput = userInput.replace(/ /g, '');
       if (trimedInput !== null && trimedInput !== '') {
-        dispatch(sendMail({ postId, content: userInput }))
+        dispatch(sendMail({ postId, content: userInput }));
       }
       setUserInput('');
       setEffectSwitch(prev => !prev);
@@ -77,7 +85,10 @@ const MailPost = ({ postId, me, modalOpenId, modalOpenNickname, setModalOpenId, 
           {chats.map(v => (
             <S.MessageRow key={v.id}>
               <S.UserInfo>
-                <S.UserAvatar src={v.avatar} onClick={e => openUserModal(e, v.senderId, v.senderNickname)} />
+                <S.UserAvatar
+                  src={v.avatar}
+                  onClick={e => openUserModal(e, v.senderId, v.senderNickname)}
+                />
                 <S.InfoWrapper>
                   <S.Nickname onClick={e => openUserModal(e, v.senderId, v.senderNickname)}>
                     {v.senderNickname}

@@ -8,9 +8,15 @@ const fontSizes = {
 };
 
 const colors = {
-  black: "#000000",
-  white: "#FFFFFF",
-  gray_1: "#222222",
+  black: '#000000',
+  white: '#FFFFFF',
+  gray_1: '#222222',
+  gradientLeft: '#998CF8',
+  gradientRight: '#F383DF',
+  status1Color: '#BB94EE',
+  // status2Color: '#9D76E8',
+  status2Color:'#7a95E0',
+  status3Color: '#7E58CA',
 };
 
 const theme = {
